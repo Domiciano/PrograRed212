@@ -4,7 +4,7 @@
 
 <p>Bienvenido al curso de Programación en Red</p>
 
-<p><a href="https://docs.google.com/presentation/d/1noVmBpYhEL3hqL8btc4LRr1lS3PZ_1oOMZoQHl7GSDw/edit?usp=sharing">Participantes</a></p>
+<p><a href="https://docs.google.com/presentation/d/18aoMdZLeebJ07AA4W6ZGAc4QCGhd2lKBe1JbZLECiKg/edit?usp=sharing">Participantes</a></p>
 
 
 <b>Contenido del curso</b><br>
