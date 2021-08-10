@@ -9,11 +9,9 @@
 
 <b>Contenido del curso</b><br>
 <p>En el siguiente board de Miro podrá encontrar las clase asíncronas y las grabaciones de las clases síncronas</p>
-<a href="https://miro.com/app/board/o9J_lWAhZoQ=/" target="_blank"><img src="https://appmirror.net/wp-content/uploads/2020/12/miro-icon-1200x1200.png" width="200"></a>
+<a href="https://miro.com/app/board/o9J_lWAhZoQ=/" target="_blank"><img src="https://img.utdstc.com/icon/986/4df/9864df183e78a4a78e6113daea3de38a87e98700186480022d1b7917ecd7fc34:200" width="200"></a>
 <br>
 
-## SEMANA 11
-[![Tomcat](https://cdn.iconscout.com/icon/free/png-256/tomcat-283113.png)](https://tomcat.apache.org/download-90.cgi)
-<p>Apache Tomcat</p>
+
 
 
