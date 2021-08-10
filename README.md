@@ -15,8 +15,8 @@
 <br>
 
 <b>Comunicación</b><br>
+<p>Click en la imagen para unirse al servidor de Discord del curso</p>
 <a href="https://discord.gg/UyxvUaTf"><img width="128" src="https://logos-marcas.com/wp-content/uploads/2020/12/Discord-Logo.png"></a><br>
-<small>Click en el logo para ingresar</small>
 
 
 
