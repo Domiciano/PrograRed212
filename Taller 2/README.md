@@ -11,3 +11,4 @@
 <p>6. Regla del juego: se puede ganar el juego</p>
 <p>7. Regla del juego: Me puedo rendir</p>
 
+<p>BONUS: el server es capaz de alojar varias partidas al mismo tiempo: el primer cliente vs el segundo, el tercero vs el cuarto, etc.
