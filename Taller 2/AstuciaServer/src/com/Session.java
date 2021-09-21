@@ -7,9 +7,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+import model.User;
+
 public class Session{
 	
-	
+	private User user;
 	private Receptor receptor;
 	private Emisor emisor;
 	
@@ -38,4 +40,14 @@ public class Session{
 		return this.receptor;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
+	
 }

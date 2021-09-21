@@ -20,7 +20,7 @@ public class GameWindow extends Stage{
 	private Label[][] radar;
 	private Button[][] ataque;
 	private TextField nameTF;
-	private Button sendNameBtn;
+	private Button sendNameBtn, surrenderBtn;
 	private Label opponentLabel;
 	private Label statusLabel;	
 	
@@ -59,6 +59,7 @@ public class GameWindow extends Stage{
 			sendNameBtn = (Button) loader.getNamespace().get("sendNameBtn");
 			opponentLabel = (Label) loader.getNamespace().get("opponentLabel");
 			statusLabel = (Label) loader.getNamespace().get("statusLabel");
+			surrenderBtn = (Button) loader.getNamespace().get("surrenderBtn");
 			
 			
 			contol = new GameController(this);
@@ -96,8 +97,13 @@ public class GameWindow extends Stage{
 
 	public Label getStatusLabel() {
 		return statusLabel;
-	}	
+	}
 	
+	public Button getSurrenderBtn() {
+		return surrenderBtn;
+	}
+
+
 	//UI Actions
 	public void drawAttackInRadar(int fil, int col) {
 		radar[fil][col].setStyle("-fx-background-color: red;");
