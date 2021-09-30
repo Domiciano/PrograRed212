@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+import com.google.gson.Gson;
+
+import model.Match;
 import model.User;
 
 public class Session{
@@ -14,6 +17,7 @@ public class Session{
 	private User user;
 	private Receptor receptor;
 	private Emisor emisor;
+	private Session opponent;
 	
 	
 	public Session(Socket socket) {	
@@ -47,6 +51,23 @@ public class Session{
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public Session getOpponent() {
+		return opponent;
+	}
+
+	public void setOpponent(Session oponent) {
+		this.opponent = oponent;
+	}
+
+	public void startMatch(boolean turn) {
+		Gson gson = new Gson();
+		Match m = new Match(opponent.getUser().getUsername(),turn);
+		String json = gson.toJson(m);
+		emisor.sendMessage(json);
+	}
+
+
 
 	
 	

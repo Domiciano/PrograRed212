@@ -21,7 +21,7 @@ public class Receptor extends Thread{
 				listener.onMessage(msg);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 	}

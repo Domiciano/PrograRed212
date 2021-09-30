@@ -4,13 +4,12 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.google.gson.Gson;
 
 import model.Generic;
 import model.User;
-import model.Surrender;
+//import model.Surrender;
 
 public class TCPConnectionServer extends Thread implements Receptor.OnMessageListener {
 
@@ -46,17 +45,38 @@ public class TCPConnectionServer extends Thread implements Receptor.OnMessageLis
 
 				Session session = new Session(socket);
 				sessions.add(session);
+				checkMatch();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void sendBroadcast(String msg) {
+	private void checkMatch() {
+		if(sessions.size()%2==0) {
+			Session firstAlone,secondAlone;
+			for (int i = 0; i < sessions.size(); i++) {
+				if(sessions.get(i).getOpponent()==null&&sessions.get(i).getUser()!=null) {
+					firstAlone=sessions.get(i);
+					for (int j = i+1; j < sessions.size(); j++) {
+						if(sessions.get(j).getOpponent()==null&&sessions.get(j).getUser()!=null) {
+							secondAlone=sessions.get(j);
+							firstAlone.setOpponent(secondAlone);
+							secondAlone.setOpponent(firstAlone);
+							firstAlone.startMatch(true);
+							secondAlone.startMatch(false);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/*public void sendBroadcast(String msg) {
 		for (Session session : sessions) {
 			session.getEmisor().sendMessage(msg);
 		}
-	}
+	}*/
 
 	@Override
 	public void onMessage(Session session, String msg) {
@@ -70,10 +90,22 @@ public class TCPConnectionServer extends Thread implements Receptor.OnMessageLis
 			User user = gson.fromJson(msg, User.class);
 			System.out.println(user.getUsername());
 			session.setUser(user);
+			checkMatch();
 			break;
 		case "Surrender":
-			Surrender s = gson.fromJson(msg, Surrender.class);
-			System.out.println("Se rindiÃ³ el usuario: "+session.getUser().getUsername());
+			//Surrender s = gson.fromJson(msg, Surrender.class);
+			if(session.getOpponent()!=null) {
+				session.getOpponent().getEmisor().sendMessage(msg);
+				sessions.remove(session.getOpponent());
+			}			
+			System.out.println("Se rindió el usuario: "+session.getUser().getUsername());
+			sessions.remove(session);
+			break;
+		case "Attack":
+			session.getOpponent().getEmisor().sendMessage(msg);
+			break;
+		case "Win":
+			session.getOpponent().getEmisor().sendMessage(msg);
 			break;
 		}
 	}

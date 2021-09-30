@@ -3,13 +3,10 @@ package comm;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 import comm.Receptor.OnMessageListener;
-import comm.TCPConnection.OnConnectionListener;
 
 public class TCPConnection extends Thread {
 
@@ -33,7 +30,7 @@ public class TCPConnection extends Thread {
 	private int puerto;
 	private Receptor receptor;
 	private Emisor emisor;
-	private OnMessageListener listener;
+	//private OnMessageListener listener;
 	private OnConnectionListener connectionListener;
 
 	public void setPuerto(int puerto) {
@@ -59,7 +56,6 @@ public class TCPConnection extends Thread {
 			emisor = new Emisor(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -79,5 +75,10 @@ public class TCPConnection extends Thread {
 	public interface OnConnectionListener {
 		public void onConnection();
 	}
+
+	public void disconnect() {
+		instance.interrupt();
+	}
+
 
 }

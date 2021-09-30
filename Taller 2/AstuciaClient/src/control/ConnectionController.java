@@ -2,8 +2,6 @@ package control;
 
 import comm.TCPConnection;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import view.GameWindow;
 import view.ConnectionWindow;
 

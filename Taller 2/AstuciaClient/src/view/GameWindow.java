@@ -3,10 +3,12 @@ package view;
 import java.io.IOException;
 
 import control.GameController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -16,7 +18,7 @@ public class GameWindow extends Stage{
 	
 	//UI Elements
 	private Scene scene;
-	private GameController contol;
+	private GameController control;
 	private Label[][] radar;
 	private Button[][] ataque;
 	private TextField nameTF;
@@ -60,9 +62,10 @@ public class GameWindow extends Stage{
 			opponentLabel = (Label) loader.getNamespace().get("opponentLabel");
 			statusLabel = (Label) loader.getNamespace().get("statusLabel");
 			surrenderBtn = (Button) loader.getNamespace().get("surrenderBtn");
+			disableAttack();
+			surrenderBtn.setDisable(true);
 			
-			
-			contol = new GameController(this);
+			control = new GameController(this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,5 +114,60 @@ public class GameWindow extends Stage{
 	
 	public void drawWeakPointInRadar(int fil, int col) {
 		radar[fil][col].setStyle("-fx-background-color: yellow;");
+	}
+	public void enableAttack() {
+		for (int i = 0; i < ataque.length; i++) {
+			for (int j = 0; j < ataque[i].length; j++) {
+				ataque[i][j].setDisable(false);
+			}
+		}
+	}
+	public void disableAttack() {
+		for (int i = 0; i < ataque.length; i++) {
+			for (int j = 0; j < ataque[i].length; j++) {
+				ataque[i][j].setDisable(true);
+			}
+		}
+	}
+
+
+	public void defeat() {
+		
+	Platform.runLater(
+			
+			()->{
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Defeat");
+				alert.setHeaderText("You were defeated");
+				alert.setContentText("Opponent hit your weak spot!");
+
+				alert.showAndWait();
+				this.close();
+			}
+			
+			);
+}
+	public void win(int i) {
+Platform.runLater(
+				
+				()->{
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Victory");
+					alert.setHeaderText("You were victorious");
+					switch(i) {
+					case 1:
+						alert.setContentText("You hit your opponent's weak spot!");
+						break;
+					case 2:
+						alert.setContentText("Your opponent surrendered!");
+						break;
+					}
+
+					alert.showAndWait();
+					this.close();
+				}
+				
+				);
+		
 	}
 }
