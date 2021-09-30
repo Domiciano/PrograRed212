@@ -58,7 +58,8 @@ public class GameController implements OnMessageListener {
 			Surrender s = new Surrender();
 			String json = gson.toJson(s);
 			TCPConnection.getInstance().getEmisor().sendMessage(json);
-			view.close();
+			view.surrender();
+			
 		});
 		for (int i = 0; i < view.getAtaque().length; i++) {
 			for (int j = 0; j < view.getAtaque()[i].length; j++) {

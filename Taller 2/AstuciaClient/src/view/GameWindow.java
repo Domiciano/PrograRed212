@@ -165,9 +165,27 @@ Platform.runLater(
 
 					alert.showAndWait();
 					this.close();
+					System.exit(0);
 				}
 				
 				);
-		
+	}
+
+
+	public void surrender() {
+		Platform.runLater(
+				
+				()->{
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Defeat");
+					alert.setHeaderText("You surrendered");
+					alert.setContentText(null);
+
+					alert.showAndWait();
+					this.close();
+					System.exit(0);
+				}
+				
+				);
 	}
 }

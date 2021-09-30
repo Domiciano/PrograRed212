@@ -77,7 +77,7 @@ public class TCPConnection extends Thread {
 	}
 
 	public void disconnect() {
-		instance.interrupt();
+		receptor.setAlive(false);
 	}
 
 
