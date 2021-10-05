@@ -68,13 +68,23 @@ public class TCPConnectionServer extends Thread implements Receptor.OnMessageLis
 		switch (obj.getType()) {
 		case "User":
 			User user = gson.fromJson(msg, User.class);
-			System.out.println(user.getUsername());
+			System.out.println(user.getName());
 			session.setUser(user);
-			break;
+		break;
+		
 		case "Surrender":
 			Surrender s = gson.fromJson(msg, Surrender.class);
-			System.out.println("Se rindió el usuario: "+session.getUser().getUsername());
-			break;
+			System.out.println("Se rindió el usuario: "+session.getUser().getName());
+		break;
+		
+		case "Win":
+			session.getOpponent().getEmisor().sendMessage(msg);
+		break;
+		
+		case "Attack":
+			session.getOpponent().getEmisor().sendMessage(msg);
+		break;	
+		
 		}
 	}
 

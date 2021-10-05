@@ -64,7 +64,6 @@ public class GameWindow extends Stage{
 			
 			contol = new GameController(this);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
