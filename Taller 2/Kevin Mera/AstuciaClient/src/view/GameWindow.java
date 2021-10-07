@@ -18,9 +18,14 @@ public class GameWindow extends Stage{
 	private GameController control;
 	private Label[][] radar;
 	private Button[][] ataque;
+<<<<<<< HEAD:Taller 2/Kevin Mera/AstuciaClient/src/view/GameWindow.java
 	private Label playerLabel;
 	private Button queueBtn; 
 	private Button surrenderBtn;
+=======
+	private TextField nameTF;
+	private Button sendNameBtn, surrenderBtn;
+>>>>>>> 1d650def67ef607e4c5ff8e61c5503d5118e6693:Taller 2/AstuciaClient/src/view/GameWindow.java
 	private Label opponentLabel;
 	private Label statusLabel;	
 	private Label winsLabel;
@@ -61,8 +66,14 @@ public class GameWindow extends Stage{
 			opponentLabel = (Label) loader.getNamespace().get("opponentLabel");
 			statusLabel = (Label) loader.getNamespace().get("statusLabel");
 			surrenderBtn = (Button) loader.getNamespace().get("surrenderBtn");
+<<<<<<< HEAD:Taller 2/Kevin Mera/AstuciaClient/src/view/GameWindow.java
 			winsLabel = (Label) loader.getNamespace().get("winsLabel");
 			control = new GameController(this);
+=======
+			
+			
+			contol = new GameController(this);
+>>>>>>> 1d650def67ef607e4c5ff8e61c5503d5118e6693:Taller 2/AstuciaClient/src/view/GameWindow.java
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -96,13 +107,14 @@ public class GameWindow extends Stage{
 
 	public Label getStatusLabel() {
 		return statusLabel;
-	}	
+	}
 	
 	public Button getSurrenderBtn() {
 		return surrenderBtn;
 	}
 
 
+<<<<<<< HEAD:Taller 2/Kevin Mera/AstuciaClient/src/view/GameWindow.java
 	public Label getPlayerLabel() {
 		return playerLabel;
 	}
@@ -113,6 +125,8 @@ public class GameWindow extends Stage{
 	}
 
 
+=======
+>>>>>>> 1d650def67ef607e4c5ff8e61c5503d5118e6693:Taller 2/AstuciaClient/src/view/GameWindow.java
 	//UI Actions
 	public void drawAttackInRadar(int fil, int col, boolean f) {
 		if(!f) {
