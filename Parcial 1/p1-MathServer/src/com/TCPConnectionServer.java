@@ -58,7 +58,7 @@ public class TCPConnectionServer extends Thread implements Receptor.OnMessageLis
 					System.out.println("user2 conectado.");
 					Session session = new Session(socket);
 					sessions.add(session);
-					checkMatch();
+					//checkMatch();
 				}
 			}
 		} catch (IOException e) {
