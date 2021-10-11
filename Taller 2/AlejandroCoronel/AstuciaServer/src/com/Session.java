@@ -11,6 +11,10 @@ import model.User;
 
 public class Session{
 	
+<<<<<<< HEAD:Taller 2/AlejandroCoronel/AstuciaServer/src/com/Session.java
+=======
+	private User user;
+>>>>>>> 1d650def67ef607e4c5ff8e61c5503d5118e6693:Taller 2/AstuciaServer/src/com/Session.java
 	private Receptor receptor;
 	private Emisor emisor;
 	private User user;
@@ -48,6 +52,7 @@ public class Session{
 		return this.receptor;
 	}
 
+<<<<<<< HEAD:Taller 2/AlejandroCoronel/AstuciaServer/src/com/Session.java
 	public Socket getSocket() {
 		return socket;
 	}
@@ -56,4 +61,16 @@ public class Session{
 		this.socket = socket;
 	}
 
+=======
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
+	
+>>>>>>> 1d650def67ef607e4c5ff8e61c5503d5118e6693:Taller 2/AstuciaServer/src/com/Session.java
 }
