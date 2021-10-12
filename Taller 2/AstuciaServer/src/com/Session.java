@@ -14,7 +14,7 @@ public class Session{
 	private User user;
 	private Receptor receptor;
 	private Emisor emisor;
-	
+	private Session opponent;
 	
 	public Session(Socket socket) {	
 		try {
@@ -46,6 +46,14 @@ public class Session{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Session getOpponent() {
+		return opponent;
+	}
+
+	public void setOpponent(Session opponent) {
+		this.opponent = opponent;
 	}
 
 	

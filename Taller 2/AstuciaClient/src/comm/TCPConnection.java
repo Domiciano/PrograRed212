@@ -36,14 +36,6 @@ public class TCPConnection extends Thread {
 	private OnMessageListener listener;
 	private OnConnectionListener connectionListener;
 
-	public void setPuerto(int puerto) {
-		this.puerto = puerto;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
 	@Override
 	public void run() {
 		try {
@@ -59,7 +51,6 @@ public class TCPConnection extends Thread {
 			emisor = new Emisor(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -78,6 +69,14 @@ public class TCPConnection extends Thread {
 
 	public interface OnConnectionListener {
 		public void onConnection();
+	}
+	
+	public void setPuerto(int puerto) {
+		this.puerto = puerto;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 }
