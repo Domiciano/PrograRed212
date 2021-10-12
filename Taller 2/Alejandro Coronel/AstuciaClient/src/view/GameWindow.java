@@ -25,13 +25,10 @@ public class GameWindow extends Stage{
 	private Button[][] ataque;
 	private TextField nameTF;
 	private Button sendNameBtn, surrenderBtn;
-<<<<<<< HEAD:Taller 2/Anderson Cardenas/AstuciaClient/src/view/GameWindow.java
-=======
 	public Button getSurrenderBtn() {
 		return surrenderBtn;
 	}
 
->>>>>>> origin/Taller2A00365049:Taller 2/AlejandroCoronel/AstuciaClient/src/view/GameWindow.java
 	private Label opponentLabel;
 	private Label statusLabel;
 	
@@ -130,15 +127,10 @@ public class GameWindow extends Stage{
 			sendNameBtn = (Button) loader.getNamespace().get("sendNameBtn");
 			opponentLabel = (Label) loader.getNamespace().get("opponentLabel");
 			statusLabel = (Label) loader.getNamespace().get("statusLabel");
-<<<<<<< HEAD:Taller 2/Anderson Cardenas/AstuciaClient/src/view/GameWindow.java
-			surrenderBtn = (Button) loader.getNamespace().get("surrenderBtn");
-			
-			
-=======
 			surrenderBtn = (Button)loader.getNamespace().get("surrenderBtn");
->>>>>>> origin/Taller2A00365049:Taller 2/AlejandroCoronel/AstuciaClient/src/view/GameWindow.java
 			contol = new GameController(this);
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -171,13 +163,8 @@ public class GameWindow extends Stage{
 
 	public Label getStatusLabel() {
 		return statusLabel;
-	}
+	}	
 	
-	public Button getSurrenderBtn() {
-		return surrenderBtn;
-	}
-
-
 	//UI Actions
 	public void drawAttackInRadar(int fil, int col) {
 		radar[fil][col].setStyle("-fx-background-color: red;");

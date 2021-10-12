@@ -32,6 +32,14 @@ public class TCPConnection extends Thread {
 //	private OnMessageListener listener;
 	private OnConnectionListener connectionListener;
 
+	public void setPuerto(int puerto) {
+		this.puerto = puerto;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
 	@Override
 	public void run() {
 		try {
@@ -47,6 +55,7 @@ public class TCPConnection extends Thread {
 			emisor = new Emisor(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())));
 
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -66,19 +75,9 @@ public class TCPConnection extends Thread {
 	public interface OnConnectionListener {
 		public void onConnection();
 	}
-<<<<<<< HEAD:Taller 2/Anderson Cardenas/AstuciaClient/src/comm/TCPConnection.java
-	
-	public void setPuerto(int puerto) {
-		this.puerto = puerto;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-=======
 	private Socket socket;
 	public Socket getSocket() {
 		return socket;
->>>>>>> origin/Taller2A00365049:Taller 2/AlejandroCoronel/AstuciaClient/src/comm/TCPConnection.java
 	}
 
 }

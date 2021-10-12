@@ -11,13 +11,6 @@ import model.User;
 
 public class Session{
 	
-<<<<<<< HEAD:Taller 2/Anderson Cardenas/AstuciaServer/src/com/Session.java
-	private User user;
-	private Receptor receptor;
-	private Emisor emisor;
-	private Session opponent;
-	
-=======
 	private Receptor receptor;
 	private Emisor emisor;
 	private User user;
@@ -31,7 +24,6 @@ public class Session{
 		this.user = user;
 	}
 
->>>>>>> origin/Taller2A00365049:Taller 2/AlejandroCoronel/AstuciaServer/src/com/Session.java
 	public Session(Socket socket) {	
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -56,26 +48,6 @@ public class Session{
 		return this.receptor;
 	}
 
-<<<<<<< HEAD:Taller 2/Anderson Cardenas/AstuciaServer/src/com/Session.java
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Session getOpponent() {
-		return opponent;
-	}
-
-	public void setOpponent(Session opponent) {
-		this.opponent = opponent;
-	}
-
-	
-	
-=======
 	public Socket getSocket() {
 		return socket;
 	}
@@ -84,5 +56,4 @@ public class Session{
 		this.socket = socket;
 	}
 
->>>>>>> origin/Taller2A00365049:Taller 2/AlejandroCoronel/AstuciaServer/src/com/Session.java
 }

@@ -8,10 +8,7 @@ public class Receptor extends Thread{
 	private BufferedReader breader;
 	private OnMessageListener listener;
 	private boolean alive = true;
-<<<<<<< HEAD:Taller 2/Anderson Cardenas/AstuciaClient/src/comm/Receptor.java
-=======
 	
->>>>>>> origin/Taller2A00365049:Taller 2/AlejandroCoronel/AstuciaClient/src/comm/Receptor.java
 	
 	public Receptor(BufferedReader breader) {
 		this.breader = breader;
@@ -20,13 +17,6 @@ public class Receptor extends Thread{
 	@Override
 	public void run() {
 		try {
-<<<<<<< HEAD:Taller 2/Anderson Cardenas/AstuciaClient/src/comm/Receptor.java
-				String msg = "";
-				while(alive && msg!=null) {
-					msg = breader.readLine();
-					listener.onMessage(msg);	
-				}
-=======
 			while(alive) {	
 				String msg = breader.readLine();
 				if(msg != null) {
@@ -36,7 +26,6 @@ public class Receptor extends Thread{
 					return;
 				}
 			}
->>>>>>> origin/Taller2A00365049:Taller 2/AlejandroCoronel/AstuciaClient/src/comm/Receptor.java
 		} catch (IOException e) {
 			System.out.println("Se desconecto");
 		}
@@ -51,16 +40,5 @@ public class Receptor extends Thread{
 	public interface OnMessageListener{
 		void onMessage(String msg);
 	}
-
-
-	public boolean getAlive() {
-		return alive;
-	}
-
-	public void setAlive(boolean alive) {
-		this.alive = alive;
-	}
-	
-	
 
 }
