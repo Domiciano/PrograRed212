@@ -5,8 +5,9 @@ public class User {
 	
 	public String type = "User";
 	private String id;
-	private String username;
-	
+	private String username;	
+
+	private transient GameStatus game;
 	
 	public User() {}
 	
@@ -14,6 +15,8 @@ public class User {
 		this.id = id;
 		this.username = username;
 	}
+
+	// --------------------------------- Getters and Setters
 	
 	public String getId() {
 		return id;
@@ -26,6 +29,14 @@ public class User {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public GameStatus getGame() {
+		return game;
+	}
+
+	public void setGame(GameStatus game) {
+		this.game = game;
 	}
 	
 	
