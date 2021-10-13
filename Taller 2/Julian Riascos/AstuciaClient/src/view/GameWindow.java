@@ -2,18 +2,14 @@ package view;
 
 import java.io.IOException;
 
-import javafx.application.Platform;
+import control.GameController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-<<<<<<< HEAD:Taller 2/Julian Riascos/AstuciaClient/src/view/GameWindow.java
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-=======
-
->>>>>>> origin/A00306456:Taller 2/JuanBallesteros-T2/AstuciaClient/src/view/GameWindow.java
 import javafx.stage.Stage;
 
 public class GameWindow extends Stage{
@@ -21,10 +17,7 @@ public class GameWindow extends Stage{
 	
 	//UI Elements
 	private Scene scene;
-<<<<<<< HEAD:Taller 2/Julian Riascos/AstuciaClient/src/view/GameWindow.java
 	private GameController control;
-=======
->>>>>>> origin/A00306456:Taller 2/JuanBallesteros-T2/AstuciaClient/src/view/GameWindow.java
 	private Label[][] radar;
 	private Button[][] ataque;
 	private TextField nameTF;
@@ -72,10 +65,7 @@ public class GameWindow extends Stage{
 			resultLabel = (Label) loader.getNamespace().get("resultLabel");
 			warningLabel = (Label) loader.getNamespace().get("warningLabel");
 			
-<<<<<<< HEAD:Taller 2/Julian Riascos/AstuciaClient/src/view/GameWindow.java
 			control = new GameController(this);
-=======
->>>>>>> origin/A00306456:Taller 2/JuanBallesteros-T2/AstuciaClient/src/view/GameWindow.java
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -150,11 +140,5 @@ public class GameWindow extends Stage{
 		this.close();
 		Alert alert = new Alert(AlertType.CONFIRMATION, "¡Perdiste!");
 		alert.show();
-	}
-
-	public void changeLabel(Label label, String msg){
-		Platform.runLater(()->{
-			label.setText(msg);
-		});
 	}
 }
