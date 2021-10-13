@@ -16,7 +16,6 @@ public class ConnectionWindow extends Stage{
 	private TextField portTF;
 	private Button btnConnect;
 	
-	@SuppressWarnings("unused")
 	private ConnectionController control;
 	
 	
@@ -53,5 +52,10 @@ public class ConnectionWindow extends Stage{
 
 	public Button getBtnConnect() {
 		return btnConnect;
-	}	
+	}
+	
+	
+	
+	
+
 }

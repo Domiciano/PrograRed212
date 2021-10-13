@@ -2,6 +2,8 @@ package control;
 
 import comm.TCPConnection;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import view.GameWindow;
 import view.ConnectionWindow;
 
@@ -39,7 +41,6 @@ public class ConnectionController implements TCPConnection.OnConnectionListener 
 					GameWindow window = new GameWindow();
 					window.show();
 					view.close();
-					new GameController(window);
 				}
 
 		);

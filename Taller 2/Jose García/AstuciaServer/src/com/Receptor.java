@@ -21,9 +21,6 @@ public class Receptor extends Thread{
 		try {
 			while(true) {	
 				String msg = breader.readLine();
-				if(msg == null){
-					break;
-				}
 				listener.onMessage(session, msg);
 			}
 		} catch (IOException e) {
