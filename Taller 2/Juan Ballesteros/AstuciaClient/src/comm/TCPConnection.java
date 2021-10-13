@@ -1,4 +1,5 @@
 package comm;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -28,15 +29,11 @@ public class TCPConnection extends Thread /* implements Receptor.OnMessageListen
 
 	}
 
-
+	private Socket socket;
 	private String ip;
 	private int puerto;
 	private Receptor receptor;
 	private Emisor emisor;
-<<<<<<< HEAD:Taller 2/Alejandro Coronel/AstuciaClient/src/comm/TCPConnection.java
-//	private OnMessageListener listener;
-=======
->>>>>>> origin/A00306456:Taller 2/JuanBallesteros-T2/AstuciaClient/src/comm/TCPConnection.java
 	private OnConnectionListener connectionListener;
 
 	public void setPuerto(int puerto) {
@@ -81,10 +78,6 @@ public class TCPConnection extends Thread /* implements Receptor.OnMessageListen
 
 	public interface OnConnectionListener {
 		public void onConnection();
-	}
-	private Socket socket;
-	public Socket getSocket() {
-		return socket;
 	}
 
 	/* @Override

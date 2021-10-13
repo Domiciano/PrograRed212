@@ -11,19 +11,11 @@ import model.User;
 
 public class Session{
 	
+	private User user;
 	private Receptor receptor;
 	private Emisor emisor;
-	private User user;
-	private Socket socket;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+	
+	
 	public Session(Socket socket) {	
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -48,12 +40,14 @@ public class Session{
 		return this.receptor;
 	}
 
-	public Socket getSocket() {
-		return socket;
+	public User getUser() {
+		return user;
 	}
 
-	public void setSocket(Socket socket) {
-		this.socket = socket;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
+	
+	
 }

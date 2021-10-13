@@ -7,13 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-<<<<<<< HEAD:Taller 2/Julian Riascos/AstuciaClient/src/view/GameWindow.java
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-=======
 
->>>>>>> origin/A00306456:Taller 2/JuanBallesteros-T2/AstuciaClient/src/view/GameWindow.java
 import javafx.stage.Stage;
 
 public class GameWindow extends Stage{
@@ -21,18 +15,13 @@ public class GameWindow extends Stage{
 	
 	//UI Elements
 	private Scene scene;
-<<<<<<< HEAD:Taller 2/Julian Riascos/AstuciaClient/src/view/GameWindow.java
-	private GameController control;
-=======
->>>>>>> origin/A00306456:Taller 2/JuanBallesteros-T2/AstuciaClient/src/view/GameWindow.java
 	private Label[][] radar;
 	private Button[][] ataque;
 	private TextField nameTF;
 	private Button sendNameBtn, surrenderBtn;
 	private Label opponentLabel;
 	private Label statusLabel;	
-	private Label resultLabel;
-	private Label warningLabel;
+	
 	
 	public GameWindow() {
 		try {
@@ -69,14 +58,9 @@ public class GameWindow extends Stage{
 			opponentLabel = (Label) loader.getNamespace().get("opponentLabel");
 			statusLabel = (Label) loader.getNamespace().get("statusLabel");
 			surrenderBtn = (Button) loader.getNamespace().get("surrenderBtn");
-			resultLabel = (Label) loader.getNamespace().get("resultLabel");
-			warningLabel = (Label) loader.getNamespace().get("warningLabel");
 			
-<<<<<<< HEAD:Taller 2/Julian Riascos/AstuciaClient/src/view/GameWindow.java
-			control = new GameController(this);
-=======
->>>>>>> origin/A00306456:Taller 2/JuanBallesteros-T2/AstuciaClient/src/view/GameWindow.java
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -115,41 +99,14 @@ public class GameWindow extends Stage{
 		return surrenderBtn;
 	}
 
-	public Label getResultLabel() {
-		return resultLabel;
-	}
-
-	public void setResultLabel(Label resultLabel) {
-		this.resultLabel = resultLabel;
-	}
-	
-	public Label getWarningLabel() {
-		return warningLabel;
-	}
-
-	public void setWarningLabel(Label warningLabel) {
-		this.warningLabel = warningLabel;
-	}
 
 	//UI Actions
-	public void drawAttackInRadar(int row, int col) {
-		radar[row][col].setStyle("-fx-background-color: red;");
+	public void drawAttackInRadar(int fil, int col) {
+		radar[fil][col].setStyle("-fx-background-color: red;");
 	}
 	
-	public void drawWeakPointInRadar(int row, int col) {
-		radar[row][col].setStyle("-fx-background-color: yellow;");
-	}
-	
-	public void win() {
-		this.close();
-		Alert alert = new Alert(AlertType.CONFIRMATION, "¡Ganaste!");
-		alert.show();
-	}
-	
-	public void lose() {
-		this.close();
-		Alert alert = new Alert(AlertType.CONFIRMATION, "¡Perdiste!");
-		alert.show();
+	public void drawWeakPointInRadar(int fil, int col) {
+		radar[fil][col].setStyle("-fx-background-color: yellow;");
 	}
 
 	public void changeLabel(Label label, String msg){
