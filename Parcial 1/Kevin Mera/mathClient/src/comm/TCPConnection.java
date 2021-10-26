@@ -34,6 +34,14 @@ public class TCPConnection extends Thread {
 	private OnMessageListener listener;
 	private OnConnectionListener connectionListener;
 
+	public void setPuerto(int puerto) {
+		this.puerto = puerto;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
 	@Override
 	public void run() {
 		try {
@@ -67,14 +75,6 @@ public class TCPConnection extends Thread {
 
 	public interface OnConnectionListener {
 		public void onConnection();
-	}
-	
-	public void setPuerto(int puerto) {
-		this.puerto = puerto;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
 	}
 
 }

@@ -2,10 +2,6 @@ package control;
 
 import comm.TCPConnection;
 import javafx.application.Platform;
-<<<<<<< HEAD:Taller 2/Jose García/AstuciaClient/src/control/ConnectionController.java
-import view.GameWindow;
-=======
->>>>>>> origin/A00364415:Parcial 1/Kevin Mera/mathClient/src/control/ConnectionController.java
 import view.ConnectionWindow;
 import view.GameWindow;
 

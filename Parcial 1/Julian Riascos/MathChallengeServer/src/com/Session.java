@@ -15,11 +15,9 @@ public class Session{
 	private Session enemy;
 	private Receptor receptor;
 	private Emisor emisor;
-	private Socket socket;
 	
 	public Session(Socket socket) {	
 		try {
-			this.socket = socket;
 			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			
 			receptor = new Receptor(this, reader);
@@ -49,7 +47,6 @@ public class Session{
 		this.user = user;
 	}
 
-<<<<<<< HEAD:Parcial 1/Julian Riascos/MathChallengeServer/src/com/Session.java
 	public Session getEnemy() {
 		return enemy;
 	}
@@ -58,15 +55,4 @@ public class Session{
 		this.enemy = enemy;
 	}
 
-=======
-<<<<<<< HEAD:Taller 2/Kevin Mera/AstuciaServer/src/com/Session.java
-	public Socket getSocket() {
-		return socket;
-	}
-	
-=======
->>>>>>> 1d650def67ef607e4c5ff8e61c5503d5118e6693:Taller 2/AstuciaServer/src/com/Session.java
-	
-	
->>>>>>> origin/A00364415:Taller 2/Kevin Mera/AstuciaServer/src/com/Session.java
 }
