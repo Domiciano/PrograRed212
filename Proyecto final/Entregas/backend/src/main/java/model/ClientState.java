@@ -1,9 +1,9 @@
 package model;
 
   enum Type{
-      BLOQUEADO,
-      ADENTRO,
-      AFUERA;
+      BLOCKED,
+      IN,
+      OUT;
 
   }
 public class ClientState {
