@@ -1,0 +1,23 @@
+footer {
+  margin: auto 0;
+  /* position: fixed;
+  bottom: 0;
+  height: 10%;
+  width: 100%; */
+}
+
+footer div {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+footer a {
+  float: left;
+}
+
+footer p {
+  position: absolute;
+  right: 20px;
+}
