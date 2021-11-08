@@ -5,7 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
+<<<<<<< HEAD
   <artifactId>buddyTech</artifactId>
+=======
+  <artifactId>backend</artifactId>
+>>>>>>> 9beda12160f961281b41f999c68313ff1411a2ea
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -26,6 +30,7 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+<<<<<<< HEAD
 
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -40,12 +45,27 @@
       <scope>provided</scope>
     </dependency>
 
+=======
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.7</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.15</version>
+    </dependency>
+>>>>>>> 9beda12160f961281b41f999c68313ff1411a2ea
     <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.bundles/jaxrs-ri -->
     <dependency>
       <groupId>org.glassfish.jersey.bundles</groupId>
       <artifactId>jaxrs-ri</artifactId>
       <version>2.33</version>
     </dependency>
+<<<<<<< HEAD
 
     <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
     <dependency>
@@ -53,6 +73,8 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.15</version>
     </dependency>
+=======
+>>>>>>> 9beda12160f961281b41f999c68313ff1411a2ea
   </dependencies>
 
   <build>
@@ -88,6 +110,7 @@
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
         </plugin>
+<<<<<<< HEAD
         <!-- Se realiza esto para acer el desplieque en heroku -->
         <plugin>
           <groupId>com.heroku.sdk</groupId>
@@ -97,6 +120,8 @@
             <appName>buddyTech</appName>
           </configuration>
         </plugin>
+=======
+>>>>>>> 9beda12160f961281b41f999c68313ff1411a2ea
       </plugins>
     </pluginManagement>
   </build>

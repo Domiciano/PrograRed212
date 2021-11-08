@@ -9,8 +9,9 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-@Path("services")
+
 @Stateless
+@Path("db")
 public class UserServices {
 
     private final UserProvider provider;
