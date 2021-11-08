@@ -1,5 +1,8 @@
 package config;
 
+import services.RoleServices;
+import services.UserServices;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
@@ -10,7 +13,8 @@ public class ApplicationConfig extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes = new HashSet <>();
-        classes.add(services.UserServices.class);
+        classes.add(UserServices.class);
+        classes.add(RoleServices.class);
         return classes;
     }
 }

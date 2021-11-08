@@ -4,8 +4,8 @@ package model;
       BLOCKED,
       IN,
       OUT;
-
   }
+
 public class ClientState {
 
        private int id;
@@ -35,5 +35,3 @@ public class ClientState {
         this.type = type;
     }
 }
-
-
