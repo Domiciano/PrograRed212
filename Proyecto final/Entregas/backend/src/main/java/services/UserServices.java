@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 
 @Stateless
-@Path("db")
+@Path("users")
 public class UserServices {
 
     private final UserProvider provider;
@@ -27,7 +27,7 @@ public class UserServices {
     }
 
     @GET
-    @Path("users")
+    @Path("")
     @Produces("application/json")
     public Response getList(){
         try {
@@ -40,9 +40,9 @@ public class UserServices {
     }
 
     @GET
-    @Path("users")
+    @Path("{property}-{value}")
     @Produces("application/json")
-    public Response getList(String property, String value){
+    public Response getList(@PathParam("property") String property, @PathParam("value") String value){
         try {
             ArrayList<User> res = provider.getData(property, value);
             return Response.status(200).entity(res).build();
@@ -53,7 +53,7 @@ public class UserServices {
     }
 
     @POST
-    @Path("users")
+    @Path("")
     @Consumes("application/json")
     public Response addUser(User user){
         try {
@@ -66,7 +66,7 @@ public class UserServices {
     }
 
     @PUT
-    @Path("users")
+    @Path("")
     @Consumes("application/json")
     public Response updateUser(User user){
         try {
@@ -78,7 +78,7 @@ public class UserServices {
         }
     }
     @DELETE
-    @Path("users")
+    @Path("")
     public Response deleteUser(int id){
         try {
             String o = provider.delete(id);
