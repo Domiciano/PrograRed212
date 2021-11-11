@@ -1,19 +1,14 @@
 package model;
 
-  enum Type{
-      BLOCKED,
-      IN,
-      OUT;
 
-  }
 public class ClientState {
 
        private int id;
-       private Type type;
+       private String status;
 
-    public ClientState(int id, Type type) {
+    public ClientState(int id, String status) {
         this.id = id;
-        this.type = type;
+        this.status = status;
     }
 
     public ClientState() {
@@ -27,12 +22,12 @@ public class ClientState {
         this.id = id;
     }
 
-    public Type getType() {
-        return type;
+    public String getStatus() {
+        return status;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
 
