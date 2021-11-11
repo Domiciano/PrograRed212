@@ -1,0 +1,11 @@
+#left-img{
+    position: absolute;
+    left: 0;
+    top: 100px;
+}
+#right-img{
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}

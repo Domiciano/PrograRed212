@@ -1,0 +1,90 @@
+main {
+  font-family: 'Fira Sans', sans-serif;
+  margin: auto;
+  margin-top: 50px;
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.border-gradient-blue {
+  border: 3px solid rgb(36, 255, 160);
+  border-radius: 15px;
+  background: -webkit-linear-gradient(
+    -86deg,
+    #aaf85b 5%,
+    #7aec8d 53%,
+    #11c2e1 91%
+  );
+  -webkit-background-clip: text;
+  color: white;
+  text-align: left;
+}
+
+.form-input {
+  border: none;
+  padding-left: 10px;
+  border-radius: 8px;
+  color: white;
+  background-color: rgb(202, 202, 202, 0.5);
+  text-align: left;
+}
+
+#login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#login input {
+  background-color: none;
+  margin: 20px 0;
+  height: 40px;
+  width: 100%;
+}
+
+#login button {
+  border: none;
+  margin: 20px 0;
+  height: 40px;
+  width: 104%;
+  border-radius: 8px;
+  text-align: left;
+  padding-left: 10px;
+
+  background: -webkit-linear-gradient(
+    45deg,
+    #5bf895 5%,
+    #7aec8d 53%,
+    #11c2e1 91%
+  );
+  color: #ffffff;
+
+  font-weight: 700;
+}
+
+#login button:hover {
+    border: none;
+    margin: 20px 0;
+    padding-left: 10px;
+    height: 40px;
+    width: 104%;
+    border-radius: 8px;
+    text-align: left;
+  
+    background: -webkit-linear-gradient(
+      45deg,
+      #46c474 5%,
+      #45d581 53%,
+      #1198e1 91%
+    );
+    color: #ffffff;
+  
+    font-weight: 700;
+  }
+
+#login p {
+  margin: 10px;
+  text-align: center;
+}
