@@ -13,6 +13,7 @@ public class ApplicationConfig extends Application {
         Set<Class<?>> classes = new HashSet <>();
         classes.add(services.UserServices.class);
         classes.add(services.ClientServices.class);
+        classes.add(services.CityServices.class);
         return classes;
     }
 
