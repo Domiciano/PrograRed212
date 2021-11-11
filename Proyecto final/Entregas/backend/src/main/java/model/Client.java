@@ -8,22 +8,40 @@ public class Client {
     private String name;
     private String lastname;
     private float weight;
-    private float length;
+    private float height;
     private int statusID;
     private int membershipID;
 
-    public Client(String natId,int id, int age, String name, String lastname, float weight, float length, int statusID, int membershipID) {
+    public Client(String natId,int id, int age, String name, String lastname, float weight, float height, int statusID, int membershipID) {
         this.id = id;
         this.age = age;
         this.name = name;
         this.lastname = lastname;
         this.weight = weight;
-        this.length = length;
+        this.height = height;
         this.statusID = statusID;
         this.membershipID = membershipID;
         this.natId = natId;
     }
-
+    public Client(String natId, int age, String name, String lastname, float weight, float height, int statusID, int membershipID) {
+        this.age = age;
+        this.name = name;
+        this.lastname = lastname;
+        this.weight = weight;
+        this.height = height;
+        this.statusID = statusID;
+        this.membershipID = membershipID;
+        this.natId = natId;
+    }
+    public Client(String natId, int age, String name, String lastname, float weight, float height, int statusID) {
+        this.age = age;
+        this.name = name;
+        this.lastname = lastname;
+        this.weight = weight;
+        this.height = height;
+        this.statusID = statusID;
+        this.natId = natId;
+    }
     public Client() {
     }
 
@@ -74,12 +92,12 @@ public class Client {
         this.weight = weight;
     }
 
-    public float getLength() {
-        return length;
+    public float getHeight() {
+        return height;
     }
 
-    public void setLength(float length) {
-        this.length = length;
+    public void setHeight(float height) {
+        this.height = height;
     }
 
     public int getStatusID() {

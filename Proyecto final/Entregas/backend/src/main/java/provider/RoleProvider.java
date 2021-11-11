@@ -63,8 +63,8 @@ public class RoleProvider {
         return "ok";
     }
 
-    public String delete(String name) throws SQLException {
-        String sql = "DELETE FROM roleBuddy WHERE name = " + name;
+    public String delete(Role role) throws SQLException {
+        String sql = "DELETE FROM roleBuddy WHERE name = " + role.getName();
 
         MySQL db = new MySQL();
         db.connection();
