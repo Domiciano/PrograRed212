@@ -40,7 +40,7 @@ public class CityProvider {
     }
 
     public String delete(City city) throws SQLException {
-        String sql = "DELETE FROM cityBuddy WHERE name = "+city.getName();
+        String sql = "DELETE FROM cityBuddy WHERE name = '"+city.getName()+"'";
 
         MySQL db = new MySQL();
         db.connection();
