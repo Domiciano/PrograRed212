@@ -2,15 +2,15 @@ package model;
 
 public class Role {
   private int id;
-  private String code;
+  private String name;
   private String description;
 
     public Role() {
     }
 
-    public Role(int id, String code, String description) {
+    public Role(int id, String name, String description) {
         this.id = id;
-        this.code = code;
+        this.name = name;
         this.description = description;
     }
 
@@ -22,12 +22,12 @@ public class Role {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public String getName() {
+        return name;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

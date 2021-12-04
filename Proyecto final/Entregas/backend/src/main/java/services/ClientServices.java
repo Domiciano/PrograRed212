@@ -28,7 +28,6 @@ public class ClientServices {
         }
     }
 
-
     @POST
     @Path("addClient")
     @Consumes("application/json")
