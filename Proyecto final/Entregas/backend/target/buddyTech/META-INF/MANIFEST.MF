@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
 Built-By: alejo
 Build-Jdk: 1.8.0_301
 
+=======
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: Julian
+Build-Jdk: version 1.8.0_281
+
+>>>>>>> 8b50924f26b027e5b180ab5257076c2b09bbddb5

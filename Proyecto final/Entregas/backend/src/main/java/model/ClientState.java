@@ -1,6 +1,5 @@
 package model;
 
-
 public class ClientState {
 
        private int id;
@@ -30,5 +29,3 @@ public class ClientState {
         this.status = status;
     }
 }
-
-
