@@ -1,0 +1,104 @@
+main {
+  position: fixed;
+  top: 50px;
+  left: 0px;
+  font-family: "Fira Sans", sans-serif;
+  margin: auto;
+  margin-top: 50px;
+  display: grid;
+  place-items: center;
+  width: 100%; 
+  height: 70%;
+}
+
+.border-gradient-blue {
+  border: 3px solid rgb(36, 255, 160);
+  border-radius: 15px;
+  background: -webkit-linear-gradient(
+    -86deg,
+    #aaf85b 5%,
+    #7aec8d 53%,
+    #11c2e1 91%
+  );
+  -webkit-background-clip: text;
+  color: white;
+  text-align: left;
+}
+
+.form-input {
+  border: none;
+  padding-left: 10px;
+  border-radius: 8px;
+  color: white;
+  background-color: rgba(67, 149, 255, 0.5);
+  text-align: left;
+}
+
+#ClientLogin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+
+}
+
+#ClientLogin input {
+  background-color: none;
+  margin: 17px 0;
+  height: 40px;
+  width: 400px;
+}
+
+#ClientLogin button {
+  border: none;
+  margin: 20px 0;
+  height: 40px;
+  width: 85px;
+  border-radius: 8px;
+  text-align: center;
+  padding-left: 10px;
+  cursor: pointer;
+  margin-left: 20px;
+
+  background: -webkit-linear-gradient(
+    45deg,
+    #5bf895 5%,
+    #7aec8d 53%,
+    #11c2e1 91%
+  );
+  color: #ffffff;
+  font-weight: 700;
+}
+
+#ClientLogin button:hover {
+  /* Cuando me paro en el botón hace esto*/
+  border: none;
+  margin: 20px 0;
+  height: 40px;
+  width: 85px;
+  border-radius: 8px;
+  text-align: center;
+  padding-left: 10px;
+  margin-left: 20px;
+  border: 20px;
+
+  background: -webkit-linear-gradient(
+    45deg,
+    #46c474 5%,
+    #45d581 20%,
+    #1198e1 91%
+  );
+  color: #ffffff;
+
+  font-weight: 750;
+}
+
+#login p {
+  margin: 10px;
+  text-align: center;
+}

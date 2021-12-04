@@ -1,0 +1,15 @@
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: 'Fira Sans', sans-serif;
+    background: linear-gradient(45deg, #0A163A, #0C0851);
+    color: azure;
+    height: 100%;
+}
+
+body a{
+    color: azure;
+    text-decoration: none;
+}
+
