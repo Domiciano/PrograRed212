@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class RoleProvider {
 
-    public ArrayList<Role> getData() throws SQLException {
+    public ArrayList<Role> getAllRoles() throws SQLException {
         ArrayList<Role> respuesta = new ArrayList<>();
 
         String sql = "SELECT * FROM roleBuddy";

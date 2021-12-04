@@ -1,14 +1,13 @@
 package services;
 
+import com.google.gson.Gson;
 import model.Role;
 import provider.RoleProvider;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 @Path("rs")
 public class RoleServices {
@@ -17,6 +16,22 @@ public class RoleServices {
     @GET
     public String echo(){
         return "echo role";
+    }
+
+    @Path("getAll")
+    @GET
+    @Produces("application/json")
+    public Response getAllRoles(){
+        try {
+            RoleProvider provider = new RoleProvider();
+            ArrayList<Role> op = provider.getAllRoles();
+            Gson gson = new Gson();
+            String list = gson.toJson(op);
+            return Response.status(200).entity(list).build();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Response.status(500).entity(e).build();
+        }
     }
 
     @Path("insert")
@@ -33,9 +48,9 @@ public class RoleServices {
         }
     }
 
-    @Path("updateName")
+    @Path("updateName/{oldName}-{newName}")
     @POST
-    public Response updateName(String oldName, String newName){
+    public Response updateName(@PathParam("oldName") String oldName, @PathParam("newName") String newName){
         try {
             RoleProvider provider = new RoleProvider();
             String op = provider.updateName(oldName, newName);
@@ -46,9 +61,9 @@ public class RoleServices {
         }
     }
 
-    @Path("updateDesc")
+    @Path("updateDesc/{oldDesc}-{newDesc}")
     @POST
-    public Response updateDesc(String oldDesc, String newDesc){
+    public Response updateDesc(@PathParam("oldDesc") String oldDesc, @PathParam("newDesc") String newDesc){
         try {
             RoleProvider provider = new RoleProvider();
             String op = provider.updateDescription(oldDesc, newDesc);
