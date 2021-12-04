@@ -49,6 +49,30 @@ public class ClientProvider {
         db.connection();
         db.comandSQL(sql);
         db.close();
-        return "ok";
+        return "Cliente creado exitosamente";
+    }
+    public String edit(Client client) throws ClassNotFoundException, SQLException {
+        MySQL db = new MySQL();
+        db.connection();
+        String sql = "UPDATE clientsBuddy SET name='$name', lastName='$lastName', age=$age,weight=$weight,height=$height, clientStatusBuddyID= $clientStatusBuddyID, memberShipBuddyID=$memberShipBuddyID WHERE natID='$natId'";
+        sql = sql.replace("$natId", client.getNatId());
+        sql = sql.replace("$name", client.getName());
+        sql = sql.replace("$lastName", client.getLastname());
+        sql = sql.replace("$age", ""+client.getAge());
+        sql = sql.replace("$weight", ""+client.getWeight());
+        sql = sql.replace("$height", ""+client.getHeight());
+        sql = sql.replace("$clientStatusBuddyID", client.getStatusID() + "");
+        sql = sql.replace("$memberShipBuddyID", client.getMembershipID() + "");
+        db.comandSQL(sql);
+        db.close();
+        return "Cliente editado exitosamente";
+    }
+    public String delete(String natID) throws SQLException {
+        MySQL db = new MySQL();
+        db.connection();
+        String sql = "DELETE FROM clientsBuddy WHERE natID='"+natID+"'";
+        db.comandSQL(sql);
+        db.close();
+        return "Cliente borrado exitosamente";
     }
 }

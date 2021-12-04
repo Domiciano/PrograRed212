@@ -41,4 +41,28 @@ public class ClientServices {
             return Response.status(500).entity(e).build();
         }
     }
+    @PUT
+    @Path("editClient")
+    @Produces("application/json")
+    public Response edit(Client client) {
+        try {
+            ClientProvider provider = new ClientProvider();
+            String o = provider.edit(client);
+            return Response.status(200).entity(o).build();
+        } catch (ClassNotFoundException | SQLException ex) {
+            return Response.status(500).entity(ex).build();
+        }
+    }
+    @DELETE
+    @Path("deleteClient/{clientId}")
+    @Produces("application/json")
+    public Response deleteClient(@PathParam("clientId") String natID){
+        ClientProvider provider = new ClientProvider();
+        try {
+            String o = provider.delete(natID);
+            return Response.status(200).entity(o).build();
+        } catch (SQLException ex) {
+            return Response.status(500).entity(ex).build();
+        }
+    }
 }
