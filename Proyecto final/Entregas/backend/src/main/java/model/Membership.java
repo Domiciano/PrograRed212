@@ -7,15 +7,15 @@ public class Membership {
     private int id;
     private int venueID;
     private int planID;
-    private float totalAmount;
-    private float discount;
+    private double totalAmount;
+    private double discount;
     private Date startDate;
     private Date endDate;
 
     public Membership() {
     }
 
-    public Membership(int id, int venueID, int planID, float totalAmount, float discount, Date startDate, Date endDate) {
+    public Membership(int id, int venueID, int planID, double totalAmount, double discount, Date startDate, Date endDate) {
         this.id = id;
         this.venueID = venueID;
         this.planID = planID;
@@ -49,19 +49,19 @@ public class Membership {
         this.planID = planID;
     }
 
-    public float getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(float totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public float getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(float discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 
