@@ -33,7 +33,7 @@ public class ClientProvider {
 
         return respuesta;
     }
-    public String insert(Client client) throws SQLException {
+    public void insert(Client client) throws SQLException {
         String sql = "INSERT INTO clientsBuddy (natID, name, lastName, age,weight,height, clientStatusBuddyID, memberShipBuddyID )";
         sql += " VALUES ('$natId', '$name','$lastName', $age,$weight,$height, $clientStatusBuddyID, $memberShipBuddyID )";
         sql = sql.replace("$natId", client.getNatId());
@@ -49,9 +49,8 @@ public class ClientProvider {
         db.connection();
         db.comandSQL(sql);
         db.close();
-        return "Cliente creado exitosamente";
     }
-    public String edit(Client client) throws ClassNotFoundException, SQLException {
+    public void edit(Client client) throws ClassNotFoundException, SQLException {
         MySQL db = new MySQL();
         db.connection();
         String sql = "UPDATE clientsBuddy SET name='$name', lastName='$lastName', age=$age,weight=$weight,height=$height, clientStatusBuddyID= $clientStatusBuddyID, memberShipBuddyID=$memberShipBuddyID WHERE natID='$natId'";
@@ -65,14 +64,12 @@ public class ClientProvider {
         sql = sql.replace("$memberShipBuddyID", client.getMembershipID() + "");
         db.comandSQL(sql);
         db.close();
-        return "Cliente editado exitosamente";
     }
-    public String delete(String natID) throws SQLException {
+    public void delete(String natID) throws SQLException {
         MySQL db = new MySQL();
         db.connection();
         String sql = "DELETE FROM clientsBuddy WHERE natID='"+natID+"'";
         db.comandSQL(sql);
         db.close();
-        return "Cliente borrado exitosamente";
     }
 }

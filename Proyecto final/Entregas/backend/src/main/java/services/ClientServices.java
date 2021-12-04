@@ -1,5 +1,6 @@
 package services;
 import model.Client;
+import model.Message;
 import provider.ClientProvider;
 
 
@@ -27,19 +28,25 @@ public class ClientServices {
         }
     }
 
-
     @POST
     @Path("addClient")
     @Consumes("application/json")
     public Response addUser(Client client){
         ClientProvider provider =  new ClientProvider();
         try {
-            String o = provider.insert(client);
-            return Response.status(200).entity(o).build();
+            provider.insert(client);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message("cliente creado correctamente")).build();
         } catch (SQLException e) {
-            e.printStackTrace();
-            return Response.status(500).entity(e).build();
-        }
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message(e.getMessage())).build();
+    }
     }
     @PUT
     @Path("editClient")
@@ -47,10 +54,18 @@ public class ClientServices {
     public Response edit(Client client) {
         try {
             ClientProvider provider = new ClientProvider();
-            String o = provider.edit(client);
-            return Response.status(200).entity(o).build();
-        } catch (ClassNotFoundException | SQLException ex) {
-            return Response.status(500).entity(ex).build();
+            provider.edit(client);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message("cliente editado correctamente")).build();
+        } catch (SQLException | ClassNotFoundException e) {
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message(e.getMessage())).build();
         }
     }
     @DELETE
@@ -59,10 +74,18 @@ public class ClientServices {
     public Response deleteClient(@PathParam("clientId") String natID){
         ClientProvider provider = new ClientProvider();
         try {
-            String o = provider.delete(natID);
-            return Response.status(200).entity(o).build();
-        } catch (SQLException ex) {
-            return Response.status(500).entity(ex).build();
+            provider.delete(natID);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message("cliente borrado correctamente")).build();
+        } catch (SQLException e) {
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message(e.getMessage())).build();
         }
     }
 }
