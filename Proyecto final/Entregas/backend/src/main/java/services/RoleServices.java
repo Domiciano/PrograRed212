@@ -1,6 +1,7 @@
 package services;
 
 import com.google.gson.Gson;
+import model.Message;
 import model.Role;
 import provider.RoleProvider;
 
@@ -40,48 +41,36 @@ public class RoleServices {
     public Response insertRole(Role role){
         try {
             RoleProvider provider = new RoleProvider();
-            String op = provider.insert(role);
-            return Response.status(200).entity(op).build();
+            provider.insert(role);
+            return Response.status(200).entity(new Message("Role inserted")).build();
         } catch (SQLException e) {
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }
     }
 
-    @Path("updateName/{oldName}-{newName}")
-    @POST
-    public Response updateName(@PathParam("oldName") String oldName, @PathParam("newName") String newName){
+    @Path("update")
+    @PUT
+    @Consumes("application/json")
+    public Response update(Role role){
         try {
             RoleProvider provider = new RoleProvider();
-            String op = provider.updateName(oldName, newName);
-            return Response.status(200).entity(op).build();
+            provider.update(role);
+            return Response.status(200).entity(new Message("Role updated")).build();
         } catch (SQLException e) {
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }
     }
 
-    @Path("updateDesc/{oldDesc}-{newDesc}")
-    @POST
-    public Response updateDesc(@PathParam("oldDesc") String oldDesc, @PathParam("newDesc") String newDesc){
-        try {
-            RoleProvider provider = new RoleProvider();
-            String op = provider.updateDescription(oldDesc, newDesc);
-            return Response.status(200).entity(op).build();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return Response.status(500).entity(e).build();
-        }
-    }
-
-    @Path("updateDesc")
-    @POST
+    @Path("delete")
+    @DELETE
     @Consumes("application/json")
     public Response delete(Role role){
         try {
             RoleProvider provider = new RoleProvider();
-            String op = provider.delete(role);
-            return Response.status(200).entity(op).build();
+            provider.delete(role);
+            return Response.status(200).entity(new Message("Role deleted")).build();
         } catch (SQLException e) {
             e.printStackTrace();
             return Response.status(500).entity(e).build();

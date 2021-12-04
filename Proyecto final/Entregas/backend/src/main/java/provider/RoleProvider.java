@@ -29,7 +29,7 @@ public class RoleProvider {
         return respuesta;
     }
 
-    public String insert(Role role) throws SQLException {
+    public void insert(Role role) throws SQLException {
         String sql = "INSERT INTO roleBuddy (id, name, description)";
         sql += " VALUES ($id,'$name', '$description')";
         sql = sql.replace("$name", role.getName());
@@ -40,36 +40,25 @@ public class RoleProvider {
         db.connection();
         db.comandSQL(sql);
         db.close();
-        return "ok";
     }
 
-    public String updateName(String oldName, String newName) throws SQLException {
-        String sql = "UPDATE roleBuddy SET name = " + newName + " WHERE name = " + oldName;
+    public void update(Role role) throws SQLException {
+        String sql = "UPDATE roleBuddy SET name = '$name', description = '$description' WHERE id = " + role.getId();
+        sql = sql.replace("$name", role.getName());
+        sql = sql.replace("$description", role.getDescription());
+        System.out.println(sql);
+        MySQL db = new MySQL();
+        db.connection();
+        db.comandSQL(sql);
+        db.close();
+    }
+
+    public void delete(Role role) throws SQLException {
+        String sql = "DELETE FROM roleBuddy WHERE ID = " + role.getId();
 
         MySQL db = new MySQL();
         db.connection();
         db.comandSQL(sql);
         db.close();
-        return "ok";
-    }
-
-    public String updateDescription(String oldDesc, String newDesc) throws SQLException {
-        String sql = "UPDATE roleBuddy SET description = " + newDesc + " WHERE description = " + oldDesc;
-
-        MySQL db = new MySQL();
-        db.connection();
-        db.comandSQL(sql);
-        db.close();
-        return "ok";
-    }
-
-    public String delete(Role role) throws SQLException {
-        String sql = "DELETE FROM roleBuddy WHERE name = " + role.getName();
-
-        MySQL db = new MySQL();
-        db.connection();
-        db.comandSQL(sql);
-        db.close();
-        return "ok";
     }
 }
