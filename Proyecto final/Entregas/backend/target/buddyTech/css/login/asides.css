@@ -1,11 +1,13 @@
 #left-img{
     position: absolute;
+    z-index: 2;
     left: 0;
-    top: 100px;
+    top: 35%;
 }
-#right-img{
 
+#right-img{
     position: absolute;
+    z-index: 2;
     right: 0;
     bottom: 0;
 }
