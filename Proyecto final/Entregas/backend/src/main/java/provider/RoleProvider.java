@@ -30,11 +30,10 @@ public class RoleProvider {
     }
 
     public void insert(Role role) throws SQLException {
-        String sql = "INSERT INTO roleBuddy (id, name, description)";
-        sql += " VALUES ($id,'$name', '$description')";
+        String sql = "INSERT INTO roleBuddy (name, description)";
+        sql += " VALUES ('$name', '$description')";
         sql = sql.replace("$name", role.getName());
         sql = sql.replace("$description", role.getDescription());
-        sql = sql.replace("$id", role.getId()+"");
 
         MySQL db = new MySQL();
         db.connection();
@@ -46,7 +45,7 @@ public class RoleProvider {
         String sql = "UPDATE roleBuddy SET name = '$name', description = '$description' WHERE id = " + role.getId();
         sql = sql.replace("$name", role.getName());
         sql = sql.replace("$description", role.getDescription());
-        System.out.println(sql);
+
         MySQL db = new MySQL();
         db.connection();
         db.comandSQL(sql);
