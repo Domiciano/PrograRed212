@@ -21,8 +21,8 @@ public class ClientProvider {
             String name = results.getString(results.findColumn("name"));
             String lastName = results.getString(results.findColumn("lastName"));
             int age = results.getInt(results.findColumn("age"));
-            float weight = results.getFloat(results.findColumn("weight"));
-            float height = results.getFloat(results.findColumn("height"));
+            double weight = results.getFloat(results.findColumn("weight"));
+            double height = results.getFloat(results.findColumn("height"));
             int statusID = results.getInt(results.findColumn("clientStatusBuddyID"));
             int membershipID = results.getInt(results.findColumn("memberShipBuddyID"));
 
