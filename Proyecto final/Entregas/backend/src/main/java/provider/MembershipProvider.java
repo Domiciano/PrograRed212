@@ -1,9 +1,7 @@
 package provider;
 
-import model.Client;
 import model.Membership;
 import sql.MySQL;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -51,13 +49,13 @@ public class MembershipProvider {
         db.close();
     }
 
-    public ArrayList<Membership> searchMembershipByClientID(int clientID) throws SQLException {
+    public ArrayList<Membership> searchMembershipByMemID(int memID) throws SQLException {
         MySQL db = new MySQL();
         ArrayList<Membership> memberships = new ArrayList<>();
         db.connection();
 
-        String sql = "SELECT * FROM memberShipBuddy WHERE id = $CID ";
-        sql = sql.replace("$CID", clientID+"");
+        String sql = "SELECT * FROM memberShipBuddy WHERE id = $MID ";
+        sql = sql.replace("$MID", memID+"");
         ResultSet results = db.getDataMySQL(sql);
 
         while (results.next()) {

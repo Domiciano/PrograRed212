@@ -99,12 +99,13 @@ public class ClientProvider {
         return client;
     }
 
-    public void editStatusByNatId(String natID) throws SQLException {
+    public void editStatusByNatId(String natID, int status) throws SQLException {
         MySQL db = new MySQL();
         ArrayList<Client> client = new ArrayList<>();
         db.connection();
-        String sql= "UPDATE clientsBuddy SET clientStatusBuddyID = 2 WHERE natID = '$NATID'";
+        String sql= "UPDATE clientsBuddy SET clientStatusBuddyID = $STATUS WHERE natID = '$NATID'";
         sql = sql.replace("$NATID", natID);
+        sql = sql.replace("$STATUS",status+"");
         db.comandSQL(sql);
 
     }
