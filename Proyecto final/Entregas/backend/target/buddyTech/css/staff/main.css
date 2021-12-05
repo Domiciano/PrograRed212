@@ -51,11 +51,7 @@ main {
   background-color: none;
   margin: 17px 0;
   height: 40px;
-<<<<<<< HEAD
   width: 600px;
-=======
-  width: 400px;
->>>>>>> aee526bda7d41544c662c7b996d11e47008908dc
 }
 
 #ClientLogin button {
@@ -106,7 +102,6 @@ main {
   margin: 10px;
   text-align: center;
 }
-<<<<<<< HEAD
 
 #keyboard{
 
@@ -145,5 +140,3 @@ height: 120px;
 
 }
 
-=======
->>>>>>> aee526bda7d41544c662c7b996d11e47008908dc

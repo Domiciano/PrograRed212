@@ -1,8 +1,10 @@
 package services;
 
+import model.Client;
 import model.Membership;
 import model.Message;
 import model.Venue;
+import provider.ClientProvider;
 import provider.MembershipProvider;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -21,6 +23,16 @@ public class MembershipServices {
     @OPTIONS
     @Path("addmembership")
     public Response options(Membership membership){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
+    @OPTIONS
+    @Path("searchmembership")
+    public Response optionsSearch(Membership membership){
         return Response.status(200)
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
@@ -60,6 +72,27 @@ public class MembershipServices {
         } catch (SQLException e) {
             e.printStackTrace();
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(e.getMessage())).build();
+        }
+    }
+
+    @GET
+    @Path("searchmembership/{clientID}")
+    @Produces("application/json")
+    public Response getMembershipsByClientId(@PathParam("clientID") int clientID){
+        try {
+            MembershipProvider provider = new MembershipProvider();
+            ArrayList<Membership> memberships = provider.searchMembershipByClientID(clientID);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(memberships).build();
+        } catch (SQLException ex) {
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message(ex.getMessage())).build();
         }
     }
 
