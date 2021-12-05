@@ -98,4 +98,14 @@ public class ClientProvider {
         db.close();
         return client;
     }
+
+    public void editStatusByNatId(String natID) throws SQLException {
+        MySQL db = new MySQL();
+        ArrayList<Client> client = new ArrayList<>();
+        db.connection();
+        String sql= "UPDATE clientsBuddy SET clientStatusBuddyID = 2 WHERE natID = '$NATID'";
+        sql = sql.replace("$NATID", natID);
+        db.comandSQL(sql);
+
+    }
 }
