@@ -72,4 +72,30 @@ public class ClientProvider {
         db.comandSQL(sql);
         db.close();
     }
+
+    public ArrayList<Client> searchClient(String natID) throws SQLException {
+        MySQL db = new MySQL();
+        ArrayList<Client> client = new ArrayList<>();
+        db.connection();
+
+        String sql = "SELECT * FROM clientsBuddy WHERE natID = '$NATID' ";
+        sql = sql.replace("$NATID", natID);
+        ResultSet results = db.getDataMySQL(sql);
+
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            String natId = results.getString(results.findColumn("natID"));
+            String name = results.getString(results.findColumn("name"));
+            String lastName = results.getString(results.findColumn("lastName"));
+            int age = results.getInt(results.findColumn("age"));
+            double weight = results.getFloat(results.findColumn("weight"));
+            double height = results.getFloat(results.findColumn("height"));
+            int statusID = results.getInt(results.findColumn("clientStatusBuddyID"));
+            int membershipID = results.getInt(results.findColumn("memberShipBuddyID"));
+            Client found = new Client(natId, id, age, name, lastName, weight, height, statusID, membershipID);
+            client.add(found);
+        }
+        db.close();
+        return client;
+    }
 }

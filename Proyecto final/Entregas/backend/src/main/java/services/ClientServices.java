@@ -15,16 +15,16 @@ public class ClientServices {
     public String echo(){return "echo client";}
 
     @GET
-    @Path("clients")
+    @Path("getclients")
     @Produces("application/json")
     public Response getList(){
-        ClientProvider provider = new ClientProvider();
         try {
-            ArrayList<Client> res = provider.getData();
-            return Response.status(200).entity(res).build();
+            ClientProvider provider = new ClientProvider();
+            ArrayList<Client> clients = provider.getData();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(clients).build();
         } catch (SQLException e) {
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(e.getMessage())).build();
         }
     }
 
@@ -86,6 +86,19 @@ public class ClientServices {
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
                     .entity(new Message(e.getMessage())).build();
+        }
+    }
+
+    @GET
+    @Path("searchclient/{natID}")
+    @Produces("application/json")
+    public Response getByType(@PathParam("natID") String natID){
+        try {
+            ClientProvider provider = new ClientProvider();
+            ArrayList<Client> client = provider.searchClient(natID);
+            return Response.status(200).header("access-control-allow-origin", "*").entity(client).build();
+        } catch (SQLException ex) {
+            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
     }
 }

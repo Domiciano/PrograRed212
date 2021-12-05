@@ -51,7 +51,7 @@ main {
   background-color: none;
   margin: 17px 0;
   height: 40px;
-  width: 400px;
+  width: 600px;
 }
 
 #ClientLogin button {
@@ -102,3 +102,41 @@ main {
   margin: 10px;
   text-align: center;
 }
+
+#keyboard{
+
+height: 200px;
+width: 400px;
+
+
+}
+
+.container{
+
+  position: relative;
+  
+  place-items: center;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 50px;
+  margin: auto;
+
+}
+
+.btnKeyboard{
+
+width: 120px;
+height: 120px;
+
+}
+
+#clearBtn{
+  
+  width: 555px;
+  height: 120px;
+  justify-content: flex-end;
+
+}
+
