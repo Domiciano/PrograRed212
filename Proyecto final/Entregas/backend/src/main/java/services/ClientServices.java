@@ -14,6 +14,27 @@ public class ClientServices {
     @Path("echo")
     public String echo(){return "echo client";}
 
+
+    @OPTIONS
+    @Path("editclientstatusbyid/{natID}/{status}")
+    public Response optionsEditStatusByNatId(@PathParam("natID") String natID, @PathParam("status") int status) {
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
+    @OPTIONS
+    @Path("searchclient/{natID}")
+    public Response optionsSearch(@PathParam("natID") String natID){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
     @GET
     @Path("getclients")
     @Produces("application/json")
@@ -68,6 +89,28 @@ public class ClientServices {
                     .entity(new Message(e.getMessage())).build();
         }
     }
+
+    @PUT
+    @Path("editclientstatusbyid/{natID}/{status}")
+    @Produces("application/json")
+    public Response editStatusByNatId(@PathParam("natID") String natID, @PathParam("status") int status) {
+        try {
+            ClientProvider provider = new ClientProvider();
+            provider.editStatusByNatId(natID, status);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message("Estado del cliente ha sido cambiado")).build();
+        } catch (SQLException e) {
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message(e.getMessage())).build();
+        }
+    }
+
     @DELETE
     @Path("deleteClient/{clientId}")
     @Produces("application/json")
@@ -92,7 +135,7 @@ public class ClientServices {
     @GET
     @Path("searchclient/{natID}")
     @Produces("application/json")
-    public Response getByType(@PathParam("natID") String natID){
+    public Response getByNatId(@PathParam("natID") String natID){
         try {
             ClientProvider provider = new ClientProvider();
             ArrayList<Client> client = provider.searchClient(natID);
