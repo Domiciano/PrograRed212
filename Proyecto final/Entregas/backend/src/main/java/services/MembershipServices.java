@@ -1,10 +1,7 @@
 package services;
 
-import model.Client;
 import model.Membership;
 import model.Message;
-import model.Venue;
-import provider.ClientProvider;
 import provider.MembershipProvider;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -34,7 +31,7 @@ public class MembershipServices {
     @Path("searchmembership")
     public Response optionsSearch(Membership membership){
         return Response.status(200)
-                .header("access-control-allow-origin", "*")
+                .header("Access-Control-Allow-Origin", "*")
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
                 .build();
@@ -76,23 +73,15 @@ public class MembershipServices {
     }
 
     @GET
-    @Path("searchmembership/{clientID}")
+    @Path("searchmembership/{memshipID}")
     @Produces("application/json")
-    public Response getMembershipsByClientId(@PathParam("clientID") int clientID){
+    public Response getMembershipsByMemId(@PathParam("memshipID") int memshipID){
         try {
             MembershipProvider provider = new MembershipProvider();
-            ArrayList<Membership> memberships = provider.searchMembershipByClientID(clientID);
-            return Response.status(200)
-                    .header("access-control-allow-origin", "*")
-                    .header("access-control-allow-methods", "*")
-                    .header("access-control-allow-headers", "*")
-                    .entity(memberships).build();
+            ArrayList<Membership> memberships = provider.searchMembershipByMemID(memshipID);
+            return Response.status(200).header("access-control-allow-origin", "*").entity(memberships).build();
         } catch (SQLException ex) {
-            return Response.status(500)
-                    .header("access-control-allow-origin", "*")
-                    .header("access-control-allow-methods", "*")
-                    .header("access-control-allow-headers", "*")
-                    .entity(new Message(ex.getMessage())).build();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
     }
 
