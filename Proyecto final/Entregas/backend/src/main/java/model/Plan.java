@@ -3,19 +3,19 @@ package model;
 public class Plan {
 
     private int id;
-    private float amount;
+    private double amount;
     private String name;
-    private boolean alive;
+    private boolean active;
     private int time;
 
     public Plan() {
     }
 
-    public Plan(int id, float amount, String name, boolean alive, int time) {
+    public Plan(int id, String name, double amount, int time, boolean active) {
         this.id = id;
         this.amount = amount;
         this.name = name;
-        this.alive = alive;
+        this.active = active;
         this.time = time;
     }
 
@@ -27,11 +27,11 @@ public class Plan {
         this.id = id;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -43,12 +43,12 @@ public class Plan {
         this.name = name;
     }
 
-    public boolean isAlive() {
-        return alive;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setAlive(boolean alive) {
-        this.alive = alive;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public int getTime() {

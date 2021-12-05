@@ -1,0 +1,72 @@
+package provider;
+
+import model.Plan;
+import sql.MySQL;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class PlanProvider {
+
+    public ArrayList<Plan> getAllPlans() throws SQLException {
+        ArrayList<Plan> respuesta = new ArrayList<>();
+
+        String sql = "SELECT * FROM plansBuddy";
+        MySQL db = new MySQL();
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+        while (results.next()) {
+            int id = Integer.parseInt(results.getString(results.findColumn("id")));
+            String name = results.getString(results.findColumn("name"));
+            double amount = results.getDouble(results.findColumn("amount"));
+            int time = results.getInt(results.findColumn("time"));
+            int parseIt = results.getInt(results.findColumn("active"));
+            boolean active = false;
+            if (parseIt == 1) active = true;
+            Plan plan = new Plan(id, name, amount, time, active);
+            respuesta.add(plan);
+        }
+        db.close();
+        return respuesta;
+    }
+
+    public void insert(Plan plan) throws SQLException {
+        String sql = "INSERT INTO plansBuddy (name, amount, time, active)";
+        sql += " VALUES ('$name', $amount, $time, $active)";
+        sql = replace(sql, plan);
+
+        MySQL db = new MySQL();
+        db.connection();
+        db.comandSQL(sql);
+        db.close();
+    }
+
+    public void update(Plan plan) throws SQLException {
+        String sql = "UPDATE plansBuddy SET name = '$name', amount = $amount, time = $time, active = '$active' WHERE id = " + plan.getId();
+        sql = replace(sql, plan);
+
+        MySQL db = new MySQL();
+        db.connection();
+        db.comandSQL(sql);
+        db.close();
+    }
+
+    private String replace(String sql, Plan plan){
+        sql = sql.replace("$name", plan.getName());
+        sql = sql.replace("$amount", plan.getAmount()+"");
+        sql = sql.replace("$time", plan.getTime()+"");
+        if (plan.isActive()) sql = sql.replace("$active", 1+"");
+        else sql = sql.replace("$active", 0+"");
+        return sql;
+    }
+
+    public void delete(Plan plan) throws SQLException {
+        String sql = "DELETE FROM plansBuddy WHERE ID = " + plan.getId();
+
+        MySQL db = new MySQL();
+        db.connection();
+        db.comandSQL(sql);
+        db.close();
+    }
+}
