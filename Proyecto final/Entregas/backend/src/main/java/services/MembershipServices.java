@@ -2,7 +2,6 @@ package services;
 
 import model.Membership;
 import model.Message;
-import model.Venue;
 import provider.MembershipProvider;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -23,6 +22,16 @@ public class MembershipServices {
     public Response options(Membership membership){
         return Response.status(200)
                 .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
+    @OPTIONS
+    @Path("searchmembership")
+    public Response optionsSearch(Membership membership){
+        return Response.status(200)
+                .header("Access-Control-Allow-Origin", "*")
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
                 .build();
@@ -60,6 +69,19 @@ public class MembershipServices {
         } catch (SQLException e) {
             e.printStackTrace();
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(e.getMessage())).build();
+        }
+    }
+
+    @GET
+    @Path("searchmembership/{memshipID}")
+    @Produces("application/json")
+    public Response getMembershipsByMemId(@PathParam("memshipID") int memshipID){
+        try {
+            MembershipProvider provider = new MembershipProvider();
+            ArrayList<Membership> memberships = provider.searchMembershipByMemID(memshipID);
+            return Response.status(200).header("access-control-allow-origin", "*").entity(memberships).build();
+        } catch (SQLException ex) {
+            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
     }
 

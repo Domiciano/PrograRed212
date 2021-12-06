@@ -2,7 +2,6 @@ package provider;
 
 import model.Membership;
 import sql.MySQL;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class MembershipProvider {
             Date startDate = results.getDate(results.findColumn("startDate"));
             Date endDate = results.getDate(results.findColumn("endDate"));
 
-            Membership temp = new Membership(id, venueID, planID, totalAmount, discount, startDate, endDate);
+            Membership temp = new Membership(id, totalAmount, discount,  startDate, endDate, planID, venueID);
             respuesta.add(temp);
         }
         db.close();
@@ -50,4 +49,28 @@ public class MembershipProvider {
         db.close();
     }
 
+    public ArrayList<Membership> searchMembershipByMemID(int memID) throws SQLException {
+        MySQL db = new MySQL();
+        ArrayList<Membership> memberships = new ArrayList<>();
+        db.connection();
+
+        String sql = "SELECT * FROM memberShipBuddy WHERE id = $MID ";
+        sql = sql.replace("$MID", memID+"");
+        ResultSet results = db.getDataMySQL(sql);
+
+        while (results.next()) {
+            int id = results.getInt(1);
+            Double totalAmount = results.getDouble(2);
+            Double discount = results.getDouble(3);
+            Date startDate = results.getDate(4);
+            Date endDate = results.getDate(5);
+            int plansBuddyID = results.getInt(6);
+            int venuesBuddyID = results.getInt(7);
+
+            Membership membership = new Membership(id, totalAmount, discount, startDate, endDate, plansBuddyID, venuesBuddyID);
+            memberships.add(membership);
+        }
+        db.close();
+        return memberships;
+    }
 }

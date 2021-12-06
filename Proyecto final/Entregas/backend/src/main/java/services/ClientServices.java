@@ -3,7 +3,6 @@ import model.Client;
 import model.Message;
 import provider.ClientProvider;
 
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
@@ -14,17 +13,38 @@ public class ClientServices {
     @Path("echo")
     public String echo(){return "echo client";}
 
+
+    @OPTIONS
+    @Path("editclientstatusbyid/{natID}/{status}")
+    public Response optionsEditStatusByNatId(@PathParam("natID") String natID, @PathParam("status") int status) {
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
+    @OPTIONS
+    @Path("searchclient/{natID}")
+    public Response optionsSearch(@PathParam("natID") String natID){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
     @GET
-    @Path("clients")
+    @Path("getclients")
     @Produces("application/json")
     public Response getList(){
-        ClientProvider provider = new ClientProvider();
         try {
-            ArrayList<Client> res = provider.getData();
-            return Response.status(200).entity(res).build();
+            ClientProvider provider = new ClientProvider();
+            ArrayList<Client> clients = provider.getData();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(clients).build();
         } catch (SQLException e) {
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(e.getMessage())).build();
         }
     }
 
@@ -68,6 +88,28 @@ public class ClientServices {
                     .entity(new Message(e.getMessage())).build();
         }
     }
+
+    @PUT
+    @Path("editclientstatusbyid/{natID}/{status}")
+    @Produces("application/json")
+    public Response editStatusByNatId(@PathParam("natID") String natID, @PathParam("status") int status) {
+        try {
+            ClientProvider provider = new ClientProvider();
+            provider.editStatusByNatId(natID, status);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message("Estado del cliente ha sido cambiado")).build();
+        } catch (SQLException e) {
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .entity(new Message(e.getMessage())).build();
+        }
+    }
+
     @DELETE
     @Path("deleteClient/{clientId}")
     @Produces("application/json")
@@ -88,4 +130,18 @@ public class ClientServices {
                     .entity(new Message(e.getMessage())).build();
         }
     }
+
+    @GET
+    @Path("searchclient/{natID}")
+    @Produces("application/json")
+    public Response getByNatId(@PathParam("natID") String natID){
+        try {
+            ClientProvider provider = new ClientProvider();
+            ArrayList<Client> client = provider.searchClient(natID);
+            return Response.status(200).header("access-control-allow-origin", "*").entity(client).build();
+        } catch (SQLException ex) {
+            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
+        }
+    }
+
 }
