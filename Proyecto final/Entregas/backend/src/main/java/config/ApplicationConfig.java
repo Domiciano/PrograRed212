@@ -16,6 +16,8 @@ public class ApplicationConfig extends Application {
         classes.add(services.RoleServices.class);
         classes.add(services.ClientStateServices.class);
         classes.add(services.CityServices.class);
+        classes.add(services.PlanServices.class);
+        classes.add(services.MembershipServices.class);
         return classes;
     }
 

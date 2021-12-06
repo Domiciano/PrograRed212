@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import model.Message;
 import model.Role;
 import provider.RoleProvider;
+import sql.SQLAdmin;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -30,6 +31,7 @@ public class RoleServices {
             String list = gson.toJson(op);
             return Response.status(200).entity(list).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }
@@ -44,6 +46,7 @@ public class RoleServices {
             provider.insert(role);
             return Response.status(200).entity(new Message("Role inserted")).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }
@@ -58,6 +61,7 @@ public class RoleServices {
             provider.update(role);
             return Response.status(200).entity(new Message("Role updated")).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }
@@ -72,6 +76,7 @@ public class RoleServices {
             provider.delete(role);
             return Response.status(200).entity(new Message("Role deleted")).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }
