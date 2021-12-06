@@ -11,10 +11,12 @@ const eightBtn = document.getElementById("eightBtn");
 const nineBtn = document.getElementById("nineBtn");
 const zeroBtn = document.getElementById("zeroBtn");
 const clearBtn = document.getElementById("clearBtn");
-const myModal = document.getElementById('exampleModal');
+const myModal = new bootstrap.Modal(document.getElementById('loginModal'));
+const modalBody = document.getElementById("loginModalBody");
+
 
 const login = async ()=>{
-
+    modalBody.innerHTML = "";
     //Al darle login que me mande a tal página, se debe guardar
     //el cliente en localstorage
     if(userIdTF.value.length !== 0){
@@ -23,7 +25,11 @@ const login = async ()=>{
         let data = await searching.json();
         console.log(data);
         if(data.length === 0){
-            alert("El usuario no está registrado jajaja pobre");
+
+
+
+
+            myModal.show();
 
         } else {
 
@@ -37,21 +43,10 @@ const login = async ()=>{
                     let memberEndDate;
                     for(let i in usermemship){
                         memberEndDate = usermemship[i].endDate;
-                        actualMembership = usermemship[i];
-                        console.log(actualMembership);      
+                        actualMembership = usermemship[i];    
                     }
-
-                    let userEndDate = new Date(memberEndDate);
-                    let userDate = userEndDate.getFullYear()+'-'+(userEndDate.getMonth()+1)+'-'+userEndDate.getDate();
-
-                    let today = new Date();
-                    let todayDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
-                    console.log("fecha usuario: "+userDate);
-                    console.log("fecha actual: "+todayDate);
-                    console.log(userDate > todayDate);
-
-                    if(userDate > todayDate){
+                    
+                    if(evaluateDateAccess(memberEndDate)){
                         //Poner el cliente con el statusID de 2 ya que está adentro en ese momento (se hace despues de verificar el estado de la membresia)
                         let xhr = new XMLHttpRequest();
                         xhr.addEventListener('readystatechange', ()=>{
@@ -59,8 +54,13 @@ const login = async ()=>{
                                 var response = JSON.parse(xhr.responseText);
                                 console.log(response.message);
                                 if(response.message == 'Estado del cliente ha sido cambiado'){
-
-                                    //Cualquier cosa de observer
+                                    let days = daysLeft(memberEndDate);
+                                    html = `<h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                                    <p class="mb-0"> Plan Type</p>
+                                    <p class="mb-0"> Days Left: ${days}</p>
+                                    <small> Success</small>`
+                                    modalBody.innerHTML = html;
+                                    myModal.show();
                                 } else {
                                     alert('No se pudo cambiar el estado del cliente');
                                 }
@@ -92,3 +92,28 @@ loginBtn.addEventListener("click", (event) =>{
     event.preventDefault();
     login();
 });
+
+
+//Al método le ingresa una fecha del atributo de endDate del cliente y retorna los días remanentes a vencerse
+const daysLeft = (memEndDate)=>{
+
+    let userEndDate = new Date(memEndDate);
+    let today = new Date();
+
+    let difference = Math.abs(userEndDate-today);
+    let days = parseInt((difference/(1000 * 3600 * 24)));
+    console.log("days left: "+days);
+
+    return days;
+}
+
+//Al metodo le ingresa una fecha de expiración dada por el cliente y saca un boolean notificando si puede acceder o no
+const evaluateDateAccess = (memEndDate) =>{
+    let userEndDate = new Date(memEndDate);
+    let userDate = userEndDate.getFullYear()+'/'+(userEndDate.getMonth()+1)+'/'+userEndDate.getDate();
+    let today = new Date();
+    let todayDate = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+    
+return (userDate > todayDate);
+
+}
