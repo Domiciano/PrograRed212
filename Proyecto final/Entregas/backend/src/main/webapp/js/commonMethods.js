@@ -1,11 +1,5 @@
-class commonMethods{
-
-constructor(){
-    Object.seal(this);
-}
-
 //Al método le ingresa una fecha del atributo de endDate del cliente y retorna los días remanentes a vencerse
- daysLeft = (memEndDate)=>{
+ const daysLeft = (memEndDate)=>{
 
     let userEndDate = new Date(memEndDate);
     let today = new Date();
@@ -18,7 +12,7 @@ constructor(){
 }
 
 //Al metodo le ingresa una fecha de expiración dada por el cliente y saca un boolean notificando si puede acceder o no
-evaluateDateAccess = (memEndDate) =>{
+const evaluateDateAccess = (memEndDate) =>{
     let userEndDate = new Date(memEndDate);
     let today = new Date();
 
@@ -28,6 +22,5 @@ return (userEndDate > today);
 
     }
 
-}
 
 

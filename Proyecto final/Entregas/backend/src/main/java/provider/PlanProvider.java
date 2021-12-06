@@ -17,7 +17,7 @@ public class PlanProvider {
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
-            int id = Integer.parseInt(results.getString(results.findColumn("id")));
+            int id = results.getInt(results.findColumn("id"));
             String name = results.getString(results.findColumn("name"));
             double amount = results.getDouble(results.findColumn("amount"));
             int time = results.getInt(results.findColumn("time"));
@@ -29,6 +29,31 @@ public class PlanProvider {
         }
         db.close();
         return respuesta;
+    }
+
+    public ArrayList<Plan> searchPlanByID(int PlanID) throws SQLException {
+        MySQL db = new MySQL();
+        ArrayList<Plan> plans = new ArrayList<>();
+        db.connection();
+
+        String sql = "SELECT * FROM plansBuddy WHERE id = $ID ";
+        sql = sql.replace("$ID", PlanID+"");
+        ResultSet results = db.getDataMySQL(sql);
+
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            String name = results.getString(results.findColumn("name"));
+            double amount = results.getDouble(results.findColumn("amount"));
+            int time = results.getInt(results.findColumn("time"));
+            int parseIt = results.getInt(results.findColumn("active"));
+            boolean active = false;
+            if (parseIt == 1) active = true;
+
+            Plan plan = new Plan(id, name, amount, time, active);
+            plans.add(plan);
+        }
+        db.close();
+        return plans;
     }
 
     public void insert(Plan plan) throws SQLException {
@@ -68,5 +93,28 @@ public class PlanProvider {
         db.connection();
         db.comandSQL(sql);
         db.close();
+    }
+
+    public ArrayList<Plan> searchPlanByPlanID(int PlanID) throws SQLException {
+        MySQL db = new MySQL();
+        ArrayList<Plan> plans = new ArrayList<>();
+        db.connection();
+
+        String sql = "SELECT * FROM plansBuddy WHERE id = $MID ";
+        sql = sql.replace("$MID", PlanID+"");
+        ResultSet results = db.getDataMySQL(sql);
+
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            String name = results.getString(results.findColumn("name"));
+            double amount = results.getDouble(results.findColumn("amount"));
+            int time = results.getInt(results.findColumn("time"));
+            boolean active = results.getBoolean(results.findColumn("active"));
+
+            Plan plan = new Plan(id, name, amount, time, active);
+            plans.add(plan);
+        }
+        db.close();
+        return plans;
     }
 }

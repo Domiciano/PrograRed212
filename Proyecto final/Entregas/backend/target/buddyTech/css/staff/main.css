@@ -158,6 +158,7 @@ background: linear-gradient(
   #adf7cc 5%,
   #1198e1 90%
 );
+<<<<<<< HEAD
 }
 
 .radiousxd{
@@ -227,3 +228,17 @@ color: #46c474
   justify-content: center;
 
 }
+=======
+
+
+}
+
+.radiousxd{
+
+  border-radius: 20px;
+
+}
+
+
+
+>>>>>>> 6f0e624d50c4c69b46fe902d6be4ce317ccac14d

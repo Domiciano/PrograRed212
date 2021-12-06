@@ -33,6 +33,7 @@ const login = async ()=>{
                 let clientFound = data[0];
                 //Revisar que esté afuera
                 if(clientFound.statusID === 3){
+                    
                     let validateMemberships = await fetch("http://localhost:8080/backend/api/ms/searchmembership/"+clientFound.membershipID);
                     let usermemship = await validateMemberships.json();
                     console.log(usermemship);
@@ -53,6 +54,7 @@ const login = async ()=>{
                                 console.log(response.message);
                                 if(response.message == 'Estado del cliente ha sido cambiado'){
                                     let days = daysLeft(memberEndDate);
+                    
                                     let html = `<div class="row">
                                     <div class="column">
                                       <h5> ${clientFound.name} ${clientFound.lastname}</h5>

@@ -3,7 +3,6 @@ import model.Client;
 import model.Message;
 import provider.ClientProvider;
 
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
@@ -144,4 +143,5 @@ public class ClientServices {
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
     }
+
 }

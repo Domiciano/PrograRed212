@@ -1,6 +1,6 @@
 package provider;
 
-import model.Client;
+import model.*;
 import sql.MySQL;
 
 import java.sql.ResultSet;
@@ -108,6 +108,6 @@ public class ClientProvider {
         sql = sql.replace("$STATUS",status+"");
         db.comandSQL(sql);
         db.close();
-
     }
+
 }
