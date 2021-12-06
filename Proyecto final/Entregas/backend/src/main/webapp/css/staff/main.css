@@ -140,3 +140,33 @@ height: 120px;
 
 }
 
+#loginModal{
+
+  opacity: 80%;
+  
+
+}
+
+.modal-content{
+  padding: 30px; 
+
+color: #000000;
+
+background: linear-gradient(
+  45deg,
+  #bae7cb 1%,
+  #adf7cc 5%,
+  #1198e1 90%
+);
+
+
+}
+
+.radiousxd{
+
+  border-radius: 20px;
+
+}
+
+
+
