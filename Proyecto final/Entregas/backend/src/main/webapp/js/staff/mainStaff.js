@@ -36,7 +36,7 @@ const login = async ()=>{
                 let clientFound = data[0];
                 //Revisar que esté afuera
                 if(clientFound.statusID === 3){
-
+                    let cm = new commonMethods();
                     let validateMemberships = await fetch("http://localhost:8080/backend/api/ms/searchmembership/"+clientFound.membershipID);
                     let usermemship = await validateMemberships.json();
                     console.log(usermemship);
@@ -46,7 +46,8 @@ const login = async ()=>{
                         actualMembership = usermemship[i];    
                     }
                     
-                    if(evaluateDateAccess(memberEndDate)){
+                    
+                    if(cm.evaluateDateAccess(memberEndDate)){
                         //Poner el cliente con el statusID de 2 ya que está adentro en ese momento (se hace despues de verificar el estado de la membresia)
                         let xhr = new XMLHttpRequest();
                         xhr.addEventListener('readystatechange', ()=>{
@@ -54,7 +55,7 @@ const login = async ()=>{
                                 var response = JSON.parse(xhr.responseText);
                                 console.log(response.message);
                                 if(response.message == 'Estado del cliente ha sido cambiado'){
-                                    let days = daysLeft(memberEndDate);
+                                    let days = cm.daysLeft(memberEndDate);
                                     html = `<h5> ${clientFound.name} ${clientFound.lastname} </h5>
                                     <p class="mb-0"> Plan Type</p>
                                     <p class="mb-0"> Days Left: ${days}</p>
@@ -94,26 +95,4 @@ loginBtn.addEventListener("click", (event) =>{
 });
 
 
-//Al método le ingresa una fecha del atributo de endDate del cliente y retorna los días remanentes a vencerse
-const daysLeft = (memEndDate)=>{
 
-    let userEndDate = new Date(memEndDate);
-    let today = new Date();
-
-    let difference = Math.abs(userEndDate-today);
-    let days = parseInt((difference/(1000 * 3600 * 24)));
-    console.log("days left: "+days);
-
-    return days;
-}
-
-//Al metodo le ingresa una fecha de expiración dada por el cliente y saca un boolean notificando si puede acceder o no
-const evaluateDateAccess = (memEndDate) =>{
-    let userEndDate = new Date(memEndDate);
-    let userDate = userEndDate.getFullYear()+'/'+(userEndDate.getMonth()+1)+'/'+userEndDate.getDate();
-    let today = new Date();
-    let todayDate = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
-    
-return (userDate > todayDate);
-
-}
