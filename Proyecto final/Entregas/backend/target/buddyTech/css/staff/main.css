@@ -158,7 +158,6 @@ background: linear-gradient(
   #adf7cc 5%,
   #1198e1 90%
 );
-<<<<<<< HEAD
 }
 
 .radiousxd{
@@ -192,6 +191,14 @@ justify-content: center;
 
 }
 
+.columnerr{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
 .h1check{
 
 display: flex;
@@ -209,6 +216,15 @@ align-content: center;
   align-content: center;
   
   }
+
+  .h1err{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    
+  }
   
 #checkModal{
 
@@ -220,6 +236,11 @@ color: #46c474
   color: darkgoldenrod;
 }
 
+#errModal{
+
+  color: rgb(255, 0, 0);
+}
+
 
 #colwar{
 
@@ -228,17 +249,3 @@ color: #46c474
   justify-content: center;
 
 }
-=======
-
-
-}
-
-.radiousxd{
-
-  border-radius: 20px;
-
-}
-
-
-
->>>>>>> 6f0e624d50c4c69b46fe902d6be4ce317ccac14d

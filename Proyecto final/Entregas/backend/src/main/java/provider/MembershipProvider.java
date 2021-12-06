@@ -2,6 +2,8 @@ package provider;
 
 import model.Membership;
 import sql.MySQL;
+import sql.SQLAdmin;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ public class MembershipProvider {
         ArrayList<Membership> respuesta = new ArrayList<>();
 
         String sql = "SELECT * FROM memberShipBuddy";
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -43,14 +45,14 @@ public class MembershipProvider {
         sql = sql.replace("$startDate", membership.getStartDate()+"");
         sql = sql.replace("$endDate", membership.getEndDate()+"");
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
     }
 
     public ArrayList<Membership> searchMembershipByMemID(int memID) throws SQLException {
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         ArrayList<Membership> memberships = new ArrayList<>();
         db.connection();
 

@@ -2,6 +2,7 @@ package provider;
 
 import model.Plan;
 import sql.MySQL;
+import sql.SQLAdmin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ public class PlanProvider {
         ArrayList<Plan> respuesta = new ArrayList<>();
 
         String sql = "SELECT * FROM plansBuddy";
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -32,7 +33,7 @@ public class PlanProvider {
     }
 
     public ArrayList<Plan> searchPlanByID(int PlanID) throws SQLException {
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         ArrayList<Plan> plans = new ArrayList<>();
         db.connection();
 
@@ -61,7 +62,7 @@ public class PlanProvider {
         sql += " VALUES ('$name', $amount, $time, $active)";
         sql = replace(sql, plan);
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
@@ -71,7 +72,7 @@ public class PlanProvider {
         String sql = "UPDATE plansBuddy SET name = '$name', amount = $amount, time = $time, active = '$active' WHERE id = " + plan.getId();
         sql = replace(sql, plan);
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
@@ -89,14 +90,14 @@ public class PlanProvider {
     public void delete(Plan plan) throws SQLException {
         String sql = "DELETE FROM plansBuddy WHERE ID = " + plan.getId();
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
     }
 
     public ArrayList<Plan> searchPlanByPlanID(int PlanID) throws SQLException {
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         ArrayList<Plan> plans = new ArrayList<>();
         db.connection();
 

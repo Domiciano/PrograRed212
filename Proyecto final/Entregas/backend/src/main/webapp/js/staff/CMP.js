@@ -11,9 +11,9 @@ class CMP{
         let div = document.createElement("div");
 
         let day = daysLeft(this.membership.endDate);
-
+        let html = "";
         if(day > 0){
-            let html = `<div class="card mb-4 py-3 border-left-success">
+            html = `<div class="card mb-4 py-3 border-left-success">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="column izq">
@@ -28,7 +28,7 @@ class CMP{
                                 </div>
                             </div>`
         } else{
-            let html = `<div class="card mb-4 py-3 border-left-warning">
+            html = `<div class="card mb-4 py-3 border-left-warning">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="column izq">

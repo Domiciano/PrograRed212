@@ -2,6 +2,7 @@ package services;
 import model.Client;
 import model.Message;
 import provider.ClientProvider;
+import sql.SQLAdmin;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -11,7 +12,11 @@ import java.util.ArrayList;
 public class ClientServices {
     @GET
     @Path("echo")
-    public String echo(){return "echo client";}
+    public String echo(){
+
+        SQLAdmin.getInstance().closeAllConnections();
+        return "echo client";
+    }
 
 
     @OPTIONS
@@ -44,6 +49,7 @@ public class ClientServices {
             return Response.status(200).header("access-control-allow-origin", "*").entity(clients).build();
         } catch (SQLException e) {
             e.printStackTrace();
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(e.getMessage())).build();
         }
     }
@@ -61,6 +67,7 @@ public class ClientServices {
                     .header("access-control-allow-headers", "*")
                     .entity(new Message("cliente creado correctamente")).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500)
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
@@ -81,6 +88,7 @@ public class ClientServices {
                     .header("access-control-allow-headers", "*")
                     .entity(new Message("cliente editado correctamente")).build();
         } catch (SQLException | ClassNotFoundException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500)
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
@@ -102,6 +110,7 @@ public class ClientServices {
                     .header("access-control-allow-headers", "*")
                     .entity(new Message("Estado del cliente ha sido cambiado")).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500)
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
@@ -123,6 +132,7 @@ public class ClientServices {
                     .header("access-control-allow-headers", "*")
                     .entity(new Message("cliente borrado correctamente")).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500)
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
@@ -140,6 +150,7 @@ public class ClientServices {
             ArrayList<Client> client = provider.searchClient(natID);
             return Response.status(200).header("access-control-allow-origin", "*").entity(client).build();
         } catch (SQLException ex) {
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
     }

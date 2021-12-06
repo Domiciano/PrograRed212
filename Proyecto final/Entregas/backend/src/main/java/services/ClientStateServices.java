@@ -2,6 +2,8 @@ package services;
 
 import model.ClientState;
 import provider.ClientStateProvider;
+import sql.SQLAdmin;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
@@ -23,6 +25,7 @@ public class ClientStateServices {
             return Response.status(200).entity(res).build();
         } catch (SQLException e) {
             e.printStackTrace();
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).entity(e).build();
         }
     }
@@ -37,6 +40,7 @@ public class ClientStateServices {
             return Response.status(200).entity(o).build();
         } catch (SQLException e) {
             e.printStackTrace();
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).entity(e).build();
         }
     }

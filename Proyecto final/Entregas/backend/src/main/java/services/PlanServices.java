@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import model.Message;
 import model.Plan;
 import provider.PlanProvider;
+import sql.SQLAdmin;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -28,6 +29,7 @@ public class PlanServices {
             String list = gson.toJson(op);
             return javax.ws.rs.core.Response.status(200).entity(list).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return javax.ws.rs.core.Response.status(500).entity(e).build();
         }
@@ -42,6 +44,7 @@ public class PlanServices {
             provider.insert(plan);
             return javax.ws.rs.core.Response.status(200).entity(new Message("Plan inserted")).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return javax.ws.rs.core.Response.status(500).entity(e).build();
         }
@@ -56,6 +59,7 @@ public class PlanServices {
             provider.update(plan);
             return javax.ws.rs.core.Response.status(200).entity(new Message("Plan updated")).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return javax.ws.rs.core.Response.status(500).entity(e).build();
         }
@@ -70,6 +74,7 @@ public class PlanServices {
             provider.delete(plan);
             return javax.ws.rs.core.Response.status(200).entity(new Message("Plan deleted")).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }
@@ -94,6 +99,7 @@ public class PlanServices {
             ArrayList<Plan> plans = provider.searchPlanByPlanID(planID);
             return Response.status(200).header("access-control-allow-origin", "*").entity(plans).build();
         } catch (SQLException ex) {
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
     }

@@ -72,7 +72,21 @@ const login = async ()=>{
                                     modalBody.innerHTML = html;
                                     myModal.show();
                                 } else {
-                                    alert('No se pudo cambiar el estado del cliente');
+            
+                                  let html = `<div class="row">
+                                  <div class="column">
+                                    <h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                                    <p class="mb-0">No se pudo cambiar el estado de ingreso en la base de datos</p>
+                                  </div>
+                                  <div id="colerr" class="column">
+                                    <h1 class="h1err">
+                                    <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+                                    </h1>
+                                  </div>
+                                </div>`
+           
+                                 modalBody.innerHTML = html;    
+                                 myModal.show();
                                 }
                             }
                         });
@@ -81,7 +95,7 @@ const login = async ()=>{
                     } else {
                         //alert("La membresía ha expirado, porfavor contacte a un staff para renovarla");
                        let days = daysLeft(memberEndDate);
-                       let html2 = `<div class="row">
+                       let html = `<div class="row">
                        <div class="column">
                          <h5> ${clientFound.name} ${clientFound.lastname} </h5>
                          <p class="mb-0"> Plan Type</p>
@@ -95,13 +109,27 @@ const login = async ()=>{
                        </div>
                      </div>`
 
-                      modalBody.innerHTML = html2;    
+                      modalBody.innerHTML = html;    
                       myModal.show();
 
                     }
 
                 }  else if(clientFound.statusID === 2){
-                    alert("La membresia del cliente ya está en uso");
+
+                  let html = `<div class="row">
+                  <div class="column">
+                    <h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                    <p class="mb-0">Membresía en uso acutalmente, no puede ingresar con la misma identidad</p>
+                  </div>
+                  <div id="colerr" class="column">
+                    <h1 class="h1err">
+                    <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+                    </h1>
+                  </div>
+                </div>`
+
+                 modalBody.innerHTML = html;    
+                 myModal.show();
 
                 } else if(clientFound.statusID === 1){
                     //La persona se encuentra bloqueada en su totalidad
@@ -124,7 +152,20 @@ const login = async ()=>{
             }
        // location.href = "dashboard.html";
     } else {
-        alert("Ingrese un documento válido");
+      let html = `<div class="row">
+      <div class="column">
+        <h5> Error </h5>
+        <p class="mb-0"> Ingrese un documento válido</p>
+      </div>
+      <div id="colwar" class="column">
+        <h1 class="h1war">
+          <i id="warningModal" class="fas fa-exclamation-triangle fa-5x"></i>
+        </h1>
+      </div>
+    </div>`
+
+    modalBody.innerHTML = html;        
+    myModal.show();
     }
 
 };

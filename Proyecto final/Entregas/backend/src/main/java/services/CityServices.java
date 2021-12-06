@@ -2,6 +2,8 @@ package services;
 
 import model.City;
 import provider.CityProvider;
+import sql.SQLAdmin;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
@@ -25,6 +27,7 @@ public class CityServices {
             return Response.status(200).entity(res).build();
         } catch (SQLException e) {
             e.printStackTrace();
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).entity(e).build();
         }
     }
@@ -39,6 +42,7 @@ public class CityServices {
             return Response.status(200).entity(o).build();
         } catch (SQLException e) {
             e.printStackTrace();
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).entity(e).build();
         }
     }
@@ -53,6 +57,7 @@ public class CityServices {
             return Response.status(200).entity(o).build();
         } catch (SQLException e) {
             e.printStackTrace();
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).entity(e).build();
         }
     }

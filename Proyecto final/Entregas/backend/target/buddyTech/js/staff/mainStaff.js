@@ -26,12 +26,6 @@ const login = async ()=>{
         console.log(data);
         if(data.length === 0){
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 6f0e624d50c4c69b46fe902d6be4ce317ccac14d
             myModal.show();
 
         } else {
@@ -39,11 +33,7 @@ const login = async ()=>{
                 let clientFound = data[0];
                 //Revisar que esté afuera
                 if(clientFound.statusID === 3){
-<<<<<<< HEAD
-                    let cm = new commonMethods();
-=======
-                    //let cm = new commonMethods();
->>>>>>> 6f0e624d50c4c69b46fe902d6be4ce317ccac14d
+                    
                     let validateMemberships = await fetch("http://localhost:8080/backend/api/ms/searchmembership/"+clientFound.membershipID);
                     let usermemship = await validateMemberships.json();
                     console.log(usermemship);
@@ -53,23 +43,18 @@ const login = async ()=>{
                         actualMembership = usermemship[i];    
                     }
                     
-                    
-<<<<<<< HEAD
-                    if(cm.evaluateDateAccess(memberEndDate)){
+                    console.log(evaluateDateAccess(memberEndDate));
+                    if(evaluateDateAccess(memberEndDate)){
                         //Poner el cliente con el statusID de 2
 
-=======
-                    if(evaluateDateAccess(memberEndDate)){
-                        //Poner el cliente con el statusID de 2 ya que está adentro en ese momento (se hace despues de verificar el estado de la membresia)
->>>>>>> 6f0e624d50c4c69b46fe902d6be4ce317ccac14d
                         let xhr = new XMLHttpRequest();
                         xhr.addEventListener('readystatechange', ()=>{
                             if(xhr.readyState == 4){
                                 var response = JSON.parse(xhr.responseText);
                                 console.log(response.message);
                                 if(response.message == 'Estado del cliente ha sido cambiado'){
-<<<<<<< HEAD
-                                    let days = cm.daysLeft(memberEndDate);
+                                    let days = daysLeft(memberEndDate);
+                    
                                     let html = `<div class="row">
                                     <div class="column">
                                       <h5> ${clientFound.name} ${clientFound.lastname}</h5>
@@ -84,27 +69,33 @@ const login = async ()=>{
                                     </div>
                                   </div>`
 
-=======
-                                    let days = daysLeft(memberEndDate);
-                                    html = `<h5> ${clientFound.name} ${clientFound.lastname} </h5>
-                                    <p class="mb-0"> Plan Type</p>
-                                    <p class="mb-0"> Days Left: ${days}</p>
-                                    <small> Success</small>`
->>>>>>> 6f0e624d50c4c69b46fe902d6be4ce317ccac14d
                                     modalBody.innerHTML = html;
                                     myModal.show();
                                 } else {
-                                    alert('No se pudo cambiar el estado del cliente');
+            
+                                  let html = `<div class="row">
+                                  <div class="column">
+                                    <h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                                    <p class="mb-0">No se pudo cambiar el estado de ingreso en la base de datos</p>
+                                  </div>
+                                  <div id="colerr" class="column">
+                                    <h1 class="h1err">
+                                    <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+                                    </h1>
+                                  </div>
+                                </div>`
+           
+                                 modalBody.innerHTML = html;    
+                                 myModal.show();
                                 }
                             }
                         });
                     xhr.open('PUT', 'http://localhost:8080/backend/api/cls/editclientstatusbyid/'+clientFound.natId+'/'+2);
                     xhr.send();
                     } else {
-<<<<<<< HEAD
                         //alert("La membresía ha expirado, porfavor contacte a un staff para renovarla");
-                       let days = cm.daysLeft(memberEndDate);
-                       let html2 = `<div class="row">
+                       let days = daysLeft(memberEndDate);
+                       let html = `<div class="row">
                        <div class="column">
                          <h5> ${clientFound.name} ${clientFound.lastname} </h5>
                          <p class="mb-0"> Plan Type</p>
@@ -118,26 +109,63 @@ const login = async ()=>{
                        </div>
                      </div>`
 
-                      modalBody.innerHTML = html2;
-                    
+                      modalBody.innerHTML = html;    
                       myModal.show();
-=======
-                        alert("La membresía ha expirado, porfavor contacte a un staff para renovarla");
->>>>>>> 6f0e624d50c4c69b46fe902d6be4ce317ccac14d
 
                     }
 
                 }  else if(clientFound.statusID === 2){
-                    alert("La membresia del cliente ya está en uso");
+
+                  let html = `<div class="row">
+                  <div class="column">
+                    <h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                    <p class="mb-0">Membresía en uso acutalmente, no puede ingresar con la misma identidad</p>
+                  </div>
+                  <div id="colerr" class="column">
+                    <h1 class="h1err">
+                    <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+                    </h1>
+                  </div>
+                </div>`
+
+                 modalBody.innerHTML = html;    
+                 myModal.show();
 
                 } else if(clientFound.statusID === 1){
-                    alert("La persona se encuentra bloqueada en su totalidad");
+                    //La persona se encuentra bloqueada en su totalidad
 
+                    let html = `<div class="row">
+                    <div class="column">
+                      <h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                      <p class="mb-0"> Cliente bloqueado permanentemente</p>
+                    </div>
+                    <div id="colerr" class="column">
+                      <h1 class="h1err">
+                      <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+                      </h1>
+                    </div>
+                  </div>`
+
+                  modalBody.innerHTML = html;        
+                  myModal.show();
                 }     
             }
        // location.href = "dashboard.html";
     } else {
-        alert("Ingrese un documento válido");
+      let html = `<div class="row">
+      <div class="column">
+        <h5> Error </h5>
+        <p class="mb-0"> Ingrese un documento válido</p>
+      </div>
+      <div id="colwar" class="column">
+        <h1 class="h1war">
+          <i id="warningModal" class="fas fa-exclamation-triangle fa-5x"></i>
+        </h1>
+      </div>
+    </div>`
+
+    modalBody.innerHTML = html;        
+    myModal.show();
     }
 
 };

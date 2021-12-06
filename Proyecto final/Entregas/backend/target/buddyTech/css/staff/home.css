@@ -6,3 +6,14 @@
     float: right;
 }
 
+.column{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.izq{
+    display: flex;
+    align-items: center;
+}

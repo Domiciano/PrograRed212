@@ -2,6 +2,7 @@ package provider;
 
 import model.Role;
 import sql.MySQL;
+import sql.SQLAdmin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ public class RoleProvider {
         ArrayList<Role> respuesta = new ArrayList<>();
 
         String sql = "SELECT * FROM roleBuddy";
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -35,7 +36,7 @@ public class RoleProvider {
         sql = sql.replace("$name", role.getName());
         sql = sql.replace("$description", role.getDescription());
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
@@ -46,7 +47,7 @@ public class RoleProvider {
         sql = sql.replace("$name", role.getName());
         sql = sql.replace("$description", role.getDescription());
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
@@ -55,7 +56,7 @@ public class RoleProvider {
     public void delete(Role role) throws SQLException {
         String sql = "DELETE FROM roleBuddy WHERE ID = " + role.getId();
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();

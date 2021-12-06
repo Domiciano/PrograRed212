@@ -2,6 +2,7 @@ package provider;
 
 import model.ClientState;
 import sql.MySQL;
+import sql.SQLAdmin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ public class ClientStateProvider {
         ArrayList<ClientState> response = new ArrayList<>();
 
         String sql = "SELECT * FROM clientStatusBuddy";
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -31,7 +32,7 @@ public class ClientStateProvider {
         ArrayList<ClientState> response = new ArrayList<>();
 
         String sql = "SELECT * FROM clientStatusBuddy WHERE ID =" + CID;
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -50,7 +51,7 @@ public class ClientStateProvider {
         sql += " VALUES ('$status')";
         sql = sql.replace("$status",clientS.getStatus());
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
