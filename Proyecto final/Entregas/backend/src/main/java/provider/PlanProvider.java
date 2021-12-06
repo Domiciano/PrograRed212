@@ -1,13 +1,11 @@
 package provider;
 
-import model.Membership;
 import model.Plan;
 import sql.MySQL;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class PlanProvider {
 
@@ -95,5 +93,28 @@ public class PlanProvider {
         db.connection();
         db.comandSQL(sql);
         db.close();
+    }
+
+    public ArrayList<Plan> searchPlanByPlanID(int PlanID) throws SQLException {
+        MySQL db = new MySQL();
+        ArrayList<Plan> plans = new ArrayList<>();
+        db.connection();
+
+        String sql = "SELECT * FROM plansBuddy WHERE id = $MID ";
+        sql = sql.replace("$MID", PlanID+"");
+        ResultSet results = db.getDataMySQL(sql);
+
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            String name = results.getString(results.findColumn("name"));
+            double amount = results.getDouble(results.findColumn("amount"));
+            int time = results.getInt(results.findColumn("time"));
+            boolean active = results.getBoolean(results.findColumn("active"));
+
+            Plan plan = new Plan(id, name, amount, time, active);
+            plans.add(plan);
+        }
+        db.close();
+        return plans;
     }
 }

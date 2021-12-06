@@ -1,16 +1,24 @@
 var clients = document.getElementById("clients");
 
 const getClients = async () => {
-    console.log("i'm in")
-    let response = await fetch("http://localhost:8080/backend/api/cls/getCCMP")
-    console.log("Fetch done")
-    let data = await response.json();
-    console.log(data[0])
+    let response1 = await fetch("http://localhost:8080/backend/api/cls/getclients")
+    let data1 = await response1.json();
     clients.innerHTML = "";
-    for(let i in data){
-        let CCMP = data[i];
-        let CCMPView = new CCMPview(CCMP);
-        CCMPView.render(lastClients);
+    for(let i in data1){
+        let client = data1[i];
+        console.log(client);
+        let response2 = await fetch("http://localhost:8080/backend/api/ms/searchmembership/" + client.membershipID)
+        let data2 = await response2.json();
+        let membership = data2[0];
+
+        console.log(membership);
+
+        let response3 = await fetch("http://localhost:8080/backend/api/ps/searchplan/" + membership.planID)
+        let data3 = await response3.json();
+
+        let plan = data3[0];
+        let cmpView = new CMP(client, membership, plan);
+        cmpView.render(clients);
     }
 }
 
