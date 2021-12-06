@@ -1,5 +1,4 @@
 package services;
-import model.CCMP;
 import model.Client;
 import model.Message;
 import provider.ClientProvider;
@@ -145,26 +144,4 @@ public class ClientServices {
         }
     }
 
-    @OPTIONS
-    @Path("getCCMP")
-    public Response optionsCMP(){
-        return Response.status(200)
-                .header("access-control-allow-origin", "*")
-                .header("access-control-allow-methods", "*")
-                .header("access-control-allow-headers", "*")
-                .build();
-    }
-
-    @GET
-    @Path("getCCMP")
-    @Produces("application/json")
-    public Response getCCMP(){
-        try {
-            ClientProvider provider = new ClientProvider();
-            ArrayList<CCMP> ccmps = provider.getCCMP();
-            return Response.status(200).header("access-control-allow-origin", "*").entity(ccmps).build();
-        } catch (SQLException ex) {
-            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
-        }
-    }
 }

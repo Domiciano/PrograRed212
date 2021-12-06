@@ -36,7 +36,7 @@ const login = async ()=>{
                 let clientFound = data[0];
                 //Revisar que esté afuera
                 if(clientFound.statusID === 3){
-                    let cm = new commonMethods();
+                    //let cm = new commonMethods();
                     let validateMemberships = await fetch("http://localhost:8080/backend/api/ms/searchmembership/"+clientFound.membershipID);
                     let usermemship = await validateMemberships.json();
                     console.log(usermemship);
@@ -47,7 +47,7 @@ const login = async ()=>{
                     }
                     
                     
-                    if(cm.evaluateDateAccess(memberEndDate)){
+                    if(evaluateDateAccess(memberEndDate)){
                         //Poner el cliente con el statusID de 2 ya que está adentro en ese momento (se hace despues de verificar el estado de la membresia)
                         let xhr = new XMLHttpRequest();
                         xhr.addEventListener('readystatechange', ()=>{
@@ -55,7 +55,7 @@ const login = async ()=>{
                                 var response = JSON.parse(xhr.responseText);
                                 console.log(response.message);
                                 if(response.message == 'Estado del cliente ha sido cambiado'){
-                                    let days = cm.daysLeft(memberEndDate);
+                                    let days = daysLeft(memberEndDate);
                                     html = `<h5> ${clientFound.name} ${clientFound.lastname} </h5>
                                     <p class="mb-0"> Plan Type</p>
                                     <p class="mb-0"> Days Left: ${days}</p>

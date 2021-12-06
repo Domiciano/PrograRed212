@@ -1,7 +1,7 @@
-class Client{
+class CCMPview{
 
-    constructor(client){
-      this.client = client;
+    constructor(CCMP){
+      this.CCMP = CCMP;
       Object.seal(this);
     }
 
@@ -12,11 +12,12 @@ class Client{
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-
+                                        <i class="fas fa-user-circle"></i>
                                         </div>
                                         <div class="col">
-                                            <h3 class="h3 mb-0 black font-weight-bold">${this.client.name}</h3>
-                                            
+                                            <h3 class="h3 mb-0 black font-weight-bold">${this.CCMP.client.name}</h3>
+                                            <p class="mb-0">${this.CCMP.plan.name}</p>
+                                            <p class="mb-0">${daysLeft(this.CCMP.membership.endDate)}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -24,17 +25,6 @@ class Client{
         div.innerHTML = html;
         let card = div.firstChild;
 
-        if(this.user.blocked){
-            card.classList.add("text-white")
-            card.classList.add("bg-secondary")
-        }
-
         container.appendChild(card);
-
-        let blockBtn = document.getElementById(this.user.id);
-        blockBtn.addEventListener("click", (e)=>{
-            e.preventDefault();
-            alert(this.user.name)
-        });
     }
 }
