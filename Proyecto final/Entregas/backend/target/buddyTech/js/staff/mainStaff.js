@@ -11,7 +11,7 @@ const eightBtn = document.getElementById("eightBtn");
 const nineBtn = document.getElementById("nineBtn");
 const zeroBtn = document.getElementById("zeroBtn");
 const clearBtn = document.getElementById("clearBtn");
-
+const myModal = document.getElementById('exampleModal');
 
 const login = async ()=>{
 
@@ -68,6 +68,9 @@ const login = async ()=>{
                         });
                     xhr.open('PUT', 'http://localhost:8080/backend/api/cls/editclientstatusbyid/'+clientFound.natId+'/'+2);
                     xhr.send();
+                    } else {
+                        alert("La membresía ha expirado, porfavor contacte a un staff para renovarla");
+
                     }
 
                 }  else if(clientFound.statusID === 2){

@@ -1,6 +1,6 @@
 package provider;
 
-import model.Client;
+import model.*;
 import sql.MySQL;
 
 import java.sql.ResultSet;
@@ -107,6 +107,27 @@ public class ClientProvider {
         sql = sql.replace("$NATID", natID);
         sql = sql.replace("$STATUS",status+"");
         db.comandSQL(sql);
-
     }
+
+    public ArrayList<CCMP> getCCMP() throws SQLException {
+        MySQL db = new MySQL();
+        MembershipProvider membershipProvider = new MembershipProvider();
+        ClientStateProvider clientStateProvider = new ClientStateProvider();
+        PlanProvider planProvider = new PlanProvider();
+        ArrayList<CCMP> cmps = new ArrayList<>();
+        String sql = "SELECT * FROM clientsBuddy";
+        ArrayList<Client> clients = getData();
+        for (Client client: clients) {
+            ArrayList<Membership> membership = membershipProvider.searchMembershipByMemID(client.getMembershipID());
+            ArrayList<ClientState> clientState = clientStateProvider.getDataById(client.getStatusID());
+            if (!membership.isEmpty()) {
+                ArrayList<Plan> plan = planProvider.searchPlanByID(membership.get(0).getPlanID());
+                cmps.add(new CCMP(client, clientState.get(0), membership.get(0),plan.get(0)));
+            }
+        }
+        db.connection();
+        return cmps;
+    }
+
+    
 }

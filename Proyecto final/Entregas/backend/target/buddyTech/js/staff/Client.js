@@ -10,7 +10,15 @@ class Client{
 
                 let html = `<div class="card mb-4 py-3 border-left-primary">
                                 <div class="card-body">
-                                    
+                                    <div class="row">
+                                        <div class="col">
+
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="h3 mb-0 black font-weight-bold">${this.client.name}</h3>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                             </div>`
         div.innerHTML = html;
