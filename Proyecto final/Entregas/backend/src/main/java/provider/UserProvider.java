@@ -2,6 +2,7 @@ package provider;
 
 import model.User;
 import sql.MySQL;
+import sql.SQLAdmin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ public class UserProvider {
     private final MySQL db;
 
     public UserProvider() {
-        db = new MySQL();
+        db = SQLAdmin.getInstance().addConnection();
     }
 
     public ArrayList<User> getData() throws SQLException {

@@ -2,6 +2,7 @@ package services;
 
 import model.User;
 import provider.UserProvider;
+import sql.SQLAdmin;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
@@ -34,6 +35,7 @@ public class UserServices {
             ArrayList<User> res = provider.getData();
             return Response.status(200).entity(res).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(200).entity(e).build();
         }
@@ -47,6 +49,7 @@ public class UserServices {
             ArrayList<User> res = provider.getData(property, value);
             return Response.status(200).entity(res).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(200).entity(e).build();
         }
@@ -60,6 +63,7 @@ public class UserServices {
             String o = provider.insert(user);
             return Response.status(200).entity(o).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }
@@ -73,6 +77,7 @@ public class UserServices {
             String o = provider.update(user);
             return Response.status(200).entity(o).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }
@@ -84,6 +89,7 @@ public class UserServices {
             String o = provider.delete(id);
             return Response.status(200).entity(o).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }

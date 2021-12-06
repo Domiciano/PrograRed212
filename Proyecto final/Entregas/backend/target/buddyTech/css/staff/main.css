@@ -140,3 +140,112 @@ height: 120px;
 
 }
 
+#loginModal{
+
+  opacity: 80%;
+  
+
+}
+
+.modal-content{
+  padding: 30px; 
+
+color: #000000;
+
+background: linear-gradient(
+  45deg,
+  #bae7cb 1%,
+  #adf7cc 5%,
+  #1198e1 90%
+);
+}
+
+.radiousxd{
+
+  border-radius: 20px;
+
+}
+
+.column{
+
+width: 50%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+
+}
+
+.columncheck{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.columnwar{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.columnerr{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.h1check{
+
+display: flex;
+align-items: center;
+justify-content: center;
+align-content: center;
+
+}
+
+.h1war{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  
+  }
+
+  .h1err{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    
+  }
+  
+#checkModal{
+
+color: #46c474  
+}
+
+#warningModal{
+
+  color: darkgoldenrod;
+}
+
+#errModal{
+
+  color: rgb(255, 0, 0);
+}
+
+
+#colwar{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
