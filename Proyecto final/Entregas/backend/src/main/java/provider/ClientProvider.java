@@ -107,6 +107,7 @@ public class ClientProvider {
         sql = sql.replace("$NATID", natID);
         sql = sql.replace("$STATUS",status+"");
         db.comandSQL(sql);
+        db.close();
 
     }
 }

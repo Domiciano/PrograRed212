@@ -26,9 +26,6 @@ const login = async ()=>{
         console.log(data);
         if(data.length === 0){
 
-
-
-
             myModal.show();
 
         } else {
@@ -36,7 +33,6 @@ const login = async ()=>{
                 let clientFound = data[0];
                 //Revisar que esté afuera
                 if(clientFound.statusID === 3){
-                    let cm = new commonMethods();
                     let validateMemberships = await fetch("http://localhost:8080/backend/api/ms/searchmembership/"+clientFound.membershipID);
                     let usermemship = await validateMemberships.json();
                     console.log(usermemship);
@@ -46,20 +42,31 @@ const login = async ()=>{
                         actualMembership = usermemship[i];    
                     }
                     
-                    
-                    if(cm.evaluateDateAccess(memberEndDate)){
-                        //Poner el cliente con el statusID de 2 ya que está adentro en ese momento (se hace despues de verificar el estado de la membresia)
+                    console.log(evaluateDateAccess(memberEndDate));
+                    if(evaluateDateAccess(memberEndDate)){
+                        //Poner el cliente con el statusID de 2
+
                         let xhr = new XMLHttpRequest();
                         xhr.addEventListener('readystatechange', ()=>{
                             if(xhr.readyState == 4){
                                 var response = JSON.parse(xhr.responseText);
                                 console.log(response.message);
                                 if(response.message == 'Estado del cliente ha sido cambiado'){
-                                    let days = cm.daysLeft(memberEndDate);
-                                    html = `<h5> ${clientFound.name} ${clientFound.lastname} </h5>
-                                    <p class="mb-0"> Plan Type</p>
-                                    <p class="mb-0"> Days Left: ${days}</p>
-                                    <small> Success</small>`
+                                    let days = daysLeft(memberEndDate);
+                                    let html = `<div class="row">
+                                    <div class="column">
+                                      <h5> ${clientFound.name} ${clientFound.lastname}</h5>
+                                      <p class="mb-0"> Plan Type</p>
+                                      <p class="mb-0"> Days Left: ${days}</p>
+                                      <small> Success</small>
+                                    </div>
+                                    <div id="colcheck" class="column">
+                                      <h1 class="h1check">
+                                        <i id="checkModal" class="fas fa-check fa-5x"></i>
+                                      </h1>
+                                    </div>
+                                  </div>`
+
                                     modalBody.innerHTML = html;
                                     myModal.show();
                                 } else {
@@ -70,7 +77,24 @@ const login = async ()=>{
                     xhr.open('PUT', 'http://localhost:8080/backend/api/cls/editclientstatusbyid/'+clientFound.natId+'/'+2);
                     xhr.send();
                     } else {
-                        alert("La membresía ha expirado, porfavor contacte a un staff para renovarla");
+                        //alert("La membresía ha expirado, porfavor contacte a un staff para renovarla");
+                       let days = daysLeft(memberEndDate);
+                       let html2 = `<div class="row">
+                       <div class="column">
+                         <h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                         <p class="mb-0"> Plan Type</p>
+                         <p class="mb-0"> Days Left: ${days}</p>
+                         <small>La membresía ha expirado, porfavor contacte a un staff para renovarla</small>
+                       </div>
+                       <div id="colwar" class="column">
+                         <h1 class="h1war">
+                           <i id="warningModal" class="fas fa-exclamation-triangle fa-5x"></i>
+                         </h1>
+                       </div>
+                     </div>`
+
+                      modalBody.innerHTML = html2;    
+                      myModal.show();
 
                     }
 
@@ -78,8 +102,22 @@ const login = async ()=>{
                     alert("La membresia del cliente ya está en uso");
 
                 } else if(clientFound.statusID === 1){
-                    alert("La persona se encuentra bloqueada en su totalidad");
+                    //La persona se encuentra bloqueada en su totalidad
 
+                    let html = `<div class="row">
+                    <div class="column">
+                      <h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                      <p class="mb-0"> Cliente bloqueado permanentemente</p>
+                    </div>
+                    <div id="colerr" class="column">
+                      <h1 class="h1err">
+                      <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+                      </h1>
+                    </div>
+                  </div>`
+
+                  modalBody.innerHTML = html;        
+                  myModal.show();
                 }     
             }
        // location.href = "dashboard.html";

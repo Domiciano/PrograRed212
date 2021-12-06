@@ -20,11 +20,11 @@ constructor(){
 //Al metodo le ingresa una fecha de expiración dada por el cliente y saca un boolean notificando si puede acceder o no
 evaluateDateAccess = (memEndDate) =>{
     let userEndDate = new Date(memEndDate);
+    let userDate = userEndDate.getFullYear()+'/'+(userEndDate.getMonth()+1)+'/'+userEndDate.getDate();
     let today = new Date();
-
-    console.log("hoy "+today);
-    console.log("Mem "+userEndDate);
-return (userEndDate > today);
+    let todayDate = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+    
+return (userDate > todayDate);
 
     }
 
