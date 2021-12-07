@@ -29,7 +29,7 @@ public class PlanProvider {
         db.close();
         return respuesta;
     }
-//
+
     public ArrayList<String> getActivePlans() throws SQLException {
         ArrayList<String> nombres = new ArrayList<>();
 
