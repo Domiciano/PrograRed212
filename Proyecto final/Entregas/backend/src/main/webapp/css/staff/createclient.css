@@ -1,0 +1,243 @@
+.inputContainer{
+
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    width: 70%;
+    height: 80%;
+    margin-left: 270px;
+    margin-top: 60px;
+    margin-bottom: 2px;
+    margin-right: 900px;
+    padding-top: 60px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 50px;
+    text-align: center;
+    box-shadow: 0px 0px 15px 2px #b4afaf;
+    border-radius:10px;
+      
+}
+.btn{
+    background-color: #000000;
+}
+
+.inp{
+
+box-sizing: content-box;
+width: 80%;
+margin: 30px;
+height: 50px;
+border-radius: 10px;
+border-width: 5px;
+border-style: solid;
+border-color: #c4c4c4;
+font-weight: 400;
+
+}
+
+.inp:active{
+box-sizing: content-box;
+width: 80%;
+margin: 30px;
+height: 50px;
+border-radius: 10px;
+border-width: 5px;
+border-style: solid;
+border-color: #c4c4c4;
+font-weight: 400;
+
+}
+/*Con esto se quita el borde todo feo*/
+.inp:focus{
+outline: none;
+}
+.inp[type=text]{
+    padding-left: 15px;
+}
+
+.inp[type=number]{
+    padding-left: 15px;
+}
+.inp:hover{
+
+box-sizing: content-box;
+width: 85%;
+margin: 30px;
+height: 50px;
+border-radius: 10px;
+border-width: 5px;
+border-style: solid;
+border-color: #c6d3d1;
+font-weight: 400;
+
+}
+
+.inp::placeholder{
+
+    text-align: left;
+    padding-left: 15px;
+
+}
+
+.createBtn{
+    
+    border-radius: 8px;
+    border: 20px;
+    background: -webkit-linear-gradient(
+        45deg,
+        #46c474 5%,
+        #45d581 20%,
+        #1198e1 91%
+      );
+      color: #ffffff;
+    
+      font-weight: bold;
+
+      width: 100px;
+      height: 50px;
+      margin-left: 25px;
+
+}
+
+.createBtn:hover{
+
+    border-radius: 8px;
+    border: 20px;
+    background: -webkit-linear-gradient(
+        100deg,
+        #46c474 5%,
+        #45d581 20%,
+        #1198e1 91%
+      );
+      color: #ffffff;
+    
+      font-weight: bold;
+
+      width: 100px;
+      height: 50px;
+      margin-left: 25px;
+
+}
+
+.cancelBtn{
+
+    border-radius: 8px;
+    border: 20px;
+    font-weight: bold;
+    width: 100px;
+    height: 50px;
+    color: rgb(201, 194, 194);
+    background-color: #ffffff;
+    box-shadow: 0px 0px 0px 2px #b4afaf;
+}
+
+.columnscontainer{
+
+    box-sizing: content-box;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-top: 50px;
+    border-radius:10px;  
+
+}
+
+.col{
+    
+    display: flex;  
+    flex-direction: column;   
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 0%;
+}
+
+#citySelect{
+    box-sizing: content-box;
+    width: 75%;
+    height: 50%;
+    border-radius: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #c4c4c4;
+    font-weight: 400;
+}
+
+#citySelect:hover{
+    box-sizing: content-box;
+    width: 80%;
+    height: 50%;
+    border-radius: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #c4c4c4;
+    font-weight: 400;
+    cursor: pointer;
+
+}
+
+#planSelect{
+
+    box-sizing: content-box;
+    width: 75%;
+    height: 50%;
+    border-radius: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #c4c4c4;
+    font-weight: 400;
+}
+
+#planSelect:hover{
+    box-sizing: content-box;
+    width: 80%;
+    height: 50%;
+    border-radius: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #c4c4c4;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.colbtns{
+
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+
+}
+
+.cancelBtn{
+
+    border-radius: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #c4c4c4;
+    font-weight: 400;
+
+}
+
+.cancelBtn:hover{
+    
+    border-radius: 10px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #eeecec;
+    font-weight: 400;
+
+}
+
+.createClientTittle{
+
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    margin-right: 50%;
+}
