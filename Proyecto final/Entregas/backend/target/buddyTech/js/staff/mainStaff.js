@@ -26,6 +26,19 @@ const login = async ()=>{
         console.log(data);
         if(data.length === 0){
 
+          let html = `<div class="row">
+          <div class="column">
+            <h5> Error </h5>
+            <p class="mb-0"> El cliente con ID: ${userIdTF.value} no está registrado</p>
+          </div>
+          <div id="colerr" class="column">
+            <h1 class="h1err">
+            <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+            </h1>
+          </div>
+        </div>`
+
+        modalBody.innerHTML = html; 
             myModal.show();
 
         } else {
@@ -155,7 +168,7 @@ const login = async ()=>{
       let html = `<div class="row">
       <div class="column">
         <h5> Error </h5>
-        <p class="mb-0"> Ingrese un documento válido</p>
+        <p class="mb-0">Ingrese un documento válido</p>
       </div>
       <div id="colwar" class="column">
         <h1 class="h1war">
@@ -173,6 +186,12 @@ const login = async ()=>{
 loginBtn.addEventListener("click", (event) =>{
     event.preventDefault();
     login();
+});
+
+oneBtn.addEventListener("click", (event) =>{
+event.preventDefault();
+
+
 });
 
 
