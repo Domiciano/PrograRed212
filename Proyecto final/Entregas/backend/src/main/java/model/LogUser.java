@@ -1,6 +1,6 @@
 package model;
 
-public class logUser {
+public class LogUser {
 
     private int id;
     private String name;
@@ -8,10 +8,10 @@ public class logUser {
     private int venuesBuddyID;
     private int roleBuddyID;
 
-    public logUser() {
+    public LogUser() {
     }
 
-    public logUser(int id, String name, String lastName, int venuesBuddyID, int roleBuddyID) {
+    public LogUser(int id, String name, String lastName, int venuesBuddyID, int roleBuddyID) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;

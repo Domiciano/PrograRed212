@@ -1,7 +1,8 @@
 package provider;
 
-import model.User;
+import model.*;
 import sql.MySQL;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -104,4 +105,30 @@ public class UserProvider {
 
         return "ok";
     }
+    public LogUser auth(Auth auth) throws SQLException {
+        LogUser temp = null;
+
+        String sql = "SELECT * FROM usersBuddy WHERE id=$name AND password='$password'";
+        sql = sql.replace("$name", auth.getId()+"");
+        sql = sql.replace("$password", auth.getPassword());
+
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+
+        while (results.next()) {
+            int id = Integer.parseInt(results.getString(results.findColumn("id")));
+            String lastName = results.getString(results.findColumn("lastName"));
+            String name = results.getString(results.findColumn("name"));
+            int venuesBuddyID = Integer.parseInt(results.getString(results.findColumn("venuesBuddyID")));
+            int roleBuddyID = Integer.parseInt(results.getString(results.findColumn("roleBuddyID")));
+
+            temp = new LogUser(id, lastName, name, venuesBuddyID, roleBuddyID);
+        }
+
+        db.close();
+
+        return temp;
+
+    }
+
 }

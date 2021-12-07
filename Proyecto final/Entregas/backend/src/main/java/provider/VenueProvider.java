@@ -12,13 +12,32 @@ public class VenueProvider {
     public ArrayList<Venue> getData() throws SQLException {
         ArrayList<Venue> respuesta = new ArrayList<>();
 
-        String sql = "SELECT * FROM venueBuddy";
+        String sql = "SELECT * FROM venueBuddy ";
         MySQL db = new MySQL();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
             int id = results.getInt(results.findColumn("id"));
             int cityID = results.getInt(results.findColumn("cityID"));
+            String name = results.getString(results.findColumn("name"));
+
+            Venue temp = new Venue(id, cityID, name);
+            respuesta.add(temp);
+        }
+        db.close();
+        return respuesta;
+    }
+
+    public ArrayList<Venue> getData(int cityId) throws SQLException {
+        ArrayList<Venue> respuesta = new ArrayList<>();
+
+        String sql = "SELECT * FROM `venuesBuddy` WHERE cityBuddyID = "+cityId;
+        MySQL db = new MySQL();
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            int cityID = results.getInt(results.findColumn("cityBuddyID"));
             String name = results.getString(results.findColumn("name"));
 
             Venue temp = new Venue(id, cityID, name);
