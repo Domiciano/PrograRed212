@@ -32,7 +32,7 @@ public class MembershipProvider {
             Date startDate = results.getDate(results.findColumn("startDate"));
             Date endDate = results.getDate(results.findColumn("endDate"));
 
-            Membership temp = new Membership(id, venueID, planID, totalAmount, discount, startDate, endDate);
+            Membership temp = new Membership(id, totalAmount, discount, startDate, endDate, planID, venueID);
             respuesta.add(temp);
         }
         db.close();
@@ -40,7 +40,6 @@ public class MembershipProvider {
     }
 
     public ArrayList<Membership> getData(String city, boolean isYear) throws SQLException, ParseException {
-        MySQL db = SQLAdmin.getInstance().addConnection();
         String sql;
         City cityObj = new CityProvider().getData(city);
         ArrayList<Venue> vList = new VenueProvider().getData(cityObj.getId());
@@ -72,6 +71,8 @@ public class MembershipProvider {
             sql += " AND startDate > "+ date[0]+date[1]+date[2];
         }
 
+
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -83,7 +84,7 @@ public class MembershipProvider {
             Date startDate = results.getDate(results.findColumn("startDate"));
             Date endDate = results.getDate(results.findColumn("endDate"));
 
-            Membership temp = new Membership(id, venueID, planID, totalAmount, discount, startDate, endDate);
+            Membership temp = new Membership(id, totalAmount, discount, startDate, endDate, planID, venueID);
             respuesta.add(temp);
         }
         db.close();
@@ -124,7 +125,7 @@ public class MembershipProvider {
             int plansBuddyID = results.getInt(6);
             int venuesBuddyID = results.getInt(7);
 
-            Membership membership = new Membership(id, plansBuddyID, venuesBuddyID, totalAmount, discount, startDate, endDate);
+            Membership membership = new Membership(id, totalAmount, discount, startDate, endDate, plansBuddyID, venuesBuddyID);
             memberships.add(membership);
         }
         db.close();

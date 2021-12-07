@@ -1,4 +1,5 @@
 package services;
+import model.Card;
 import model.Client;
 import model.Message;
 import provider.ClientProvider;
@@ -13,7 +14,6 @@ public class ClientServices {
     @GET
     @Path("echo")
     public String echo(){
-
         SQLAdmin.getInstance().closeAllConnections();
         return "echo client";
     }
@@ -148,6 +148,30 @@ public class ClientServices {
         try {
             ClientProvider provider = new ClientProvider();
             ArrayList<Client> client = provider.searchClient(natID);
+            return Response.status(200).header("access-control-allow-origin", "*").entity(client).build();
+        } catch (SQLException ex) {
+            SQLAdmin.getInstance().closeAllConnections();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
+        }
+    }
+
+    @OPTIONS
+    @Path("cardInfo/{natID}")
+    public Response optionsCardInfo(@PathParam("natID") String natID){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
+    @GET
+    @Path("cardInfo/{natID}")
+    @Produces("application/json")
+    public Response getCardInfo(@PathParam("natID") String natID){
+        try {
+            ClientProvider provider = new ClientProvider();
+            ArrayList<Card> client = provider.getCardInfo(natID);
             return Response.status(200).header("access-control-allow-origin", "*").entity(client).build();
         } catch (SQLException ex) {
             SQLAdmin.getInstance().closeAllConnections();

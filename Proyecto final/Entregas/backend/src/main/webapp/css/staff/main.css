@@ -64,12 +64,13 @@ main {
   padding-left: 10px;
   cursor: pointer;
   margin-left: 20px;
+  opacity: 80%;
 
   background: -webkit-linear-gradient(
     45deg,
-    #5bf895 5%,
-    #7aec8d 53%,
-    #11c2e1 91%
+    #46c474 5%,
+    #45d581 20%,
+    #1198e1 91%
   );
   color: #ffffff;
   font-weight: 700;
@@ -85,13 +86,13 @@ main {
   text-align: center;
   padding-left: 10px;
   margin-left: 20px;
-  border: 20px;
-
-  background: -webkit-linear-gradient(
-    45deg,
-    #46c474 5%,
-    #45d581 20%,
-    #1198e1 91%
+  border: 2px;
+  border-style: groove;
+  opacity: 100%;
+  background: -webkit-radial-gradient(
+    circle,
+    #45d5819f 30%,
+    #1198e134 98%
   );
   color: #ffffff;
 
@@ -113,12 +114,14 @@ width: 400px;
 
 .container{
 
-  position: relative;
-  
-  place-items: center;
-  text-align: center;
+  display: flex;
   align-items: center;
   justify-content: center;
+  align-content: center;
+  place-items: center;
+  text-align: center;
+  width: 450px;
+  height: min-content;
   padding: 20px;
   margin-top: 50px;
   margin: auto;
@@ -130,13 +133,62 @@ width: 400px;
 width: 120px;
 height: 120px;
 
+background: -webkit-radial-gradient(
+  circle,
+  #1198e134 91%, 
+  rgba(182,208,213,1) 100%
+);
+opacity: 50%;
+color: #ffffff;
+border: #ffffff;
+border-style: groove;
+border-width: 5px;
+}
+
+.btnKeyboard:hover{
+  width: 120px;
+  height: 120px;
+background: -webkit-radial-gradient(
+  circle,
+  #45d5819f 20%,
+  #1198e134 91%
+);
+opacity: 100%;
+color: #ffffff;
+border: #ffffff;
+border-style: groove;
+border-width: 8px;
+}
+
+.col-4{
+  margin-bottom: 15px;
+  margin-top: 5px;
+  place-items: center;
+}
+
+.col-8{
+
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  align-items: center;
+  margin-top: 5px;
+  margin-right: auto;
+  place-items: center;
+  flex-direction: center;
+  justify-content: center;
+  margin-bottom: 15px;
+
 }
 
 #clearBtn{
   
-  width: 555px;
+  width: 265px;
   height: 120px;
-  justify-content: flex-end;
+  
+  align-items: center;
+  justify-content: center;
+  align-content: center; 
 
 }
 
@@ -249,3 +301,4 @@ color: #46c474
   justify-content: center;
 
 }
+

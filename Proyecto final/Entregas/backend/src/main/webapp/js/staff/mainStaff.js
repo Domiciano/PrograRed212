@@ -26,6 +26,19 @@ const login = async ()=>{
         console.log(data);
         if(data.length === 0){
 
+          let html = `<div class="row">
+          <div class="column">
+            <h5> Error </h5>
+            <p class="mb-0"> El cliente con ID: ${userIdTF.value} no está registrado</p>
+          </div>
+          <div id="colerr" class="column">
+            <h1 class="h1err">
+            <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+            </h1>
+          </div>
+        </div>`
+
+        modalBody.innerHTML = html; 
             myModal.show();
 
         } else {
@@ -155,7 +168,7 @@ const login = async ()=>{
       let html = `<div class="row">
       <div class="column">
         <h5> Error </h5>
-        <p class="mb-0"> Ingrese un documento válido</p>
+        <p class="mb-0">Ingrese un documento válido</p>
       </div>
       <div id="colwar" class="column">
         <h1 class="h1war">
@@ -174,6 +187,52 @@ loginBtn.addEventListener("click", (event) =>{
     event.preventDefault();
     login();
 });
+
+zeroBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "0";
+}); 
+oneBtn.addEventListener("click", (event) =>{
+event.preventDefault();
+userIdTF.value += "1";
+});
+twoBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "2"; 
+  });
+threeBtn.addEventListener("click", (event) =>{
+    event.preventDefault();
+    userIdTF.value += "3";   
+});
+fourBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "4";
+});
+fiveBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "5";
+});
+sixBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "6";
+});
+sevenBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "7";
+});
+eightBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "8";
+});
+nineBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "9";
+});   
+clearBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value = "";
+}); 
+  
 
 
 

@@ -5,6 +5,8 @@ const password = document.getElementById("sPass");
 const venueId = document.getElementById("sVenueId");
 const addBtn = document.getElementById("addBtn");
 const cBtn = document.getElementById("cBtn");
+const plansDrop = document.getElementById("plansDrop");
+const sede = document.getElementById("sede");
 
 const postStaff = async ()=>{
     let user = {
@@ -38,7 +40,18 @@ const postStaff = async ()=>{
         
     }
 }
-
+const getVenues = async ()=>{
+    let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
+    let venues = await venuesNames.json();
+    console.log(venues);
+    let html = `<option selected disabled selected hidden>Seleccionar Ciudad...</option>`;
+    for(let i in venues){
+        let incomingName = venues[i].name;
+            html += `<option value="${i}">${incomingName}</option>`;        
+    }
+    plansDrop.innerHTML = html;
+}
+getVenues();
 const clearFields = async()=>{
     id.value = "";
     nameTF.value = "";
@@ -60,6 +73,12 @@ cBtn.addEventListener("click", (event)=>{
     
 });
 
+
+plansDrop.addEventListener("click",(event)=>{
+
+    event.preventDefault();
+    sede.innerHTML = plansDrop.innerHTML;
+})
 
 
 

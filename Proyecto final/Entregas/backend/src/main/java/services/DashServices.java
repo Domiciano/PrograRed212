@@ -1,6 +1,7 @@
 package services;
 
 import provider.DashProvider;
+import sql.SQLAdmin;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
@@ -40,6 +41,7 @@ public class DashServices {
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (SQLException | ParseException e) {
             e.printStackTrace();
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
