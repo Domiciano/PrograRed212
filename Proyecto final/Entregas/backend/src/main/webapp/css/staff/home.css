@@ -13,7 +13,60 @@
     justify-content: center;
 }
 
-.izq{
-    display: flex;
+.col-user{
+    width: 30%;
     align-items: center;
+}
+
+.col-text{
+    width: 35%;
+}
+
+.col-check{
+    width: 35%;
+}
+
+.centIcon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pad-5{
+    padding-left: 30px;
+}
+
+.pad-icon{
+    padding-left: 25px;
+    padding-right: 10px;
+}
+
+.pad-2{
+    padding-left: 20px;
+}
+.cardStyle{
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 2px #dadada;
+}
+
+.check{
+    color: rgb(1, 194, 1);
+}
+
+.seeDet{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 20px;
+    font-weight:700;
+    color: rgb(45, 178, 255);
+    margin-right: 20px;
+
 }

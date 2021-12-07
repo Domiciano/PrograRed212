@@ -14,6 +14,16 @@ import java.util.ArrayList;
 @Path("venues")
 public class VenueServices {
 
+    @OPTIONS
+    @Path("getvenues")
+    public Response optionsGetVenues(){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
     @POST
     @Path("addVenue")
     @Consumes("application/json")
