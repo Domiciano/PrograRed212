@@ -188,11 +188,51 @@ loginBtn.addEventListener("click", (event) =>{
     login();
 });
 
+zeroBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "0";
+}); 
 oneBtn.addEventListener("click", (event) =>{
 event.preventDefault();
-
-
+userIdTF.value += "1";
 });
+twoBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "2"; 
+  });
+threeBtn.addEventListener("click", (event) =>{
+    event.preventDefault();
+    userIdTF.value += "3";   
+});
+fourBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "4";
+});
+fiveBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "5";
+});
+sixBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "6";
+});
+sevenBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "7";
+});
+eightBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "8";
+});
+nineBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value += "9";
+});   
+clearBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  userIdTF.value = "";
+}); 
+  
 
 
 

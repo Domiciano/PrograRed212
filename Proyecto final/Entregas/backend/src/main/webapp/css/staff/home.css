@@ -13,7 +13,25 @@
     justify-content: center;
 }
 
-.izq{
+.col-2{
+    width: 20%;
+}
+
+.col-5{
+    width: 50%;
+}
+
+.cent{
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pad-4{
+    padding-left: 40px;
+}
+
+.pad-1{
+    padding-left: 25px;
+    padding-right: 10px;
 }
