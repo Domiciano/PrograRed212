@@ -32,6 +32,21 @@ public class PlanProvider {
         return respuesta;
     }
 
+    public ArrayList<String> getActivePlans() throws SQLException {
+        ArrayList<String> nombres = new ArrayList<>();
+
+        String sql = "SELECT name FROM plansBuddy WHERE active = 1";
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+        while (results.next()) {
+            String name = results.getString(1);
+            nombres.add(name);
+        }
+        db.close();
+        return nombres;
+    }
+
     public ArrayList<Plan> searchPlanByID(int PlanID) throws SQLException {
         MySQL db = SQLAdmin.getInstance().addConnection();
         ArrayList<Plan> plans = new ArrayList<>();
