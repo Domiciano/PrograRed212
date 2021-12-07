@@ -15,7 +15,7 @@ public class Membership {
     public Membership() {
     }
 
-    public Membership(int id, double totalAmount, double discount, Date startDate, Date endDate, int planID, int venueID) {
+    public Membership(int id, int venueID, int planID, double totalAmount, double discount, Date startDate, Date endDate) {
         this.id = id;
         this.venueID = venueID;
         this.planID = planID;

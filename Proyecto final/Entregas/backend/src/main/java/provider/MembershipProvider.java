@@ -1,11 +1,15 @@
 package provider;
 
+import model.City;
 import model.Membership;
+import model.Venue;
 import sql.MySQL;
 import sql.SQLAdmin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -28,7 +32,58 @@ public class MembershipProvider {
             Date startDate = results.getDate(results.findColumn("startDate"));
             Date endDate = results.getDate(results.findColumn("endDate"));
 
-            Membership temp = new Membership(id, totalAmount, discount,  startDate, endDate, planID, venueID);
+            Membership temp = new Membership(id, venueID, planID, totalAmount, discount, startDate, endDate);
+            respuesta.add(temp);
+        }
+        db.close();
+        return respuesta;
+    }
+
+    public ArrayList<Membership> getData(String city, boolean isYear) throws SQLException, ParseException {
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        String sql;
+        City cityObj = new CityProvider().getData(city);
+        ArrayList<Venue> vList = new VenueProvider().getData(cityObj.getId());
+        StringBuilder venuesIds = new StringBuilder();
+
+        String pattern = "yyyy-MM-dd";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String[] date = simpleDateFormat.format(new Date()).split("-");
+
+        ArrayList<Membership> respuesta = new ArrayList<>();
+        if(isYear){
+            date[1] = "01";
+        }
+        date[2] = "01";
+
+        for (int i = 0; i < vList.size(); i++) {
+            if(i == vList.size()-1){
+                venuesIds.append(vList.get(i).getCity());
+            } else {
+                venuesIds.append(vList.get(i).getCity()).append(" OR venuesBuddyID = ");
+            }
+        }
+
+        if(city.equals("")){
+            sql = "SELECT * FROM memberShipBuddy WHERE startDate > "+ date[0]+date[1]+date[2];
+        } else {
+            sql = "SELECT * FROM memberShipBuddy WHERE venuesBuddyID = " + venuesIds;
+            sql += " AND startDate > "+ date[0]+date[1]+date[2];
+        }
+
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            int venueID = results.getInt(results.findColumn("venuesBuddyID"));
+            int planID = results.getInt(results.findColumn("plansBuddyID"));
+            double totalAmount = results.getFloat(results.findColumn("totalAmount"));
+            double discount = results.getFloat(results.findColumn("discount"));
+            Date startDate = results.getDate(results.findColumn("startDate"));
+            Date endDate = results.getDate(results.findColumn("endDate"));
+
+            Membership temp = new Membership(id, venueID, planID, totalAmount, discount, startDate, endDate);
             respuesta.add(temp);
         }
         db.close();
@@ -69,7 +124,7 @@ public class MembershipProvider {
             int plansBuddyID = results.getInt(6);
             int venuesBuddyID = results.getInt(7);
 
-            Membership membership = new Membership(id, totalAmount, discount, startDate, endDate, plansBuddyID, venuesBuddyID);
+            Membership membership = new Membership(id, plansBuddyID, venuesBuddyID, totalAmount, discount, startDate, endDate);
             memberships.add(membership);
         }
         db.close();

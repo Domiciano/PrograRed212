@@ -1,7 +1,7 @@
 const loginBtn = document.getElementById("loginBtn");
 
 const login = ()=>{
-    location.href = "dashboard.html";
+    location.href = "dashboardCEO.html";
 };
 
 loginBtn.addEventListener("click", login);

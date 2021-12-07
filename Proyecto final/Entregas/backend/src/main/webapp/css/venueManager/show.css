@@ -1,0 +1,56 @@
+.container{
+
+
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 80%;
+    padding-top: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    box-shadow: 0px 0px 15px 2px #b4afaf;
+    border-radius:10px;  
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+   
+}
+
+.cardsC{
+    
+    width: 70%;
+    background-color: black;
+    overflow-y: scroll;
+    
+}
+.filtersC{
+
+   width: 60%;
+   background-color: aqua;
+   margin-right: 30px;
+   
+}
+
+.staffview{
+
+
+    display: flex;
+    flex-direction:column;
+    margin:20px;
+    padding:30px;
+    border-radius:10px;   
+    position:relative;
+    background-color: rgb(255, 255, 255);
+    text-justify: auto;
+    line-height: 1.6;
+}
+
+.name{
+
+    font-weight: bold;
+}
+
+.subtext{
+
+    color: #b4afaf;
+}

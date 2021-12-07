@@ -28,6 +28,23 @@ public class CityProvider {
         return respuesta;
     }
 
+    public City getData(String cityName) throws SQLException {
+        City respuesta = null;
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        String sql = "SELECT * FROM cityBuddy WHERE name='"+cityName+"'";
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            String name = results.getString(results.findColumn("name"));
+
+            respuesta = new City(id, name);
+        }
+        db.close();
+
+        return respuesta;
+    }
+
     public String insert(City city) throws SQLException {
         String sql = "INSERT INTO cityBuddy (name)";
         sql += " VALUES ('$name')";
