@@ -55,8 +55,19 @@ public class UserServices {
         }
     }
 
+
+    @OPTIONS
+    @Path("create")
+    public Response options(User user){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
     @POST
-    @Path("")
+    @Path("create")
     @Consumes("application/json")
     public Response addUser(User user){
         try {

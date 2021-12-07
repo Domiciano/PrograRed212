@@ -22,7 +22,7 @@ const postStaff = async ()=>{
     let json = JSON.stringify(user);
     //let obj = JSON.parse(json);
 
-    let response = await fetch("http://localhost:8080/backend/api/users/", 
+    let response = await fetch("http://localhost:8080/backend/api/users/create", 
         {
             method: "POST",
             headers: {
