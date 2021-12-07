@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app_filter{
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 400px;
+}
+
+.input_container{
+    display: flex;
+}
+
+.app_filter input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.amount{
+    display: flex;
+    width: 100%;
+    gap: .5em; 
+}
+
+.amount label{
+    display: flex;
+    align-items: flex-end;
+    gap: .5em; 
+}
+
+.amount span{
+    font-size: 10px; 
+}
+
+.btns{
+    /* background-color: red; */
+    display: flex;
+    gap: 1em; 
+    justify-content: center;
+}
+  
+.btns button{
+    padding: 0 .5em; 
+    border-radius: 4px; 
+}
+  
+.clear{
+    background-color: transparent;
+    border: 1px solid gray; 
+    color: gray;
+}
+  
+.search{
+    color: white;
+    border: none;
+    background-color: gray; 
+}
+  
+.btnCreate button{
+    padding: 0 .5em; 
+    border-radius: 4px; 
+    color: white;
+    border: none;
+    background-color: gray; 
+}  
+  
