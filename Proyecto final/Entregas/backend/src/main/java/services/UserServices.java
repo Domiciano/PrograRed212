@@ -170,5 +170,17 @@ public class UserServices {
                 .header("access-control-allow-headers", "*")
                 .build();
     }
-
+    @GET
+    @Path("cardInfo")
+    @Produces("application/json")
+    public Response getCardInfo(){
+        try {
+            UserProvider provider = new UserProvider();
+            ArrayList<UserCard> managers = provider.getVenueManagerCardInfo();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(managers).build();
+        } catch (SQLException ex) {
+            SQLAdmin.getInstance().closeAllConnections();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
+        }
+    }
 }
