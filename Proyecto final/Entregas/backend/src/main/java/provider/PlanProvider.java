@@ -23,14 +23,13 @@ public class PlanProvider {
             double amount = results.getDouble(results.findColumn("amount"));
             int time = results.getInt(results.findColumn("time"));
             boolean active = results.getBoolean(results.findColumn("active"));
-            
             Plan plan = new Plan(id, name, amount, time, active);
             respuesta.add(plan);
         }
         db.close();
         return respuesta;
     }
-
+//
     public ArrayList<String> getActivePlans() throws SQLException {
         ArrayList<String> nombres = new ArrayList<>();
 
@@ -71,7 +70,7 @@ public class PlanProvider {
         sql = sql.replace("$name", plan.getName());
         sql = sql.replace("$amount", plan.getAmount()+"");
         sql = sql.replace("$time", plan.getTime()+"");
-        sql.replace("$active", plan.isActive()+"");
+        sql = sql.replace("$active", plan.isActive()+"");
         return sql;
     }
 

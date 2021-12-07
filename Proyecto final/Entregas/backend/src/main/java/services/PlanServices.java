@@ -25,7 +25,7 @@ public class PlanServices {
                 .header("access-control-allow-headers", "*")
                 .build();
     }
-
+//
 
     @Path("getAll")
     @GET
