@@ -7,6 +7,7 @@ import sql.SQLAdmin;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ClientProvider {
     public ArrayList<Client> getData() throws SQLException {
@@ -111,6 +112,32 @@ public class ClientProvider {
         sql = sql.replace("$STATUS",status+"");
         db.comandSQL(sql);
         db.close();
+    }
+
+    public ArrayList<Card> getCardInfo(String natID) throws SQLException {
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        ArrayList<Card> cards = new ArrayList<>();
+        db.connection();
+        String sql= "SELECT c.*, p.name, m.endDate, cs.status FROM plansBuddy p, clientsBuddy c, memberShipBuddy m, clientStatusBuddy cs WHERE c.memberShipBuddyID=m.id AND m.plansBuddyID=p.id AND c.clientStatusBuddyID=cs.id AND c.natID='"+natID+"'";
+        ResultSet results = db.getDataMySQL(sql);
+        while(results.next()){
+            int id = results.getInt(results.findColumn("id"));
+            String natId = results.getString(results.findColumn("natID"));
+            String name = results.getString(3);
+            String lastName = results.getString(results.findColumn("lastName"));
+            int age = results.getInt(results.findColumn("age"));
+            double weight = results.getFloat(results.findColumn("weight"));
+            double height = results.getFloat(results.findColumn("height"));
+            int statusID = results.getInt(results.findColumn("clientStatusBuddyID"));
+            int membershipID = results.getInt(results.findColumn("memberShipBuddyID"));
+            String planName = results.getString(10);
+            Date date = results.getDate(results.findColumn("endDate"));
+            String status = results.getString(results.findColumn("status"));
+            Client client = new Client(natId, id, age, name, lastName, weight, height, statusID, membershipID);
+            cards.add(new Card(client, date, planName, status));
+        }
+        db.close();
+        return cards;
     }
 
 }
