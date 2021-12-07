@@ -1,11 +1,9 @@
 package services;
 
-import com.google.gson.Gson;
 import model.Message;
 import model.Plan;
 import provider.PlanProvider;
 import sql.SQLAdmin;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
@@ -18,20 +16,45 @@ public class PlanServices {
     @GET
     public String echo(){return "echo Plan";}
 
+    @OPTIONS
+    @Path("getactive")
+    public Response optionsEditStatusByNatId(@PathParam("natID") String natID, @PathParam("status") int status) {
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
+
     @Path("getAll")
     @GET
     @Produces("application/json")
     public Response getAllRoles(){
         try {
             PlanProvider provider = new PlanProvider();
-            ArrayList<Plan> op = provider.getAllPlans();
-            Gson gson = new Gson();
-            String list = gson.toJson(op);
-            return javax.ws.rs.core.Response.status(200).entity(list).build();
+            ArrayList<Plan> list = provider.getAllPlans();
+            return Response.status(200).entity(list).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
-            return javax.ws.rs.core.Response.status(500).entity(e).build();
+            return Response.status(500).entity(e).build();
+        }
+    }
+
+
+    @GET
+    @Path("getactive")
+    @Produces("application/json")
+    public Response getActivePlans(){
+        try {
+            PlanProvider provider = new PlanProvider();
+            ArrayList<String> names = provider.getActivePlans();
+            return Response.status(200).entity(names).build();
+        } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
+            e.printStackTrace();
+            return Response.status(500).entity(e).build();
         }
     }
 
@@ -42,11 +65,11 @@ public class PlanServices {
         try {
             PlanProvider provider = new PlanProvider();
             provider.insert(plan);
-            return javax.ws.rs.core.Response.status(200).entity(new Message("Plan inserted")).build();
+            return Response.status(200).entity(new Message("Plan inserted")).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
-            return javax.ws.rs.core.Response.status(500).entity(e).build();
+            return Response.status(500).entity(e).build();
         }
     }
 
@@ -57,11 +80,11 @@ public class PlanServices {
         try {
             PlanProvider provider = new PlanProvider();
             provider.update(plan);
-            return javax.ws.rs.core.Response.status(200).entity(new Message("Plan updated")).build();
+            return Response.status(200).entity(new Message("Plan updated")).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
-            return javax.ws.rs.core.Response.status(500).entity(e).build();
+            return Response.status(500).entity(e).build();
         }
     }
 
@@ -72,7 +95,7 @@ public class PlanServices {
         try {
             PlanProvider provider = new PlanProvider();
             provider.delete(plan);
-            return javax.ws.rs.core.Response.status(200).entity(new Message("Plan deleted")).build();
+            return Response.status(200).entity(new Message("Plan deleted")).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
