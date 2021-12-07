@@ -34,11 +34,11 @@ public class PlanServices {
         try {
             PlanProvider provider = new PlanProvider();
             ArrayList<Plan> list = provider.getAllPlans();
-            return Response.status(200).entity(list).build();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(list).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
 
@@ -50,11 +50,11 @@ public class PlanServices {
         try {
             PlanProvider provider = new PlanProvider();
             ArrayList<String> names = provider.getActivePlans();
-            return Response.status(200).entity(names).build();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(names).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
 
