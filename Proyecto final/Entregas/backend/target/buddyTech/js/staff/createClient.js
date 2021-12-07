@@ -23,10 +23,6 @@ const getPlans = async ()=>{
     planSelect.innerHTML = html;
 }
 
-getPlans();
-
-
-
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     let venues = await venuesNames.json();
@@ -39,6 +35,7 @@ const getVenues = async ()=>{
     citySelect.innerHTML = html;
 }
 
+getPlans();
 getVenues();
 
 
