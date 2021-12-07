@@ -3,6 +3,8 @@ package services;
 import model.Membership;
 import model.Message;
 import provider.MembershipProvider;
+import sql.SQLAdmin;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
@@ -50,6 +52,7 @@ public class MembershipServices {
                     .header("access-control-allow-headers", "*")
                     .entity(new Message("membresia creada correctamente")).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500)
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
@@ -67,6 +70,7 @@ public class MembershipServices {
             ArrayList<Membership> memberships = provider.getData();
             return Response.status(200).header("access-control-allow-origin", "*").entity(memberships).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(e.getMessage())).build();
         }
@@ -81,6 +85,8 @@ public class MembershipServices {
             ArrayList<Membership> memberships = provider.searchMembershipByMemID(memshipID);
             return Response.status(200).header("access-control-allow-origin", "*").entity(memberships).build();
         } catch (SQLException ex) {
+            SQLAdmin.getInstance().closeAllConnections();
+            ex.printStackTrace();
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
     }

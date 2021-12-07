@@ -4,6 +4,8 @@ import model.City;
 import model.Membership;
 import model.Venue;
 import sql.MySQL;
+import sql.SQLAdmin;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -18,7 +20,7 @@ public class MembershipProvider {
         ArrayList<Membership> respuesta = new ArrayList<>();
 
         String sql = "SELECT * FROM memberShipBuddy";
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -69,7 +71,7 @@ public class MembershipProvider {
             sql += " AND startDate > "+ date[0]+date[1]+date[2];
         }
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -81,7 +83,7 @@ public class MembershipProvider {
             Date startDate = results.getDate(results.findColumn("startDate"));
             Date endDate = results.getDate(results.findColumn("endDate"));
 
-            Membership temp = new Membership(id, venueID, planID, totalAmount, discount, startDate, endDate);
+            Membership temp = new Membership(id, totalAmount, discount, startDate, endDate, planID, venueID);
             respuesta.add(temp);
         }
         db.close();
@@ -98,14 +100,14 @@ public class MembershipProvider {
         sql = sql.replace("$startDate", membership.getStartDate()+"");
         sql = sql.replace("$endDate", membership.getEndDate()+"");
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
     }
 
     public ArrayList<Membership> searchMembershipByMemID(int memID) throws SQLException {
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         ArrayList<Membership> memberships = new ArrayList<>();
         db.connection();
 

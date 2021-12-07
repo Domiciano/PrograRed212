@@ -2,6 +2,7 @@ package provider;
 
 import model.Plan;
 import sql.MySQL;
+import sql.SQLAdmin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ public class PlanProvider {
         ArrayList<Plan> respuesta = new ArrayList<>();
 
         String sql = "SELECT * FROM plansBuddy";
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -21,9 +22,7 @@ public class PlanProvider {
             String name = results.getString(results.findColumn("name"));
             double amount = results.getDouble(results.findColumn("amount"));
             int time = results.getInt(results.findColumn("time"));
-            int parseIt = results.getInt(results.findColumn("active"));
-            boolean active = false;
-            if (parseIt == 1) active = true;
+            boolean active = results.getBoolean(results.findColumn("active"));
             Plan plan = new Plan(id, name, amount, time, active);
             respuesta.add(plan);
         }
@@ -31,29 +30,19 @@ public class PlanProvider {
         return respuesta;
     }
 
-    public ArrayList<Plan> searchPlanByID(int PlanID) throws SQLException {
-        MySQL db = new MySQL();
-        ArrayList<Plan> plans = new ArrayList<>();
+    public ArrayList<String> getActivePlans() throws SQLException {
+        ArrayList<String> nombres = new ArrayList<>();
+
+        String sql = "SELECT name FROM plansBuddy WHERE active = 1";
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
-
-        String sql = "SELECT * FROM plansBuddy WHERE id = $ID ";
-        sql = sql.replace("$ID", PlanID+"");
         ResultSet results = db.getDataMySQL(sql);
-
         while (results.next()) {
-            int id = results.getInt(results.findColumn("id"));
-            String name = results.getString(results.findColumn("name"));
-            double amount = results.getDouble(results.findColumn("amount"));
-            int time = results.getInt(results.findColumn("time"));
-            int parseIt = results.getInt(results.findColumn("active"));
-            boolean active = false;
-            if (parseIt == 1) active = true;
-
-            Plan plan = new Plan(id, name, amount, time, active);
-            plans.add(plan);
+            String name = results.getString(1);
+            nombres.add(name);
         }
         db.close();
-        return plans;
+        return nombres;
     }
 
     public void insert(Plan plan) throws SQLException {
@@ -61,7 +50,7 @@ public class PlanProvider {
         sql += " VALUES ('$name', $amount, $time, $active)";
         sql = replace(sql, plan);
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
@@ -71,7 +60,7 @@ public class PlanProvider {
         String sql = "UPDATE plansBuddy SET name = '$name', amount = $amount, time = $time, active = '$active' WHERE id = " + plan.getId();
         sql = replace(sql, plan);
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
@@ -81,22 +70,21 @@ public class PlanProvider {
         sql = sql.replace("$name", plan.getName());
         sql = sql.replace("$amount", plan.getAmount()+"");
         sql = sql.replace("$time", plan.getTime()+"");
-        if (plan.isActive()) sql = sql.replace("$active", 1+"");
-        else sql = sql.replace("$active", 0+"");
+        sql = sql.replace("$active", plan.isActive()+"");
         return sql;
     }
 
     public void delete(Plan plan) throws SQLException {
         String sql = "DELETE FROM plansBuddy WHERE ID = " + plan.getId();
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
     }
 
     public ArrayList<Plan> searchPlanByPlanID(int PlanID) throws SQLException {
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         ArrayList<Plan> plans = new ArrayList<>();
         db.connection();
 

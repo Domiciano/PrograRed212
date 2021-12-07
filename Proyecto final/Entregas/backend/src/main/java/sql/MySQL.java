@@ -4,9 +4,10 @@ import java.sql.*;
 
 public class MySQL {
 
+    private static MySQL instance;
     private Connection connection;
 
-    public MySQL(){
+     MySQL(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection();

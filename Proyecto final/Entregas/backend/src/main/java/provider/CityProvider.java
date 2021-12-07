@@ -2,6 +2,7 @@ package provider;
 
 import model.City;
 import sql.MySQL;
+import sql.SQLAdmin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ public class CityProvider {
         ArrayList<City> respuesta = new ArrayList<>();
 
         String sql = "SELECT * FROM cityBuddy";
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -31,7 +32,7 @@ public class CityProvider {
         City respuesta = null;
 
         String sql = "SELECT * FROM cityBuddy WHERE name='"+cityName+"'";
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -50,7 +51,7 @@ public class CityProvider {
         sql += " VALUES ('$name')";
         sql = sql.replace("$name", city.getName());
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
@@ -60,7 +61,7 @@ public class CityProvider {
     public String delete(City city) throws SQLException {
         String sql = "DELETE FROM cityBuddy WHERE name = '"+city.getName()+"'";
 
-        MySQL db = new MySQL();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();

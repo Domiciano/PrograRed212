@@ -2,6 +2,7 @@ package provider;
 
 import model.Membership;
 import sql.MySQL;
+import sql.SQLAdmin;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -9,10 +10,10 @@ import java.util.ArrayList;
 
 public class DashProvider {
 
-    private final MySQL db;
+    private MySQL db;
 
     public DashProvider() {
-        db = new MySQL();
+         db = SQLAdmin.getInstance().addConnection();
     }
 
     public int earnings(String city, boolean isYear) throws SQLException, ParseException {

@@ -2,6 +2,7 @@ package services;
 
 import model.*;
 import provider.UserProvider;
+import sql.SQLAdmin;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
@@ -34,6 +35,7 @@ public class UserServices {
             ArrayList<User> res = provider.getData();
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
@@ -47,6 +49,7 @@ public class UserServices {
             ArrayList<User> res = provider.getData(property, value);
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
@@ -63,6 +66,7 @@ public class UserServices {
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*").entity(o).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500)
                     .header("access-control-allow-origin", "*")
@@ -83,6 +87,7 @@ public class UserServices {
                     .header("access-control-allow-headers", "*")
                     .entity(o).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500)
                     .header("access-control-allow-origin", "*")
@@ -102,6 +107,7 @@ public class UserServices {
                     .header("access-control-allow-headers", "*")
                     .entity(o).build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500)
                     .header("access-control-allow-origin", "*")

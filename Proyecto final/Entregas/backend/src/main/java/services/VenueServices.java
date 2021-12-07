@@ -6,11 +6,23 @@ import javax.ws.rs.core.Response;
 import model.Message;
 import model.Venue;
 import provider.VenueProvider;
+import sql.SQLAdmin;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Path("venues")
 public class VenueServices {
+
+    @OPTIONS
+    @Path("getvenues")
+    public Response optionsGetVenues(){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
 
     @POST
     @Path("addVenue")
@@ -26,6 +38,7 @@ public class VenueServices {
                     .header("access-control-allow-headers", "*")
                     .entity(new Message("Sede creada correctamente")).build();
         }catch (SQLException ex){
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500)
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
@@ -44,6 +57,7 @@ public class VenueServices {
             ArrayList<Venue> response = provider.getData();
             return Response.status(200).header("access-control-allow-origin", "*").entity(response).build();
         } catch (SQLException ex) {
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
     }
@@ -60,6 +74,7 @@ public class VenueServices {
                     .header("Content-Type", "application/json")
                     .build();
         } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
             return Response.status(500)
                     .entity(new Message("Operacion fallida"))
@@ -81,6 +96,7 @@ public class VenueServices {
                     .header("access-control-allow-origin", "*")
                     .build();
         } catch (SQLException ex) {
+            SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
     }
