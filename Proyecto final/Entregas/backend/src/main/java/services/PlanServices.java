@@ -18,14 +18,14 @@ public class PlanServices {
 
     @OPTIONS
     @Path("getactive")
-    public Response optionsEditStatusByNatId(@PathParam("natID") String natID, @PathParam("status") int status) {
+    public Response optionsgetActivePlans() {
         return Response.status(200)
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
                 .build();
     }
-
+//
 
     @Path("getAll")
     @GET

@@ -23,14 +23,13 @@ public class PlanProvider {
             double amount = results.getDouble(results.findColumn("amount"));
             int time = results.getInt(results.findColumn("time"));
             boolean active = results.getBoolean(results.findColumn("active"));
-
             Plan plan = new Plan(id, name, amount, time, active);
             respuesta.add(plan);
         }
         db.close();
         return respuesta;
     }
-
+//
     public ArrayList<String> getActivePlans() throws SQLException {
         ArrayList<String> nombres = new ArrayList<>();
 
