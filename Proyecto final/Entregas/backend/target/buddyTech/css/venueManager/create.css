@@ -36,10 +36,11 @@ background-color: #ffffff;
     border-radius: 8px;
     border: 20px;
     background: -webkit-linear-gradient(
-        -86deg,
-        #1198e1 5%,
-        #45d581 53%,
-        #46c474 91%
+        45deg,
+        #46c474 5%,
+        #45d581 20%,
+        #1198e1 91%
+        
       );
       color: #ffffff;
     
@@ -64,6 +65,40 @@ background-color: #ffffff;
     border-color: #d8d2d2;
     border-width: 3px;
     border-style: solid;
+}
+
+.createBtn:hover{
+
+    border-radius: 8px;
+    border: 20px;
+    background: -webkit-linear-gradient(
+        100deg,
+        #46c474 5%,
+        #45d581 20%,
+        #1198e1 91%
+        
+      );
+      color: #ffffff;
+    
+      font-weight: bold;
+
+      width: 100px;
+      height: 50px;
+      margin-left: 25px;
+      margin-top: 30px;
+   
+
+}
+
+.inp:hover{
+
+
+    width: 51%;
+}  
+
+.cancelBtn:hover{
+
+    border-color: #a5a3a3;
 }
 
 
