@@ -106,14 +106,14 @@
                     
                 </div>
                 <hr class="sidebar-divider d-none d-md-block">
-                <input type= "text" class= "inp" placeholder="Numero ID">
-                <input type= "text" class= "inp" placeholder="Nombre">
-                <input type= "text" class= "inp" placeholder="Apellido">
-                <input type= "text" class= "inp"placeholder="Contrasena">
-                <input type= "number" class= "inp" placeholder="Id Sede"><br>
+                <input id="sId"type= "text" class= "inp" placeholder="Numero ID">
+                <input id="sName"type= "text" class= "inp" placeholder="Nombre">
+                <input id="sLastname"type= "text" class= "inp" placeholder="Apellido">
+                <input id="sPass"type= "text" class= "inp"placeholder="Contrasena">
+                <input id="sVenueId"type= "number" class= "inp" placeholder="Id Sede"><br>
                 
-                <button class ="cancelBtn">Cancelar</button>
-                <button class ="createBtn">Crear</button>
+                <button id = "cBtn"class ="cancelBtn">Cancelar</button>
+                <button id = "addBtn"class ="createBtn">Crear</button>
                 
 
             </div>  
@@ -123,11 +123,6 @@
 
     </div>
     <!-- End of Page Wrapper -->
-
-
-
-
-
 
       <!-- Bootstrap core JavaScript-->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -139,6 +134,10 @@
   
       <!-- Custom scripts for all pages-->
       <script src="js/sb-admin-2.min.js"></script> 
+      <!-- Custom script-->
+      <script src="js/VenueManager/createStaff.js"></script> 
+
+
 
 
 
