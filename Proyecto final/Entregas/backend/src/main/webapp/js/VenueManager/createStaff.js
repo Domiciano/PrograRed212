@@ -61,6 +61,7 @@ const clearFields = async()=>{
     nameTF.value = "";
     lastname.value = "";
     password.value = "";
+    select.value = "Seleccionar Sede";
    
 
 }
