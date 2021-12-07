@@ -22,9 +22,8 @@ public class PlanProvider {
             String name = results.getString(results.findColumn("name"));
             double amount = results.getDouble(results.findColumn("amount"));
             int time = results.getInt(results.findColumn("time"));
-            int parseIt = results.getInt(results.findColumn("active"));
-            boolean active = false;
-            if (parseIt == 1) active = true;
+            boolean active = results.getBoolean(results.findColumn("active"));
+            
             Plan plan = new Plan(id, name, amount, time, active);
             respuesta.add(plan);
         }
@@ -45,31 +44,6 @@ public class PlanProvider {
         }
         db.close();
         return nombres;
-    }
-
-    public ArrayList<Plan> searchPlanByID(int PlanID) throws SQLException {
-        MySQL db = SQLAdmin.getInstance().addConnection();
-        ArrayList<Plan> plans = new ArrayList<>();
-        db.connection();
-
-        String sql = "SELECT * FROM plansBuddy WHERE id = $ID ";
-        sql = sql.replace("$ID", PlanID+"");
-        ResultSet results = db.getDataMySQL(sql);
-
-        while (results.next()) {
-            int id = results.getInt(results.findColumn("id"));
-            String name = results.getString(results.findColumn("name"));
-            double amount = results.getDouble(results.findColumn("amount"));
-            int time = results.getInt(results.findColumn("time"));
-            int parseIt = results.getInt(results.findColumn("active"));
-            boolean active = false;
-            if (parseIt == 1) active = true;
-
-            Plan plan = new Plan(id, name, amount, time, active);
-            plans.add(plan);
-        }
-        db.close();
-        return plans;
     }
 
     public void insert(Plan plan) throws SQLException {
@@ -97,8 +71,7 @@ public class PlanProvider {
         sql = sql.replace("$name", plan.getName());
         sql = sql.replace("$amount", plan.getAmount()+"");
         sql = sql.replace("$time", plan.getTime()+"");
-        if (plan.isActive()) sql = sql.replace("$active", 1+"");
-        else sql = sql.replace("$active", 0+"");
+        sql.replace("$active", plan.isActive()+"");
         return sql;
     }
 
