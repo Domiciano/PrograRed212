@@ -1,0 +1,7 @@
+Hola profe muy buenas tardes, te hago envío del parcial final, estuvo muy chévere e interesante para 
+entrenar esos músculos de los dedos aunque decidí por no irme por el bonus, no obstante, intenté dejar 
+la parte del front decente a nivel visual y con algunas cosas interesantes que con mucha dedicación logré implementar jajaja.
+Muchas gracias profe.
+
+Link despliegue en Heroku: https://trello-kevin.herokuapp.com/
+Tabla: A00364415Tasks
