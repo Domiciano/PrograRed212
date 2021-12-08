@@ -11,16 +11,15 @@ import java.util.ArrayList;
 
 public class UserProvider {
 
-    private final MySQL db;
-
     public UserProvider() {
-        db = SQLAdmin.getInstance().addConnection();
+
     }
 
     public ArrayList<User> getData() throws SQLException {
         ArrayList<User> respuesta = new ArrayList<>();
 
         String sql = "SELECT * FROM usersBuddy";
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         getResponseList(results, respuesta);
@@ -36,6 +35,7 @@ public class UserProvider {
         sql = sql.replace("$property", property);
         sql = sql.replace("$value", value);
 
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         getResponseList(results, respuesta);
@@ -65,6 +65,7 @@ public class UserProvider {
 
         sql = replace(sql, user);
 
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
@@ -79,6 +80,7 @@ public class UserProvider {
 
         sql = replace(sql, user);
 
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
@@ -100,6 +102,7 @@ public class UserProvider {
                 "WHERE id=$id";
         sql = sql.replace("$id", id+"");
 
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         db.comandSQL(sql);
         db.close();
@@ -113,6 +116,7 @@ public class UserProvider {
         sql = sql.replace("$name", auth.getId()+"");
         sql = sql.replace("$password", auth.getPassword());
 
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
 
