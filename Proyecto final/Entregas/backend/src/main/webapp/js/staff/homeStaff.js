@@ -1,5 +1,9 @@
 var clientsContainer = document.getElementById("clientsContainer");
 
+$(document).ready(function(){
+    $('[data-bs-toggle="popover"]').popover();
+});
+
 const getCardInfo = async () => {
     
     let response1 = await fetch("http://localhost:8080/backend/api/cls/getclients")
@@ -13,5 +17,3 @@ const getCardInfo = async () => {
         
     }
 }
-
-getCardInfo();

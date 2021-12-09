@@ -32,7 +32,7 @@ public class MembershipProvider {
             Date startDate = results.getDate(results.findColumn("startDate"));
             Date endDate = results.getDate(results.findColumn("endDate"));
 
-            Membership temp = new Membership(id, totalAmount, discount,  startDate, endDate, planID, venueID);
+            Membership temp = new Membership(id, totalAmount, discount, startDate, endDate, planID, venueID);
             respuesta.add(temp);
         }
         db.close();
@@ -70,6 +70,7 @@ public class MembershipProvider {
             sql = "SELECT * FROM memberShipBuddy WHERE venuesBuddyID = " + venuesIds;
             sql += " AND startDate > "+ date[0]+date[1]+date[2];
         }
+
 
         MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();

@@ -13,5 +13,3 @@ const getCardInfo = async () => {
         
     }
 }
-
-getCardInfo();

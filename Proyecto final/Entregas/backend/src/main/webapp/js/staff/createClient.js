@@ -23,7 +23,6 @@ html2 += `<option value="1">Sede Cali</option>`;
 citySelect.innerHTML = html2;
 */
 const getPlans = async () => {
-
     let html = `<option selected disabled selected hidden>Elegir Plan...</option>`;
     let plans = await fetch("http://localhost:8080/backend/api/ps/getactive");
     plansFull = await plans.json();
