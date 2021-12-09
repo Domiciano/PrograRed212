@@ -54,7 +54,7 @@ public class UserServices {
             return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
-    
+
     @POST
     @Path("")
     @Consumes("application/json")

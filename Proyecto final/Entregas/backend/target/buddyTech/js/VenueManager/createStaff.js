@@ -6,11 +6,10 @@ const addBtn = document.getElementById("addBtn");
 const cBtn = document.getElementById("cBtn");
 const select = document.getElementById("select");
 var venuesD;
-
 const postStaff = async ()=>{
 
       var str = select.options[select.selectedIndex].text;
-      var venueId = parseInt(getVenueId(str));
+      var venueId = getVenueId(str);
     let user = {
 
         id:id.value,
@@ -22,9 +21,11 @@ const postStaff = async ()=>{
     
     };
 
+    console.log(user);
+     
     let json = JSON.stringify(user);
     //let obj = JSON.parse(json);
-
+    
     let response = await fetch("http://localhost:8080/backend/api/users/", 
         {
             method: "POST",
@@ -35,11 +36,10 @@ const postStaff = async ()=>{
             body: json
         }
     );
+   
     if(response.ok){
-        let data = await response.json();
-        console.log(data);
-        
-    }
+        swal("Datos Actualizados", "Creaste un nuevo miembro del staff", "success");
+     }     
 }
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
@@ -59,11 +59,13 @@ const clearFields = async()=>{
     nameTF.value = "";
     lastname.value = "";
     password.value = "";
+    select.value = "Seleccionar Sede";
    
 
 }
 
 addBtn.addEventListener("click", (event)=>{
+   
     event.preventDefault();
     postStaff();
     clearFields();

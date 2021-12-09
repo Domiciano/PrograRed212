@@ -5,116 +5,59 @@ class staffView{
     constructor(user){
         this.user = user;
         
-        
         //Object.seal(this);
     }
+
+
+    
  
     render = ()=>{
         //Construir un elemento visual
         let component = document.createElement("div");      //<div></div>
         let id = document.createElement("div");
-        let name = document.createElement("div");          //<p></p>
-        let lastname = document.createElement("div");
-        let venuesBuddyID = document.createElement("div");
-        let roleBuddyID = document.createElement("div");
-
-
-        //Agregar clases para los css
-
-        name.classList.add("name");
-        lastname.classList.add("subtext");
         id.classList.add("subtext");
-        venuesBuddyID.classList.add("subtext");
+        id.classList.add("text")
+        let nameV = document.createElement("div");
+        nameV.classList.add("name");          //<p></p>
+        nameV.classList.add("text")
+        let lastname = document.createElement("div");
+        lastname.classList.add("subtext");
+        lastname.classList.add("text")
+        let venuesBuddyID = document.createElement("div")
+        venuesBuddyID.classList.add("subtext");  
+        venuesBuddyID.classList.add("text") 
+        let roleBuddyID = document.createElement("div");
         roleBuddyID.classList.add("subtext");
+        roleBuddyID.classList.add("text");
+        let iconsdiv = document.createElement("div");
+        let detailbtn = document.createElement("button");
+        detailbtn.classList.add("detail");
+        iconsdiv.classList.add("icons"); 
+        let showDetail = document.createElement("div");
+        iconsdiv.innerHTML = 
+        '<i class="fas fa-arrow-circle-left hicon fas"></i>'+
+        '<i class="fas fa-user-circle dicon"></i>';
+        detailbtn.innerHTML= 
+        '<h4>Ver detalle</h4>'+
+        '<i class="fas fa-chevron-right"></i>';
 
- 
-                      //<p></p>
 
-       /* this.prev =()=>{
-            if(this.task.statusId ==4){
-
-                var newid = this.task.statusId-2;
-            }else{
-
-                var newid = this.task.statusId-1;
-            }
-            
-            let task = {
-
-                id: this.task.id,
-                statusId: newid
-            };
-
-             updateTask(task);
-
-        }
         
-        this.next =()=>{
-            if(this.task.statusId ==2){
-
-                var newid = this.task.statusId+2;
-            }else{
-
-                var newid = this.task.statusId+1;
-            }
-            
-            let task = {
-
-                id: this.task.id,
-                statusId: newid
-            };
-
-             updateTask(task);
-
-        }
-        
-        this.delete =()=>{
-           
-            let task = {
-
-                id: this.task.id,
-            };
-
-             deleteTask(task);
-
-        }
-
-        if(this.task.statusId == 1 || this.task.statusId == 2 ){
-            
-            let nextBtn = document.createElement("button");
-             nextBtn.classList.add("button2");
-             nextBtn.addEventListener("click",(event)=>{
-                event.preventDefault();
-                this.next();
-                
-            }); 
-             component.appendChild(nextBtn);
-        
-
-        }
-         if(this.task.statusId == 2 || this.task.statusId == 4){
-            let prevBtn = document.createElement("button");
-            prevBtn.classList.add("button3");
-            prevBtn.addEventListener("click",(event)=>{ 
-                event.preventDefault();
-                this.prev();
-                
-            });
-            component.appendChild(prevBtn);
-        } */
-
-      
+         
         id.innerHTML = this.user.id;
-        name.innerHTML = this.user.name;
+        nameV.innerHTML = this.user.name;
         lastname.innerHTML = this.user.lastName;
         venuesBuddyID.innerHTML = this.user.venuesBuddyID;
         roleBuddyID.innerHTML = this.user.roleBuddyID;
+
+
         
-        component.appendChild(name); 
-        component.appendChild(lastname)
+        
+        component.appendChild(lastname);
+        component.appendChild(nameV); 
         component.appendChild(id);              //<div><p></p></div>  
-        component.appendChild(roleBuddyID);  
-        component.appendChild(venuesBuddyID);
+        component.appendChild(iconsdiv);
+        component.appendChild(detailbtn);
         
         component.classList.add("staffview"); //<div class="userview">  ....  </div>
     
@@ -122,5 +65,4 @@ class staffView{
         return component;
     }
 
-    
 }
