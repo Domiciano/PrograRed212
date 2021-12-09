@@ -13,29 +13,128 @@
     justify-content: center;
 }
 
-.col-2{
-    width: 20%;
+.col-user{
+    width: 30%;
+    align-items: center;
 }
 
-.col-5{
-    width: 50%;
+.col-text{
+    width: 35%;
 }
 
-.cent{
+.col-check{
+    width: 35%;
+}
+
+.centIcon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centText{
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.pad-4{
-    padding-left: 50px;
+.pad-5{
+    padding-left: 30px;
 }
 
-.pad-1{
+.pad-icon{
     padding-left: 25px;
     padding-right: 10px;
 }
 
-.cardStyle{
-    box-shadow: 0px 0px 15px 2px #b4afaf;
+.pad-2{
+    padding-left: 20px;
 }
+
+.check{
+    color: rgb(1, 194, 1);
+}
+
+#quieto{
+    width: 100%;
+    height: 100%;
+}
+
+.seeDet{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-size: 20px;
+    font-weight:700;
+    color: rgb(0, 162, 255);
+    margin-right: 20px;
+}
+
+.click{
+    text-decoration: none !important;
+}
+
+.click:hover{
+    color: rgb(0, 195, 255);
+}
+
+.cardStyle{
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 2px #dadada;
+    -moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cardStyle:hover {
+    transform: scale(1.2);
+    box-shadow: 20px 15px rgba(0, 0, 0, 0.15);
+  }
+
+.cardSelStyle{
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 2px #dadada;
+    -moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cardSelStyle .icons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5rem 2.5rem 1.2rem;
+    width: 1.25rem;
+    height: 2.6rem;
+  }
+  .cardSelStyle .icons i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+  .cardSelStyle .icons .icon-default {
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .cardSelStyle .icons .icon-hover {
+    transition: opacity 0.3s, transform 0.3s;
+    transform: rotate(-180deg) scale(0.5);
+    opacity: 0;
+  }
+  .cardSelStyle:hover {
+    transform: scale(1.2);
+    box-shadow: 20px 15px rgba(0, 0, 0, 0.15);
+  }
+  .cardSelStyle:hover .icon-hover {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  .cardSelStyle:hover .icon-default {
+    transform: rotate(180deg) scale(0.5);
+    opacity: 0;
+  }
+

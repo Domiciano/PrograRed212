@@ -4,7 +4,6 @@ import java.sql.*;
 
 public class MySQL {
 
-    private static MySQL instance;
     private Connection connection;
 
      MySQL(){
@@ -17,7 +16,7 @@ public class MySQL {
     }
 
     public void connection() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:mysql://200.3.193.22:3306/P09728_1_11","P09728_1_11","ZCSaQGZU");
+        connection = DriverManager.getConnection("jdbc:mysql://200.3.193.22:3306/P09728_1_5","P09728_1_5","63ZxFhdM");
     }
 
     public void close() throws SQLException {
