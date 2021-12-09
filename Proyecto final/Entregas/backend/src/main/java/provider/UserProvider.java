@@ -28,26 +28,7 @@ public class UserProvider {
 
         return respuesta;
     }
-
-/*
-
-    public ArrayList<User> getData(String property, String value) throws SQLException {
-        ArrayList<User> respuesta = new ArrayList<>();
-
-        String sql = "SELECT * FROM usersBuddy WHERE $property='$value'";
-        sql = sql.replace("$property", property);
-        sql = sql.replace("$value", value);
-
-        db.connection();
-        ResultSet results = db.getDataMySQL(sql);
-        getResponseList(results, respuesta);
-        db.close();
-
-        return respuesta;
-    }
-
-*/
-
+    
     public ArrayList<User> getData(String property, String value) throws SQLException {
         ArrayList<User> respuesta = new ArrayList<>();
         LinkedHashMap<String,String> values = getExpression(property,value);

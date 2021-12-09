@@ -6,6 +6,7 @@ const venue = document.getElementById("venue");
 const id = document.getElementById("id");
 const select = document.getElementById("select");
 const filterbtn = document.getElementById("filter");
+const cancelbtn = document.getElementById("cButton");
 var venuesD;
 /*
 const updateTask = async (task)=>{
@@ -193,6 +194,12 @@ filterbtn.addEventListener("click", (event)=>{
     clearFields();
     
 });
+
+cancelbtn.addEventListener("click",(event)=>{
+
+    event.preventDefault();
+    clearFields();
+})
 
 clearFields();
 
