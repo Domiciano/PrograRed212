@@ -54,7 +54,7 @@ public class UserProvider {
             int venuesBuddyID = Integer.parseInt(results.getString(results.findColumn("venuesBuddyID")));
             int roleBuddyID = Integer.parseInt(results.getString(results.findColumn("roleBuddyID")));
 
-            User temp = new User(id, lastName, name, password, venuesBuddyID, roleBuddyID);
+            User temp = new User(id, name, lastName, password, venuesBuddyID, roleBuddyID);
             list.add(temp);
         }
     }

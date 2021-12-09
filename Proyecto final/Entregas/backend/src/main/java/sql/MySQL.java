@@ -17,7 +17,7 @@ public class MySQL {
     }
 
     public void connection() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:mysql://200.3.193.22:3306/P09728_1_11","P09728_1_11","ZCSaQGZU");
+        connection = DriverManager.getConnection("jdbc:mysql://200.3.193.22:3306/P09728_1_2","P09728_1_2","ajvRnEIa");
     }
 
     public void close() throws SQLException {
