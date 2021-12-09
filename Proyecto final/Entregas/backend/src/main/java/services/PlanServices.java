@@ -12,9 +12,26 @@ import java.util.ArrayList;
 @Path("ps")
 public class PlanServices {
 
-    @Path("echo")
     @GET
-    public String echo(){return "echo Plan";}
+    @Path("close")
+    public Response closeConnections(){
+        SQLAdmin.getInstance().closeAllConnections();
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .entity(new Message("Conexiones cerradas desde plan")).build();
+    }
+
+    @OPTIONS
+    @Path("close")
+    public Response optionsClose(){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
 
     @OPTIONS
     @Path("getactive")

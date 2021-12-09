@@ -39,7 +39,7 @@ public class ClientProvider {
     public void insert(Client client) throws SQLException {
         MySQL db = SQLAdmin.getInstance().addConnection();
         String sql = "INSERT INTO clientsBuddy (natID, name, lastName, age,weight,height, clientStatusBuddyID, memberShipBuddyID)" +
-                "VALUES ('$natId', '$name','$lastName', $age,$weight,$height, $clientStatusBuddyID, $memberShipBuddyID )";
+                "VALUES ('$natId', '$name','$lastName', $age, $weight, $height, $clientStatusBuddyID, $memberShipBuddyID )";
         sql = sql.replace("$natId", client.getNatId());
         sql = sql.replace("$name", client.getName());
         sql = sql.replace("$lastName", client.getLastname());
@@ -47,7 +47,7 @@ public class ClientProvider {
         sql = sql.replace("$weight", client.getWeight()+"");
         sql = sql.replace("$height", client.getHeight()+"");
         sql = sql.replace("$clientStatusBuddyID", client.getStatusID()+"");
-        sql = sql.replace("$memberShipBuddyID", client.getMembershipID() + "");
+        sql = sql.replace("$memberShipBuddyID", client.getMembershipID()+"");
 
 
         db.connection();

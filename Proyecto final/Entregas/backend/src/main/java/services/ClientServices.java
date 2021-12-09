@@ -12,10 +12,24 @@ import java.util.ArrayList;
 @Path("cls")
 public class ClientServices {
     @GET
-    @Path("echo")
-    public String echo(){
+    @Path("close")
+    public Response closeConnections(){
         SQLAdmin.getInstance().closeAllConnections();
-        return "echo client";
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .entity(new Message("Conexiones cerradas desde cliente")).build();
+    }
+
+    @OPTIONS
+    @Path("close")
+    public Response optionsClose(){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
     }
 
 
@@ -46,6 +60,7 @@ public class ClientServices {
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
+                .header("Content-Type", "application/json")
                 .build();
     }
 
@@ -68,13 +83,14 @@ public class ClientServices {
     @Path("addClient")
     @Consumes("application/json")
     public Response addClient(Client client){
-        ClientProvider provider =  new ClientProvider();
         try {
+        ClientProvider provider =  new ClientProvider();
             provider.insert(client);
             return Response.status(200)
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
+                    .header("Content-Type", "application/json")
                     .entity(new Message("cliente creado correctamente")).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
