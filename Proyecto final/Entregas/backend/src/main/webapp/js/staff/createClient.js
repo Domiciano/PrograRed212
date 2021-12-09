@@ -9,6 +9,7 @@ const weightTF = document.getElementById("weightTF");
 
 
 
+
 const getPlans = async ()=>{
 
     let plansNames = await fetch("http://localhost:8080/backend/api/ps/getactive");

@@ -13,7 +13,9 @@ public class DashProvider {
     private MySQL db;
 
     public DashProvider() {
-         db = SQLAdmin.getInstance().addConnection();
+
+       db = SQLAdmin.getInstance().addConnection();;
+
     }
 
     public int earnings(String city, boolean isYear) throws SQLException, ParseException {

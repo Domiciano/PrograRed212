@@ -30,7 +30,6 @@ public class CityProvider {
 
     public City getData(String cityName) throws SQLException {
         City respuesta = null;
-
         String sql = "SELECT * FROM cityBuddy WHERE name='"+cityName+"'";
         MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
