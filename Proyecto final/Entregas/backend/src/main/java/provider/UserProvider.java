@@ -28,7 +28,7 @@ public class UserProvider {
 
         return respuesta;
     }
-    
+
     public ArrayList<User> getData(String property, String value) throws SQLException {
         ArrayList<User> respuesta = new ArrayList<>();
         LinkedHashMap<String,String> values = getExpression(property,value);
@@ -100,7 +100,7 @@ public class UserProvider {
                 int venuesBuddyID = Integer.parseInt(results.getString(results.findColumn("venuesBuddyID")));
                 int roleBuddyID = Integer.parseInt(results.getString(results.findColumn("roleBuddyID")));
 
-                User temp = new User(id, lastName, name, password, venuesBuddyID, roleBuddyID);
+                User temp = new User(id, name, lastName, password, venuesBuddyID, roleBuddyID);
                 list.add(temp);
             }
         }

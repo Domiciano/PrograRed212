@@ -13,20 +13,22 @@ class staffView{
  
     render = ()=>{
         //Construir un elemento visual
-        let component = document.createElement("div");      //<div></div>
-        let id = document.createElement("div");
+        let component = document.createElement("div");
+              //<div></div>
+        let infodiv = document.createElement("div");
+        let id = document.createElement("label");
         id.classList.add("subtext");
         id.classList.add("text")
-        let nameV = document.createElement("div");
+        let nameV = document.createElement("label");
         nameV.classList.add("name");          //<p></p>
         nameV.classList.add("text")
-        let lastname = document.createElement("div");
+        let lastname = document.createElement("label");
         lastname.classList.add("subtext");
         lastname.classList.add("text")
-        let venuesBuddyID = document.createElement("div")
+        let venuesBuddyID = document.createElement("label")
         venuesBuddyID.classList.add("subtext");  
         venuesBuddyID.classList.add("text") 
-        let roleBuddyID = document.createElement("div");
+        let roleBuddyID = document.createElement("label");
         roleBuddyID.classList.add("subtext");
         roleBuddyID.classList.add("text");
         let iconsdiv = document.createElement("div");
@@ -35,13 +37,12 @@ class staffView{
         iconsdiv.classList.add("icons"); 
         let showDetail = document.createElement("div");
         iconsdiv.innerHTML = 
-        '<i class="fas fa-arrow-circle-left hicon fas"></i>'+
         '<i class="fas fa-user-circle dicon"></i>';
         detailbtn.innerHTML= 
         '<h4>Ver detalle</h4>'+
         '<i class="fas fa-chevron-right"></i>';
 
-
+        
         
          
         id.innerHTML = this.user.id;
@@ -50,13 +51,12 @@ class staffView{
         venuesBuddyID.innerHTML = this.user.venuesBuddyID;
         roleBuddyID.innerHTML = this.user.roleBuddyID;
 
+        infodiv.appendChild(nameV);
+        infodiv.appendChild(lastname);
+        infodiv.appendChild(id);
 
-        
-        
-        component.appendChild(lastname);
-        component.appendChild(nameV); 
-        component.appendChild(id);              //<div><p></p></div>  
         component.appendChild(iconsdiv);
+        component.appendChild(infodiv);              //<div><p></p></div>  
         component.appendChild(detailbtn);
         
         component.classList.add("staffview"); //<div class="userview">  ....  </div>

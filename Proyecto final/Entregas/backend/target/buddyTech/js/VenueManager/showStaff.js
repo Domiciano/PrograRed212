@@ -6,6 +6,7 @@ const venue = document.getElementById("venue");
 const id = document.getElementById("id");
 const select = document.getElementById("select");
 const filterbtn = document.getElementById("filter");
+const cancelbtn = document.getElementById("cButton");
 var venuesD;
 /*
 const updateTask = async (task)=>{
@@ -64,19 +65,9 @@ const getAllUsers = async ()=>{
     for(let i in data){
         let user = data[i];     
         let sfView = new staffView(user);
-        let view = sfView.render();
-
-        
-         //let view = taskView.render();
-        
+        let view = sfView.render();  
        cardsC.appendChild(view);
-        
-
-        
-        
-        
-       
-        //usersContainer.innerHTML += `<li>${user.name}</li>`;
+    
     }
 }
 
@@ -193,6 +184,12 @@ filterbtn.addEventListener("click", (event)=>{
     clearFields();
     
 });
+
+cancelbtn.addEventListener("click",(event)=>{
+
+    event.preventDefault();
+    clearFields();
+})
 
 clearFields();
 

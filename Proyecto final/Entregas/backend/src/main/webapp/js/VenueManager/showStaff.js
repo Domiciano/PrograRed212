@@ -65,19 +65,9 @@ const getAllUsers = async ()=>{
     for(let i in data){
         let user = data[i];     
         let sfView = new staffView(user);
-        let view = sfView.render();
-
-        
-         //let view = taskView.render();
-        
+        let view = sfView.render();  
        cardsC.appendChild(view);
-        
-
-        
-        
-        
-       
-        //usersContainer.innerHTML += `<li>${user.name}</li>`;
+    
     }
 }
 
