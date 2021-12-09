@@ -38,15 +38,15 @@ public class ClientProvider {
     }
     public void insert(Client client) throws SQLException {
         MySQL db = SQLAdmin.getInstance().addConnection();
-        String sql = "INSERT INTO clientsBuddy (natID, name, lastName, age,weight,height, clientStatusBuddyID, memberShipBuddyID )";
-        sql += " VALUES ('$natId', '$name','$lastName', $age,$weight,$height, $clientStatusBuddyID, $memberShipBuddyID )";
+        String sql = "INSERT INTO clientsBuddy (natID, name, lastName, age,weight,height, clientStatusBuddyID, memberShipBuddyID)" +
+                "VALUES ('$natId', '$name','$lastName', $age,$weight,$height, $clientStatusBuddyID, $memberShipBuddyID )";
         sql = sql.replace("$natId", client.getNatId());
         sql = sql.replace("$name", client.getName());
         sql = sql.replace("$lastName", client.getLastname());
-        sql = sql.replace("$age", ""+client.getAge());
-        sql = sql.replace("$weight", ""+client.getWeight());
-        sql = sql.replace("$height", ""+client.getHeight());
-        sql = sql.replace("$clientStatusBuddyID", client.getStatusID() + "");
+        sql = sql.replace("$age", client.getAge()+"");
+        sql = sql.replace("$weight", client.getWeight()+"");
+        sql = sql.replace("$height", client.getHeight()+"");
+        sql = sql.replace("$clientStatusBuddyID", client.getStatusID()+"");
         sql = sql.replace("$memberShipBuddyID", client.getMembershipID() + "");
 
 

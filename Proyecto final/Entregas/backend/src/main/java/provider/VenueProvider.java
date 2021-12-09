@@ -29,7 +29,7 @@ public class VenueProvider {
         return respuesta;
     }
 
-    public ArrayList<Venue> getData(int cityId) throws SQLException {
+    public ArrayList<Venue> getDatabyCityID(int cityId) throws SQLException {
         ArrayList<Venue> respuesta = new ArrayList<>();
 
         String sql = "SELECT * FROM `venuesBuddy` WHERE cityBuddyID = "+cityId;

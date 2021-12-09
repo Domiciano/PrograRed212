@@ -39,6 +39,16 @@ public class ClientServices {
                 .build();
     }
 
+    @OPTIONS
+    @Path("addClient")
+    public Response optionsAddClient(Client client) {
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
     @GET
     @Path("getclients")
     @Produces("application/json")
@@ -57,7 +67,7 @@ public class ClientServices {
     @POST
     @Path("addClient")
     @Consumes("application/json")
-    public Response addUser(Client client){
+    public Response addClient(Client client){
         ClientProvider provider =  new ClientProvider();
         try {
             provider.insert(client);
