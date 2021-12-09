@@ -1,11 +1,15 @@
 package provider;
 
+import model.City;
 import model.Membership;
+import model.Venue;
 import sql.MySQL;
 import sql.SQLAdmin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -35,6 +39,57 @@ public class MembershipProvider {
         return respuesta;
     }
 
+    public ArrayList<Membership> getData(String city, boolean isYear) throws SQLException, ParseException {
+        String sql;
+        City cityObj = new CityProvider().getData(city);
+        ArrayList<Venue> vList = new VenueProvider().getDatabyCityID(cityObj.getId());
+        StringBuilder venuesIds = new StringBuilder();
+
+        String pattern = "yyyy-MM-dd";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String[] date = simpleDateFormat.format(new Date()).split("-");
+
+        ArrayList<Membership> respuesta = new ArrayList<>();
+        if(isYear){
+            date[1] = "01";
+        }
+        date[2] = "01";
+
+        for (int i = 0; i < vList.size(); i++) {
+            if(i == vList.size()-1){
+                venuesIds.append(vList.get(i).getCity());
+            } else {
+                venuesIds.append(vList.get(i).getCity()).append(" OR venuesBuddyID = ");
+            }
+        }
+
+        if(city.equals("")){
+            sql = "SELECT * FROM memberShipBuddy WHERE startDate > "+ date[0]+date[1]+date[2];
+        } else {
+            sql = "SELECT * FROM memberShipBuddy WHERE venuesBuddyID = " + venuesIds;
+            sql += " AND startDate > "+ date[0]+date[1]+date[2];
+        }
+
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            int venueID = results.getInt(results.findColumn("venuesBuddyID"));
+            int planID = results.getInt(results.findColumn("plansBuddyID"));
+            double totalAmount = results.getFloat(results.findColumn("totalAmount"));
+            double discount = results.getFloat(results.findColumn("discount"));
+            Date startDate = results.getDate(results.findColumn("startDate"));
+            Date endDate = results.getDate(results.findColumn("endDate"));
+
+            Membership temp = new Membership(id, totalAmount, discount, startDate, endDate, planID, venueID);
+            respuesta.add(temp);
+        }
+        db.close();
+        return respuesta;
+    }
+
     public void insert(Membership membership) throws SQLException {
         String sql = "INSERT INTO memberShipBuddy ( venuesBuddyID, planBuddyID, totalAmount, discount, startDate, endDate)";
         sql += " VALUES ('$venueID','$planID',$totalAmount,$discount, $startDate, $endDate)";
@@ -49,6 +104,44 @@ public class MembershipProvider {
         db.connection();
         db.comandSQL(sql);
         db.close();
+    }
+
+    public ArrayList<Membership> newInsert(Membership membership) throws SQLException {
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        ArrayList<Membership> respuesta = new ArrayList<>();
+        String sql = "INSERT INTO memberShipBuddy(totalAmount, discount, startDate, endDate, plansBuddyID, venuesBuddyID) VALUES " +
+                "($totalAmount, $discount, CURRENT_DATE, DATE_ADD(CURRENT_DATE(), INTERVAL $ndays DAY), $planID, $venueID)";
+
+        sql = sql.replace("$totalAmount", membership.getTotalAmount()+"");
+        sql = sql.replace("$discount", membership.getDiscount()+"");
+        sql = sql.replace("$ndays", membership.getDays()+"");
+        sql = sql.replace("$planID", membership.getPlanID()+"");
+        sql = sql.replace("$venueID", membership.getVenueID()+"");
+
+
+        db.connection();
+        db.comandSQL(sql);
+        db.close();
+
+
+
+        String sql2 = "SELECT * FROM memberShipBuddy WHERE id=(SELECT MAX(id) FROM memberShipBuddy)";
+        MySQL db2 = SQLAdmin.getInstance().addConnection();
+        db2.connection();
+        ResultSet results = db2.getDataMySQL(sql2);
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            int venueID = results.getInt(results.findColumn("venuesBuddyID"));
+            int planID = results.getInt(results.findColumn("plansBuddyID"));
+            double totalAmount = results.getFloat(results.findColumn("totalAmount"));
+            double discount = results.getFloat(results.findColumn("discount"));
+            Date startDate = results.getDate(results.findColumn("startDate"));
+            Date endDate = results.getDate(results.findColumn("endDate"));
+
+            Membership temp = new Membership(id, totalAmount, discount,  startDate, endDate, planID, venueID);
+            respuesta.add(temp);
+        }
+        return respuesta;
     }
 
     public ArrayList<Membership> searchMembershipByMemID(int memID) throws SQLException {

@@ -12,7 +12,7 @@ public class Client {
     private int statusID;
     private int membershipID;
 
-    public Client(String natId,int id, int age, String name, String lastname, double weight, double height, int statusID, int membershipID) {
+    public Client(String natId, int id, int age, String name, String lastname, double weight, double height, int statusID, int membershipID) {
         this.id = id;
         this.age = age;
         this.name = name;

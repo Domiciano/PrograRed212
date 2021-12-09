@@ -25,7 +25,6 @@ public class PlanServices {
                 .header("access-control-allow-headers", "*")
                 .build();
     }
-//
 
     @Path("getAll")
     @GET
@@ -49,8 +48,8 @@ public class PlanServices {
     public Response getActivePlans(){
         try {
             PlanProvider provider = new PlanProvider();
-            ArrayList<String> names = provider.getActivePlans();
-            return Response.status(200).header("access-control-allow-origin", "*").entity(names).build();
+            ArrayList<Plan> plans = provider.getActivePlans();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(plans).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();

@@ -11,6 +11,7 @@ public class Membership {
     private double discount;
     private Date startDate;
     private Date endDate;
+    private int days;
 
     public Membership() {
     }
@@ -23,6 +24,15 @@ public class Membership {
         this.discount = discount;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public Membership(int id, double totalAmount, double discount, int days, int planID, int venueID) {
+        this.id = id;
+        this.venueID = venueID;
+        this.planID = planID;
+        this.totalAmount = totalAmount;
+        this.discount = discount;
+        this.days = days;
     }
 
     public int getId() {
@@ -79,5 +89,13 @@ public class Membership {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
     }
 }

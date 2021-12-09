@@ -142,16 +142,24 @@
                       </div>
                       <div class="row row-4">
                         <div class="col order-last">
-                            <input id="heightTF" type= "number" class= "inp" placeholder="Estatura">
+                            <input id="heightTF" type= "number" class= "inp" placeholder="Estatura en cm">
                           </div>
                           <div class="col order-first">
-                            <input id="weightTF" type= "number" class= "inp" placeholder="Peso">
+                            <input id="weightTF" type= "number" class= "inp" placeholder="Peso en Kg">
+                          </div>
+                      </div>
+                      <div class="row row-5">
+                        <div class="col order-last">
+                           
+                          </div>
+                          <div class="col order-first">
+                            <input id="discountTF" type= "number" class= "inp" placeholder="Descuento">
                           </div>
                       </div>
                   </div>
                   <div id="createbtns" class="colbtns">
-                    <button class ="cancelBtn">Cancelar</button>
-                    <button class ="createBtn">Crear</button>
+                    <button id="cancelBtn" class ="cancelBtn">Cancelar</button>
+                    <button id="registerBtn" class ="createBtn">Crear</button>
                   </div>
             </div>  
 
@@ -162,12 +170,22 @@
     <!-- End of Page Wrapper -->
 
 
-
+    <!-- Modal -->
+    <div class="modal fade "  id="staffCteClientModal" tabindex="-1" aria-labelledby="staffCteClientModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content radiousxd border border-3">
+          <div class="modal-body" id="staffCteClientModalBody">
+    
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
       <!-- Bootstrap core JavaScript-->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+      <script src="https://kit.fontawesome.com/08a0e42bd7.js" crossorigin="anonymous"></script>
       <script src="vendor/jquery/jquery.min.js"></script>
       <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
