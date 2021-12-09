@@ -39,6 +39,8 @@ class staffView{
         '<i class="fas fa-chevron-right"></i>';
         detailbtn.classList.add("detail");
         detailbtn.id ="detail"
+        detailbtn.setAttribute("data-toggle","popover");
+        detailbtn.setAttribute("data-trigger","focus");
         id.innerHTML = '<label class="text label">Id:</label>'+'<label class="text">'+this.user.id+'</label>';
         nameV.innerHTML =  '<label class="name label">Nombre:</label>'+'<label class="name">'+this.user.name+'</label>';
         lastname.innerHTML = '<label class="text label">Apellido:</label>'+'<label class="text">'+this.user.lastName+'</label>';

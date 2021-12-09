@@ -10,7 +10,9 @@ const cancelbtn = document.getElementById("cButton");
 var venuesD;
 
 const getAllUsers = async ()=>{
-    let response = await fetch("http://localhost:8080/backend/api/users/");
+
+
+    let response = await fetch("http://localhost:8080/backend/api/users/"+"roleBuddyID-3");
     let data = await response.json();
     cardsC.innerHTML = "";
     
@@ -79,7 +81,7 @@ const getUserByParam = async()=>{
 
 const checkFilterV = ()=>{
 
-    let values = "";
+    let values = "3,";
 
     if(!userN.value==""){
 
@@ -101,7 +103,7 @@ const checkFilterV = ()=>{
 }
 
 const checkFilterP = ()=>{
-    let properties = "";
+    let properties = "roleBuddyID,";
     
     if(!userN.value==""){
        properties+="name,"
