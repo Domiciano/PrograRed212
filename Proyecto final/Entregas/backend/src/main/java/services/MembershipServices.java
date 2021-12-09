@@ -26,6 +26,7 @@ public class MembershipServices {
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
+                .header("Connection", "close")
                 .build();
     }
 
@@ -38,6 +39,7 @@ public class MembershipServices {
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
+                .header("Connection", "close")
                 .entity(new Message("Conexiones cerradas")).build();
     }
 
@@ -49,6 +51,7 @@ public class MembershipServices {
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
                 .header("Content-Type", "application/json")
+                .header("Connection", "close")
                 .build();
     }
 
@@ -60,6 +63,7 @@ public class MembershipServices {
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
                 .header("Content-Type", "application/json")
+                .header("Connection", "close")
                 .build();
     }
 
@@ -84,6 +88,7 @@ public class MembershipServices {
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
+                    .header("Connection", "close")
                     .entity(new Message("membresia creada correctamente")).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
@@ -91,6 +96,7 @@ public class MembershipServices {
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
+                    .header("Connection", "close")
                     .entity(new Message(e.getMessage())).build();
         }
     }
@@ -107,6 +113,7 @@ public class MembershipServices {
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
+                    .header("Connection", "close")
                     .entity(memberships).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
@@ -114,6 +121,7 @@ public class MembershipServices {
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
+                    .header("Connection", "close")
                     .entity(new Message(e.getMessage())).build();
         }
     }
@@ -125,7 +133,10 @@ public class MembershipServices {
         MembershipProvider provider = new MembershipProvider();
         try {
             ArrayList<Membership> memberships = provider.getData();
-            return Response.status(200).header("access-control-allow-origin", "*").entity(memberships).build();
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .header("Connection", "close")
+                    .entity(memberships).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();

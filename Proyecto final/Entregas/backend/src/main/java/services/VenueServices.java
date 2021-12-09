@@ -21,6 +21,7 @@ public class VenueServices {
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
+                .header("Connection", "close")
                 .build();
     }
 
@@ -55,10 +56,10 @@ public class VenueServices {
         try {
             VenueProvider provider = new VenueProvider();
             ArrayList<Venue> response = provider.getData();
-            return Response.status(200).header("access-control-allow-origin", "*").entity(response).build();
+            return Response.status(200).header("access-control-allow-origin", "*").header("Connection", "close").entity(response).build();
         } catch (SQLException ex) {
             SQLAdmin.getInstance().closeAllConnections();
-            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
+            return Response.status(500).header("access-control-allow-origin", "*").header("Connection", "close").entity(new Message(ex.getMessage())).build();
         }
     }
 

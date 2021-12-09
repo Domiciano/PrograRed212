@@ -24,7 +24,13 @@ citySelect.innerHTML = html2;
 */
 const getPlans = async () => {
     let html = `<option selected disabled selected hidden>Elegir Plan...</option>`;
-    let plans = await fetch("http://localhost:8080/backend/api/ps/getactive");
+    let plans = await fetch("http://localhost:8080/backend/api/ps/getactive",
+    {
+        method: "GET",
+        headers: {
+            "Connection": "close"
+        },
+    });
     plansFull = await plans.json();
     console.log(plansFull);
 
@@ -38,7 +44,13 @@ const getPlans = async () => {
 const getVenues = async () => {
 
     let html = `<option selected disabled selected hidden>Seleccionar Ciudad...</option>`;
-    let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
+    let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues",    
+    {
+        method: "GET",
+        headers: {
+            "Connection": "close"
+        },
+    });
     venues = await venuesNames.json();
     console.log(venues);
     for (let i in venues) {
@@ -193,6 +205,7 @@ const createClient = async () => {
        modalBody.innerHTML = html;    
        myModal.show();
     }
+    /*
     let cerradas = await fetch("http://localhost:8080/backend/api/ms/close");
     let closedCon = await cerradas.json();
     console.log(closedCon);
@@ -202,6 +215,7 @@ const createClient = async () => {
     let cerradasclient = await fetch("http://localhost:8080/backend/api/cls/close");
     let closedclient = await cerradasclient.json();
     console.log(closedclient);
+    */
 }
 
 const clearAll = () =>{

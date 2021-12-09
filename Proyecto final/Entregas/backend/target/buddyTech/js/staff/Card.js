@@ -17,14 +17,10 @@ class Card{
                         <div class="card-body">
                             <div class="row">
                                 <div class="column centIcon">
-<<<<<<< HEAD
                                     <div class="icons">
                                         <i class="fas fa-arrow-circle-left fa-5x icon-hover"></i>
                                         <i class="fas fa-user-circle fa-5x icon-default"></i>
                                     </div>
-=======
-                                <i class="fas fa-user-circle fa-5x"></i>
->>>>>>> 42231b67ba07e1432a2f09e5deae6c87bb125bf3
                                 </div>
                                 <div class="column">
                                     <h3 class="h3 mb-0 black font-weight-bold">J${this.card.client.name}</h3>
@@ -52,21 +48,12 @@ class Card{
                                                         <div class="col-text centText pad-5">
                                                             <h3 class="h3 mb-3 black font-weight-bold">${this.card.client.name}</h3>
                                                             <p class="mb-0">${this.card.planName}</p>
-<<<<<<< HEAD
                                                             <p class="mb-0">Days left ${day}</p>
                                                             <small class="mb-0">Status ${this.card.status}</small>
                                                         </div>
                                                         <div id="colcheck" class="col-check centIcon">
                                                             <h1 class="h1check">
                                                                 <i class="fas fa-check fa-3x check"></i>
-=======
-                                                            <p class="mb-0">${day}</p>
-                                                            <small class="mb-0">${this.card.status}</small>
-                                                        </div>
-                                                        <div id="colcheck" class="col-check centIcon">
-                                                            <h1 class="h1check">
-                                                                <i class="fas fa-check fa-4x check"></i>
->>>>>>> 42231b67ba07e1432a2f09e5deae6c87bb125bf3
                                                             </h1>
                                                         </div>  
                                                     </div>

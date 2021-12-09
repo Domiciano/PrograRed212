@@ -51,7 +51,6 @@
 .pad-2{
     padding-left: 20px;
 }
-<<<<<<< HEAD
 
 .check{
     color: rgb(1, 194, 1);
@@ -70,6 +69,8 @@
     font-weight:700;
     color: rgb(0, 162, 255);
     margin-right: 20px;
+    border: none;
+    background: inherit;
 }
 
 .click{
@@ -80,6 +81,51 @@
     color: rgb(0, 195, 255);
 }
 
+#clientsContainer{
+    display: flex;
+    flex-direction: column;
+    max-height: 620px;
+    max-width: 400px;
+    min-width: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 0;
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+}
+
+.box-shadow{
+    box-shadow: 0px 0px 15px 2px #dadada;
+}
+
+/* Scrollbar style */
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 5px; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+  /* Animation on cards and icons */
+
 .cardStyle{
     position: relative;
     border-radius: 20px;
@@ -87,6 +133,10 @@
     -moz-transition: all 0.3s ease;
 	transition: all 0.3s ease;
     cursor: pointer;
+}
+
+.cardStyle .icon{
+    margin: 1rem 0rem 0rem 0rem;
 }
 
 .cardStyle:hover {
@@ -101,6 +151,8 @@
     -moz-transition: all 0.3s ease;
 	transition: all 0.3s ease;
     cursor: pointer;
+    z-index: 1;
+    box-sizing: border-box;
 }
 
 .cardSelStyle .icons {
@@ -139,24 +191,77 @@
     opacity: 0;
   }
 
-=======
-.cardStyle{
-    border-radius: 20px;
-    box-shadow: 0px 0px 15px 2px #dadada;
-}
+  /* Popover */
 
-.check{
-    color: rgb(1, 194, 1);
-}
-
-.seeDet{
+ /* popover */
+details[data-popover] {
+    position: relative;
     display: flex;
     justify-content: end;
-    align-items: center;
-    font-size: 20px;
-    font-weight:700;
-    color: rgb(45, 178, 255);
-    margin-right: 20px;
+  }
+  details[data-popover] > summary:focus {
+    outline: none;
+  }
+  details[data-popover] > summary::-webkit-details-marker {
+    display: none;
+  }
+  details[data-popover] > summary {
+    list-style: none;
+  }
+  details[data-popover] > summary + * {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 350%;
+    border: solid 1px teal;
+    border-radius: 5%;
+    margin-top: 10px;
+    padding-left: 65px;
+    padding-top: 20px;
+    left: -575px;
+    background: rgb(255, 255, 255);
+    border: none;
+  }
 
-}
->>>>>>> 42231b67ba07e1432a2f09e5deae6c87bb125bf3
+  details[data-popover] .column{
+      display: flex;
+      align-items: flex-start;
+  }
+
+  details[data-popover] .column p{
+    color: rgb(179, 179, 179);
+    font-weight:500;
+  }
+
+  details[data-popover] .column h5{
+    color: rgb(153, 153, 153);
+    font-weight:700;
+    margin-bottom: 0px;
+    margin-top: 10px;
+  }
+
+  details[data-popover] > * + * {
+    /* hide detail elements that would ruin the popover */
+    display: none;
+  }
+  details[data-popover="up"] > summary + * {
+    bottom: calc(0.5rem + 100%);
+    right: 50%;
+    transform: translateX(50%);
+  }
+  details[data-popover="down"] > summary + * {
+    top: calc(0.5rem + 100%);
+    right: 50%;
+    transform: translateX(50%);
+  }
+  details[data-popover="left"] > summary + * {
+    right: calc(1rem + 100%);
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+  details[data-popover="right"] > summary + * {
+    left: calc(1rem + 100%);
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+  
