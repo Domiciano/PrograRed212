@@ -13,6 +13,7 @@ public class VenueProvider {
     public ArrayList<Venue> getData() throws SQLException {
         ArrayList<Venue> respuesta = new ArrayList<>();
 
+
         String sql = "SELECT * FROM venuesBuddy";
         MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();

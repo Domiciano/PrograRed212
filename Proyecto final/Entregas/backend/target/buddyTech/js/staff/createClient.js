@@ -24,6 +24,16 @@ citySelect.innerHTML = html2;
 */
 const getPlans = async () => {
 
+<<<<<<< HEAD
+=======
+
+
+const getPlans = async ()=>{
+
+    let plansNames = await fetch("http://localhost:8080/backend/api/ps/getactive");
+    let names = await plansNames.json();
+    console.log(names);
+>>>>>>> c24ef6a9d020ff19a0ac45e36afd89ff6df5b9aa
     let html = `<option selected disabled selected hidden>Elegir Plan...</option>`;
     let plans = await fetch("http://localhost:8080/backend/api/ps/getactive");
     plansFull = await plans.json();
