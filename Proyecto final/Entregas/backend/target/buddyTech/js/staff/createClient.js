@@ -23,17 +23,6 @@ html2 += `<option value="1">Sede Cali</option>`;
 citySelect.innerHTML = html2;
 */
 const getPlans = async () => {
-
-<<<<<<< HEAD
-=======
-
-
-const getPlans = async ()=>{
-
-    let plansNames = await fetch("http://localhost:8080/backend/api/ps/getactive");
-    let names = await plansNames.json();
-    console.log(names);
->>>>>>> c24ef6a9d020ff19a0ac45e36afd89ff6df5b9aa
     let html = `<option selected disabled selected hidden>Elegir Plan...</option>`;
     let plans = await fetch("http://localhost:8080/backend/api/ps/getactive");
     plansFull = await plans.json();
@@ -46,13 +35,9 @@ const getPlans = async ()=>{
     planSelect.innerHTML = html;
 }
 
-<<<<<<< HEAD
-const getVenues = async ()=>{
-=======
 const getVenues = async () => {
     await fetch("http://localhost:8080/backend/api/ms/close");
     let html = `<option selected disabled selected hidden>Seleccionar Ciudad...</option>`;
->>>>>>> 42231b67ba07e1432a2f09e5deae6c87bb125bf3
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     venues = await venuesNames.json();
     console.log(venues);
