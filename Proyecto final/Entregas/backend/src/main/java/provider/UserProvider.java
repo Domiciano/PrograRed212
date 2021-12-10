@@ -6,8 +6,7 @@ import sql.SQLAdmin;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Date;
 
 public class UserProvider {
 
@@ -28,71 +27,49 @@ public class UserProvider {
 
         return respuesta;
     }
+    public ArrayList<UserCard> getStaffCard(String natId, String name, String lastName, String venuesBuddyID) throws SQLException {
+        ArrayList<UserCard> usercards = new ArrayList<>();
 
-    public ArrayList<User> getData(String property, String value) throws SQLException {
-        ArrayList<User> respuesta = new ArrayList<>();
-        LinkedHashMap<String,String> values = getExpression(property,value);
-        String filter = makeFilter(values);
-        String sql = "SELECT * FROM usersBuddy WHERE "+ filter;
+        String sql = "SELECT u.*, v.name,c.name FROM roleBuddy r, usersBuddy u, venuesBuddy v, cityBuddy c WHERE u.roleBuddyID = r.id AND v.cityBuddyID = c.id ";
+        sql += " AND roleBuddyID= 3 ";
+        if (!natId.equalsIgnoreCase("null")) {
 
-            for (Map.Entry<String, String> entry : values.entrySet()) {
-                sql = sql.replace("$"+entry.getValue(),entry.getValue());
-                sql = sql.replace("$"+entry.getKey(), entry.getKey());
-            }
-            db.connection();
-            ResultSet results = db.getDataMySQL(sql);
-            getResponseList(results, respuesta);
-            db.close();
-
-            return respuesta;
+            sql += " AND id = '" + natId + "'";
         }
-    public String makeFilter(LinkedHashMap<String,String> values){
-        String expression="";
-        String lastkey="";
-        String firstkey ="";
-        if (!values.isEmpty()) {
-            firstkey = values.keySet().iterator().next();
-            for (String key : values.keySet()) {
-                lastkey = key;
-            }
+        if (!name.equalsIgnoreCase("null")) {
+            sql += " AND name = '" + name + "'";
+
         }
-        String lastVal = values.get(lastkey);
+        if (!lastName.equalsIgnoreCase("null")) {
+            sql += " AND lastName = '" + lastName + "'";
 
-        for (Map.Entry<String, String> entry : values.entrySet()) {
-            if(values.size()>1) {
-                if(entry.getValue().equalsIgnoreCase(lastVal)){
-
-                    if (entry.getKey().equalsIgnoreCase("venuesBuddyID")) {
-                        expression += "$venuesBuddyID= $" + entry.getValue();
-                    } else {
-                        expression += "$" + entry.getKey() + "='$" + entry.getValue() + "'";}
-
-                }else{
-                    if (entry.getKey().equalsIgnoreCase("venuesBuddyID")) {
-                        expression += "$venuesBuddyID= $" + Integer.parseInt(entry.getValue())+" AND ";
-                    } else {
-                        expression += "$" + entry.getKey() + "='$"+entry.getValue()+"' AND ";
-                    }
-                }
-            }else{
-                if (entry.getKey().equalsIgnoreCase("venuesBuddyID")) {
-                    expression += "$venuesBuddyID= $" + entry.getValue();
-                } else {
-                    expression += "$" + entry.getKey() + "='$" + entry.getValue() + "'";
-                }
-            }
         }
-    return expression;
+        if (!venuesBuddyID.equalsIgnoreCase("null")) {
+            sql += " AND venuesBuddyID =" + Integer.parseInt(venuesBuddyID);
+        }
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            String lastname = results.getString(results.findColumn("lastName"));
+            String nameu = results.getString(results.findColumn("name"));
+            String password = results.getString(results.findColumn("password"));
+            int venueID = Integer.parseInt(results.getString(results.findColumn("venuesBuddyID")));
+            int roleID = Integer.parseInt(results.getString(results.findColumn("roleBuddyID")));
+            User user = new User(id, nameu, lastname, password, venueID, roleID);
+            String venue= results.getString(7);
+            String city= results.getString(8);
+            usercards.add(new UserCard(user,venue,city));
+        }
+
+       // getResponseList(results, respuesta);
+        db.close();
+
+        return usercards;
     }
-    public LinkedHashMap<String,String> getExpression(String property, String value){
-            String[] newproperty = property.split(",");
-            String[] newvalue = value.split(",");
-            LinkedHashMap<String, String> m = new LinkedHashMap();
-            for(int i = 0; i<newproperty.length;i++){
-                    m.put(newproperty[i],newvalue[i]);
-            }
-            return m;
-        }
+
+
+
         private void getResponseList(ResultSet results, ArrayList<User> list ) throws SQLException {
             while (results.next()) {
                 int id = Integer.parseInt(results.getString(results.findColumn("id")));
@@ -145,7 +122,8 @@ public class UserProvider {
         }
 
         public String delete(int id) throws SQLException {
-            String sql = "DELETE from usersBuddy WHERE id=$id";
+            String sql = "DELETE from usersBuddy" +
+                    "WHERE id=$id";
             sql = sql.replace("$id", id+"");
 
             db.connection();
@@ -179,53 +157,5 @@ public class UserProvider {
             return temp;
 
         }
-    public ArrayList<UserCard> getVenueManagerCardInfo() throws SQLException {
-        MySQL db = SQLAdmin.getInstance().addConnection();
-        ArrayList<UserCard> cards = new ArrayList<>();
-        db.connection();
-        String sql= "SELECT u.*,v.name,c.name FROM usersBuddy u, venuesBuddy v, cityBuddy c, roleBuddy r WHERE r.id=2 AND r.id=u.roleBuddyID AND c.id=v.cityBuddyID AND u.venuesBuddyID=v.id";
-        ResultSet results = db.getDataMySQL(sql);
-        while(results.next()){
-            int id = results.getInt(1);
-            String name = results.getString(2);
-            String lastName = results.getString(3);
-            String pwd = results.getString(4);
-            int venuesBuddyID = results.getInt(5);
-            int roleBuddyID = results.getInt(6);
-            String venueName = results.getString(7);
-            String cityName = results.getString(8);
-            User user = new User(id, name, lastName, pwd, venuesBuddyID, roleBuddyID);
-            cards.add(new UserCard(user, venueName, cityName));
-        }
-        db.close();
-        return cards;
+
     }
-    public ArrayList<UserCard> getVenueManagerCardInfo(String filter) throws SQLException {
-        MySQL db = SQLAdmin.getInstance().addConnection();
-        ArrayList<UserCard> cards = new ArrayList<>();
-        db.connection();
-        String sql= "SELECT u.*,v.name,c.name FROM usersBuddy u, venuesBuddy v, cityBuddy c, roleBuddy r WHERE r.id=2 AND r.id=u.roleBuddyID AND c.id=v.cityBuddyID AND u.venuesBuddyID=v.id AND "+filter;
-        ResultSet results = db.getDataMySQL(sql);
-        while(results.next()){
-            int id = results.getInt(1);
-            String name = results.getString(2);
-            String lastName = results.getString(3);
-            String pwd = results.getString(4);
-            int venuesBuddyID = results.getInt(5);
-            int roleBuddyID = results.getInt(6);
-            String venueName = results.getString(7);
-            String cityName = results.getString(8);
-            User user = new User(id, name, lastName, pwd, venuesBuddyID, roleBuddyID);
-            cards.add(new UserCard(user, venueName, cityName));
-        }
-        db.close();
-        return cards;
-    }
-    public ArrayList<UserCard> getData(String property, String value, int role) throws SQLException {
-        LinkedHashMap<String, String> expression = getExpression(property, value);
-        String filter = makeFilter(expression);
-        System.out.println(filter);
-        ArrayList<UserCard> res= getVenueManagerCardInfo(filter);
-        return res;
-    }
-}

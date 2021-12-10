@@ -9,22 +9,6 @@ const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
 var venuesD;
 
-const getAllUsers = async ()=>{
-    let response = await fetch("http://localhost:8080/backend/api/users/");
-    let data = await response.json();
-    cardsC.innerHTML = "";
-    
-
-    
-    for(let i in data){
-        let user = data[i];     
-        let sfView = new staffView(user);
-        let view = sfView.render();  
-       cardsC.appendChild(view);
-    
-    }
-}
-
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     let venues = await venuesNames.json();
@@ -37,7 +21,6 @@ const getVenues = async ()=>{
     select.innerHTML = html;
     
 }
-getVenues();
 
 const getVenueId = (vname)=>{  
   
@@ -50,17 +33,68 @@ const getVenueId = (vname)=>{
 
 }
 
-const getUserByParam = async()=>{
+const getAllUsers = async ()=>{
 
-    let parameters = checkFilterP();
-    let values = checkFilterV();
-
-    console.log("http://localhost:8080/backend/api/users/"+parameters+"-"+values);
-    let response = await fetch("http://localhost:8080/backend/api/users/"+parameters+"-"+values);
+  
+    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null");
     let data = await response.json();
     cardsC.innerHTML = "";
     
+ 
+    for(let i in data){
+        
+        let user = data[i];  
+        let sfView = new staffView(user);
+        let view = sfView.render();  
+       cardsC.appendChild(view);
+       $('[data-bs-toggle="popover"]').popover({
+        content:
+        `<div id="detailContainer">
+        
+        <div class="row">
+           <div class="col col1">
+                <h5>Id:</h5>
+                <p>`+user.user.id+`</p>
+           </div>
+           <div class="col col2">
+                <h5>Nombre:</h5>
+                <p>`+user.user.name+`</p>
+           
+            </div>
+        </div>
+       <div class="row">
+           <div class="col col3">
+                <h5>Apellido:</h5>
+                 <p>`+user.user.lastName+`</p>
+           </div>
+           <div class="col col4">
+                <h5>Sede:</h5>
+                <p>`+user.venueName+`</p>
+                       
+           </div> 
+           
+        <div class="row">
+            <div class="col">
+               <a class="btn delete">Delete</a>
+           </div>
+       </div>
+        `,
+        html:true
+       });   
+    
+    }
+}
 
+
+
+
+const getUserByParam = async()=>{
+
+    let filterdata = checkFilter();
+    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO);
+    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO);
+    let data = await response.json();
+    cardsC.innerHTML = "";
     
     for(let i in data){
         let user = data[i];     
@@ -71,64 +105,96 @@ const getUserByParam = async()=>{
          //let view = taskView.render();
         
        cardsC.appendChild(view);
+
+       $('[data-bs-toggle="popover"]').popover({
+        content:
+        `<div id="detailContainer">
+        
+        <div class="row">
+           <div class="col col1">
+                <h5>Id:</h5>
+                <p>`+user.user.id+`</p>
+           </div>
+           <div class="col col2">
+                <h5>Nombre:</h5>
+                <p>`+user.user.name+`</p>
+            </div>
+        </div>
+       <div id="row" class="row">
+           <div class="col col3">
+                <h5>Apellido:</h5>
+                <p>`+user.user.lastName+`</p>
+           </div>
+           <div class="col col4">
+                <h5>Sede:</h5>
+                 <p>`+user.venueName+`</p>
+               
+           </div>    
+           
+        <div class="row">
+            <div class="col">
+              <a class="btn delete">Delete</a>
+             </div>
+      </div>
+        `,
+        html:true
+       });   
+    
         
     }
 
 }
+const checkFilter = ()=>{
 
+    let ln ="";
+    let n = ""
+    let vid = "";
+    let nid = "";
 
-const checkFilterV = ()=>{
+      if(userN.value == ""){
 
-    let values = "";
+         n = "null";
 
-    if(!userN.value==""){
+      }else{
+        n = userN.value;
+      }
 
-       values += userN.value+","
-    }
-
-    if(!lastname.value==""){
-       values += lastname.value+","
-    }
-    if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
-        let str =select.options[select.selectedIndex].text;
-        let id = getVenueId(str);
-       values += id+","
-    }
-    if(!id.value==""){
-       values += id.value+",";
-    }
-     return values;
-}
-
-const checkFilterP = ()=>{
-    let properties = "";
+      if(lastname.value ==""){
     
-    if(!userN.value==""){
-       properties+="name,"
-    }
-    if(!lastname.value==""){
-       properties+="lastName,"
-    }
-    if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
-       properties+="venuesBuddyID,"
-    }
-    if(!id.value==""){
+         ln = "null"; 
+      }else{
+         ln= lastname.value;
+      }
+      if(id.value == ""){
+
+           nid = "null";
+      }else{
+          nid = id.value;
+      }
  
-       properties+="id,"
+    if(select.options[select.selectedIndex].text=="Seleccionar Sede"){
+          vid = "null";
+    }else{
+
+        vid = getVenueId(select.options[select.selectedIndex].text);
     }
 
-    return properties;
+    let obj = {
+           
+           idO: nid,
+           nameO : n,
+           lastnameO: ln,
+           venueO: vid
+    };
 
+    return obj
 }
-
-
 const clearFields = async()=>{
     userN.value = "";
     lastname.value = "";
     id.value = "";
     select.value = "Seleccionar Sede";
    
-
 }
 
 filterbtn.addEventListener("click", (event)=>{
@@ -144,7 +210,7 @@ cancelbtn.addEventListener("click",(event)=>{
     event.preventDefault();
     clearFields();
 })
-
-clearFields();
-
 getAllUsers();
+getVenues();
+
+

@@ -5,7 +5,9 @@ public class UserCard {
     private String venueName;
     private String cityName;
 
-    public UserCard() {}
+    public UserCard() {
+
+    }
 
     public UserCard(User user, String venueName, String cityName) {
         this.user = user;

@@ -38,16 +38,16 @@ public class ClientProvider {
     }
     public void insert(Client client) throws SQLException {
         MySQL db = SQLAdmin.getInstance().addConnection();
-        String sql = "INSERT INTO clientsBuddy (natID, name, lastName, age,weight,height, clientStatusBuddyID, memberShipBuddyID )";
-        sql += " VALUES ('$natId', '$name','$lastName', $age,$weight,$height, $clientStatusBuddyID, $memberShipBuddyID )";
+        String sql = "INSERT INTO clientsBuddy (natID, name, lastName, age,weight,height, clientStatusBuddyID, memberShipBuddyID)" +
+                "VALUES ('$natId', '$name','$lastName', $age, $weight, $height, $clientStatusBuddyID, $memberShipBuddyID )";
         sql = sql.replace("$natId", client.getNatId());
         sql = sql.replace("$name", client.getName());
         sql = sql.replace("$lastName", client.getLastname());
-        sql = sql.replace("$age", ""+client.getAge());
-        sql = sql.replace("$weight", ""+client.getWeight());
-        sql = sql.replace("$height", ""+client.getHeight());
-        sql = sql.replace("$clientStatusBuddyID", client.getStatusID() + "");
-        sql = sql.replace("$memberShipBuddyID", client.getMembershipID() + "");
+        sql = sql.replace("$age", client.getAge()+"");
+        sql = sql.replace("$weight", client.getWeight()+"");
+        sql = sql.replace("$height", client.getHeight()+"");
+        sql = sql.replace("$clientStatusBuddyID", client.getStatusID()+"");
+        sql = sql.replace("$memberShipBuddyID", client.getMembershipID()+"");
 
 
         db.connection();
@@ -139,5 +139,51 @@ public class ClientProvider {
         db.close();
         return cards;
     }
+
+    public ArrayList<Card> filter(String natID, String name, String lastName, String age, String plan, String status) throws SQLException {
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        ArrayList<Card> cards = new ArrayList<>();
+        db.connection();
+        String sql = "SELECT c.*, p.name, m.endDate, cs.status FROM plansBuddy p, clientsBuddy c, memberShipBuddy m, clientStatusBuddy cs WHERE c.memberShipBuddyID=m.id AND m.plansBuddyID=p.id AND c.clientStatusBuddyID=cs.id";
+        if(!natID.isEmpty()){
+            sql += "AND c.natID = '"+natID+"'";
+        }
+        if(!name.isEmpty()){
+            sql += "AND c.name = '"+name+"'";
+        }
+        if(!lastName.isEmpty()){
+            sql += "AND c.lastName = '"+lastName+"'";
+        }
+        if(!age.isEmpty()){
+            int ageint = Integer.parseInt(age);
+            sql += "AND c.age = "+ageint+"";
+        }
+        if(!plan.isEmpty()){
+            sql += "AND p.name = '"+plan+"'";
+        }
+        if(!status.isEmpty()){
+            sql += "AND cs.status = '"+status+"'";
+        }
+
+        ResultSet results = db.getDataMySQL(sql);
+        while(results.next()){
+            int id = results.getInt(results.findColumn("id"));
+            String natId = results.getString(results.findColumn("natID"));
+            String nameResult = results.getString(3);
+            String lastNameResult = results.getString(results.findColumn("lastName"));
+            int ageResult = results.getInt(results.findColumn("age"));
+            double weight = results.getFloat(results.findColumn("weight"));
+            double height = results.getFloat(results.findColumn("height"));
+            int statusID = results.getInt(results.findColumn("clientStatusBuddyID"));
+            int membershipID = results.getInt(results.findColumn("memberShipBuddyID"));
+            String planName = results.getString(10);
+            Date date = results.getDate(results.findColumn("endDate"));
+            String statusResult = results.getString(results.findColumn("status"));
+            Client client = new Client(natId, id, ageResult, nameResult, lastNameResult, weight, height, statusID, membershipID);
+            cards.add(new Card(client, date, planName, statusResult));
+        }
+        db.close();
+        return cards;
+        }
 
 }

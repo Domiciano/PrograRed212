@@ -4,15 +4,11 @@
     background-color: rgb(255, 255, 255);
     width: 70%;
     height: 80%;
-    padding-top: 50px;
-    padding-left: 15px;
-    padding-right: 15px;
     box-shadow: 0px 0px 15px 2px #b4afaf;
     border-radius:10px;  
     display: flex;
     flex-direction: row;
-    padding: 30px;
-    
+    padding: 20px; 
    
 }
 
@@ -20,14 +16,13 @@
     
     
     width: 40%;
+    height: 100%;
     overflow-y: scroll;
     padding: 20px;
-    background-color: rgb(255, 6, 6);
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-  
     
     
 }
@@ -47,33 +42,18 @@
 display: flex;
 flex-direction: row;
 align-items: center;
+column-gap: 40px;
  background-color: #1198e1;
- width: 70%;
- margin-bottom: 15px;
- padding-left: 20px;
- height: 80%;
-  /*
-    height: 20%;
-    width: 90%;
-    display: flex;
-    flex-direction:column;
-    margin:30px;
-    margin-bottom: 10px;
-    padding:10px;
-    padding-top:20px;
-    border-radius:10px;   
-    background-color: rgb(255, 255, 255);
-    text-justify: auto;
-    text-align: center;
-    line-height: 1.6;
-    position:relative;
-    border-radius: 20px;
-    box-shadow: 0px 0px 15px 2px #dadada;
-    -moz-transition: all 0.3s ease;
-	  transition: all 0.3s ease;
-    cursor: pointer;
-
-    */
+ width: 80%;
+ margin:10px;
+ padding: 20px;
+ min-height: 20%;
+ background-color: rgb(255, 255, 255);
+ box-shadow: 0px 0px 15px 2px #dadada;
+ -moz-transition: all 0.3s ease;
+ transition: all 0.3s ease;
+ cursor: pointer;
+ border-radius: 20px;
     
 }
 
@@ -82,25 +62,36 @@ align-items: center;
     transform: scale(1.1);
     box-shadow: 20px 15px rgba(0, 0, 0, 0.15);
 }
-/*
 
-.subtext{
-
-    color: #b4afaf;
-    font-size: 20%;
-   
-    
-}
 .name{
-
-    font-weight: bold;
-    font-size: 20%;
-    
-   
+  font-weight: bold;
 }
-*/
+.text{
 
-.maincontent{
+  color: #858181;
+
+}
+.label{
+  margin-right: 3px;
+}
+
+.staffview .cardelement .dicon {
+
+    
+  font-size: 50px;
+  
+  color:rgb(204, 198, 198); 
+-webkit-text-stroke:1px rgb(0, 0, 0);
+  
+}
+
+  .info {
+
+    font-size: 65%;
+    width:50%;
+ }
+
+ .maincontent{
  
   display: flex;
   flex-direction: column;
@@ -108,92 +99,6 @@ align-items: center;
  
 }
 
-
-
-
-
-.staffview .icons i{
-
-    
-    font-size: 30px;
-    
-    color:rgb(78, 78, 78); 
-    -webkit-text-stroke:2px rgb(0, 0, 0);
-    
-}
-
-
-/*
-.staffview .icons .hicon {
-    transition: opacity 0.3s, transform 0.3s;
-    transform: rotate(-180deg) scale(0.5);
-    opacity: 0;
-  }
-
-.staffview:hover .hicon {
-    transform: rotate(0deg) scale(1);
-    opacity: 1;
-  }
-
-.staffview:hover .dicon {
-    transform: rotate(180deg) scale(0.5);
-    opacity: 0;
-  }
-
-  */
-
-  .text{
-
-    margin-right: 5%;
-    font-size: 10px;
-    
-   
-  }
-
-  /*
-  .detail{
-
-  
-
-    
-    background-color: rgb(255, 255, 255);
-    border: none;
-    width: 20%;
-    padding-right:20px;
-    position: absolute;
-    right: 20px;
-    bottom: 50px;
-    height: 15%;
-    
-
-  }
-
-  .detail i{
-
-    
-    position: absolute;
-    right: 28px;
-    bottom: 5px;
-    color: dodgerblue;
-    
-
-    
-  }
-
-  .detail h4{
-
-   
-    right: 35px;
-    bottom: 0px;
-    position: absolute;
-    color: dodgerblue;
-    font-size: 12px;
-    width: 80%;
-
-
- 
-  }
-  */
     
     /*Alinear input con labels*/
    div.settings {
@@ -320,9 +225,113 @@ align-items: center;
   border-radius: 10px;
 }
 
+ .detaildiv button{
+
+  width: 80%;
+  height: 40%;
+  font-size: 70%;
+  color: #1a73e7;
+  font-weight: bold;
+  border: none;
+  background-color: #ffffff;
  
+}
+
+ .detaildiv{
+
+  width: 60%;
+  
+  
+ }
+ #par{
+
+  background-color: #45d581;
+ }
+
+ #detailContainer{
+
+  width: 90%;
+  height:300px;
+  padding-top: 30px;
+  margin: 20px;
 
  
+ }
+
+ #detailContainer h5{
+
+
+  color: rgb(153, 153, 153);
+  font-weight:700;
+  font-size: 20px;
+
+ }
+
+ #detailContainer p{
+
+  color: rgb(179, 179, 179);
+  font-weight:500;
+  font-size: 18px;
+
+ }
+ #detailContainer .row .col2{
+
+  margin-left: 10px;
+ }
+ #detailContainer .row .col4{
+
+  margin-left: 10px;
+  margin-top: 30px;
+ }
+ #detailContainer .row .col3{
+
+  margin-top: 30px;
+ }
+
+
+ .popover{
+
+  background-color: rgb(255, 255, 255);
+ box-shadow: 0px 0px 15px 2px #dadada;
+ border: 2px;
+ border-radius: 20px;
+ }
+ .popover title{
+
+  
+  background-color: #ffffff;
+ }
+
+ .popover-header{
+  border-radius: 20px;
+   background-color: #ffffff;
+   border: none;
+ }
+ .popover-arrow{
+   
+  border-radius: 20px;
+ 
+ }
+
+ .row2{
+
+  margin-top: 40px;
+ }
+
+ .delete{
+  border-width: 5px;
+  border-color: rgb(192, 53, 53);
+  color: rgb(192, 53, 53);
+  font-weight: bold;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.delete:hover{
+  color: rgb(255, 0, 0);
+  border-color: red;
+}
 
 
 

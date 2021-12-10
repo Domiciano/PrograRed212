@@ -16,11 +16,12 @@ const modalBody = document.getElementById("loginModalBody");
 
 
 const login = async ()=>{
-    modalBody.innerHTML = "";
+   // modalBody.innerHTML = "";
+/*
     //Al darle login que me mande a tal página, se debe guardar
     //el cliente en localstorage
     if(userIdTF.value.length !== 0){
-        let searching = await fetch("http://localhost:8080/backend/api/cls/searchclient/"+userIdTF.value); 
+        let searching = await fetch("http://localhost:8080/backend/api/cls/cardInfo/"+userIdTF.value); 
 
         let data = await searching.json();
         console.log(data);
@@ -45,16 +46,13 @@ const login = async ()=>{
 
                 let clientFound = data[0];
                 //Revisar que esté afuera
-                if(clientFound.statusID === 3){
-                    
-                    let validateMemberships = await fetch("http://localhost:8080/backend/api/ms/searchmembership/"+clientFound.membershipID);
-                    let usermemship = await validateMemberships.json();
-                    console.log(usermemship);
+                if(clientFound.client.statusID === 3){
+
                     let memberEndDate;
-                    for(let i in usermemship){
-                        memberEndDate = usermemship[i].endDate;
-                        actualMembership = usermemship[i];    
-                    }
+                    //for(let i in usermemship){
+                        memberEndDate = clientFound.memEndDate;
+                        //actualMembership = usermemship[i];    
+                    //}
                     
                     console.log(evaluateDateAccess(memberEndDate));
                     if(evaluateDateAccess(memberEndDate)){
@@ -70,9 +68,9 @@ const login = async ()=>{
                     
                                     let html = `<div class="row">
                                     <div class="column">
-                                      <h5> ${clientFound.name} ${clientFound.lastname}</h5>
-                                      <p class="mb-0"> Plan Type</p>
-                                      <p class="mb-0"> Days Left: ${days}</p>
+                                      <h5> ${clientFound.client.name} ${clientFound.client.lastname}</h5>
+                                      <p class="mb-0"> Tipo de plan: ${clientFound.planName}</p>
+                                      <p class="mb-0"> Dias restantes: ${days}</p>
                                       <small> Success</small>
                                     </div>
                                     <div id="colcheck" class="column">
@@ -88,7 +86,7 @@ const login = async ()=>{
             
                                   let html = `<div class="row">
                                   <div class="column">
-                                    <h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                                    <h5> ${clientFound.client.name} ${clientFound.client.lastname} </h5>
                                     <p class="mb-0">No se pudo cambiar el estado de ingreso en la base de datos</p>
                                   </div>
                                   <div id="colerr" class="column">
@@ -103,16 +101,16 @@ const login = async ()=>{
                                 }
                             }
                         });
-                    xhr.open('PUT', 'http://localhost:8080/backend/api/cls/editclientstatusbyid/'+clientFound.natId+'/'+2);
+                    xhr.open('PUT', 'http://localhost:8080/backend/api/cls/editclientstatusbyid/'+clientFound.client.natId+'/'+2);
                     xhr.send();
                     } else {
                         //alert("La membresía ha expirado, porfavor contacte a un staff para renovarla");
                        let days = daysLeft(memberEndDate);
                        let html = `<div class="row">
                        <div class="column">
-                         <h5> ${clientFound.name} ${clientFound.lastname} </h5>
-                         <p class="mb-0"> Plan Type</p>
-                         <p class="mb-0"> Days Left: ${days}</p>
+                         <h5> ${clientFound.client.name} ${clientFound.client.lastname} </h5>
+                         <p class="mb-0"> Tipo de plan: ${clientFound.planName}</p>
+                         <p class="mb-0"> Dias restantes: ${days}</p>
                          <small>La membresía ha expirado, porfavor contacte a un staff para renovarla</small>
                        </div>
                        <div id="colwar" class="column">
@@ -127,11 +125,11 @@ const login = async ()=>{
 
                     }
 
-                }  else if(clientFound.statusID === 2){
+                }  else if(clientFound.client.statusID === 2){
 
                   let html = `<div class="row">
                   <div class="column">
-                    <h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                    <h5> ${clientFound.client.name} ${clientFound.client.lastname} </h5>
                     <p class="mb-0">Membresía en uso acutalmente, no puede ingresar con la misma identidad</p>
                   </div>
                   <div id="colerr" class="column">
@@ -144,12 +142,12 @@ const login = async ()=>{
                  modalBody.innerHTML = html;    
                  myModal.show();
 
-                } else if(clientFound.statusID === 1){
+                } else if(clientFound.client.statusID === 1){
                     //La persona se encuentra bloqueada en su totalidad
 
                     let html = `<div class="row">
                     <div class="column">
-                      <h5> ${clientFound.name} ${clientFound.lastname} </h5>
+                      <h5> ${clientFound.client.name} ${clientFound.client.lastname} </h5>
                       <p class="mb-0"> Cliente bloqueado permanentemente</p>
                     </div>
                     <div id="colerr" class="column">
@@ -176,10 +174,10 @@ const login = async ()=>{
         </h1>
       </div>
     </div>`
-
-    modalBody.innerHTML = html;        
+*/
+   // modalBody.innerHTML = html;        
     myModal.show();
-    }
+    //}
 
 };
 

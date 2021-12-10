@@ -30,19 +30,24 @@ public class PlanProvider {
         return respuesta;
     }
 
-    public ArrayList<String> getActivePlans() throws SQLException {
-        ArrayList<String> nombres = new ArrayList<>();
+    public ArrayList<Plan> getActivePlans() throws SQLException {
+        ArrayList<Plan> plans = new ArrayList<>();
 
-        String sql = "SELECT name FROM plansBuddy WHERE active = 1";
+        String sql = "SELECT * FROM plansBuddy WHERE active = 1";
         MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
-            String name = results.getString(1);
-            nombres.add(name);
+            int id = results.getInt(1);
+            String name = results.getString(2);
+            double amount = results.getDouble(3);
+            int time = results.getInt(4);
+            boolean active = results.getBoolean(5);
+            Plan plan = new Plan(id, name, amount, time, active);
+            plans.add(plan);
         }
         db.close();
-        return nombres;
+        return plans;
     }
 
     public void insert(Plan plan) throws SQLException {

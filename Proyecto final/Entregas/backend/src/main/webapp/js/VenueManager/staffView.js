@@ -3,8 +3,7 @@ class staffView{
     
     //State
     constructor(user){
-        this.user = user;
-        
+        this.user = user;   
         //Object.seal(this);
     }
 
@@ -12,6 +11,7 @@ class staffView{
     
  
     render = ()=>{
+
         //Construir un elemento visual
         let component = document.createElement("div");
               //<div></div>
@@ -25,31 +25,27 @@ class staffView{
         lastname.classList.add("cardelement");
         let venuesBuddyID = document.createElement("div")
         venuesBuddyID.classList.add("cardelement");  
-        let roleBuddyID = document.createElement("div");
-        roleBuddyID.classList.add("cardelement");
         let iconsdiv = document.createElement("div");
         iconsdiv.classList.add("cardelement");
-        let detailbtn = document.createElement("a");
-        detailbtn.classList.add("cardelement");
-        let showDetail = document.createElement("div");
+        let detaildiv = document.createElement("div");
+        
+        //detaildiv.classList.add("cardelement");
+        detaildiv.classList.add("detaildiv");
+        
+
         iconsdiv.innerHTML = 
         '<i class="fas fa-user-circle dicon"></i>';
-        detailbtn.innerHTML= 
-        '<h4>Ver detalle</h4>'+
-        '<i class="fas fa-chevron-right"></i>';
-        detailbtn.classList.add("detail");
-        detailbtn.id ="detail"
-        id.innerHTML = '<label class="text label">Id:</label>'+'<label class="text">'+this.user.id+'</label>';
-        nameV.innerHTML =  '<label class="name label">Nombre:</label>'+'<label class="name">'+this.user.name+'</label>';
-        lastname.innerHTML = '<label class="text label">Apellido:</label>'+'<label class="text">'+this.user.lastName+'</label>';
 
+        id.innerHTML = '<label class="text label">Id:</label>'+'<label class="text">'+this.user.user.id+'</label>';
+        nameV.innerHTML =  '<label class="name label">Nombre:</label>'+'<label class="name">'+this.user.user.name+'</label>';
+        lastname.innerHTML = '<label class="text label">Apellido:</label>'+'<label class="text">'+this.user.user.lastName+'</label>';
+        
+        detaildiv.innerHTML= `<button id ="show" data-bs-placement="left" type="button" data-bs-toggle="popover" title="">Ver Detalles<i class="fas fa-chevron-right"></i></button>`; 
 
-         
        // id.innerHTML = this.user.id;
         //nameV.innerHTML = this.user.name;
         //lastname.innerHTML = this.user.lastName;
-        venuesBuddyID.innerHTML = this.user.venuesBuddyID;
-        roleBuddyID.innerHTML = this.user.roleBuddyID;
+        venuesBuddyID.innerHTML = this.user.venueName;
 
          //Agregar info tarjeta
 
@@ -60,10 +56,11 @@ class staffView{
                      //Agregar al componente principal 
         component.appendChild(iconsdiv);
         component.appendChild(infodiv);
-        component.appendChild(detailbtn);
+        component.appendChild(detaildiv);
         
         component.classList.add("staffview"); //<div class="userview">  ....  </div>
-    
+
+       
  
         return component;
     }
