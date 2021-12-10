@@ -185,4 +185,18 @@ public class UserServices {
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
     }
+
+    @GET
+    @Path("managers/{property}-{value}")
+    @Produces("application/json")
+    public Response getFilteredManagerList(@PathParam("property") String property, @PathParam("value") String value){
+        try {
+            ArrayList<User> res = provider.getData(property, value,2);
+            return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
+        } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
+            e.printStackTrace();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
+        }
+    }
 }

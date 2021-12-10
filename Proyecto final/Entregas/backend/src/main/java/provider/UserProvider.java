@@ -178,5 +178,33 @@ public class UserProvider {
             return temp;
 
         }
-
+    public ArrayList<UserCard> getVenueManagerCardInfo() throws SQLException {
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        ArrayList<UserCard> cards = new ArrayList<>();
+        db.connection();
+        String sql= "SELECT u.*,v.name,c.name FROM usersBuddy u, venuesBuddy v, cityBuddy c, roleBuddy r WHERE r.id=2 AND r.id=u.roleBuddyID AND c.id=v.cityBuddyID AND u.venuesBuddyID=v.id";
+        ResultSet results = db.getDataMySQL(sql);
+        while(results.next()){
+            int id = results.getInt(1);
+            String name = results.getString(2);
+            String lastName = results.getString(3);
+            String pwd = results.getString(4);
+            int venuesBuddyID = results.getInt(5);
+            int roleBuddyID = results.getInt(6);
+            String venueName = results.getString(7);
+            String cityName = results.getString(8);
+            User user = new User(id, name, lastName, pwd, venuesBuddyID, roleBuddyID);
+            cards.add(new UserCard(user, venueName, cityName));
+        }
+        db.close();
+        return cards;
     }
+    public ArrayList<User> getData(String property, String value, int role) throws SQLException {
+        ArrayList<User> res= getData(property, value);
+        for (User user:res) {
+            if (user.getRoleBuddyID()!=role)
+                res.remove(user);
+        }
+        return res;
+    }
+}
