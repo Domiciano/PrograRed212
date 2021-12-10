@@ -1,4 +1,5 @@
 const loginBtn = document.getElementById("loginBtn");
+const exitBtn = document.getElementById("exitBtn");
 const userIdTF = document.getElementById("userIdTF");
 const oneBtn = document.getElementById("oneBtn");
 const twoBtn = document.getElementById("twoBtn"); 
@@ -16,8 +17,8 @@ const modalBody = document.getElementById("loginModalBody");
 
 
 const login = async ()=>{
-   // modalBody.innerHTML = "";
-/*
+   modalBody.innerHTML = "";
+
     //Al darle login que me mande a tal página, se debe guardar
     //el cliente en localstorage
     if(userIdTF.value.length !== 0){
@@ -48,11 +49,8 @@ const login = async ()=>{
                 //Revisar que esté afuera
                 if(clientFound.client.statusID === 3){
 
-                    let memberEndDate;
-                    //for(let i in usermemship){
-                        memberEndDate = clientFound.memEndDate;
-                        //actualMembership = usermemship[i];    
-                    //}
+                    let memberEndDate = clientFound.memEndDate;
+ 
                     
                     console.log(evaluateDateAccess(memberEndDate));
                     if(evaluateDateAccess(memberEndDate)){
@@ -71,7 +69,7 @@ const login = async ()=>{
                                       <h5> ${clientFound.client.name} ${clientFound.client.lastname}</h5>
                                       <p class="mb-0"> Tipo de plan: ${clientFound.planName}</p>
                                       <p class="mb-0"> Dias restantes: ${days}</p>
-                                      <small> Success</small>
+                                      <small> Ingreso exitoso </small>
                                     </div>
                                     <div id="colcheck" class="column">
                                       <h1 class="h1check">
@@ -118,9 +116,14 @@ const login = async ()=>{
                            <i id="warningModal" class="fas fa-exclamation-triangle fa-5x"></i>
                          </h1>
                        </div>
-                     </div>`
+                     </div>
+                     <div class="columnBtn mb-0">
+                     <button id="renovar" onclick="location.href='staffRenovateClientMembership.html';" class="btnRenovar rounded fs-6">Renovar</button>
+                   </div>`
 
-                      modalBody.innerHTML = html;    
+                      localStorage.removeItem('clientToRenovate');
+                      localStorage.setItem('clientToRenovate', JSON.stringify(clientFound.client));
+                      modalBody.innerHTML = html;  
                       myModal.show();
 
                     }
@@ -161,7 +164,7 @@ const login = async ()=>{
                   myModal.show();
                 }     
             }
-       // location.href = "dashboard.html";
+       
     } else {
       let html = `<div class="row">
       <div class="column">
@@ -174,16 +177,187 @@ const login = async ()=>{
         </h1>
       </div>
     </div>`
-*/
-   // modalBody.innerHTML = html;        
+
+    modalBody.innerHTML = html;        
     myModal.show();
-    //}
+    }
+
+};
+
+const exit = async ()=>{
+  modalBody.innerHTML = "";
+
+    //Al darle login que me mande a tal página, se debe guardar
+    //el cliente en localstorage
+    if(userIdTF.value.length !== 0){
+        let searching = await fetch("http://localhost:8080/backend/api/cls/cardInfo/"+userIdTF.value); 
+
+        let data = await searching.json();
+        console.log(data);
+        if(data.length === 0){
+
+          let html = `<div class="row">
+          <div class="column">
+            <h5> Error </h5>
+            <p class="mb-0"> El cliente con ID: ${userIdTF.value} no está registrado</p>
+          </div>
+          <div id="colerr" class="column">
+            <h1 class="h1err">
+            <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+            </h1>
+          </div>
+        </div>`
+
+        modalBody.innerHTML = html; 
+            myModal.show();
+
+        } else {
+
+                let clientFound = data[0];
+                //Revisar que esté adentro
+                if(clientFound.client.statusID === 2){
+
+                    let memberEndDate = clientFound.memEndDate;
+ 
+                    
+                    console.log(evaluateDateAccess(memberEndDate));
+                    if(evaluateDateAccess(memberEndDate)){
+                        //Poner el cliente con el statusID de 3
+
+                        let xhr = new XMLHttpRequest();
+                        xhr.addEventListener('readystatechange', ()=>{
+                            if(xhr.readyState == 4){
+                                var response = JSON.parse(xhr.responseText);
+                                console.log(response.message);
+                                if(response.message == 'Estado del cliente ha sido cambiado'){
+                                    let days = daysLeft(memberEndDate);
+                    
+                                    let html = `<div class="row">
+                                    <div class="column">
+                                      <h5> ${clientFound.client.name} ${clientFound.client.lastname}</h5>
+                                      <p class="mb-0"> Tipo de plan: ${clientFound.planName}</p>
+                                      <p class="mb-0"> Dias restantes: ${days}</p>
+                                      <small> Salida exitosa </small>
+                                    </div>
+                                    <div id="colcheck" class="column">
+                                      <h1 class="h1check">
+                                        <i id="checkModal" class="fas fa-check fa-5x"></i>
+                                      </h1>
+                                    </div>
+                                  </div>`
+
+                                    modalBody.innerHTML = html;
+                                    myModal.show();
+                                } else {
+            
+                                  let html = `<div class="row">
+                                  <div class="column">
+                                    <h5> ${clientFound.client.name} ${clientFound.client.lastname} </h5>
+                                    <p class="mb-0">No se pudo cambiar el estado de salida en la base de datos</p>
+                                  </div>
+                                  <div id="colerr" class="column">
+                                    <h1 class="h1err">
+                                    <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+                                    </h1>
+                                  </div>
+                                </div>`
+           
+                                 modalBody.innerHTML = html;    
+                                 myModal.show();
+                                }
+                            }
+                        });
+                    xhr.open('PUT', 'http://localhost:8080/backend/api/cls/editclientstatusbyid/'+clientFound.client.natId+'/'+3);
+                    xhr.send();
+                    } else {
+                        //alert("La membresía ha expirado, porfavor contacte a un staff para renovarla");
+                       let days = daysLeft(memberEndDate);
+                       let html = `<div class="row">
+                       <div class="column">
+                         <h5> ${clientFound.client.name} ${clientFound.client.lastname} </h5>
+                         <p class="mb-0"> Tipo de plan: ${clientFound.planName}</p>
+                         <p class="mb-0"> Dias restantes: ${days}</p>
+                         <small>La membresía ha expirado, porfavor contacte a un staff para renovarla</small>
+                       </div>
+                       <div id="colwar" class="column">
+                         <h1 class="h1war">
+                           <i id="warningModal" class="fas fa-exclamation-triangle fa-5x"></i>
+                         </h1>
+                       </div>
+                     </div>
+                     <div class="columnBtn mb-0">
+                     <button id="renovar" onclick="location.href='staffRenovateClientMembership.html';" class="btnRenovar rounded fs-6">Renovar</button>
+                   </div>`
+
+                      modalBody.innerHTML = html;    
+                      myModal.show();
+
+                    }
+
+                }  else if(clientFound.client.statusID === 3){
+
+                  let html = `<div class="row">
+                  <div class="column">
+                    <h5> ${clientFound.client.name} ${clientFound.client.lastname} </h5>
+                    <p class="mb-0">La identificación no estaba en uso, no requiere salida</p>
+                  </div>
+                  <div id="colerr" class="column">
+                    <h1 class="h1err">
+                    <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+                    </h1>
+                  </div>
+                </div>`
+
+                 modalBody.innerHTML = html;    
+                 myModal.show();
+
+                } else if(clientFound.client.statusID === 1){
+                    //La persona se encuentra bloqueada en su totalidad
+
+                    let html = `<div class="row">
+                    <div class="column">
+                      <h5> ${clientFound.client.name} ${clientFound.client.lastname} </h5>
+                      <p class="mb-0"> Cliente bloqueado permanentemente</p>
+                    </div>
+                    <div id="colerr" class="column">
+                      <h1 class="h1err">
+                      <i id="errModal" class="fas fa-exclamation-circle fa-5x"></i>
+                      </h1>
+                    </div>
+                  </div>`
+
+                  modalBody.innerHTML = html;        
+                  myModal.show();
+                }     
+            }
+       
+    } else {
+      let html = `<div class="row">
+      <div class="column">
+        <h5> Error </h5>
+        <p class="mb-0">Ingrese un documento válido</p>
+      </div>
+      <div id="colwar" class="column">
+        <h1 class="h1war">
+          <i id="warningModal" class="fas fa-exclamation-triangle fa-5x"></i>
+        </h1>
+      </div>
+    </div>`
+
+    modalBody.innerHTML = html;        
+    myModal.show();
+    }
 
 };
 
 loginBtn.addEventListener("click", (event) =>{
     event.preventDefault();
     login();
+});
+
+exitBtn.addEventListener("click", (event) =>{
+  event.preventDefault();
+  exit();
 });
 
 zeroBtn.addEventListener("click", (event) =>{
@@ -231,6 +405,3 @@ clearBtn.addEventListener("click", (event) =>{
   userIdTF.value = "";
 }); 
   
-
-
-

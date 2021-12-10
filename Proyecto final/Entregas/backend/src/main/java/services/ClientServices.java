@@ -46,6 +46,17 @@ public class ClientServices {
     }
 
     @OPTIONS
+    @Path("editClient")
+    public Response optionsEditClient(Client client){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
+
+    @OPTIONS
     @Path("searchclient/{natID}")
     public Response optionsSearch(@PathParam("natID") String natID){
         return Response.status(200)
@@ -122,7 +133,7 @@ public class ClientServices {
     }
     @PUT
     @Path("editClient")
-    @Produces("application/json")
+    @Consumes("application/json")
     public Response edit(Client client) {
         try {
             ClientProvider provider = new ClientProvider();

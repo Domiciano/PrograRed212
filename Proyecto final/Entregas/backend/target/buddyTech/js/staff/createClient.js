@@ -193,17 +193,6 @@ const createClient = async () => {
        modalBody.innerHTML = html;    
        myModal.show();
     }
-    /*
-    let cerradas = await fetch("http://localhost:8080/backend/api/ms/close");
-    let closedCon = await cerradas.json();
-    console.log(closedCon);
-    let cerradasplan = await fetch("http://localhost:8080/backend/api/ps/close");
-    let closedplan = await cerradasplan.json();
-    console.log(closedplan);
-    let cerradasclient = await fetch("http://localhost:8080/backend/api/cls/close");
-    let closedclient = await cerradasclient.json();
-    console.log(closedclient);
-    */
 }
 
 const clearAll = () =>{

@@ -16,8 +16,8 @@ const modalBody = document.getElementById("loginModalBody");
 
 
 const login = async ()=>{
-   // modalBody.innerHTML = "";
-/*
+   modalBody.innerHTML = "";
+
     //Al darle login que me mande a tal página, se debe guardar
     //el cliente en localstorage
     if(userIdTF.value.length !== 0){
@@ -48,11 +48,8 @@ const login = async ()=>{
                 //Revisar que esté afuera
                 if(clientFound.client.statusID === 3){
 
-                    let memberEndDate;
-                    //for(let i in usermemship){
-                        memberEndDate = clientFound.memEndDate;
-                        //actualMembership = usermemship[i];    
-                    //}
+                    let memberEndDate = clientFound.memEndDate;
+ 
                     
                     console.log(evaluateDateAccess(memberEndDate));
                     if(evaluateDateAccess(memberEndDate)){
@@ -161,7 +158,7 @@ const login = async ()=>{
                   myModal.show();
                 }     
             }
-       // location.href = "dashboard.html";
+       
     } else {
       let html = `<div class="row">
       <div class="column">
@@ -174,10 +171,10 @@ const login = async ()=>{
         </h1>
       </div>
     </div>`
-*/
-   // modalBody.innerHTML = html;        
+
+    modalBody.innerHTML = html;        
     myModal.show();
-    //}
+    }
 
 };
 

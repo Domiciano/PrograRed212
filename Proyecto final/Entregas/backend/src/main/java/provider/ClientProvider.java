@@ -57,15 +57,15 @@ public class ClientProvider {
     public void edit(Client client) throws ClassNotFoundException, SQLException {
         MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
-        String sql = "UPDATE clientsBuddy SET name='$name', lastName='$lastName', age=$age,weight=$weight,height=$height, clientStatusBuddyID= $clientStatusBuddyID, memberShipBuddyID=$memberShipBuddyID WHERE natID='$natId'";
+        String sql = "UPDATE clientsBuddy SET name = '$name', lastName = '$lastName', age = $age, weight = $weight, height = $height, clientStatusBuddyID = $clientStatusBuddyID, memberShipBuddyID = $memberShipBuddyID WHERE natID = '$natId'";
         sql = sql.replace("$natId", client.getNatId());
         sql = sql.replace("$name", client.getName());
         sql = sql.replace("$lastName", client.getLastname());
-        sql = sql.replace("$age", ""+client.getAge());
-        sql = sql.replace("$weight", ""+client.getWeight());
-        sql = sql.replace("$height", ""+client.getHeight());
-        sql = sql.replace("$clientStatusBuddyID", client.getStatusID() + "");
-        sql = sql.replace("$memberShipBuddyID", client.getMembershipID() + "");
+        sql = sql.replace("$age", ""+client.getAge()+"");
+        sql = sql.replace("$weight", ""+client.getWeight()+"");
+        sql = sql.replace("$height", ""+client.getHeight()+"");
+        sql = sql.replace("$clientStatusBuddyID", client.getStatusID()+"");
+        sql = sql.replace("$memberShipBuddyID", client.getMembershipID()+"");
         db.comandSQL(sql);
         db.close();
     }
