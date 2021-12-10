@@ -34,18 +34,18 @@ public class UserProvider {
         sql += " AND roleBuddyID= 3 ";
         if (!natId.equalsIgnoreCase("null")) {
 
-            sql += " AND id = '" + natId + "'";
+            sql += " AND u.id = " + Integer.parseInt(natId);
         }
         if (!name.equalsIgnoreCase("null")) {
-            sql += " AND name = '" + name + "'";
+            sql += " AND u.name = '" + name + "'";
 
         }
         if (!lastName.equalsIgnoreCase("null")) {
-            sql += " AND lastName = '" + lastName + "'";
+            sql += " AND u.lastName = '" + lastName + "'";
 
         }
         if (!venuesBuddyID.equalsIgnoreCase("null")) {
-            sql += " AND venuesBuddyID =" + Integer.parseInt(venuesBuddyID);
+            sql += " AND u.venuesBuddyID =" + Integer.parseInt(venuesBuddyID);
         }
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
@@ -123,7 +123,7 @@ public class UserProvider {
 
         public String delete(int id) throws SQLException {
             String sql = "DELETE from usersBuddy" +
-                    "WHERE id=$id";
+                    " WHERE id=$id";
             sql = sql.replace("$id", id+"");
 
             db.connection();

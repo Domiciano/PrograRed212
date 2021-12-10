@@ -9,6 +9,14 @@ const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
 var venuesD;
 
+
+
+
+
+
+
+
+
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     let venues = await venuesNames.json();
@@ -22,6 +30,8 @@ const getVenues = async ()=>{
     
 }
 
+
+
 const getVenueId = (vname)=>{  
   
     for(let i in venuesD){
@@ -31,6 +41,15 @@ const getVenueId = (vname)=>{
         }       
     }
 
+}
+
+const deleteStaff = async (id)=>{
+    
+    //let obj = JSON.parse(json);
+
+    let response = await fetch("http://localhost:8080/backend/api/users/"+id)
+    let data = await response.json();
+        
 }
 
 const getAllUsers = async ()=>{
@@ -54,34 +73,48 @@ const getAllUsers = async ()=>{
         <div class="row">
            <div class="col col1">
                 <h5>Id:</h5>
-                <p>`+user.id+`</p>
+                <p>`+user.user.id+`</p>
            </div>
            <div class="col col2">
                 <h5>Nombre:</h5>
-                <p>`+user.name+`</p>
+                <p>`+user.user.name+`</p>
            
             </div>
         </div>
        <div class="row">
            <div class="col col3">
                 <h5>Apellido:</h5>
-                 <p>`+user.lastName+`</p>
+                 <p>`+user.user.lastName+`</p>
            </div>
            <div class="col col4">
                 <h5>Sede:</h5>
-                <p>Cali</p>
-          
-               
+                <p>`+user.venueName+`</p>
+                       
            </div> 
            
         <div class="row">
             <div class="col">
-               <a class="btn delete">Delete</a>
+               <a class="btn delete" id="btnDelete">Delete</a>
            </div>
        </div>
         `,
         html:true
-       });   
+       }).parent().delegate("click",'a#btnDelete',function() {
+
+        console.log("llegue XD");
+        deleteStaff(user.user.id);
+        getAllUsers();
+    });
+
+        /*list[0].addEventListener("click",(event)=>{
+            
+            console.log("llegue XD");
+            event.preventDefault();
+            deleteStaff(user.user.id);
+            getAllUsers();
+        });
+
+        */
     
     }
 }
@@ -114,34 +147,51 @@ const getUserByParam = async()=>{
         <div class="row">
            <div class="col col1">
                 <h5>Id:</h5>
-                <p>`+user.id+`</p>
+                <p>`+user.user.id+`</p>
            </div>
            <div class="col col2">
                 <h5>Nombre:</h5>
-                <p>`+user.name+`</p>
+                <p>`+user.user.name+`</p>
             </div>
         </div>
        <div id="row" class="row">
            <div class="col col3">
                 <h5>Apellido:</h5>
-                <p>`+user.lastName+`</p>
+                <p>`+user.user.lastName+`</p>
            </div>
            <div class="col col4">
                 <h5>Sede:</h5>
-                 <p>Cali</p>
+                 <p>`+user.venueName+`</p>
                
            </div>    
            
         <div class="row">
             <div class="col">
-              <a class="btn delete">Delete</a>
+              <a name ="btndelete" class="btn delete" id="btnDelete">Delete</a>
              </div>
       </div>
         `,
         html:true
-       });   
+       }).parent().delegate('a#btnDelete',"click",(event)=> {
+
+        event.preventDefault();
+        console.log("llegue XD");
+        deleteStaff(user.user.id);
+        getAllUsers();
+    });  
+       
+
     
-        
+    /*
+        list[0].addEventListener("click",(event)=>{
+            
+            console.log("llegue XD");
+            event.preventDefault();
+            deleteStaff(user.user.id);
+            getAllUsers();
+        });
+        */
+     
     }
 
 }
