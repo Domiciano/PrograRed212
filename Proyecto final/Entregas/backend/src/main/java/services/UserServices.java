@@ -42,11 +42,11 @@ public class UserServices {
     }
 
     @GET
-    @Path("{natId}-{name}-{lastName}-{venuesBuddyID}")
+    @Path("{natId}-{name}-{lastName}-{venuesBuddyID}-{role}")
     @Produces("application/json")
-    public Response getList(@PathParam("natId") String natId, @PathParam("name") String name,@PathParam("lastName") String lastName, @PathParam("venuesBuddyID") String venueBuddyID){
+    public Response getList(@PathParam("natId") String natId, @PathParam("name") String name,@PathParam("lastName") String lastName, @PathParam("venuesBuddyID") String venueBuddyID, @PathParam("role") String role){
         try {
-            ArrayList<UserCard> res = provider.getStaffCard(natId, name, lastName,venueBuddyID);
+            ArrayList<UserCard> res = provider.getUserCard(natId, name, lastName,venueBuddyID,role);
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
@@ -144,8 +144,8 @@ public class UserServices {
     }
 
     @OPTIONS
-    @Path("{natId}-{name}-{lastName}-{venuesBuddyID}")
-    public Response options(@PathParam("natId") String natId, @PathParam("name") String name,@PathParam("lastName") String lastName, @PathParam("venuesBuddyID") String venueBuddyID){
+    @Path("{natId}-{name}-{lastName}-{venuesBuddyID}-{role}")
+    public Response options(@PathParam("natId") String natId, @PathParam("name") String name,@PathParam("lastName") String lastName, @PathParam("venuesBuddyID") String venueBuddyID,@PathParam("role") String role){
         return Response.status(200)
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
@@ -183,5 +183,4 @@ public class UserServices {
                 .header("access-control-allow-headers", "*")
                 .build();
     }
-
 }
