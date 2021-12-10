@@ -10,6 +10,29 @@ import java.util.ArrayList;
 
 public class PlanProvider {
 
+    public ArrayList<Plan> getData() throws SQLException{
+        ArrayList<Plan> response = new ArrayList<>();
+        String sql = "SELECT * FROM plansBuddy";
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+        getResponseList(results, response);
+        db.close();
+
+        return response;
+    }
+
+    private void getResponseList(ResultSet results, ArrayList<Plan> list) throws SQLException{
+        while (results.next()){
+            int id = results.getInt(results.findColumn("id"));
+            String name = results.getString(results.findColumn("name"));
+            double amount = results.getDouble(results.findColumn("amount"));
+            int time = results.getInt(results.findColumn("time"));
+            boolean active = results.getBoolean(results.findColumn("active"));
+            Plan temp = new Plan(id, name, amount, time, active);
+            list.add(temp)
+        }
+    }
+
     public ArrayList<Plan> getAllPlans() throws SQLException {
         ArrayList<Plan> respuesta = new ArrayList<>();
 

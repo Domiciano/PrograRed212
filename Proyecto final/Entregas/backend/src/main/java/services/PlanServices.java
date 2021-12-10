@@ -26,6 +26,20 @@ public class PlanServices {
                 .build();
     }
 //
+    @GET
+    @Path("getData")
+    @Produces("application/json")
+    public Response getList(){
+        try{
+            PlanProvider provider = new PlanProvider();
+            ArrayList<Plan> res = provider.getData();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
+        }catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
+            e.printStackTrace();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
+        }
+    }
 
     @Path("getAll")
     @GET

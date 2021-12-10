@@ -10,14 +10,16 @@ const searchBtn = document.getElementById("sButton");
 
 const getCardInfo = async () => {
     
-    let response1 = await fetch("http://localhost:8080/backend/api/cls/getclients")
-    let clients = await response1.json();
-    for(let i in clients){
-        let client = clients[i];
-        let response2 = await fetch("http://localhost:8080/backend/api/cls/cardInfo/" + client.natId)
-        let cardsPlan = await response2.json();
-        let cardView = new Card(cardsPlan[0]);
-        cardView.render(cardsC);   
+    let response1 = await fetch("http://localhost:8080/backend/api/ps/getAll")
+    let data = await response1.json();
+    for(let i in data){
+        let plan = data[i];
+        let cardView = new cardsPlan(plan);
+        let view = cardView.render();
+        cardsC.appendChild(view);
+        $('[data-bs-toggle="popover"]').popover({
+
+        });
     }
 }
 
