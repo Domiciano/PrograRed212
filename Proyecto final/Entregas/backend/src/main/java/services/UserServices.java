@@ -191,7 +191,7 @@ public class UserServices {
     @Produces("application/json")
     public Response getFilteredManagerList(@PathParam("property") String property, @PathParam("value") String value){
         try {
-            ArrayList<User> res = provider.getData(property, value,2);
+            ArrayList<UserCard> res = provider.getData(property, value,2);
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();

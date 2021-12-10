@@ -11,13 +11,17 @@ const getCardInfo = async () => {
 
     let response1 = await fetch("http://localhost:8080/backend/api/users/cardInfo")
     let managerCards = await response1.json();
+    await fillCards(managerCards);
+    console.log("Rendering done")
+}
+const fillCards = async (managerCards) => {
+    subgerentesContainer.innerHTML = "";
     for(let i in managerCards) {
         let managerCard = managerCards[i];
-        //let response2 = await fetch("http://localhost:8080/backend/api/cls/cardInfo/" + client.natId)
+
         let cardView = new UserCard(managerCard);
         cardView.render(subgerentesContainer);
     }
-    console.log("Rendering done")
 }
 
 const getVenues = async ()=>{
@@ -52,22 +56,7 @@ const getUserByParam = async()=>{
     console.log("http://localhost:8080/backend/api/users/managers"+parameters+"-"+values);
     let response = await fetch("http://localhost:8080/backend/api/users/managers"+parameters+"-"+values);
     let data = await response.json();
-    subgerentesContainer.innerHTML = "";
-
-
-
-    for(let i in data){
-        let user = data[i];
-        let sfView = new staffView(user);
-        let view = sfView.render();
-
-
-        //let view = taskView.render();
-
-        subgerentesContainer.appendChild(view);
-
-    }
-
+    await fillCards(data);
 }
 
 
@@ -98,17 +87,17 @@ const checkFilterP = ()=>{
     let properties = "";
 
     if(!userN.value==""){
-        properties+="name,"
+        properties+="u.name,"
     }
     if(!lastname.value==""){
-        properties+="lastName,"
+        properties+="u.lastName,"
     }
     if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
-        properties+="venuesBuddyID,"
+        properties+="u.venuesBuddyID,"
     }
     if(!id.value==""){
 
-        properties+="id,"
+        properties+="u.id,"
     }
 
     return properties;
