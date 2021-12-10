@@ -66,4 +66,58 @@ class staffView{
         return component;
     }
 
+    check=(user)=>{
+
+        $('[data-bs-toggle="popover"]').popover({
+            content:
+            `<div id="detailContainer">
+            
+            <div class="row">
+               <div class="col col1">
+                    <h5>Id:</h5>
+                    <p>`+user.user.id+`</p>
+               </div>
+               <div class="col col2">
+                    <h5>Nombre:</h5>
+                    <p>`+user.user.name+`</p>
+               
+                </div>
+            </div>
+           <div class="row">
+               <div class="col col3">
+                    <h5>Apellido:</h5>
+                     <p>`+user.user.lastName+`</p>
+               </div>
+               <div class="col col4">
+                    <h5>Sede:</h5>
+                    <p>`+user.venueName+`</p>
+                           
+               </div> 
+               
+            <div class="row">
+                <div class="col">
+                   <a class="btn delete" id="btnDelete">Delete</a>
+               </div>
+           </div>
+            `,
+            html:true
+            });
+
+            $('[data-bs-toggle="popover"]').on('shown.bs.popover', function() {
+                // set what happens when user clicks on the button
+                $("#btnDelete").on('click', function(){
+                    alert("clicked!!!");
+                });
+            });
+            
+            // when popover's content is hidden
+            $('[data-bs-toggle="popover"]').on('hidden.bs.popover', function(){
+                // clear listeners
+                $("#btnDelete").off('click');
+            });
+          
+
+
+    }
+
 }

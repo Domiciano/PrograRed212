@@ -10,13 +10,6 @@ const cancelbtn = document.getElementById("cButton");
 var venuesD;
 
 
-
-
-
-
-
-
-
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     let venues = await venuesNames.json();
@@ -47,8 +40,13 @@ const deleteStaff = async (id)=>{
     
     //let obj = JSON.parse(json);
 
-    let response = await fetch("http://localhost:8080/backend/api/users/"+id)
-    let data = await response.json();
+    let response = await fetch("http://localhost:8080/backend/api/users/"+id,
+    {
+        method: "DELETE",      
+    }
+);
+
+
         
 }
 
@@ -66,6 +64,8 @@ const getAllUsers = async ()=>{
         let sfView = new staffView(user);
         let view = sfView.render();  
        cardsC.appendChild(view);
+
+       /*
        $('[data-bs-toggle="popover"]').popover({
         content:
         `<div id="detailContainer">
@@ -99,12 +99,12 @@ const getAllUsers = async ()=>{
        </div>
         `,
         html:true
-       }).parent().delegate("click",'a#btnDelete',function() {
 
-        console.log("llegue XD");
-        deleteStaff(user.user.id);
-        getAllUsers();
-    });
+
+       });
+       */
+
+     sfView.check(user);
 
         /*list[0].addEventListener("click",(event)=>{
             
@@ -118,8 +118,6 @@ const getAllUsers = async ()=>{
     
     }
 }
-
-
 
 
 const getUserByParam = async()=>{
@@ -166,23 +164,24 @@ const getUserByParam = async()=>{
            </div>    
            
         <div class="row">
-            <div class="col">
-              <a name ="btndelete" class="btn delete" id="btnDelete">Delete</a>
+            <div class="col double">
+              <a class="btn delete" id="btnDelete">Delete</a>
              </div>
       </div>
         `,
         html:true
-       }).parent().delegate('a#btnDelete',"click",(event)=> {
-
-        event.preventDefault();
+       });
+     
+      
+     /*  }).$('body').on('click','a#btnDelete',function(){
         console.log("llegue XD");
         deleteStaff(user.user.id);
         getAllUsers();
     });  
+
        
 
-    
-    /*
+
         list[0].addEventListener("click",(event)=>{
             
             console.log("llegue XD");
@@ -193,6 +192,8 @@ const getUserByParam = async()=>{
         */
      
     }
+
+    
 
 }
 const checkFilter = ()=>{
