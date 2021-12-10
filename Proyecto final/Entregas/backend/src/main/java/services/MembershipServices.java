@@ -20,12 +20,50 @@ public class MembershipServices {
     }
 
     @OPTIONS
-    @Path("addmembership")
-    public Response options(Membership membership){
+    @Path("close")
+    public Response optionsClose(){
         return Response.status(200)
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
+                .header("Connection", "close")
+                .build();
+    }
+
+
+    @GET
+    @Path("close")
+    public Response closeConnections(){
+        SQLAdmin.getInstance().closeAllConnections();
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Connection", "close")
+                .entity(new Message("Conexiones cerradas")).build();
+    }
+
+    @OPTIONS
+    @Path("addmembership")
+    public Response optionsadd(Membership membership){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Content-Type", "application/json")
+                .header("Connection", "close")
+                .build();
+    }
+
+    @OPTIONS
+    @Path("addmembershipnew")
+    public Response optionsAddNew(Membership membership){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Content-Type", "application/json")
+                .header("Connection", "close")
                 .build();
     }
 
@@ -50,6 +88,7 @@ public class MembershipServices {
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
+                    .header("Connection", "close")
                     .entity(new Message("membresia creada correctamente")).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
@@ -57,6 +96,32 @@ public class MembershipServices {
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
+                    .header("Connection", "close")
+                    .entity(new Message(e.getMessage())).build();
+        }
+    }
+
+    @POST
+    @Path("addmembershipnew")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response addMembershipNew(Membership membership){
+        try {
+            MembershipProvider provider = new MembershipProvider();
+            ArrayList<Membership> memberships = provider.newInsert(membership);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .header("Connection", "close")
+                    .entity(memberships).build();
+        } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .header("access-control-allow-methods", "*")
+                    .header("access-control-allow-headers", "*")
+                    .header("Connection", "close")
                     .entity(new Message(e.getMessage())).build();
         }
     }
@@ -68,7 +133,10 @@ public class MembershipServices {
         MembershipProvider provider = new MembershipProvider();
         try {
             ArrayList<Membership> memberships = provider.getData();
-            return Response.status(200).header("access-control-allow-origin", "*").entity(memberships).build();
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .header("Connection", "close")
+                    .entity(memberships).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();

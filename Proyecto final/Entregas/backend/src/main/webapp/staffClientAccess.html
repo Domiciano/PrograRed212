@@ -85,8 +85,23 @@
   <div class="modal-dialog modal-dialog-centered ">
     <div class="modal-content radiousxd border border-3">
       <div class="modal-body" id="loginModalBody">
-
+        <div class="row">
+          <div class="column">
+            <h5> ${clientFound.client.name} ${clientFound.client.lastname} </h5>
+            <p class="mb-0"> Tipo de plan: ${clientFound.planName}</p>
+            <p class="mb-0"> Dias restantes: ${days}</p>
+            <small>La membresía ha expirado, porfavor contacte a un staff para renovarla</small>
+          </div>
+          <div id="colwar" class="column">
+            <h1 class="h1war">
+              <i id="warningModal" class="fas fa-exclamation-triangle fa-5x"></i>
+            </h1>
+          </div>
+        </div>
       </div>
+        <div class="columnBtn mb-0">
+          <button id="renovar" class="btnRenovar rounded fs-6">Renovar</button>
+        </div>
     </div>
   </div>
 </div>

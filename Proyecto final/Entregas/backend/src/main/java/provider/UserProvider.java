@@ -6,8 +6,6 @@ import sql.SQLAdmin;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class UserProvider {
 
@@ -28,69 +26,36 @@ public class UserProvider {
 
         return respuesta;
     }
-
-    public ArrayList<User> getData(String property, String value) throws SQLException {
+    public ArrayList<User> getData(String natId, String name, String lastName, String venuesBuddyID) throws SQLException {
         ArrayList<User> respuesta = new ArrayList<>();
-        LinkedHashMap<String,String> values = getExpression(property,value);
-        String expression="";
-        String lastkey="";
-        String firstkey ="";
-        if (!values.isEmpty()) {
-            firstkey = values.keySet().iterator().next();
-            for (String key : values.keySet()) {
-                lastkey = key;
-            }
+
+        String sql = "SELECT * FROM usersBuddy WHERE ";
+        sql+= "roleBuddyID= 3 ";
+        if(!natId.equalsIgnoreCase("null")){
+
+            sql+= " AND id = '" +natId+"'";
         }
-            String lastVal = values.get(lastkey);
+        if(!name.equalsIgnoreCase("null")){
+            sql+= " AND name = '" +name+"'";
 
-            for (Map.Entry<String, String> entry : values.entrySet()) {
-                if(values.size()>1) {
-                    if(entry.getValue().equalsIgnoreCase(lastVal)){
-
-                        if (entry.getKey().equalsIgnoreCase("venuesBuddyID")) {
-                            expression += "$venuesBuddyID= $" + entry.getValue();
-                        } else {
-                            expression += "$" + entry.getKey() + "='$" + entry.getValue() + "'";}
-
-                    }else{
-                        if (entry.getKey().equalsIgnoreCase("venuesBuddyID")) {
-                            expression += "$venuesBuddyID= $" + Integer.parseInt(entry.getValue())+" AND ";
-                        } else {
-                            expression += "$" + entry.getKey() + "='$"+entry.getValue()+"' AND ";
-                        }
-                    }
-                }else{
-                    if (entry.getKey().equalsIgnoreCase("venuesBuddyID")) {
-                        expression += "$venuesBuddyID= $" + entry.getValue();
-                    } else {
-                        expression += "$" + entry.getKey() + "='$" + entry.getValue() + "'";
-                    }
-                }
-            }
-            String sql = "SELECT * FROM usersBuddy WHERE "+expression;
-
-            for (Map.Entry<String, String> entry : values.entrySet()) {
-
-                sql = sql.replace("$"+entry.getValue(),entry.getValue());
-                sql = sql.replace("$"+entry.getKey(), entry.getKey());
-            }
-            db.connection();
-            ResultSet results = db.getDataMySQL(sql);
-            getResponseList(results, respuesta);
-            db.close();
-
-            return respuesta;
         }
+        if(!lastName.equalsIgnoreCase("null")){
+            sql+= " AND lastName = '"+lastName+"'";
 
-    public LinkedHashMap<String,String> getExpression(String property, String value){
-            String[] newproperty = property.split(",");
-            String[] newvalue = value.split(",");
-            LinkedHashMap<String, String> m = new LinkedHashMap();
-            for(int i = 0; i<newproperty.length;i++){
-                    m.put(newproperty[i],newvalue[i]);
-            }
-            return m;
         }
+        if(!venuesBuddyID.equalsIgnoreCase("null")){
+            sql+= " AND venuesBuddyID ="+Integer.parseInt(venuesBuddyID);
+        }
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+        getResponseList(results, respuesta);
+        db.close();
+
+        return respuesta;
+    }
+
+
+
         private void getResponseList(ResultSet results, ArrayList<User> list ) throws SQLException {
             while (results.next()) {
                 int id = Integer.parseInt(results.getString(results.findColumn("id")));

@@ -9,23 +9,7 @@ const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
 var venuesD;
 
-const getAllUsers = async ()=>{
 
-
-    let response = await fetch("http://localhost:8080/backend/api/users/"+"roleBuddyID-3");
-    let data = await response.json();
-    cardsC.innerHTML = "";
-    
-
-    
-    for(let i in data){
-        let user = data[i];     
-        let sfView = new staffView(user);
-        let view = sfView.render();  
-       cardsC.appendChild(view);
-    
-    }
-}
 
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
@@ -39,7 +23,6 @@ const getVenues = async ()=>{
     select.innerHTML = html;
     
 }
-getVenues();
 
 const getVenueId = (vname)=>{  
   
@@ -51,14 +34,30 @@ const getVenueId = (vname)=>{
     }
 
 }
+const getAllUsers = async ()=>{
+  
+    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null");
+    let data = await response.json();
+    cardsC.innerHTML = "";
+    
+ 
+    for(let i in data){
+        let user = data[i];     
+        let sfView = new staffView(user);
+        let view = sfView.render();  
+       cardsC.appendChild(view);
+    
+    }
+}
+
+
+
 
 const getUserByParam = async()=>{
 
-    let parameters = checkFilterP();
-    let values = checkFilterV();
-
-    console.log("http://localhost:8080/backend/api/users/"+parameters+"-"+values);
-    let response = await fetch("http://localhost:8080/backend/api/users/"+parameters+"-"+values);
+    let filterdata = checkFilter();
+    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO);
+    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO);
     let data = await response.json();
     cardsC.innerHTML = "";
     
@@ -79,50 +78,52 @@ const getUserByParam = async()=>{
 }
 
 
-const checkFilterV = ()=>{
 
-    let values = "3,";
+const checkFilter = ()=>{
 
-    if(!userN.value==""){
+    let ln ="";
+    let n = ""
+    let vid = "";
+    let nid = "";
 
-       values += userN.value+","
-    }
+      if(userN.value == ""){
 
-    if(!lastname.value==""){
-       values += lastname.value+","
-    }
-    if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
-        let str =select.options[select.selectedIndex].text;
-        let id = getVenueId(str);
-       values += id+","
-    }
-    if(!id.value==""){
-       values += id.value+",";
-    }
-     return values;
-}
+         n = "null";
 
-const checkFilterP = ()=>{
-    let properties = "roleBuddyID,";
+      }else{
+        n = userN.value;
+      }
+
+      if(lastname.value ==""){
     
-    if(!userN.value==""){
-       properties+="name,"
-    }
-    if(!lastname.value==""){
-       properties+="lastName,"
-    }
-    if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
-       properties+="venuesBuddyID,"
-    }
-    if(!id.value==""){
+         ln = "null"; 
+      }else{
+         ln= lastname.value;
+      }
+      if(id.value == ""){
+
+           nid = "null";
+      }else{
+          nid = id.value;
+      }
  
-       properties+="id,"
+    if(select.options[select.selectedIndex].text=="Seleccionar Sede"){
+          vid = "null";
+    }else{
+
+        vid = getVenueId(select.options[select.selectedIndex].text);
     }
 
-    return properties;
+    let obj = {
+           
+           idO: nid,
+           nameO : n,
+           lastnameO: ln,
+           venueO: vid
+    };
 
+    return obj
 }
-
 
 const clearFields = async()=>{
     userN.value = "";
@@ -146,7 +147,8 @@ cancelbtn.addEventListener("click",(event)=>{
     event.preventDefault();
     clearFields();
 })
-
 clearFields();
-
 getAllUsers();
+getVenues();
+
+

@@ -42,11 +42,11 @@ public class UserServices {
     }
 
     @GET
-    @Path("{property}-{value}")
+    @Path("{natId}-{name}-{lastName}-{venuesBuddyID}")
     @Produces("application/json")
-    public Response getList(@PathParam("property") String property, @PathParam("value") String value){
+    public Response getList(@PathParam("natId") String natId, @PathParam("name") String name,@PathParam("lastName") String lastName, @PathParam("venuesBuddyID") String venueBuddyID){
         try {
-            ArrayList<User> res = provider.getData(property, value);
+            ArrayList<User> res = provider.getData(natId, name, lastName,venueBuddyID);
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
@@ -144,6 +144,16 @@ public class UserServices {
     }
 
     @OPTIONS
+    @Path("{natId}-{name}-{lastName}-{venuesBuddyID}")
+    public Response options(@PathParam("natId") String natId, @PathParam("name") String name,@PathParam("lastName") String lastName, @PathParam("venuesBuddyID") String venueBuddyID){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
+    @OPTIONS
     @Path("{id}")
     public Response options(@PathParam("id") String id){
         return Response.status(200)
@@ -152,6 +162,7 @@ public class UserServices {
                 .header("access-control-allow-headers", "*")
                 .build();
     }
+
 
     @OPTIONS
     @Path("")

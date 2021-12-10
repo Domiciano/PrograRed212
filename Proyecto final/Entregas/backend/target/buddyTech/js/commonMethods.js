@@ -1,13 +1,17 @@
 //Al método le ingresa una fecha del atributo de endDate del cliente y retorna los días remanentes a vencerse
  const daysLeft = (memEndDate)=>{
-
+    let days;
     let userEndDate = new Date(memEndDate);
     let today = new Date();
 
-    let difference = Math.abs(userEndDate-today);
-    let days = parseInt((difference/(1000 * 3600 * 24)));
-    console.log("days left: "+days);
-
+    let difference = (userEndDate-today);
+    if(difference < 0){
+        days = 0;
+    } else {
+        difference = Math.abs(userEndDate-today);
+        days = parseInt((difference/(1000 * 3600 * 24)));
+        console.log("days left: "+days);
+    }
     return days;
 }
 

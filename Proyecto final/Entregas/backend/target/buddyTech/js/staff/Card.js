@@ -13,14 +13,17 @@ class Card{
             let day = daysLeft(this.card.memEndDate);
             let html = "";
             
-            html = `<div id="${this.card.client.id}" class="card mb-4 py-3">
+            html = `<div id="${this.card.client.id}" class="card mb-4 py-3 onHover cardSelStyle border-left-success">
                         <div class="card-body">
                             <div class="row">
                                 <div class="column centIcon">
-                                <i class="fas fa-user-circle fa-5x"></i>
+                                    <div class="icons">
+                                        <i class="fas fa-arrow-circle-left fa-5x icon-hover"></i>
+                                        <i class="fas fa-user-circle fa-5x icon-default"></i>
+                                    </div>
                                 </div>
                                 <div class="column">
-                                    <h3 class="h3 mb-0 black font-weight-bold">${this.card.client.name}</h3>
+                                    <h3 class="h3 mb-0 black font-weight-bold">J${this.card.client.name}</h3>
                                     <p class="mb-0">Plan: ${this.card.planName}</p>
                                     <p class="mb-0">Days left ${day}</p>
                                 </div>
@@ -28,13 +31,6 @@ class Card{
                         </div>
                     </div>`
             div.innerHTML = html;
-            if(day > 0){
-            let change = div.querySelector(`div[id="${this.card.client.id}" ]`);
-            change.classList.add("border-left-success");
-            } else{
-                let change = div.querySelector(`div[id="${this.card.client.id}" ]`);
-                change.classList.add("border-left-warning");
-            }
             
             let cardComplete = div.firstChild;                
             container.appendChild(cardComplete);
@@ -52,12 +48,12 @@ class Card{
                                                         <div class="col-text centText pad-5">
                                                             <h3 class="h3 mb-3 black font-weight-bold">${this.card.client.name}</h3>
                                                             <p class="mb-0">${this.card.planName}</p>
-                                                            <p class="mb-0">${day}</p>
-                                                            <small class="mb-0">${this.card.status}</small>
+                                                            <p class="mb-0">Days left ${day}</p>
+                                                            <small class="mb-0">Status ${this.card.status}</small>
                                                         </div>
                                                         <div id="colcheck" class="col-check centIcon">
                                                             <h1 class="h1check">
-                                                                <i class="fas fa-check fa-4x check"></i>
+                                                                <i class="fas fa-check fa-3x check"></i>
                                                             </h1>
                                                         </div>  
                                                     </div>
