@@ -68,6 +68,8 @@ const getAllUsers = async ()=>{
                  <p>`+user.lastName+`</p>
            </div>
            <div class="col col4">
+                <h5>Sede:</h5>
+                <p>Cali</p>
           
                
            </div> 
@@ -125,7 +127,8 @@ const getUserByParam = async()=>{
                 <p>`+user.lastName+`</p>
            </div>
            <div class="col col4">
-          
+                <h5>Sede:</h5>
+                 <p>Cali</p>
                
            </div>    
            

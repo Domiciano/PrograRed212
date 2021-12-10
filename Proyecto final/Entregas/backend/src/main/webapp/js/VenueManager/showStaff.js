@@ -54,24 +54,23 @@ const getAllUsers = async ()=>{
         <div class="row">
            <div class="col col1">
                 <h5>Id:</h5>
-                <p>`+user.id+`</p>
+                <p>`+user.user.id+`</p>
            </div>
            <div class="col col2">
                 <h5>Nombre:</h5>
-                <p>`+user.name+`</p>
+                <p>`+user.user.name+`</p>
            
             </div>
         </div>
        <div class="row">
            <div class="col col3">
                 <h5>Apellido:</h5>
-                 <p>`+user.lastName+`</p>
+                 <p>`+user.user.lastName+`</p>
            </div>
            <div class="col col4">
                 <h5>Sede:</h5>
-                <p>Cali</p>
-          
-               
+                <p>`+user.venueName+`</p>
+                       
            </div> 
            
         <div class="row">
@@ -114,21 +113,21 @@ const getUserByParam = async()=>{
         <div class="row">
            <div class="col col1">
                 <h5>Id:</h5>
-                <p>`+user.id+`</p>
+                <p>`+user.user.id+`</p>
            </div>
            <div class="col col2">
                 <h5>Nombre:</h5>
-                <p>`+user.name+`</p>
+                <p>`+user.user.name+`</p>
             </div>
         </div>
        <div id="row" class="row">
            <div class="col col3">
                 <h5>Apellido:</h5>
-                <p>`+user.lastName+`</p>
+                <p>`+user.user.lastName+`</p>
            </div>
            <div class="col col4">
                 <h5>Sede:</h5>
-                 <p>Cali</p>
+                 <p>`+user.venueName+`</p>
                
            </div>    
            

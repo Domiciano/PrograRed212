@@ -6,6 +6,7 @@ import sql.SQLAdmin;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class UserProvider {
 
@@ -26,32 +27,45 @@ public class UserProvider {
 
         return respuesta;
     }
-    public ArrayList<User> getData(String natId, String name, String lastName, String venuesBuddyID) throws SQLException {
-        ArrayList<User> respuesta = new ArrayList<>();
+    public ArrayList<UserCard> getStaffCard(String natId, String name, String lastName, String venuesBuddyID) throws SQLException {
+        ArrayList<UserCard> usercards = new ArrayList<>();
 
-        String sql = "SELECT * FROM usersBuddy WHERE ";
-        sql+= "roleBuddyID= 3 ";
-        if(!natId.equalsIgnoreCase("null")){
+        String sql = "SELECT u.*, v.name,c.name FROM roleBuddy r, usersBuddy u, venuesBuddy v, cityBuddy c WHERE u.roleBuddyID = r.id AND v.cityBuddyID = c.id ";
+        sql += " AND roleBuddyID= 3 ";
+        if (!natId.equalsIgnoreCase("null")) {
 
-            sql+= " AND id = '" +natId+"'";
+            sql += " AND id = '" + natId + "'";
         }
-        if(!name.equalsIgnoreCase("null")){
-            sql+= " AND name = '" +name+"'";
-
-        }
-        if(!lastName.equalsIgnoreCase("null")){
-            sql+= " AND lastName = '"+lastName+"'";
+        if (!name.equalsIgnoreCase("null")) {
+            sql += " AND name = '" + name + "'";
 
         }
-        if(!venuesBuddyID.equalsIgnoreCase("null")){
-            sql+= " AND venuesBuddyID ="+Integer.parseInt(venuesBuddyID);
+        if (!lastName.equalsIgnoreCase("null")) {
+            sql += " AND lastName = '" + lastName + "'";
+
+        }
+        if (!venuesBuddyID.equalsIgnoreCase("null")) {
+            sql += " AND venuesBuddyID =" + Integer.parseInt(venuesBuddyID);
         }
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
-        getResponseList(results, respuesta);
+        while (results.next()) {
+            int id = results.getInt(results.findColumn("id"));
+            String lastname = results.getString(results.findColumn("lastName"));
+            String nameu = results.getString(results.findColumn("name"));
+            String password = results.getString(results.findColumn("password"));
+            int venueID = Integer.parseInt(results.getString(results.findColumn("venuesBuddyID")));
+            int roleID = Integer.parseInt(results.getString(results.findColumn("roleBuddyID")));
+            User user = new User(id, nameu, lastname, password, venueID, roleID);
+            String venue= results.getString(7);
+            String city= results.getString(8);
+            usercards.add(new UserCard(user,venue,city));
+        }
+
+       // getResponseList(results, respuesta);
         db.close();
 
-        return respuesta;
+        return usercards;
     }
 
 

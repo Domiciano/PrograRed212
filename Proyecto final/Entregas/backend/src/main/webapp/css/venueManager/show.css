@@ -80,8 +80,8 @@ column-gap: 40px;
     
   font-size: 50px;
   
-  color:rgb(167, 167, 167); 
--webkit-text-stroke:2px rgb(0, 0, 0);
+  color:rgb(204, 198, 198); 
+-webkit-text-stroke:1px rgb(0, 0, 0);
   
 }
 

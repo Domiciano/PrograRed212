@@ -46,7 +46,7 @@ public class UserServices {
     @Produces("application/json")
     public Response getList(@PathParam("natId") String natId, @PathParam("name") String name,@PathParam("lastName") String lastName, @PathParam("venuesBuddyID") String venueBuddyID){
         try {
-            ArrayList<User> res = provider.getData(natId, name, lastName,venueBuddyID);
+            ArrayList<UserCard> res = provider.getStaffCard(natId, name, lastName,venueBuddyID);
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();

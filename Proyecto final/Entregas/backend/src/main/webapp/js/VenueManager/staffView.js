@@ -25,8 +25,6 @@ class staffView{
         lastname.classList.add("cardelement");
         let venuesBuddyID = document.createElement("div")
         venuesBuddyID.classList.add("cardelement");  
-        let roleBuddyID = document.createElement("div");
-        roleBuddyID.classList.add("cardelement");
         let iconsdiv = document.createElement("div");
         iconsdiv.classList.add("cardelement");
         let detaildiv = document.createElement("div");
@@ -38,17 +36,16 @@ class staffView{
         iconsdiv.innerHTML = 
         '<i class="fas fa-user-circle dicon"></i>';
 
-        id.innerHTML = '<label class="text label">Id:</label>'+'<label class="text">'+this.user.id+'</label>';
-        nameV.innerHTML =  '<label class="name label">Nombre:</label>'+'<label class="name">'+this.user.name+'</label>';
-        lastname.innerHTML = '<label class="text label">Apellido:</label>'+'<label class="text">'+this.user.lastName+'</label>';
+        id.innerHTML = '<label class="text label">Id:</label>'+'<label class="text">'+this.user.user.id+'</label>';
+        nameV.innerHTML =  '<label class="name label">Nombre:</label>'+'<label class="name">'+this.user.user.name+'</label>';
+        lastname.innerHTML = '<label class="text label">Apellido:</label>'+'<label class="text">'+this.user.user.lastName+'</label>';
         
         detaildiv.innerHTML= `<button id ="show" data-bs-placement="left" type="button" data-bs-toggle="popover" title="">Ver Detalles<i class="fas fa-chevron-right"></i></button>`; 
 
        // id.innerHTML = this.user.id;
         //nameV.innerHTML = this.user.name;
         //lastname.innerHTML = this.user.lastName;
-        venuesBuddyID.innerHTML = this.user.venuesBuddyID;
-        roleBuddyID.innerHTML = this.user.roleBuddyID;
+        venuesBuddyID.innerHTML = this.user.venueName;
 
          //Agregar info tarjeta
 
