@@ -34,7 +34,9 @@ const getVenueId = (vname)=>{
     }
 
 }
+
 const getAllUsers = async ()=>{
+
   
     let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null");
     let data = await response.json();
@@ -61,8 +63,6 @@ const getUserByParam = async()=>{
     let data = await response.json();
     cardsC.innerHTML = "";
     
-
-    
     for(let i in data){
         let user = data[i];     
         let sfView = new staffView(user);
@@ -76,9 +76,6 @@ const getUserByParam = async()=>{
     }
 
 }
-
-
-
 const checkFilter = ()=>{
 
     let ln ="";
@@ -124,14 +121,12 @@ const checkFilter = ()=>{
 
     return obj
 }
-
 const clearFields = async()=>{
     userN.value = "";
     lastname.value = "";
     id.value = "";
     select.value = "Seleccionar Sede";
    
-
 }
 
 filterbtn.addEventListener("click", (event)=>{
@@ -147,7 +142,6 @@ cancelbtn.addEventListener("click",(event)=>{
     event.preventDefault();
     clearFields();
 })
-clearFields();
 getAllUsers();
 getVenues();
 

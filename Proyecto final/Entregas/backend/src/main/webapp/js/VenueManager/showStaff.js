@@ -9,8 +9,6 @@ const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
 var venuesD;
 
-
-
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     let venues = await venuesNames.json();
@@ -34,7 +32,9 @@ const getVenueId = (vname)=>{
     }
 
 }
+
 const getAllUsers = async ()=>{
+
   
     let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null");
     let data = await response.json();
@@ -42,10 +42,34 @@ const getAllUsers = async ()=>{
     
  
     for(let i in data){
-        let user = data[i];     
+        
+        let user = data[i];  
         let sfView = new staffView(user);
         let view = sfView.render();  
        cardsC.appendChild(view);
+       $('[data-bs-toggle="popover"]').popover({
+        content:
+        `<div id="detailContainer">
+        
+        <div class="row">
+           <div class="col">
+               Id: `+user.id+`
+           </div>
+           <div class="col">
+               Nombre: `+user.name+`
+            </div>
+        </div>
+       <div class="row">
+           <div class="col">
+              Apellido: `+user.lastName+`
+           </div>
+           <div class="col">
+          2 of 2
+               
+           </div>             
+        `,
+        html:true
+       });   
     
     }
 }
@@ -61,8 +85,6 @@ const getUserByParam = async()=>{
     let data = await response.json();
     cardsC.innerHTML = "";
     
-
-    
     for(let i in data){
         let user = data[i];     
         let sfView = new staffView(user);
@@ -72,13 +94,35 @@ const getUserByParam = async()=>{
          //let view = taskView.render();
         
        cardsC.appendChild(view);
+
+       $('[data-bs-toggle="popover"]').popover({
+        content:
+        `<div id="detailContainer">
+        
+        <div class="row">
+           <div class="col">
+               Id: `+user.id+`
+           </div>
+           <div class="col">
+               Nombre: `+user.name+`
+            </div>
+        </div>
+       <div class="row">
+           <div class="col">
+              Apellido: `+user.lastName+`
+           </div>
+           <div class="col">
+          2 of 2
+               
+           </div>             
+        `,
+        html:true
+       });   
+    
         
     }
 
 }
-
-
-
 const checkFilter = ()=>{
 
     let ln ="";
@@ -124,14 +168,12 @@ const checkFilter = ()=>{
 
     return obj
 }
-
 const clearFields = async()=>{
     userN.value = "";
     lastname.value = "";
     id.value = "";
     select.value = "Seleccionar Sede";
    
-
 }
 
 filterbtn.addEventListener("click", (event)=>{
@@ -147,7 +189,6 @@ cancelbtn.addEventListener("click",(event)=>{
     event.preventDefault();
     clearFields();
 })
-clearFields();
 getAllUsers();
 getVenues();
 

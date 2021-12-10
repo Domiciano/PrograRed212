@@ -3,8 +3,7 @@ class staffView{
     
     //State
     constructor(user){
-        this.user = user;
-        
+        this.user = user;   
         //Object.seal(this);
     }
 
@@ -12,6 +11,7 @@ class staffView{
     
  
     render = ()=>{
+
         //Construir un elemento visual
         let component = document.createElement("div");
               //<div></div>
@@ -29,24 +29,21 @@ class staffView{
         roleBuddyID.classList.add("cardelement");
         let iconsdiv = document.createElement("div");
         iconsdiv.classList.add("cardelement");
-        let detailbtn = document.createElement("a");
-        detailbtn.classList.add("cardelement");
-        let showDetail = document.createElement("div");
+        let detaildiv = document.createElement("div");
+        
+        /*detaildiv.classList.add("cardelement");
+        detaildiv.classList.add("detaildiv");
+        */
+
         iconsdiv.innerHTML = 
         '<i class="fas fa-user-circle dicon"></i>';
-        detailbtn.innerHTML= 
-        '<h4>Ver detalle</h4>'+
-        '<i class="fas fa-chevron-right"></i>';
-        detailbtn.classList.add("detail");
-        detailbtn.id ="detail"
-        detailbtn.setAttribute("data-toggle","popover");
-        detailbtn.setAttribute("data-trigger","focus");
+
         id.innerHTML = '<label class="text label">Id:</label>'+'<label class="text">'+this.user.id+'</label>';
         nameV.innerHTML =  '<label class="name label">Nombre:</label>'+'<label class="name">'+this.user.name+'</label>';
         lastname.innerHTML = '<label class="text label">Apellido:</label>'+'<label class="text">'+this.user.lastName+'</label>';
+        
+        detaildiv.innerHTML= `<button id ="show" data-bs-placement="left" type="button" data-bs-toggle="popover" title="Popover title">Ver Detalles</button>`; 
 
-
-         
        // id.innerHTML = this.user.id;
         //nameV.innerHTML = this.user.name;
         //lastname.innerHTML = this.user.lastName;
@@ -62,10 +59,11 @@ class staffView{
                      //Agregar al componente principal 
         component.appendChild(iconsdiv);
         component.appendChild(infodiv);
-        component.appendChild(detailbtn);
+        component.appendChild(detaildiv);
         
         component.classList.add("staffview"); //<div class="userview">  ....  </div>
-    
+
+       
  
         return component;
     }

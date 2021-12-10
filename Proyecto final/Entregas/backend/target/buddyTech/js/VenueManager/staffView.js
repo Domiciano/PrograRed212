@@ -29,22 +29,20 @@ class staffView{
         roleBuddyID.classList.add("cardelement");
         let iconsdiv = document.createElement("div");
         iconsdiv.classList.add("cardelement");
-        let detailbtn = document.createElement("a");
-        detailbtn.classList.add("cardelement");
-        let showDetail = document.createElement("div");
+        let detail = document.createElement("a");
+        detail.classList.add("cardelement");
         iconsdiv.innerHTML = 
         '<i class="fas fa-user-circle dicon"></i>';
-        detailbtn.innerHTML= 
-        '<h4>Ver detalle</h4>'+
-        '<i class="fas fa-chevron-right"></i>';
-        detailbtn.classList.add("detail");
-        detailbtn.id ="detail"
-        detailbtn.setAttribute("data-toggle","popover");
-        detailbtn.setAttribute("data-trigger","focus");
+        detail.innerHTML= 
+        `<h4>Ver detalle</h4>'
+        <i class="fas fa-chevron-right"></i>`;
+
+        
+        detail.classList.add("detail");
+        detail.id ="detail"
         id.innerHTML = '<label class="text label">Id:</label>'+'<label class="text">'+this.user.id+'</label>';
         nameV.innerHTML =  '<label class="name label">Nombre:</label>'+'<label class="name">'+this.user.name+'</label>';
         lastname.innerHTML = '<label class="text label">Apellido:</label>'+'<label class="text">'+this.user.lastName+'</label>';
-
 
          
        // id.innerHTML = this.user.id;
@@ -62,7 +60,7 @@ class staffView{
                      //Agregar al componente principal 
         component.appendChild(iconsdiv);
         component.appendChild(infodiv);
-        component.appendChild(detailbtn);
+        component.appendChild(detail);
         
         component.classList.add("staffview"); //<div class="userview">  ....  </div>
     

@@ -42,7 +42,7 @@
 display: flex;
 flex-direction: row;
 align-items: center;
-justify-content: space-between;
+column-gap: 40px;
  background-color: #1198e1;
  width: 80%;
  margin:10px;
@@ -85,24 +85,10 @@ justify-content: space-between;
   
 }
 
-
-  .staffview .detail{
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 15px;
-    
-  }
-
-  .staffview .detail h4{
-
-    font-size: 15px;
-  }
-
   .info {
 
-    font-size: 70%
+    font-size: 65%;
+    width:50%;
  }
 
  .maincontent{
@@ -239,15 +225,56 @@ justify-content: space-between;
   border-radius: 10px;
 }
 
- 
-#detail{
+ .detaildiv button{
 
-  text-decoration: none;
-  
+  width: 90%;
+  height: 40%;
+  font-size: 70%;
+  color: #1a73e7;
+  font-weight: bold;
+ 
 }
 
- 
+ .detaildiv{
 
+  width: 60%;
+  
+  
+ }
+ #par{
+
+  background-color: #45d581;
+ }
+
+ #detailContainer{
+
+  width: 70%;
+  height:200px;
+ }
+
+ .popover{
+
+  background-color: rgb(255, 255, 255);
+ box-shadow: 0px 0px 15px 2px #dadada;
+ border: 2px;
+ border-radius: 20px;
+ }
+ .popover title{
+
+  
+  background-color: #ffffff;
+ }
+
+ .popover-header{
+  border-radius: 20px;
+   background-color: #ffffff;
+   border: none;
+ }
+ .popover-arrow{
+   
+  border-radius: 20px;
+ 
+ }
 
 
 
