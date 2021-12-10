@@ -84,7 +84,7 @@
 
             <!-- Sidebar Message -->
             <div class="d-none d-lg-flex cardBtn" id="cardBtn">
-                <button id="logoutBtn" class="border-gradient-blue"> Salir</button>
+                <button id="logoutBtn" class="border-gradient-blue">Cerrar Sesión</button>
 
             </div>
 
@@ -111,10 +111,7 @@
                         <div class="nav-item dropdown no-arrow selectDiv">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"> Selecciona una opción de filtrado </span>
                             <select name="City" id="selectCity" class="form-control bg-light border-0 small">
-                                <option value="volvo" selected>Todas</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
+                                <option value="all" selected>Todas</option>
                             </select>
                         </div>
                     </form>
@@ -153,10 +150,10 @@
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Ganancias en el mes</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="earningMonth">
-                                                $40,000</div>
+                                                </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -172,7 +169,7 @@
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Ganancias en el Año</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="earningYear">
-                                                $215,000</div>
+                                                </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -194,7 +191,7 @@
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
-                                                        id="capacity">50%</div>
+                                                        id="capacity"></div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
@@ -313,27 +310,7 @@
 
                     </div>
                     <!-- /.container-fluid -->
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="container-fluid">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Clientes Activos</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart2"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                   
                 <!-- End of Main Content -->
 
                 <!-- Footer -->
@@ -391,11 +368,14 @@
         <script src="vendor/chart.js/Chart.min.js"></script>
 
         <!-- Page level custom scripts -->
-        <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-area2.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
-        <script src="js/dash/main.js"></script>
+    
+        <script defer src="js/dash/CitySelect.js"></script>
+        <script defer type="module" src="js/dash/main.js"></script>
+
+        <script  src="js/demo/chart-area-demo.js"></script>
+        <!-- <script  src="js/demo/chart-pie-demo.js"></script> -->
 
 </body>
 
 </html>
+
