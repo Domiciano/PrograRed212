@@ -51,6 +51,9 @@ class UserCard {
                                     <i class="fas fa-check fa-3x check"></i>
                                 </h2>
                             </div>  
+                            <a id="delete${this.card.user.id}btn" class="btn btn-danger btn-circle btn-lg">
+                                <i class="fas fa-trash"></i>
+                            </a>                                    
                         </div>
                     </div>
                     

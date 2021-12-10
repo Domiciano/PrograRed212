@@ -55,7 +55,7 @@ const deleteStaff = async (id)=>{
 const getAllUsers = async ()=>{
 
   
-    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null");
+    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null-3");
     let data = await response.json();
     cardsC.innerHTML = "";
     
@@ -125,8 +125,8 @@ const getAllUsers = async ()=>{
 const getUserByParam = async()=>{
 
     let filterdata = checkFilter();
-    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO);
-    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO);
+    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-3");
+    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-3");
     let data = await response.json();
     cardsC.innerHTML = "";
     
