@@ -31,6 +31,7 @@ class staffView{
         
         //detaildiv.classList.add("cardelement");
         detaildiv.classList.add("detaildiv");
+        detaildiv.id= "details";
         
 
         iconsdiv.innerHTML = 

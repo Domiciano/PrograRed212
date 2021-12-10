@@ -9,6 +9,14 @@ const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
 var venuesD;
 
+
+
+
+
+
+
+
+
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     let venues = await venuesNames.json();
@@ -22,6 +30,8 @@ const getVenues = async ()=>{
     
 }
 
+
+
 const getVenueId = (vname)=>{  
   
     for(let i in venuesD){
@@ -31,6 +41,15 @@ const getVenueId = (vname)=>{
         }       
     }
 
+}
+
+const deleteStaff = async (id)=>{
+    
+    //let obj = JSON.parse(json);
+
+    let response = await fetch("http://localhost:8080/backend/api/users/"+id)
+    let data = await response.json();
+        
 }
 
 const getAllUsers = async ()=>{
@@ -75,12 +94,27 @@ const getAllUsers = async ()=>{
            
         <div class="row">
             <div class="col">
-               <a class="btn delete">Delete</a>
+               <a class="btn delete" id="btnDelete">Delete</a>
            </div>
        </div>
         `,
         html:true
-       });   
+       }).parent().delegate("click",'a#btnDelete',function() {
+
+        console.log("llegue XD");
+        deleteStaff(user.user.id);
+        getAllUsers();
+    });
+
+        /*list[0].addEventListener("click",(event)=>{
+            
+            console.log("llegue XD");
+            event.preventDefault();
+            deleteStaff(user.user.id);
+            getAllUsers();
+        });
+
+        */
     
     }
 }
@@ -133,14 +167,31 @@ const getUserByParam = async()=>{
            
         <div class="row">
             <div class="col">
-              <a class="btn delete">Delete</a>
+              <a name ="btndelete" class="btn delete" id="btnDelete">Delete</a>
              </div>
       </div>
         `,
         html:true
-       });   
+       }).parent().delegate('a#btnDelete',"click",(event)=> {
+
+        event.preventDefault();
+        console.log("llegue XD");
+        deleteStaff(user.user.id);
+        getAllUsers();
+    });  
+       
+
     
-        
+    /*
+        list[0].addEventListener("click",(event)=>{
+            
+            console.log("llegue XD");
+            event.preventDefault();
+            deleteStaff(user.user.id);
+            getAllUsers();
+        });
+        */
+     
     }
 
 }
