@@ -39,7 +39,6 @@
 }
 
 .btns{
-    /* background-color: red; */
     display: flex;
     gap: 1em; 
     justify-content: center;
@@ -63,10 +62,30 @@
 }
   
 .btnCreate button{
-    padding: 0 .5em; 
-    border-radius: 4px; 
-    color: white;
-    border: none;
-    background-color: gray; 
+    background: -webkit-linear-gradient(
+        45deg,
+        #46c474 5%,
+        #45d581 20%,
+        #1198e1 91%
+        
+      );
+      color: #ffffff;
+    
+      font-weight: bold;
+      
 }  
-  
+#cardsContainer{
+    display: flex;
+    flex-direction: column;
+    max-height: 620px;
+    max-width: 400px;
+    min-width: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 0;
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+}  
+

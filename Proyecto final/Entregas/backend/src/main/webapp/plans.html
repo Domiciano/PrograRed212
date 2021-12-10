@@ -107,39 +107,57 @@
                     <div class="app_form">
                         <label for="">Planes</label>
                         <div class="btnCreate">
-                            <button  type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Right popover">Crear</button>
+                            <button  id="createBtn" type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Right popover">Crear</button>
                             <h3>Filtros</h3>
                         </div>
                     </div>
                     <div class="app_actions">
-                        <form class="app_filter">
+                        <div class="app_filter">
                             <div class="input_container">
                                 <label for="">Name</label>
-                                <input type="text">
+                                <input id="name"type="text">
                             </div>
                             <div class="input_container amount">
                                 <label for="">Amount</label>
                                 <label for="">
                                     From
-                                    <input type="text", name="inputAFrom">
+                                    <input id="amountF"type="text", name="inputAFrom">
                                 </label>
                                 <label for="">
                                     To
-                                    <input type="text", name="inputAFrom">
+                                    <input id="amountT"type="text", name="inputAFrom">
                                 </label>
                             </div>
                             <div class="input_container">
                                 <label for="">Status</label>
-                            <input type="text">
+                            <input id="status"type="text">
                             </div>
                             <div class="btns">
-                                <button class="clear">Clear</button>
-                                <button class="search">Search</button>
+                                <button id="cButton"class="cancelar">Cancelar</button>
+                                <button id="sButton"class="search">Search</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                    <div id="clientsContainer">
-
+                    <div id="cardsContainer" class="carCont">
+                            <div class="content-wrapper">
+                                <div class="card mb-4 py-3 onHover cardSelStyle border-left-success">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="column centIcon">
+                                                <div class="icons">
+                                                    <i class="fas fa-user-circle fa-5x icon-default"></i>
+                                                </div>
+                                            </div>
+                                            <div class="column">
+                                                <h3 class="h3 mb-0 black font-weight-bold">Juan </h3>
+                                                <p class="mb-0">Plan: Oro</p>
+                                                <p class="mb-0">Days left 15</p>
+                                                <button id="details">Mas detalles</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>    
                 <!-- /.container-fluid -->
