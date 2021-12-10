@@ -80,8 +80,8 @@ column-gap: 40px;
     
   font-size: 50px;
   
-  color:rgb(78, 78, 78); 
-  -webkit-text-stroke:2px rgb(0, 0, 0);
+  color:rgb(167, 167, 167); 
+-webkit-text-stroke:2px rgb(0, 0, 0);
   
 }
 
@@ -227,11 +227,13 @@ column-gap: 40px;
 
  .detaildiv button{
 
-  width: 90%;
+  width: 80%;
   height: 40%;
   font-size: 70%;
   color: #1a73e7;
   font-weight: bold;
+  border: none;
+  background-color: #ffffff;
  
 }
 
@@ -248,9 +250,44 @@ column-gap: 40px;
 
  #detailContainer{
 
-  width: 70%;
-  height:200px;
+  width: 90%;
+  height:300px;
+  padding-top: 30px;
+  margin: 20px;
+
+ 
  }
+
+ #detailContainer h5{
+
+
+  color: rgb(153, 153, 153);
+  font-weight:700;
+  font-size: 20px;
+
+ }
+
+ #detailContainer p{
+
+  color: rgb(179, 179, 179);
+  font-weight:500;
+  font-size: 18px;
+
+ }
+ #detailContainer .row .col2{
+
+  margin-left: 10px;
+ }
+ #detailContainer .row .col4{
+
+  margin-left: 10px;
+  margin-top: 30px;
+ }
+ #detailContainer .row .col3{
+
+  margin-top: 30px;
+ }
+
 
  .popover{
 
@@ -275,6 +312,27 @@ column-gap: 40px;
   border-radius: 20px;
  
  }
+
+ .row2{
+
+  margin-top: 40px;
+ }
+
+ .delete{
+  border-width: 5px;
+  border-color: rgb(192, 53, 53);
+  color: rgb(192, 53, 53);
+  font-weight: bold;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.delete:hover{
+  color: rgb(255, 0, 0);
+  border-color: red;
+}
+
 
 
 

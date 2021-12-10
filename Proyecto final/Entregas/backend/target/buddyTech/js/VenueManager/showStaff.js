@@ -9,8 +9,6 @@ const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
 var venuesD;
 
-
-
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     let venues = await venuesNames.json();
@@ -44,10 +42,44 @@ const getAllUsers = async ()=>{
     
  
     for(let i in data){
-        let user = data[i];     
+        
+        let user = data[i];  
         let sfView = new staffView(user);
         let view = sfView.render();  
        cardsC.appendChild(view);
+       $('[data-bs-toggle="popover"]').popover({
+        content:
+        `<div id="detailContainer">
+        
+        <div class="row">
+           <div class="col col1">
+                <h5>Id:</h5>
+                <p>`+user.id+`</p>
+           </div>
+           <div class="col col2">
+                <h5>Nombre:</h5>
+                <p>`+user.name+`</p>
+           
+            </div>
+        </div>
+       <div class="row">
+           <div class="col col3">
+                <h5>Apellido:</h5>
+                 <p>`+user.lastName+`</p>
+           </div>
+           <div class="col col4">
+          
+               
+           </div> 
+           
+        <div class="row">
+            <div class="col">
+               <a class="btn delete">Delete</a>
+           </div>
+       </div>
+        `,
+        html:true
+       });   
     
     }
 }
@@ -72,6 +104,40 @@ const getUserByParam = async()=>{
          //let view = taskView.render();
         
        cardsC.appendChild(view);
+
+       $('[data-bs-toggle="popover"]').popover({
+        content:
+        `<div id="detailContainer">
+        
+        <div class="row">
+           <div class="col col1">
+                <h5>Id:</h5>
+                <p>`+user.id+`</p>
+           </div>
+           <div class="col col2">
+                <h5>Nombre:</h5>
+                <p>`+user.name+`</p>
+            </div>
+        </div>
+       <div id="row" class="row">
+           <div class="col col3">
+                <h5>Apellido:</h5>
+                <p>`+user.lastName+`</p>
+           </div>
+           <div class="col col4">
+          
+               
+           </div>    
+           
+        <div class="row">
+            <div class="col">
+              <a class="btn delete">Delete</a>
+             </div>
+      </div>
+        `,
+        html:true
+       });   
+    
         
     }
 

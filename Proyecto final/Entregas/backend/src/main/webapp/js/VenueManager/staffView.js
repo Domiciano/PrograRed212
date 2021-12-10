@@ -31,9 +31,9 @@ class staffView{
         iconsdiv.classList.add("cardelement");
         let detaildiv = document.createElement("div");
         
-        /*detaildiv.classList.add("cardelement");
+        //detaildiv.classList.add("cardelement");
         detaildiv.classList.add("detaildiv");
-        */
+        
 
         iconsdiv.innerHTML = 
         '<i class="fas fa-user-circle dicon"></i>';
@@ -42,7 +42,7 @@ class staffView{
         nameV.innerHTML =  '<label class="name label">Nombre:</label>'+'<label class="name">'+this.user.name+'</label>';
         lastname.innerHTML = '<label class="text label">Apellido:</label>'+'<label class="text">'+this.user.lastName+'</label>';
         
-        detaildiv.innerHTML= `<button id ="show" data-bs-placement="left" type="button" data-bs-toggle="popover" title="Popover title">Ver Detalles</button>`; 
+        detaildiv.innerHTML= `<button id ="show" data-bs-placement="left" type="button" data-bs-toggle="popover" title="">Ver Detalles<i class="fas fa-chevron-right"></i></button>`; 
 
        // id.innerHTML = this.user.id;
         //nameV.innerHTML = this.user.name;
