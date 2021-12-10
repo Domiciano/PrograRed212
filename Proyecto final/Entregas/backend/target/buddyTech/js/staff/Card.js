@@ -49,8 +49,13 @@ class Card {
                                                         <div class="col-text centText pad-5">
                                                             <h3 class="h3 mb-3 black font-weight-bold">${this.card.client.name}</h3>
                                                             <p class="mb-0">${this.card.planName}</p>
+<<<<<<< HEAD
                                                             <p class="mb-0">Días restantes ${day}</p>
                                                             <small class="mb-0">Estado ${this.card.status}</small>
+=======
+                                                            <p class="mb-0">Days left ${day}</p>
+                                                            <small class="mb-0">Status ${this.card.status}</small>
+>>>>>>> 4d7be6e275a0b6c0650260ef73c1392a41f9ca39
                                                         </div>
                                                         <div id="colcheck" class="col-check centIcon">
                                                             <h1 class="h1check">

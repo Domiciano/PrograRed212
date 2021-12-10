@@ -35,7 +35,9 @@
         </p>
         <div id="ClientLogin">
             <input class="form-input col-form-label-lg" type="number" name="userId" id="userIdTF" placeholder="Número de identificación">
-            <button id="loginBtn">Ir -></button>
+            
+            <button id="loginBtn">INGRESO</button>
+            <button id="exitBtn">SALIDA</button>
             
         </div>
 
@@ -85,7 +87,19 @@
   <div class="modal-dialog modal-dialog-centered ">
     <div class="modal-content radiousxd border border-3">
       <div class="modal-body" id="loginModalBody">
-
+        <div class="row">
+          <div class="column">
+            <h5> ${clientFound.client.name} ${clientFound.client.lastname} </h5>
+            <p class="mb-0"> Tipo de plan: ${clientFound.planName}</p>
+            <p class="mb-0"> Dias restantes: ${days}</p>
+            <small>La membresía ha expirado, porfavor contacte a un staff para renovarla</small>
+          </div>
+          <div id="colwar" class="column">
+            <h1 class="h1war">
+              <i id="warningModal" class="fas fa-exclamation-triangle fa-5x"></i>
+            </h1>
+          </div>
+        </div>
       </div>
     </div>
   </div>

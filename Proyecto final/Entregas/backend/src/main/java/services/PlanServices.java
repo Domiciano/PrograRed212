@@ -12,9 +12,28 @@ import java.util.ArrayList;
 @Path("ps")
 public class PlanServices {
 
-    @Path("echo")
     @GET
-    public String echo(){return "echo Plan";}
+    @Path("close")
+    public Response closeConnections(){
+        SQLAdmin.getInstance().closeAllConnections();
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Connection", "close")
+                .entity(new Message("Conexiones cerradas desde plan")).build();
+    }
+
+    @OPTIONS
+    @Path("close")
+    public Response optionsClose(){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Connection", "close")
+                .build();
+    }
 
     @OPTIONS
     @Path("getactive")
@@ -23,6 +42,7 @@ public class PlanServices {
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
+                .header("Connection", "close")
                 .build();
     }
 
@@ -49,11 +69,17 @@ public class PlanServices {
         try {
             PlanProvider provider = new PlanProvider();
             ArrayList<Plan> plans = provider.getActivePlans();
-            return Response.status(200).header("access-control-allow-origin", "*").entity(plans).build();
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .header("Connection", "close")
+                    .entity(plans).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
-            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .header("Connection", "close")
+                    .entity(e).build();
         }
     }
 

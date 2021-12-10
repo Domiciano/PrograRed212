@@ -142,6 +142,7 @@ public class MembershipProvider {
             Membership temp = new Membership(id, totalAmount, discount,  startDate, endDate, planID, venueID);
             respuesta.add(temp);
         }
+        db2.close();
         return respuesta;
     }
 

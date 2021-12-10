@@ -135,7 +135,11 @@ details>summary {
     color: rgb(0, 195, 255);
 }
 
+<<<<<<< HEAD
 #clientsContainer {
+=======
+#clientsContainer{
+>>>>>>> 4d7be6e275a0b6c0650260ef73c1392a41f9ca39
     display: flex;
     flex-direction: column;
     max-height: 620px;
@@ -150,6 +154,7 @@ details>summary {
     padding-bottom: 10px;
 }
 
+<<<<<<< HEAD
 
 /* Scrollbar style */
 
@@ -187,6 +192,39 @@ details>summary {
 /* Animation on cards and icons */
 
 .cardStyle {
+=======
+.box-shadow{
+    box-shadow: 0px 0px 15px 2px #dadada;
+}
+
+/* Scrollbar style */
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 5px; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+  /* Animation on cards and icons */
+
+.cardStyle{
+>>>>>>> 4d7be6e275a0b6c0650260ef73c1392a41f9ca39
     position: relative;
     border-radius: 20px;
     width: 550px;
@@ -196,7 +234,11 @@ details>summary {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 .cardStyle .icon {
+=======
+.cardStyle .icon{
+>>>>>>> 4d7be6e275a0b6c0650260ef73c1392a41f9ca39
     margin: 1rem 0rem 0rem 0rem;
 }
 
@@ -258,6 +300,7 @@ details>summary {
     opacity: 0;
 }
 
+<<<<<<< HEAD
 
 /* Popover container */
 
@@ -268,10 +311,16 @@ details>summary {
 
 /* Popover */
 
+=======
+  /* Popover */
+
+ /* popover */
+>>>>>>> 4d7be6e275a0b6c0650260ef73c1392a41f9ca39
 details[data-popover] {
     position: relative;
     display: flex;
     justify-content: end;
+<<<<<<< HEAD
 }
 
 details[data-popover]>summary:focus {
@@ -287,6 +336,19 @@ details[data-popover]>summary {
 }
 
 details[data-popover]>summary+* {
+=======
+  }
+  details[data-popover] > summary:focus {
+    outline: none;
+  }
+  details[data-popover] > summary::-webkit-details-marker {
+    display: none;
+  }
+  details[data-popover] > summary {
+    list-style: none;
+  }
+  details[data-popover] > summary + * {
+>>>>>>> 4d7be6e275a0b6c0650260ef73c1392a41f9ca39
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -294,11 +356,16 @@ details[data-popover]>summary+* {
     border: solid 1px teal;
     border-radius: 5%;
     margin-top: 10px;
+<<<<<<< HEAD
     padding-left: 0px;
+=======
+    padding-left: 65px;
+>>>>>>> 4d7be6e275a0b6c0650260ef73c1392a41f9ca39
     padding-top: 20px;
     left: -575px;
     background: rgb(255, 255, 255);
     border: none;
+<<<<<<< HEAD
 }
 
 details[data-popover] .row {
@@ -398,3 +465,49 @@ details[data-popover="right"]>summary+* {
     color: rgb(255, 196, 0);
     border-color: rgb(255, 196, 0);
 }
+=======
+  }
+
+  details[data-popover] .column{
+      display: flex;
+      align-items: flex-start;
+  }
+
+  details[data-popover] .column p{
+    color: rgb(179, 179, 179);
+    font-weight:500;
+  }
+
+  details[data-popover] .column h5{
+    color: rgb(153, 153, 153);
+    font-weight:700;
+    margin-bottom: 0px;
+    margin-top: 10px;
+  }
+
+  details[data-popover] > * + * {
+    /* hide detail elements that would ruin the popover */
+    display: none;
+  }
+  details[data-popover="up"] > summary + * {
+    bottom: calc(0.5rem + 100%);
+    right: 50%;
+    transform: translateX(50%);
+  }
+  details[data-popover="down"] > summary + * {
+    top: calc(0.5rem + 100%);
+    right: 50%;
+    transform: translateX(50%);
+  }
+  details[data-popover="left"] > summary + * {
+    right: calc(1rem + 100%);
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+  details[data-popover="right"] > summary + * {
+    left: calc(1rem + 100%);
+    bottom: 50%;
+    transform: translateY(50%);
+  }
+  
+>>>>>>> 4d7be6e275a0b6c0650260ef73c1392a41f9ca39

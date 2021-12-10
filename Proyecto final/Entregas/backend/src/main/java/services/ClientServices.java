@@ -12,10 +12,26 @@ import java.util.ArrayList;
 @Path("cls")
 public class ClientServices {
     @GET
-    @Path("echo")
-    public String echo(){
+    @Path("close")
+    public Response closeConnections(){
         SQLAdmin.getInstance().closeAllConnections();
-        return "echo client";
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Connection", "close")
+                .entity(new Message("Conexiones cerradas desde cliente")).build();
+    }
+
+    @OPTIONS
+    @Path("close")
+    public Response optionsClose(){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Connection", "close")
+                .build();
     }
 
 
@@ -28,6 +44,17 @@ public class ClientServices {
                 .header("access-control-allow-headers", "*")
                 .build();
     }
+
+    @OPTIONS
+    @Path("editClient")
+    public Response optionsEditClient(Client client){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
 
     @OPTIONS
     @Path("searchclient/{natID}")
@@ -46,8 +73,24 @@ public class ClientServices {
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
                 .header("access-control-allow-headers", "*")
+                .header("Content-Type", "application/json")
+                .header("Connection", "close")
                 .build();
     }
+
+    @OPTIONS
+    @Path("filter/{natID}/{name}/{lastName}/{age}/{plan}/{status}")
+    public Response optionsFilter(@PathParam("natID") String natID, @PathParam("name") String name,
+                                  @PathParam("lastName") String lastName, @PathParam("age") String age,
+                                  @PathParam("plan") String plan, @PathParam("status") String status){
+        return Response.status(200)
+        .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Content-Type", "application/json")
+                .build();
+    }
+
 
     @GET
     @Path("getclients")
@@ -68,13 +111,15 @@ public class ClientServices {
     @Path("addClient")
     @Consumes("application/json")
     public Response addClient(Client client){
-        ClientProvider provider =  new ClientProvider();
         try {
+        ClientProvider provider =  new ClientProvider();
             provider.insert(client);
             return Response.status(200)
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
+                    .header("Content-Type", "application/json")
+                    .header("Connection", "close")
                     .entity(new Message("cliente creado correctamente")).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
@@ -82,12 +127,13 @@ public class ClientServices {
                     .header("access-control-allow-origin", "*")
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
+                    .header("Connection", "close")
                     .entity(new Message(e.getMessage())).build();
     }
     }
     @PUT
     @Path("editClient")
-    @Produces("application/json")
+    @Consumes("application/json")
     public Response edit(Client client) {
         try {
             ClientProvider provider = new ClientProvider();
@@ -200,4 +246,20 @@ public class ClientServices {
         }
     }
 
+    @GET
+    @Path("filter/{natID}/{name}/{lastName}/{age}/{plan}/{status}")
+    @Produces("application/json")
+    public Response getClientFiltered(@PathParam("natID") String natID, @PathParam("name") String name,
+                                      @PathParam("lastName") String lastName, @PathParam("age") String age,
+                                      @PathParam("plan") String plan, @PathParam("status") String status){
+        try {
+            ClientProvider provider = new ClientProvider();
+            ArrayList<Card> client = provider.filter(natID, name, lastName, age, plan, status);
+            return Response.status(200).header("access-control-allow-origin", "*").entity(client).build();
+        } catch (SQLException ex) {
+            SQLAdmin.getInstance().closeAllConnections();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
+        }
+
+    }
 }

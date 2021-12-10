@@ -36,7 +36,7 @@ const getPlans = async () => {
 }
 
 const getVenues = async () => {
-    await fetch("http://localhost:8080/backend/api/ms/close");
+
     let html = `<option selected disabled selected hidden>Seleccionar Ciudad...</option>`;
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     venues = await venuesNames.json();
@@ -65,8 +65,6 @@ const validateSelectors = () => {
 }
 
 const createClient = async () => {
-
-   fetch("http://localhost:8080/backend/api/ms/close");
 
     if ((validateSelectors()) && (nameTF.value.lenght !== 0) && (lastNameTF.value.lenght !== 0) && (clientidTF.value.lenght !== 0) &&
         (ageTF.value.lenght !== 0) && (heightTF.value.lenght !== 0) && (weightTF.value.lenght !== 0) && (discountTF.value.lenght !== 0)) {

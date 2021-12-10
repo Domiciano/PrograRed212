@@ -148,6 +148,6 @@ class Card {
     }
 
     filterCard = (container) =>{
-
+        
     }
 }
