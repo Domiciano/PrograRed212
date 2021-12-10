@@ -58,7 +58,7 @@ class UserCard {
                     </div>   
                 </div>`;
             let deleteBtn = document.getElementById("delete"+this.card.user.id+"btn");
-            deleteBtn.addEventListener("click", async () => {
+            deleteBtn.addEventListener("click", async (e) => {
                 e.preventDefault();
                 let response = await fetch("http://localhost:8080/backend/api/users/"+this.card.user.id,
                     {

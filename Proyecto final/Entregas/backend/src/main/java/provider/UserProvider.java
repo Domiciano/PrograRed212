@@ -30,7 +30,7 @@ public class UserProvider {
     public ArrayList<UserCard> getUserCard(String natId, String name, String lastName, String venuesBuddyID, String role) throws SQLException {
         ArrayList<UserCard> usercards = new ArrayList<>();
 
-        String sql = "SELECT u.*, v.name,c.name FROM roleBuddy r, usersBuddy u, venuesBuddy v, cityBuddy c WHERE u.roleBuddyID = r.id AND v.cityBuddyID = c.id ";
+        String sql = "SELECT u.*, v.name,c.name FROM roleBuddy r, usersBuddy u, venuesBuddy v, cityBuddy c WHERE u.roleBuddyID = r.id AND v.cityBuddyID = c.id AND u.venuesBuddyID=v.id ";
         sql += " AND roleBuddyID= "+role+" ";
         if (!natId.equalsIgnoreCase("null")) {
 
