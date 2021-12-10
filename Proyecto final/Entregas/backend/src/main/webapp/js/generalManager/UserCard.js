@@ -6,13 +6,10 @@ class UserCard {
     }
 
     render = (container) => {
-        //console.log(this.card.status)
-        //if(this.card.status == "In"){
         let div = document.createElement("div");
-        //let day = daysLeft(this.card.memEndDate);
-        //let html = "";
 
-        let html = `<div id="${this.card.user.id}" class="card mb-4 py-3 onHover cardSelStyle">
+
+        let html = `<div id="${this.card.user.id}" class="card mb-4 py-3 cardOnHover cardSelStyle">
                         <div class="card-body">
                             <div class="row">
                                 <div class="column centIcon">
@@ -22,7 +19,7 @@ class UserCard {
                                     </div>
                                 </div>
                                 <div class="column">
-                                    <h3 class="h3 mb-0 black font-weight-bold">J${this.card.user.name}</h3>
+                                    <h3 class="h3 mb-0 black font-weight-bold">${this.card.user.name}</h3>
                                     <p class="mb-0">Venue: ${this.card.venueName}</p>
                                     <p class="mb-0">City: ${this.card.cityName}</p>
                                 </div>
@@ -43,20 +40,20 @@ class UserCard {
                             <div class="col-user centIcon pad-icon">
                                 <i class="fas fa-user-circle fa-8x"></i>
                             </div>
-                            <div class="col-text centText pad-5">
-                                <h3 class="h3 mb-0 black font-weight-bold">J${this.card.user.name}</h3>
-                                <p class="mb-0">Venue: ${this.card.venueName}</p>
-                                <p class="mb-0">City: ${this.card.cityName}</p>
-                                <small class="mb-0">${this.card.status}</small>
+                            <div class="col-text centText pad-5 mx-4">
+                                <h3 class="h3 mb-0 black font-weight-bold">${this.card.user.name} ${this.card.user.lastName}</h3>
+                                <p class="mb-0">ID: ${this.card.user.id}</p>
+                                <p class="mb-0">Sede: ${this.card.venueName}</p>
+                                <p class="mb-0">Ciudad: ${this.card.cityName}</p>
                             </div>
                             <div id="colcheck" class="col-check centIcon">
-                                <h1 class="h1check">
+                                <h2 class="h2check ml-5">
                                     <i class="fas fa-check fa-3x check"></i>
-                                </h1>
+                                </h2>
                             </div>  
                         </div>
                     </div>
-                    <p class="seeDet mb-1">See details <i class="fas fa-chevron-right pl-3"></i></p>
+                    
                 </div>`;
         });
     }

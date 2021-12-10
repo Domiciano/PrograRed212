@@ -16,10 +16,10 @@ const getCardInfo = async () => {
         //let response2 = await fetch("http://localhost:8080/backend/api/cls/cardInfo/" + client.natId)
         let cardView = new UserCard(managerCard);
         cardView.render(subgerentesContainer);
-
     }
+    console.log("Rendering done")
 }
-getCardInfo();
+
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     let venues = await venuesNames.json();
@@ -32,7 +32,7 @@ const getVenues = async ()=>{
     select.innerHTML = html;
 
 }
-getVenues();
+
 
 const getVenueId = (vname)=>{
 
@@ -49,10 +49,10 @@ const getUserByParam = async()=>{
     let parameters = checkFilterP();
     let values = checkFilterV();
 
-    console.log("http://localhost:8080/backend/api/users/"+parameters+"-"+values);
-    let response = await fetch("http://localhost:8080/backend/api/users/"+parameters+"-"+values);
+    console.log("http://localhost:8080/backend/api/users/managers"+parameters+"-"+values);
+    let response = await fetch("http://localhost:8080/backend/api/users/managers"+parameters+"-"+values);
     let data = await response.json();
-    cardsC.innerHTML = "";
+    subgerentesContainer.innerHTML = "";
 
 
 
@@ -64,7 +64,7 @@ const getUserByParam = async()=>{
 
         //let view = taskView.render();
 
-        cardsC.appendChild(view);
+        subgerentesContainer.appendChild(view);
 
     }
 
@@ -140,3 +140,5 @@ cancelbtn.addEventListener("click",(event)=>{
 })
 
 clearFields();
+getVenues();
+getCardInfo();

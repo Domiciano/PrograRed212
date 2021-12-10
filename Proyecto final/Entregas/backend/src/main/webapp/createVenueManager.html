@@ -19,7 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/generalManager/manageVenueManagers.css">
+    <link rel="stylesheet" href="css/generalManager/createVenueManager.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -127,9 +127,10 @@
                             <div class="form-group">
                                 <select placeholder="Sede" id="venues" class="form-control form-control-user" name="venues"></select>
                             </div>
-                            <input type="submit" value="Crear" class="btn btn-primary btn-user btn-block"/>
+                            <input type="submit" value="Crear" class="btn btn-primary btn-user btn-block" id="createBtn"/>
                         </form>
-
+                        <br>
+                        <a href="manageVenueManagers.html" class="btn btn-secondary btn-block" id="cancelBtn">Cancel</a>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -193,7 +194,7 @@
 
     <!-- Own JavaScript -->
     <script src="js/commonMethods.js"></script>
-    <script src="js/generalManager/manageVenueManagers.js"></script>
+    <script src="js/generalManager/createVenueManager.js"></script>
 </body>
 
 </html>
