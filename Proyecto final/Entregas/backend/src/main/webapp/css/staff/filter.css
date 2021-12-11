@@ -134,19 +134,14 @@
 div.settings {
   display: grid;
   grid-template-columns: max-content max-content;
-  grid-gap: 55px;
-  margin-top: 10%;
+  grid-gap: 30px;
+  margin-top: 25px;
 }
 div.settings label {
   text-align: right;
 }
 div.settings label:after {
   content: ":";
-}
-
-div.settings > label, input, .selectorC {
-  padding: 0px;
-  margin: 0px;
 }
 
 .input {
@@ -180,7 +175,6 @@ div.settings > label, input, .selectorC {
   border-color: #d8d2d2;
   border-width: 3px;
   border-style: solid;
-
 }
 
 .filter {
@@ -247,4 +241,73 @@ div.settings > label, input, .selectorC {
   border-style: solid;
   border-radius: 10px;
   outline: none;
+}
+
+#cardsContainer{
+  display: flex;
+    flex-direction: column;
+    max-height: 620px;
+    max-width: 400px;
+    min-width: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 0;
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+}
+
+.cardSelStyle {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0px 0px 15px 2px #dadada;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  z-index: 1;
+  box-sizing: border-box;
+}
+
+.cardSelStyle .icons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5rem 2.5rem 1.2rem;
+  width: 1.25rem;
+  height: 2.6rem;
+}
+
+.cardSelStyle .icons i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+.cardSelStyle .icons .icon-default {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.cardSelStyle .icons .icon-hover {
+  transition: opacity 0.3s, transform 0.3s;
+  transform: rotate(-180deg) scale(0.5);
+  opacity: 0;
+}
+
+.cardSelStyle:hover {
+  transform: scale(1.2);
+  box-shadow: 20px 15px rgba(0, 0, 0, 0.15);
+}
+
+.cardSelStyle:hover .icon-hover {
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+}
+
+.cardSelStyle:hover .icon-default {
+  transform: rotate(180deg) scale(0.5);
+  opacity: 0;
 }

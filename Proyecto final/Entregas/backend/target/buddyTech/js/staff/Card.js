@@ -12,7 +12,7 @@ class Card {
             let day = daysLeft(this.card.memEndDate);
             let html = "";
 
-            html = `<div id="${this.card.client.id}" class="card mb-4 py-3 onHover cardSelStyle border-left-success">
+            html = `<div id="${this.card.client.id}" class="card mb-4 py-3 cardSelStyle border-left-success">
                         <div class="card-body">
                             <div class="row">
                                 <div class="column centIcon">
@@ -49,13 +49,8 @@ class Card {
                                                         <div class="col-text centText pad-5">
                                                             <h3 class="h3 mb-3 black font-weight-bold">${this.card.client.name}</h3>
                                                             <p class="mb-0">${this.card.planName}</p>
-<<<<<<< HEAD
                                                             <p class="mb-0">Días restantes ${day}</p>
                                                             <small class="mb-0">Estado ${this.card.status}</small>
-=======
-                                                            <p class="mb-0">Days left ${day}</p>
-                                                            <small class="mb-0">Status ${this.card.status}</small>
->>>>>>> 4d7be6e275a0b6c0650260ef73c1392a41f9ca39
                                                         </div>
                                                         <div id="colcheck" class="col-check centIcon">
                                                             <h1 class="h1check">
@@ -149,10 +144,35 @@ class Card {
                     } else details.innerHTML = "";
                 });
             });
-
-
-
-
         }
+    }
+
+    filterCard = (container) =>{
+        let div = document.createElement("div");
+
+            let day = daysLeft(this.card.memEndDate);
+            let html = "";
+
+            html = `<div id="${this.card.client.id}" class="card mb-4 py-3 onHover cardSelStyle border-left-success">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="column centIcon">
+                                    <div class="icons">
+                                        <i class="fas fa-arrow-circle-left fa-5x icon-hover"></i>
+                                        <i class="fas fa-user-circle fa-5x icon-default"></i>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <h3 class="h3 mb-0 black font-weight-bold">${this.card.client.name}</h3>
+                                    <p class="mb-0">Plan: ${this.card.planName}</p>
+                                    <p class="mb-0">Days left ${day}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+            div.innerHTML = html;
+
+            let cardComplete = div.firstChild;
+            container.appendChild(cardComplete);
     }
 }

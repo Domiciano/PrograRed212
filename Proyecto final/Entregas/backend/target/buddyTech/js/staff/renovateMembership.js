@@ -10,6 +10,16 @@ var plansFull = undefined;
 var venues = undefined;
 
 
+
+
+const retrieveClient = () => {
+    if(localStorage.getItem('clientToRenovate') !== null){
+        let retrievedClient = localStorage.getItem('clientToRenovate');
+        let parseClient = JSON.parse(retrievedClient);
+        clientidTF.value = parseClient.natId;
+    }
+}
+
 const getPlans = async () => {
     let html = `<option selected disabled selected hidden>Elegir Plan...</option>`;
     let plans = await fetch("http://localhost:8080/backend/api/ps/getactive");
@@ -35,7 +45,7 @@ const getVenues = async () => {
     }
     citySelect.innerHTML = html;
 }
-
+retrieveClient();
 getPlans();
 getVenues();
 
