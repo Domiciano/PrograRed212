@@ -1,5 +1,6 @@
 package services;
 
+import model.MainGraphData;
 import provider.DashProvider;
 import sql.SQLAdmin;
 
@@ -37,16 +38,6 @@ public class DashServices {
         }
     }
 
-    @OPTIONS
-    @Path("card/{city}-{year}")
-    public Response options(@PathParam("city") String city, @PathParam("year") boolean isYear){
-        return Response.status(200)
-                .header("access-control-allow-origin", "*")
-                .header("access-control-allow-methods", "*")
-                .header("access-control-allow-headers", "*")
-                .build();
-    }
-
     @GET
     @Path("card/{city}/{year}")
     public Response earnings(@PathParam("city") String city, @PathParam("year") boolean isYear){
@@ -55,7 +46,7 @@ public class DashServices {
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (SQLException | ParseException e) {
             e.printStackTrace();
-            SQLAdmin.getInstance().closeAllConnections();
+           // SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
@@ -68,20 +59,20 @@ public class DashServices {
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (SQLException | ParseException e) {
             e.printStackTrace();
-            SQLAdmin.getInstance().closeAllConnections();
+            //SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
 
     @GET
-    @Path("clientStatusData")
-    public Response clientStatusData(){
+    @Path("clientStatusData/{city}")
+    public Response clientStatusData(@PathParam("city") String city){
         try {
-            ArrayList<Integer> res = provider.clientStatusData();
+            ArrayList<Integer> res = provider.clientStatusData(city);
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (SQLException | ParseException e) {
             e.printStackTrace();
-            SQLAdmin.getInstance().closeAllConnections();
+            //SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
@@ -94,7 +85,7 @@ public class DashServices {
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (NullPointerException e) {
             e.printStackTrace();
-            SQLAdmin.getInstance().closeAllConnections();
+            //SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
@@ -107,7 +98,7 @@ public class DashServices {
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch ( SQLException e) {
             e.printStackTrace();
-            SQLAdmin.getInstance().closeAllConnections();
+            //SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
@@ -120,34 +111,46 @@ public class DashServices {
             return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
         } catch (NullPointerException e) {
             e.printStackTrace();
-            SQLAdmin.getInstance().closeAllConnections();
+            //SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
 
     @GET
-    @Path("client-ages")
-    public Response clientsByAge(){
+    @Path("client-ages/{city}")
+    public Response clientsByAge(@PathParam("city") String city){
         try {
-            ArrayList<Integer> res = provider.clientsByAge();
-            return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
+            ArrayList<Integer> res = provider.clientsByAge(city);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .entity(res)
+                    .build();
         } catch ( SQLException e) {
             e.printStackTrace();
-            SQLAdmin.getInstance().closeAllConnections();
-            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
+            //SQLAdmin.getInstance().closeAllConnections();
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .entity(e)
+                    .build();
         }
     }
 
     @GET
-    @Path("monthly-earnings")
-    public Response monthlyEarnings(){
+    @Path("monthly-earnings/{city}")
+    public Response monthlyEarnings(@PathParam("city") String city){
         try {
-            ArrayList<Integer> res = provider.monthlyEarnings();
-            return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
+            ArrayList<MainGraphData> res = provider.monthlyEarnings(city);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .entity(res)
+                    .build();
         } catch ( SQLException e) {
             e.printStackTrace();
-            SQLAdmin.getInstance().closeAllConnections();
-            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
+            //SQLAdmin.getInstance().closeAllConnections();
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .entity(e)
+                    .build();
         }
     }
 }

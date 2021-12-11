@@ -27,11 +27,14 @@ public class SQLAdmin {
     }
 
     public void closeAllConnections() {
-        if (!connections.isEmpty()) {
-            for (int i = 0; i < connections.size(); i++) {
+        if (connections.size() > 0) {
+            int size = connections.size();
+            for (int i = 0; i < size; i++) {
                 try {
-                    connections.get(i).close();
-                    connections.remove(i);
+                    if(connections.get(i) != null){
+                        connections.get(i).close();
+                        connections.remove(i);
+                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

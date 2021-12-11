@@ -1,5 +1,6 @@
 package provider;
 
+import model.MainGraphData;
 import model.Membership;
 import sql.MySQL;
 import sql.SQLAdmin;
@@ -62,15 +63,28 @@ public class DashProvider {
             }
         }
 
-        value = ((value*100)/(list.size()-block));
-        return value;
+        if(list.isEmpty()){
+            return 0;
+        } else {
+            value = ((value*100)/(list.size()-block));
+            return value;
+        }
+
     }
 
-    public ArrayList<Integer> clientStatusData() throws SQLException, ParseException{
+    public ArrayList<Integer> clientStatusData(String city) throws SQLException, ParseException{
 
-        String sql = "SELECT cs.status FROM clientsBuddy c, venuesBuddy v, cityBuddy ct, " +
-                " memberShipBuddy m, clientStatusBuddy cs WHERE c.memberShipBuddyID = m.id AND m.venuesBuddyID = v.id" +
-                " AND v.cityBuddyID = ct.id ";
+        String sql = "";
+        if(city.equals("all")){
+            sql = "SELECT cs.status FROM clientsBuddy c, venuesBuddy v, cityBuddy ct, " +
+                    " memberShipBuddy m, clientStatusBuddy cs WHERE c.memberShipBuddyID = m.id AND m.venuesBuddyID = v.id" +
+                    " AND v.cityBuddyID = ct.id ";
+        } else {
+            sql = "SELECT cs.status FROM clientsBuddy c, venuesBuddy v, cityBuddy ct, " +
+                    " memberShipBuddy m, clientStatusBuddy cs WHERE c.memberShipBuddyID = m.id AND m.venuesBuddyID = v.id" +
+                    " AND v.cityBuddyID = ct.id AND ct.name = '"+city+"'";
+        }
+
         ArrayList<String> list = new ArrayList<>();
         MySQL db = SQLAdmin.getInstance().addConnection();
 
@@ -108,9 +122,9 @@ public class DashProvider {
 
     public ArrayList<String> clientStatusLabels(){
         ArrayList<String> result = new ArrayList<>();
-        result.add("In");
-        result.add("Out");
-        result.add("Block");
+        result.add("Ingresado");
+        result.add("Afuera");
+        result.add("Bloqueado");
 
         return result;
     }
@@ -119,15 +133,15 @@ public class DashProvider {
 
     public ArrayList<String> planStatusLabels(){
         ArrayList<String> result = new ArrayList<>();
-        result.add("Active");
-        result.add("Inactive");
+        result.add("Activo");
+        result.add("Inactivo");
 
         return result;
     }
 
     public ArrayList<Integer> planStatusData() throws SQLException {
-
         String sql = "SELECT pb.active FROM  plansBuddy pb";
+
         ArrayList<Boolean> list = new ArrayList<>();
         MySQL db = SQLAdmin.getInstance().addConnection();
 
@@ -172,8 +186,16 @@ public class DashProvider {
         return list;
     }
 
-    public ArrayList<Integer> clientsByAge() throws SQLException {
-        String sql = "SELECT c.age FROM clientsBuddy c ";
+    public ArrayList<Integer> clientsByAge(String city) throws SQLException {
+        String sql = "";
+        if(city.equals("all")){
+            sql = "SELECT c.age FROM clientsBuddy c ";
+        }else{
+            sql = "SELECT cl.age FROM clientsBuddy cl, memberShipBuddy mb " +
+                    "JOIN venuesBuddy vb JOIN cityBuddy cb " +
+                    "WHERE mb.venuesBuddyID = vb.id AND vb.cityBuddyID = cb.id " +
+                    "AND cb.name = '"+city+"' AND cl.memberShipBuddyID = mb.id ";
+        }
         ArrayList<Integer> list = new ArrayList<>();
         MySQL db = SQLAdmin.getInstance().addConnection();
 
@@ -215,34 +237,45 @@ public class DashProvider {
         return result;
     }
 
-    public ArrayList<Integer> monthlyEarnings() throws SQLException {
+    public ArrayList<MainGraphData> monthlyEarnings(String city) throws SQLException {
 
-        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<MainGraphData> list = new ArrayList<>();
 
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String[] date = simpleDateFormat.format(new Date()).split("-");
 
+        String day = date[2];
         int month = Integer.parseInt(date[1]);
         int year = Integer.parseInt(date[0]);
 
-        for (int i = 1; i < 13; i++) {
             String hM = String.format("%02d", month);
             String hY = String.format("%02d", year);
 
+        for (int i = 0; i < 12; i++) {
             month--;
             if (month <= 0) {
                 month = 12;
                 year--;
             }
-
+        }
             String sM = String.format("%02d", month);
             String sY = String.format("%02d", year);
 
-            String sql = "SELECT mb.totalAmount, mb.discount, mb.startDate" +
-                    " FROM  memberShipBuddy mb " +
-                    " WHERE mb.startDate > " + sY + sM + "01 AND mb.startDate < "
-                    + hY + hM + "01";
+        String sql = "";
+
+        if(city.equals("all")){
+                sql = "SELECT mb.totalAmount, mb.discount, mb.startDate" +
+                        " FROM  memberShipBuddy mb " +
+                        " WHERE mb.startDate > " + sY + sM + day + " AND mb.startDate < "
+                        + hY + hM + day;
+            } else {
+                sql = "SELECT mb.totalAmount, mb.discount, mb.startDate " +
+                        "FROM memberShipBuddy mb JOIN venuesBuddy vb JOIN cityBuddy cb " +
+                        "WHERE mb.startDate > " + sY + sM + day + " AND mb.startDate < " + hY + hM + day +
+                        " AND mb.venuesBuddyID = vb.id AND vb.cityBuddyID = cb.id AND cb.name = '"+city+"'";
+            }
+
 
             MySQL db = SQLAdmin.getInstance().addConnection();
 
@@ -251,11 +284,12 @@ public class DashProvider {
             while (results.next()) {
                 int amount = results.getInt(results.findColumn("totalAmount"));
                 int discount = results.getInt(results.findColumn("discount"));
+                Date dateStart = results.getDate(results.findColumn("startDate"));
                 int total = amount - discount;
-                list.add(total);
+                list.add(new MainGraphData(total, dateStart));
             }
             db.close();
-        }
+
         return  list;
     }
 }
