@@ -12,11 +12,12 @@ const getCardInfo = async () => {
     
     let response1 = await fetch("http://localhost:8080/backend/api/ps/getAll")
     let data = await response1.json();
+    console.log(data);
     for(let i in data){
         let plan = data[i];
         let cardView = new cardsPlan(plan);
-        let view = cardView.render();
-        cardsC.appendChild(view);
+        let view = cardView.render(cardsC);
+        //cardsC.appendChild(view);
         $('[data-bs-toggle="popover"]').popover({
 
         });
@@ -25,7 +26,7 @@ const getCardInfo = async () => {
 
 const getClientsByParam = async ()=>{
     let filter = checkFilter();
-    let response = await fetch("http://localhost:8080/backend/api/getclients/"+filter.nameO+"-"+filter.amountf0+"-"+filter.amountt0+"-"+filter.status0);
+   // let response = await fetch("http://localhost:8080/backend/api/getclients/"+filter.nameO+"-"+filter.amountf0+"-"+filter.amountt0+"-"+filter.status0);
     let clients = await response.json();
     cardsC.innerHTML = "";
     for(let i in clients){

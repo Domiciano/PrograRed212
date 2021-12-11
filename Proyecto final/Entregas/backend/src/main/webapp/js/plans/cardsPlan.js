@@ -43,7 +43,7 @@ class cardsPlan{
                                <h3 class="h3 mb-0 black font-weight-bold">${this.plan.name}</h3>
                                <p class="mb-0">Precio: ${this.plan.amount}</p>
                                <p class="mb-0">Fecha: ${this.plan.time}</p>
-                               <p class="mb-0">Estado: ${this.plan.status}</p>
+                               <p class="mb-0">Estado: ${this.plan.active}</p>
                            </div>
                            <div id="colcheck" class="col-check centIcon">
                                <h2 class="h2check ml-5">
