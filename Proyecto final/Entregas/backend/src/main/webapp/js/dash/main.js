@@ -1,4 +1,6 @@
 import { firstChard, secondChard } from "../demo/chart-pie-demo.js";
+import { chard } from "../demo/chart-area-demo.js";
+import { months } from "./months.js";
 
 // Select
 const selectCity = document.getElementById("selectCity");
@@ -12,29 +14,115 @@ const capacity = document.getElementById("capacity");
 const ctx1 = document.getElementById("myPieChart");
 const ctx2 = document.getElementById("myPieChart2");
 
+// Bars Age Chards
+const ageBar1 = document.getElementById("ageBar1");
+const ageBar2 = document.getElementById("ageBar2");
+const ageBar3 = document.getElementById("ageBar3");
+const ageBar4 = document.getElementById("ageBar4");
+const ageBar5 = document.getElementById("ageBar5");
+
+const progressbar1 = document.getElementById("progressbar1");
+const progressbar2 = document.getElementById("progressbar2");
+const progressbar3 = document.getElementById("progressbar3");
+const progressbar4 = document.getElementById("progressbar4");
+const progressbar5 = document.getElementById("progressbar5");
+
+// Main Chard
+const mainChard = document.getElementById("myAreaChart");
+
+// Load User
+const userName = document.getElementById("userName");
+let userLoged = JSON.parse(window.localStorage.getItem('user')); 
+
+// URL
 const url = "http://192.168.1.54:8080/buddyTech_war/api/dash/";
 
-const loadMainGraph = async () => {};
+
+const loadName = () => {
+  userName.innerHTML = userLoged.name;
+}
+
+const loadMainGraph = async () => {
+  let response = await fetch(url + "monthly-earnings/"+selectCity.value);
+  let data;
+
+  months.forEach(mt => {
+    mt.value = 0;
+  });
+
+  if (response.ok) {
+    data = await response.json();
+
+    //console.log(data)
+    
+    for (let i = 0; i < data.length; i++) {
+
+      let record = data[i];
+      let recordDate = record.date.split("-");
+      let found = false;
+
+      for (let j = 0; j < months.length && !found; j++) {
+        if(recordDate[1] == months[j].num){
+          months[j].value += record.amount;
+          found = true;
+        } 
+      }
+    }
+
+    let startMonth = data[data.length-1].date.split("-")[1]+1;
+    if(startMonth > 11){
+      startMonth = 0;
+    }
+    let orderedList = []
+
+    for (let i = 0; i < months.length; i++) {
+      orderedList.push(months[startMonth]);
+      startMonth++;
+      if (startMonth > 11) {
+        startMonth = 0;
+      }
+    }
+
+    //console.log(orderedList)
+
+    chard(orderedList, mainChard);
+  }
+};
 
 const loadAgeSementation = async () => {
-  let response = await fetch(url + "client-ages");
+  let response = await fetch(url + "client-ages/"+selectCity.value);
   let data;
 
   if (response.ok) {
     data = await response.json();
+
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+       sum += data[i];
+    }
+
+    let per = data.map(function(num){
+      let value = (num*100)/sum;
+      return value+"%";
+    })
+
+    progressbar1.style.width = per[0];
+    progressbar2.style.width = per[1];
+    progressbar3.style.width = per[2];
+    progressbar4.style.width = per[3];
+    progressbar5.style.width = per[4];
+
+    ageBar1.innerHTML = per[0];
+    ageBar2.innerHTML = per[1];
+    ageBar3.innerHTML = per[2];
+    ageBar4.innerHTML = per[3];
+    ageBar5.innerHTML = per[4];
   }
-  let labels = ["20 <", "20 a 30", "31 a 40", "41 a 50", "< 50"];
-
-  let graphInfo = {
-    data,
-    labels,
-  };
-
-  return graphInfo;
+  
 };
 
 const loadClientStatus = async () => {
-  let response1 = await fetch(url + "clientStatusData");
+  let response1 = await fetch(url + "clientStatusData/"+selectCity.value);
   let data;
 
   if (response1.ok) {
@@ -85,9 +173,11 @@ const loadCards = async () => {
 };
 
 const loadData = () => {
+  loadMainGraph();
   loadCards();
   loadClientStatus();
   loadPlansStatus();
+  loadAgeSementation();
 };
 
 const loadSelectMenu = async () => {
@@ -97,11 +187,16 @@ const loadSelectMenu = async () => {
     selectCity.innerHTML = '<option value="all" selected>Todas</option>';
 
     cities.forEach((city) => {
-      let option = new CitySelect(city);
+      let option = new CitySelect(city, userLoged.city);
       option.render(selectCity);
     });
+
+    if(userLoged.city !== "all"){
+      selectCity.disabled = true;
+    }
     loadData();
   }
 };
 
+loadName();
 loadSelectMenu();

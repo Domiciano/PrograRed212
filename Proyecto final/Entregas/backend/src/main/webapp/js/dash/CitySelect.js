@@ -1,7 +1,8 @@
 class CitySelect{
-    constructor(city){
+    constructor(city, selectCity){
         this.city = city;
         this.value = city;
+        this.selectCity = selectCity;
         Object.seal(this);
     }
 
@@ -9,6 +10,9 @@ class CitySelect{
         let option = document.createElement("option");
         option.value = this.value;
         option.innerHTML += this.city;
+        if(this.city === this.selectCity){
+            option.selected = true;
+        }
         container.appendChild(option);
     }
 }
