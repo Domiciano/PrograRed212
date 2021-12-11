@@ -175,6 +175,17 @@ public class ClientServices {
         }
     }
 
+    @OPTIONS
+    @Path("deleteClient/{clientId}")
+    public Response optionsDelete(@PathParam("clientId") String natID){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
+
     @DELETE
     @Path("deleteClient/{clientId}")
     @Produces("application/json")

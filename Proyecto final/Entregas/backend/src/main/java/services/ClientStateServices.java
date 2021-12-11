@@ -8,12 +8,23 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 @Path("css")
 public class ClientStateServices {
 
     @GET
     @Path("echo")
     public String echo(){return "echo";}
+
+    @OPTIONS
+    @Path("clientsState")
+    public Response optionsClientState(){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
 
     @GET
     @Path("clientsState")
@@ -22,11 +33,15 @@ public class ClientStateServices {
         ClientStateProvider provider = new ClientStateProvider();
         try {
             ArrayList<ClientState> res = provider.getData();
-            return Response.status(200).entity(res).build();
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*")
+                    .entity(res).build();
         } catch (SQLException e) {
             e.printStackTrace();
             SQLAdmin.getInstance().closeAllConnections();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).entity(e)
+                    .header("access-control-allow-origin", "*")
+                    .build();
         }
     }
 

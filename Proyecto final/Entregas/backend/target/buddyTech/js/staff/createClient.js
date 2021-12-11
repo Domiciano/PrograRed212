@@ -11,7 +11,7 @@ const registerBtn = document.getElementById("registerBtn");
 const discountTF = document.getElementById("discountTF");
 const myModal = new bootstrap.Modal(document.getElementById('staffCteClientModal'));
 const modalBody = document.getElementById("staffCteClientModalBody");
-var plansFull = undefined;
+var statusReady = undefined;
 var venues = undefined;
 /*
 let html1 = `<option selected disabled selected hidden>Elegir Plan...</option>`;
@@ -25,11 +25,11 @@ citySelect.innerHTML = html2;
 const getPlans = async () => {
     let html = `<option selected disabled selected hidden>Elegir Plan...</option>`;
     let plans = await fetch("http://localhost:8080/backend/api/ps/getactive");
-    plansFull = await plans.json();
-    console.log(plansFull);
+    statusReady = await plans.json();
+    console.log(statusReady);
 
-    for (let i in plansFull) {
-        let incomingName = plansFull[i].name;
+    for (let i in statusReady) {
+        let incomingName = statusReady[i].name;
         html += `<option value="${i}">${incomingName}</option>`;
     }
     planSelect.innerHTML = html;
@@ -72,9 +72,9 @@ const createClient = async () => {
 
         //Membership-------------------------------------------------     
         let myplan;
-        for (let i in plansFull) {
-            let incoming = plansFull[i];
-            if (planSelect.options[planSelect.selectedIndex].text === plansFull[i].name) {
+        for (let i in statusReady) {
+            let incoming = statusReady[i];
+            if (planSelect.options[planSelect.selectedIndex].text === statusReady[i].name) {
                 myplan = incoming;
                 break;
             }
