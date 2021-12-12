@@ -2,16 +2,12 @@ const loginBtn = document.getElementById("loginBtn");
 const userIdTF = document.getElementById("userIdTF");
 const passTF = document.getElementById("passTF");
 
-const url = "http://192.168.1.54:8080/buddyTech_war/api/";
+//const url = "http://192.168.1.54:8080/buddyTech_war/api/";
+const url = "http://localhost:8080/buddyTech_war/api/";
 
 //let city = "";
 
 const getCityName = async (id) => {
-  /* fetch(url + "cty/" + id)
-        .then(response => response.text())
-        .then((response) => {
-            console.log(response)
-        }) */
 
   let response = await fetch(url + "cty/" + id);
   if(response.ok){
@@ -52,8 +48,8 @@ const login = async () => {
         name: `${data.name} ${data.lastName}`,
       };
 
-      console.log(user);
-      user.city = "Bogotá";
+      //console.log(user);
+      
       window.localStorage.setItem('user', JSON.stringify(user));
 
       if(user.role == 1){

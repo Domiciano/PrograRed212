@@ -4,7 +4,7 @@ export const firstChard = (labels, data, ctx) => {
   (Chart.defaults.global.defaultFontFamily = "Nunito"),
     '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
   Chart.defaults.global.defaultFontColor = "#858796";
-
+  
   // Pie Chart Example
   var myPieChart = new Chart(ctx, {
     type: "doughnut",
@@ -32,11 +32,12 @@ export const firstChard = (labels, data, ctx) => {
         caretPadding: 10,
       },
       legend: {
-        display: false,
+        display: true,
       },
       cutoutPercentage: 80,
     },
   });
+  
 };
 
 // Pie Chart Example
@@ -73,7 +74,7 @@ export const secondChard = (labels, data, ctx) => {
         caretPadding: 10,
       },
       legend: {
-        display: false,
+        display: true,
       },
       cutoutPercentage: 80,
     },
