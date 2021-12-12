@@ -15,7 +15,7 @@
 .cardsC{
     
     
-    width: 40%;
+    width: 70%;
     height: 100%;
     overflow-y: scroll;
     padding: 20px;
@@ -32,7 +32,7 @@
   flex-direction: column;
    width: 60%;
    background-color: rgb(255, 255, 255);
-   margin-right: 30px;
+   margin-right: 10px;
    align-items: center;
    
 }
@@ -44,8 +44,9 @@ flex-direction: row;
 align-items: center;
 column-gap: 40px;
  background-color: #1198e1;
- width: 80%;
+ width: 50%;
  margin:10px;
+ margin-left: 250px;
  padding: 20px;
  min-height: 20%;
  background-color: rgb(255, 255, 255);
@@ -80,7 +81,7 @@ column-gap: 40px;
     
   font-size: 50px;
   
-  color:rgb(0, 0, 0); 
+  color:rgb(160, 157, 157); 
 -webkit-text-stroke:1px rgb(0, 0, 0);
   
 }
@@ -234,6 +235,7 @@ column-gap: 40px;
   font-weight: bold;
   border: none;
   background-color: #ffffff;
+  
  
 }
 
@@ -244,14 +246,6 @@ column-gap: 40px;
   
  }
 
-/*
-.mb-1{
-
-  width:100px;
- 
-}
-
-*/
 
 
 /* Popover container */
@@ -259,27 +253,39 @@ column-gap: 40px;
 .box-shadow{
   box-shadow: 0px 0px 15px 2px #dadada;
   
+  
 }
 
 /* Popover */
 
 details[data-popover] {
-  position: relative;
   display: flex;
   justify-content: end;
   position: absolute;
+  background-color: #ffffff;
+  
+  
+  
 }
 
-/*
+
 details[data-popover] > summary:focus {
   outline: none;
 }
+
+
 details[data-popover] > summary::-webkit-details-marker {
   display: none;
 }
+
+/*
+
 details[data-popover] > summary {
   list-style: none;
 }
+*/
+
+
 details[data-popover] > summary + * {
   position: absolute;
   display: flex;
@@ -287,22 +293,26 @@ details[data-popover] > summary + * {
   width: 350%;
   border: solid 1px teal;
   border-radius: 5%;
-  margin-top: 10px;
-  padding-left: 0px;
+  margin-top: 5px;
+  padding-right: 0px;
   padding-top: 20px;
-  left: -575px;
+  left: -400px;
   background: rgb(255, 255, 255);
   border: none;
+  top: -70px;
+  
 }
 
-*/
+
 
 
 details[data-popover] .row{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  right: 0;
 }
+
 
 
 details[data-popover] .column{
@@ -311,12 +321,14 @@ details[data-popover] .column{
     width: 80%;
 }
 
-/*
+
 
 details[data-popover] .column p{
   color: rgb(179, 179, 179);
   font-weight:500;
+  margin-top: 12px;
   padding-left: 40px;
+  
 }
 
 details[data-popover] .column h5{
@@ -325,6 +337,8 @@ details[data-popover] .column h5{
   margin-bottom: 0px;
   margin-top: 10px;
   padding-left: 40px;
+  font-size: 15px;
+  
 }
 
 details[data-popover] .column2{
@@ -333,6 +347,7 @@ details[data-popover] .column2{
     width: 70%;
 }
 
+
 details[data-popover] .column2 a{
   margin-bottom: 10px;
   width: 90px;
@@ -340,9 +355,10 @@ details[data-popover] .column2 a{
 }
 /*
 details[data-popover] > * + * {
-   /*hide detail elements that would ruin the popover/*
+
   display: none;
 }
+/*
 
 details[data-popover="up"] > summary + * {
   bottom: calc(0.5rem + 100%);
@@ -383,19 +399,6 @@ details[data-popover="right"] > summary + * {
   border-color: red;
 }
 
-.detailBan{
-  border-width: 5px;
-  border-color: rgb(216, 152, 56);
-  color: rgb(216, 152, 56);
-  font-weight: bold;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.detailBan:hover{
-  color: rgb(255, 196, 0);
-  border-color: rgb(255, 196, 0);
-}
 
 
 

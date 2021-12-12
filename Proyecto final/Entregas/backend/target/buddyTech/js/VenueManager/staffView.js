@@ -52,37 +52,33 @@ class staffView{
             <div class="box-shadow">
                 <div class="row">
                     <div class="column">
-                        <h5>name</h5>
-                        <p>Juan</p>
+                        <h5>Nombre</h5>
+                        <p>${this.user.user.name}</p>
                     </div>
                     <div class="column">
-                        <h5>lastname</h5>
-                        <p>Gómez</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="column">
-                        <h5>natid</h5>
-                        <p>3210684</p>
-                    </div>
-                    <div class="column">
-                        <h5>plan</h5>
-                        <p>Gold</p>
+                        <h5>Apellido</h5>
+                        <p>${this.user.user.lastName}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="column">
-                        <h5>height</h5>
-                        <p>1.80</p>
+                        <h5>Cedula</h5>
+                        <p>${this.user.user.id}</p>
+                    </div>                
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h5>Sede</h5>
+                        <p>${this.user.venueName}</p>
                     </div>
                     <div class="column">
-                        <h5>weight</h5>
-                        <p>60kg</p>
+                        <h5>Ciudad</h5>
+                        <p>${this.user.cityName}</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="column2">
-                        <a id="delete${this.user.user.id}btn"class="btn detailDelete">Delete</a>
+                        <a id="delete${this.user.user.id}btn"class="btn detailDelete">Borrar</a>
                     </div>
                 </div>
             </div>
