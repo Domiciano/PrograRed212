@@ -9,9 +9,10 @@ const selectCity = document.getElementById("selectCity");
 const earningMonth = document.getElementById("earningMonth");
 const earningYear = document.getElementById("earningYear");
 const capacity = document.getElementById("capacity");
+const occupationBar = document.getElementById("occupationBar");
 
 // Pie Chards
-const ctx1 = document.getElementById("myPieChart");
+let ctx1 = document.getElementById("myPieChart");
 const ctx2 = document.getElementById("myPieChart2");
 
 // Bars Age Chards
@@ -28,22 +29,25 @@ const progressbar4 = document.getElementById("progressbar4");
 const progressbar5 = document.getElementById("progressbar5");
 
 // Main Chard
-const mainChard = document.getElementById("myAreaChart");
+let mainChard = document.getElementById("myAreaChart");
 
 // Load User
 const userName = document.getElementById("userName");
-let userLoged = JSON.parse(window.localStorage.getItem('user')); 
+let userLoged = JSON.parse(window.localStorage.getItem('user'));
 
 // URL
-const url = "http://192.168.1.54:8080/buddyTech_war/api/dash/";
+//const url = "http://192.168.1.54:8080/buddyTech_war/api/dash/";
+const url = "http://localhost:8080/buddyTech_war/api/dash/";
 
+//logout
+const logoutBtn = document.getElementById("logoutBtn");
 
 const loadName = () => {
   userName.innerHTML = userLoged.name;
 }
 
 const loadMainGraph = async () => {
-  let response = await fetch(url + "monthly-earnings/"+selectCity.value);
+  let response = await fetch(url + "monthly-earnings/" + selectCity.value);
   let data;
 
   months.forEach(mt => {
@@ -54,26 +58,35 @@ const loadMainGraph = async () => {
     data = await response.json();
 
     //console.log(data)
-    
-    for (let i = 0; i < data.length; i++) {
+    let startMonth = 0;
 
-      let record = data[i];
-      let recordDate = record.date.split("-");
-      let found = false;
+    if (data.length > 0) {
+      for (let i = 0; i < data.length; i++) {
 
-      for (let j = 0; j < months.length && !found; j++) {
-        if(recordDate[1] == months[j].num){
-          months[j].value += record.amount;
-          found = true;
-        } 
+        let record = data[i];
+        let recordDate = record.date.split("-");
+        let found = false;
+
+        for (let j = 0; j < months.length && !found; j++) {
+          if (recordDate[1] == months[j].num) {
+            months[j].value += record.amount;
+            found = true;
+          }
+        }
       }
+
+      startMonth = data[data.length - 1].date.split("-")[1] + 1;
+
+      if (startMonth > 11) {
+        startMonth = 0;
+      }
+
+    } else {
+      let dateObj = new Date(Date.now());
+      startMonth = dateObj.getMonth();
     }
 
-    let startMonth = data[data.length-1].date.split("-")[1]+1;
-    if(startMonth > 11){
-      startMonth = 0;
-    }
-    let orderedList = []
+    let orderedList = [];
 
     for (let i = 0; i < months.length; i++) {
       orderedList.push(months[startMonth]);
@@ -82,29 +95,41 @@ const loadMainGraph = async () => {
         startMonth = 0;
       }
     }
-
     //console.log(orderedList)
-
     chard(orderedList, mainChard);
   }
 };
 
 const loadAgeSementation = async () => {
-  let response = await fetch(url + "client-ages/"+selectCity.value);
+  let response = await fetch(url + "client-ages/" + selectCity.value);
   let data;
+  let per = [];
 
   if (response.ok) {
     data = await response.json();
+    let isEmpty = true;
+    
+    data.forEach(element => {
+      if (element != 0) {
+        isEmpty = false;
+      }
+    });
+  
+    if(!isEmpty){
 
-    let sum = 0;
+      let sum = 0;
     for (let i = 0; i < data.length; i++) {
-       sum += data[i];
+      sum += data[i];
     }
 
-    let per = data.map(function(num){
-      let value = (num*100)/sum;
-      return value+"%";
+    per = data.map(function (num) {
+      let value = (num * 100) / sum;
+      return value + "%";
     })
+
+    } else {
+      per = ['0%','0%','0%','0%','0%','0%']
+    }
 
     progressbar1.style.width = per[0];
     progressbar2.style.width = per[1];
@@ -118,11 +143,11 @@ const loadAgeSementation = async () => {
     ageBar4.innerHTML = per[3];
     ageBar5.innerHTML = per[4];
   }
-  
+
 };
 
 const loadClientStatus = async () => {
-  let response1 = await fetch(url + "clientStatusData/"+selectCity.value);
+  let response1 = await fetch(url + "clientStatusData/" + selectCity.value);
   let data;
 
   if (response1.ok) {
@@ -134,6 +159,8 @@ const loadClientStatus = async () => {
   if (response2.ok) {
     labels = await response2.json();
   }
+
+  //console.log(data);
 
   firstChard(labels, data, ctx1);
 };
@@ -154,6 +181,7 @@ const loadPlansStatus = async () => {
 
 const loadCards = async () => {
   let city = selectCity.value;
+
   let response1 = await fetch(url + `card/${city}/false`);
   let response2 = await fetch(url + `card/${city}/true`);
   let response3 = await fetch(url + `occupation/${city}`);
@@ -168,7 +196,9 @@ const loadCards = async () => {
   }
   if (response3.ok) {
     let occupation = await response3.json();
-    capacity.innerHTML = occupation + "%";
+    occupation = `${occupation}%`
+    capacity.innerHTML = occupation;
+    occupationBar.style.width = occupation;
   }
 };
 
@@ -191,12 +221,28 @@ const loadSelectMenu = async () => {
       option.render(selectCity);
     });
 
-    if(userLoged.city !== "all"){
+    if (userLoged.city !== "all") {
       selectCity.disabled = true;
     }
     loadData();
   }
 };
 
+logoutBtn.addEventListener('click', ()=>{
+  window.location.href = "index.html";
+  userLoged = undefined;
+})
+
+selectCity.addEventListener('change', () =>{
+  
+  document.getElementById("chartContainer1").innerHTML = '<canvas id="myAreaChart"></canvas>';
+  document.getElementById("chartContainer2").innerHTML = '<canvas id="myPieChart"></canvas>';
+  mainChard = document.getElementById("myAreaChart");
+  ctx1 = document.getElementById("myPieChart");
+
+loadData();
+});
+
 loadName();
 loadSelectMenu();
+
