@@ -153,24 +153,93 @@ class Card {
             let day = daysLeft(this.card.memEndDate);
             let html = "";
 
-            html = `<div id="${this.card.client.id}" class="card mb-4 py-3 onHover cardSelStyle border-left-success">
+            html = `<div id="${this.card.client.id}" class="card mb-4 py-3 cardSelStyle border-left-success">
                         <div class="card-body">
                             <div class="row">
-                                <div class="column centIcon">
+                                <div class="column-1 centIcon">
                                     <div class="icons">
-                                        <i class="fas fa-arrow-circle-left fa-5x icon-hover"></i>
-                                        <i class="fas fa-user-circle fa-5x icon-default"></i>
+                                        <i class="fas fa-arrow-circle-left fa-3x icon-hover"></i>
+                                        <i class="fas fa-user-circle fa-3x icon-default"></i>
                                     </div>
                                 </div>
-                                <div class="column">
-                                    <h3 class="h3 mb-0 black font-weight-bold">${this.card.client.name}</h3>
+                                <div class="column-2">
+                                    <h5 class="mb-0 black font-weight-bold">${this.card.client.name}</h5>
                                     <p class="mb-0">Plan: ${this.card.planName}</p>
                                     <p class="mb-0">Days left ${day}</p>
                                 </div>
                             </div>
                         </div>
+                        <button class="seeDet">
+                                        <details class="mb-1" data-popover="right">
+                                            <summary>
+                                                See detail
+                                                <i class="fas fa-chevron-right pl-3"></i>
+                                            </summary>
+
+                                            <div class="box-shadow">
+                                                <div class="row">
+                                                    <div class="column">
+                                                    <h5>Nombre</h5>
+                                                    <p>${this.card.client.name}</p>
+                                                    </div>
+                                                    <div class="column">
+                                                    <h5>Apellido</h5>
+                                                    <p>${this.card.client.lastname}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="column">
+                                                    <h5>Cédula</h5>
+                                                    <p>${this.card.client.natId}</p>
+                                                    </div>
+                                                    <div class="column">
+                                                    <h5>Plan</h5>
+                                                    <p>${this.card.planName}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="column">
+                                                    <h5>Altura</h5>
+                                                    <p>${this.card.client.height}</p>
+                                                    </div>
+                                                    <div class="column">
+                                                    <h5>Peso</h5>
+                                                    <p>${this.card.client.weight}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="column2">
+                                                        <a class="btn detailDelete">Delete</a>
+                                                        <a class="btn detailBan">Ban</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </details>
+                                    </button>
                     </div>`
             div.innerHTML = html;
+
+            var deleteBtn = div.querySelector(".detailDelete");
+            var banBtn = div.querySelector(".detailBan");
+
+            deleteBtn.addEventListener("click", async() => {
+                let response = await fetch("http://localhost:8080/backend/api/cls/deleteClient/" + this.card.client.natId, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                });
+                let data = await response.json();
+                console.log(data);
+                filtering();
+            });
+
+            banBtn.addEventListener("click", async() => {
+                let response = await fetch("http://localhost:8080/backend/api/cls/editclientstatusbyid/" + this.card.client.natId + "/" + 1, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                });
+                let data = await response.json();
+                console.log(data);
+            });
 
             let cardComplete = div.firstChild;
             container.appendChild(cardComplete);
