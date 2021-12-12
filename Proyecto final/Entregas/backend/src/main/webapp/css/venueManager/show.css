@@ -15,7 +15,7 @@
 .cardsC{
     
     
-    width: 40%;
+    width: 70%;
     height: 100%;
     overflow-y: scroll;
     padding: 20px;
@@ -32,7 +32,7 @@
   flex-direction: column;
    width: 60%;
    background-color: rgb(255, 255, 255);
-   margin-right: 30px;
+   margin-right: 10px;
    align-items: center;
    
 }
@@ -44,8 +44,9 @@ flex-direction: row;
 align-items: center;
 column-gap: 40px;
  background-color: #1198e1;
- width: 80%;
+ width: 50%;
  margin:10px;
+ margin-left: 250px;
  padding: 20px;
  min-height: 20%;
  background-color: rgb(255, 255, 255);
@@ -80,7 +81,7 @@ column-gap: 40px;
     
   font-size: 50px;
   
-  color:rgb(0, 0, 0); 
+  color:rgb(160, 157, 157); 
 -webkit-text-stroke:1px rgb(0, 0, 0);
   
 }
@@ -234,6 +235,7 @@ column-gap: 40px;
   font-weight: bold;
   border: none;
   background-color: #ffffff;
+  
  
 }
 
@@ -243,95 +245,160 @@ column-gap: 40px;
   
   
  }
- #par{
-
-  background-color: #45d581;
- }
-
- #detailContainer{
-
-  width: 90%;
-  height:300px;
-  padding-top: 30px;
-  margin: 20px;
-
- 
- }
-
- #detailContainer h5{
 
 
-  color: rgb(153, 153, 153);
-  font-weight:700;
-  font-size: 20px;
 
- }
+/* Popover container */
 
- #detailContainer p{
+.box-shadow{
+  box-shadow: 0px 0px 15px 2px #dadada;
+  
+  
+}
 
+/* Popover */
+
+details[data-popover] {
+  display: flex;
+  justify-content: end;
+  position: absolute;
+  background-color: #ffffff;
+  
+  
+  
+}
+
+
+details[data-popover] > summary:focus {
+  outline: none;
+}
+
+
+details[data-popover] > summary::-webkit-details-marker {
+  display: none;
+}
+
+/*
+
+details[data-popover] > summary {
+  list-style: none;
+}
+*/
+
+
+details[data-popover] > summary + * {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 350%;
+  border: solid 1px teal;
+  border-radius: 5%;
+  margin-top: 5px;
+  padding-right: 0px;
+  padding-top: 20px;
+  left: -400px;
+  background: rgb(255, 255, 255);
+  border: none;
+  top: -70px;
+  
+}
+
+
+
+
+details[data-popover] .row{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  right: 0;
+}
+
+
+
+details[data-popover] .column{
+    display: flex;
+    align-items: flex-start;
+    width: 80%;
+}
+
+
+
+details[data-popover] .column p{
   color: rgb(179, 179, 179);
   font-weight:500;
-  font-size: 18px;
-
- }
- #detailContainer .row .col2{
-
-  margin-left: 10px;
- }
- #detailContainer .row .col4{
-
-  margin-left: 10px;
-  margin-top: 30px;
- }
- #detailContainer .row .col3{
-
-  margin-top: 30px;
- }
-
-
- .popover{
-
-  background-color: rgb(255, 255, 255);
- box-shadow: 0px 0px 15px 2px #dadada;
- border: 2px;
- border-radius: 20px;
- }
- .popover title{
-
+  margin-top: 12px;
+  padding-left: 40px;
   
-  background-color: #ffffff;
- }
+}
 
- .popover-header{
-  border-radius: 20px;
-   background-color: #ffffff;
-   border: none;
- }
- .popover-arrow{
-   
-  border-radius: 20px;
- 
- }
+details[data-popover] .column h5{
+  color: rgb(153, 153, 153);
+  font-weight:700;
+  margin-bottom: 0px;
+  margin-top: 10px;
+  padding-left: 40px;
+  font-size: 15px;
+  
+}
 
- .row2{
+details[data-popover] .column2{
+  display: flex;
+    justify-content: space-evenly;
+    width: 70%;
+}
 
-  margin-top: 40px;
- }
 
- .delete{
+details[data-popover] .column2 a{
+  margin-bottom: 10px;
+  width: 90px;
+  padding: 0%;
+}
+/*
+details[data-popover] > * + * {
+
+  display: none;
+}
+/*
+
+details[data-popover="up"] > summary + * {
+  bottom: calc(0.5rem + 100%);
+  right: 50%;
+  transform: translateX(50%);
+}
+details[data-popover="down"] > summary + * {
+  top: calc(0.5rem + 100%);
+  right: 50%;
+  transform: translateX(50%);
+}
+details[data-popover="left"] > summary + * {
+  right: calc(1rem + 100%);
+  bottom: 50%;
+  transform: translateY(50%);
+}
+details[data-popover="right"] > summary + * {
+  left: calc(1rem + 100%);
+  bottom: 50%;
+  transform: translateY(50%);
+}
+
+/*
+
+/* Buttons inside popover */
+
+.detailDelete{
   border-width: 5px;
   border-color: rgb(192, 53, 53);
   color: rgb(192, 53, 53);
   font-weight: bold;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 20px;
 }
 
-.delete:hover{
+.detailDelete:hover{
   color: rgb(255, 0, 0);
   border-color: red;
 }
+
 
 
 

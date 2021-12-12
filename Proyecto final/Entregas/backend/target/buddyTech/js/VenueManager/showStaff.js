@@ -46,14 +46,17 @@ const deleteStaff = async (id)=>{
     }
 );
 
+if(response.ok){
+    getAllUsers();
+} 
+
 
         
 }
 
 const getAllUsers = async ()=>{
 
-  
-    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null");
+    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null-3");
     let data = await response.json();
     cardsC.innerHTML = "";
     
@@ -62,139 +65,27 @@ const getAllUsers = async ()=>{
         
         let user = data[i];  
         let sfView = new staffView(user);
-        let view = sfView.render();  
-       cardsC.appendChild(view);
-
-       /*
-       $('[data-bs-toggle="popover"]').popover({
-        content:
-        `<div id="detailContainer">
+        sfView.render(cardsC);  
         
-        <div class="row">
-           <div class="col col1">
-                <h5>Id:</h5>
-                <p>`+user.user.id+`</p>
-           </div>
-           <div class="col col2">
-                <h5>Nombre:</h5>
-                <p>`+user.user.name+`</p>
-           
-            </div>
-        </div>
-       <div class="row">
-           <div class="col col3">
-                <h5>Apellido:</h5>
-                 <p>`+user.user.lastName+`</p>
-           </div>
-           <div class="col col4">
-                <h5>Sede:</h5>
-                <p>`+user.venueName+`</p>
-                       
-           </div> 
-           
-        <div class="row">
-            <div class="col">
-               <a class="btn delete" id="btnDelete">Delete</a>
-           </div>
-       </div>
-        `,
-        html:true
-
-
-       });
-       */
-
-     sfView.check(user);
-
-        /*list[0].addEventListener("click",(event)=>{
-            
-            console.log("llegue XD");
-            event.preventDefault();
-            deleteStaff(user.user.id);
-            getAllUsers();
-        });
-
-        */
-    
     }
+
 }
 
 
 const getUserByParam = async()=>{
 
     let filterdata = checkFilter();
-    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO);
-    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO);
+    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-3");
+    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-3");
     let data = await response.json();
     cardsC.innerHTML = "";
     
     for(let i in data){
         let user = data[i];     
         let sfView = new staffView(user);
-        let view = sfView.render();
-
-        
-         //let view = taskView.render();
-        
-       cardsC.appendChild(view);
-
-       $('[data-bs-toggle="popover"]').popover({
-        content:
-        `<div id="detailContainer">
-        
-        <div class="row">
-           <div class="col col1">
-                <h5>Id:</h5>
-                <p>`+user.user.id+`</p>
-           </div>
-           <div class="col col2">
-                <h5>Nombre:</h5>
-                <p>`+user.user.name+`</p>
-            </div>
-        </div>
-       <div id="row" class="row">
-           <div class="col col3">
-                <h5>Apellido:</h5>
-                <p>`+user.user.lastName+`</p>
-           </div>
-           <div class="col col4">
-                <h5>Sede:</h5>
-                 <p>`+user.venueName+`</p>
-               
-           </div>    
-           
-        <div class="row">
-            <div class="col double">
-              <a class="btn delete" id="btnDelete">Delete</a>
-             </div>
-      </div>
-        `,
-        html:true
-       });
-     
-      
-     /*  }).$('body').on('click','a#btnDelete',function(){
-        console.log("llegue XD");
-        deleteStaff(user.user.id);
-        getAllUsers();
-    });  
-
-       
-
-
-        list[0].addEventListener("click",(event)=>{
-            
-            console.log("llegue XD");
-            event.preventDefault();
-            deleteStaff(user.user.id);
-            getAllUsers();
-        });
-        */
+        sfView.render(cardsC);     
      
     }
-
-    
-
 }
 const checkFilter = ()=>{
 
@@ -262,6 +153,8 @@ cancelbtn.addEventListener("click",(event)=>{
     event.preventDefault();
     clearFields();
 })
+
+
 getAllUsers();
 getVenues();
 
