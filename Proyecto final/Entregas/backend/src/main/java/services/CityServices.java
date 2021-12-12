@@ -62,4 +62,25 @@ public class CityServices {
         }
     }
 
+    @GET
+    @Path("{id}")
+    @Produces("text/plain")
+    public Response getName(@PathParam("id") int id ){
+        CityProvider provider = new CityProvider();
+        try {
+            String res = provider.getCity(id);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*").
+                    entity(res)
+                    .build();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //SQLAdmin.getInstance().closeAllConnections();
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .entity(e)
+                    .build();
+        }
+    }
+
 }
