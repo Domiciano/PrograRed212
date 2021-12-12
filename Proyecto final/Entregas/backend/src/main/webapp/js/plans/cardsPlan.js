@@ -20,8 +20,8 @@ class cardsPlan{
                                       </div>
                                   </div>
                                   <div class="column">
-                                      <h3 class="h3 mb-0 black font-weight-bold">J${this.plan.amount}</h3>
-                                      <p class="mb-0">Plan: ${this.plan.time}</p>
+                                      <h3 class="h3 mb-0 black font-weight-bold">${this.plan.amount}</h3>
+                                      <p class="mb-0">Plan: ${this.plan.name}</p>
                                   </div>
                               </div>
                           </div>

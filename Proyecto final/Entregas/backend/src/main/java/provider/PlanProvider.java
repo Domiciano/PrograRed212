@@ -12,6 +12,7 @@ public class PlanProvider {
 
     public ArrayList<Plan> getData() throws SQLException{
         ArrayList<Plan> response = new ArrayList<>();
+        MySQL db = SQLAdmin.getInstance().addConnection();
         String sql = "SELECT * FROM plansBuddy";
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
@@ -29,7 +30,7 @@ public class PlanProvider {
             int time = results.getInt(results.findColumn("time"));
             boolean active = results.getBoolean(results.findColumn("active"));
             Plan temp = new Plan(id, name, amount, time, active);
-            list.add(temp)
+            list.add(temp);
         }
     }
 
@@ -69,9 +70,11 @@ public class PlanProvider {
     }
 
     public void insert(Plan plan) throws SQLException {
-        String sql = "INSERT INTO plansBuddy (name, amount, time, active)";
-        sql += " VALUES ('$name', $amount, $time, $active)";
-        sql = replace(sql, plan);
+        String sql = "INSERT INTO plansBuddy (name, amount, time, active) VALUES ('$name', $amount, $time, $active)";
+        sql = sql.replace("$name", plan.getName());
+        sql = sql.replace("$amount", plan.getAmount()+"");
+        sql = sql.replace("$time", plan.getTime()+"");
+        sql = sql.replace("$active", plan.isActive()+"");
 
         MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();

@@ -1,47 +1,66 @@
 const nameTF = document.getElementById("sName");
-const time = document.getElementById("sTime");
-const statusTF = document.getElementById("sStatus");
-const amount = document.getElementById("sAmount");
+const timeTF = document.getElementById("sTime");
+const statusSelector = document.getElementById("sStatus");
+const amountTF = document.getElementById("sAmount");
 const cancelBtn = document.getElementById("cBtn");
 const createBtn = document.getElementById("creBtn");
 
-const createPlan = async ()=>{
-   let plan = {
-       name:nameTF.value,
-       time:time.value,
-       status:statusTF.value,
-       amount:amount.value
-   };
-   console.log(plan);
-   let json = JSON.stringify(plan);
-   let response = await fetch("http://localhost:8080/backend/api/ps/",
-        {
-            method: "POST",
-            headers: {
-                "content-type":"aplication/json",
-            },
-            body: json
-        } 
-   )
-    if(response.ok){
-        swal("Datos actualizados", "creaste un nuevo plan","success");
-    }  
+
+const validateSelector = () => {
+    let validate = true;
+    let selectedValuePlan = statusSelector.options[statusSelector.selectedIndex].text;
+
+    if (selectedValuePlan == "Activo o inactivo") {
+        validate = false;
+    }
+    return validate;
 }
 
-const clearFields = async()=>{
-    nameTF.value="";
-    time.value="";
-    statusTF.value="";
-    amount.value="";
+const createPlan = async () => {
+
+    if ((nameTF.value.length !== 0) && (timeTF.value.length !== 0) && (validateSelector()) && (amountTF.value.length !== 0)) {
+
+        let plan = {
+            name: nameTF.value,
+            time: timeTF.value,
+            status: statusSelector.value,
+            amount: amountTF.value
+        };
+        console.log(plan);
+        let json = JSON.stringify(plan);
+        let response = await fetch("http://localhost:8080/backend/api/ps/insert",
+            {
+                method: "POST",
+                headers: {
+                    "content-type": "aplication/json",
+                },
+                body: json
+            }
+        )
+        if (response.ok) {
+            alert("Plan creado satisfactoriamente");
+        }
+    } else {
+        alert("Complete todos los campos")
+    }
+
+
 }
 
-createBtn.addEventListener("click", (event)=>{
+const clearFields = async () => {
+    nameTF.value = "";
+    timeTF.value = "";
+    amountTF.value = "";
+    statusSelector.value = "Activo o inactivo";
+}
+
+createBtn.addEventListener("click", (event) => {
     event.preventDefault();
     createPlan();
     clearFields();
 });
 
-cancelBtn.addEventListener("click", (event)=>{
+cancelBtn.addEventListener("click", (event) => {
     event.preventDefault();
     clearFields();
 });

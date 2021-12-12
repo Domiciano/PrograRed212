@@ -12,10 +12,6 @@ import java.util.ArrayList;
 @Path("ps")
 public class PlanServices {
 
-    @Path("echo")
-    @GET
-    public String echo(){return "echo Plan";}
-
     @OPTIONS
     @Path("getactive")
     public Response optionsgetActivePlans() {
@@ -25,7 +21,17 @@ public class PlanServices {
                 .header("access-control-allow-headers", "*")
                 .build();
     }
-//
+
+    @OPTIONS
+    @Path("insert")
+    public Response optionsAddPlan() {
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
     @GET
     @Path("getData")
     @Produces("application/json")
@@ -75,15 +81,15 @@ public class PlanServices {
     @Path("insert")
     @POST
     @Consumes("application/json")
-    public Response insertRole(Plan plan){
+    public Response addPlan(Plan plan){
         try {
             PlanProvider provider = new PlanProvider();
             provider.insert(plan);
-            return Response.status(200).entity(new Message("Plan inserted")).build();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(new Message("Plan inserted")).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
 
