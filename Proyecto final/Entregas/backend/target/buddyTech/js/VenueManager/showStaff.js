@@ -56,7 +56,7 @@ const getCityId = (vname)=>{
 
 
 
-/*
+
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     let venues = await venuesNames.json();
@@ -83,7 +83,7 @@ const getVenueId = (vname)=>{
 
 }
 
-*/
+
 
 const deleteStaff = async (id)=>{
     
@@ -205,8 +205,13 @@ cancelbtn.addEventListener("click",(event)=>{
     event.preventDefault();
     clearFields();
 })
+logoutBtn.addEventListener('click', ()=>{
+    window.location.href = "index.html";
+    userLoged = undefined;
+  })
 getAllUsers();
 getAllCities();
+getVenues();
 
 
 

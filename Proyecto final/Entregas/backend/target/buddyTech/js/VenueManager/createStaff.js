@@ -6,9 +6,9 @@ const addBtn = document.getElementById("addBtn");
 const cBtn = document.getElementById("cBtn");
 const select = document.getElementById("select");
 let userLoged = JSON.parse(window.localStorage.getItem('user'));
-console.log("Usuario que llega con nombre: "+userLoged.name);
-console.log("Usuario que llega con ciudad: "+userLoged.city);
 var ncities;
+//logout
+const logoutBtn = document.getElementById("logoutBtn");
 
 
 
@@ -48,7 +48,7 @@ const postStaff = async ()=>{
      }     
 }
 
-/*
+
 const getVenueId = (vname)=>{  
   
     for(let i in venuesD){
@@ -60,15 +60,15 @@ const getVenueId = (vname)=>{
 
 }
 
-
 const getAllVenues = async ()=>{
+
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues/");
     let venues = await venuesNames.json();
     venuesD = venues;
       
 }
 
-*/
+
 
 
 const getVenuesByCity = async ()=>{
@@ -93,6 +93,7 @@ const getAllCities = async ()=>{
     let citiesNames = await fetch("http://localhost:8080/backend/api/cty/cities");
     let cities = await citiesNames.json();
     ncities = cities;
+    getVenuesByCity();
 
       
 }
@@ -130,10 +131,13 @@ cBtn.addEventListener("click", (event)=>{
     clearFields();
     
 });
+logoutBtn.addEventListener('click', ()=>{
+    window.location.href = "index.html";
+    userLoged = undefined;
+  })
 
-getVenuesByCity();
 getAllCities();
-
+getAllVenues();
 
 
 

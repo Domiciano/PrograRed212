@@ -241,11 +241,10 @@ column-gap: 40px;
 
  .detaildiv{
 
-  width: 60%;
+  width: 70%;
   
   
  }
-
 
 
 /* Popover container */
@@ -261,7 +260,7 @@ column-gap: 40px;
 details[data-popover] {
   display: flex;
   justify-content: end;
-  position: absolute;
+  position: relative;
   background-color: #ffffff;
   
   
@@ -278,25 +277,25 @@ details[data-popover] > summary::-webkit-details-marker {
   display: none;
 }
 
-/*
+
 
 details[data-popover] > summary {
   list-style: none;
 }
-*/
+
 
 
 details[data-popover] > summary + * {
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 350%;
+  width: 450%;
   border: solid 1px teal;
   border-radius: 5%;
   margin-top: 5px;
   padding-right: 0px;
   padding-top: 20px;
-  left: -400px;
+  left: -450px;
   background: rgb(255, 255, 255);
   border: none;
   top: -70px;
@@ -359,23 +358,29 @@ details[data-popover] > * + * {
 
   display: none;
 }
-/*
+*/
 
 details[data-popover="up"] > summary + * {
   bottom: calc(0.5rem + 100%);
   right: 50%;
   transform: translateX(50%);
 }
+
+
 details[data-popover="down"] > summary + * {
   top: calc(0.5rem + 100%);
   right: 50%;
   transform: translateX(50%);
 }
+
+/*
 details[data-popover="left"] > summary + * {
   right: calc(1rem + 100%);
   bottom: 50%;
   transform: translateY(50%);
 }
+
+/*-
 details[data-popover="right"] > summary + * {
   left: calc(1rem + 100%);
   bottom: 50%;

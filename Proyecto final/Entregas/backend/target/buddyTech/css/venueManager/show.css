@@ -301,6 +301,7 @@ details[data-popover] > summary + * {
   border: none;
   top: -70px;
   
+  
 }
 
 
