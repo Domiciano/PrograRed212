@@ -7,6 +7,7 @@ const id = document.getElementById("id");
 const select = document.getElementById("select");
 const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
+<<<<<<< HEAD
 let userLoged = JSON.parse(window.localStorage.getItem('user'));
 var ncities;
 
@@ -51,6 +52,9 @@ const getCityId = (vname)=>{
             return ncities[i].id;
         }       
     }
+=======
+var venuesD;
+>>>>>>> jk
 
 }
 

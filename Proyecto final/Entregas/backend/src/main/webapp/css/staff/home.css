@@ -1,87 +1,141 @@
-.black{
-    color:black;
+.black {
+    color: black;
 }
 
-.float-right{
+.float-right {
     float: right;
 }
 
-.column{
+.column {
     width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.col-user{
+.col-user {
     width: 30%;
     align-items: center;
 }
 
-.col-text{
+.col-text {
     width: 35%;
 }
 
-.col-check{
+.col-check {
     width: 35%;
 }
 
-.centIcon{
+.details {
+    margin-top: 0px;
+}
+
+.col-details {
+    width: 50%;
+}
+
+.col-details p {
+    color: rgb(179, 179, 179);
+    font-weight: 500;
+    padding-left: 40px;
+}
+
+.col-details h5 {
+    color: rgb(153, 153, 153);
+    font-weight: 700;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    padding-left: 40px;
+}
+
+.col-options {
+    display: flex;
+    justify-content: space-evenly;
+    width: 70%;
+}
+
+.row-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row-options a {
+    margin-bottom: 15px;
+}
+
+.row-details {
+    padding-left: 40px;
+}
+
+.effect {
+    border-radius: 20px;
+    padding-top: 10px;
+    position: relative;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.effect:hover {
+    transform: scale(1.1);
+    box-shadow: 20px 15px rgba(0, 0, 0, 0.15);
+}
+
+details>summary {
+    list-style: none;
+}
+
+.centIcon {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.centText{
+.centText {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.pad-5{
+.pad-5 {
     padding-left: 30px;
 }
 
-.pad-icon{
+.pad-icon {
     padding-left: 25px;
     padding-right: 10px;
 }
 
-.pad-2{
+.pad-2 {
     padding-left: 20px;
 }
 
-.check{
+.check {
     color: rgb(1, 194, 1);
 }
 
-#quieto{
-    width: 100%;
-    height: 100%;
-}
-
-.seeDet{
+.seeDet {
     display: flex;
     justify-content: end;
     align-items: center;
     font-size: 20px;
-    font-weight:700;
+    font-weight: 700;
     color: rgb(0, 162, 255);
     margin-right: 20px;
     border: none;
     background: inherit;
 }
 
-.click{
+.click {
     text-decoration: none !important;
 }
 
-.click:hover{
+.click:hover {
     color: rgb(0, 195, 255);
 }
 
-#clientsContainer{
+#clientsContainer {
     display: flex;
     flex-direction: column;
     max-height: 620px;
@@ -96,60 +150,71 @@
     padding-bottom: 10px;
 }
 
-.box-shadow{
-    box-shadow: 0px 0px 15px 2px #dadada;
-}
 
 /* Scrollbar style */
 
+
 /* width */
+
 ::-webkit-scrollbar {
     width: 5px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-    border-radius: 5px; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
     background: #888;
-    border-radius: 5px; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
+    border-radius: 5px;
+}
 
-  /* Animation on cards and icons */
 
-.cardStyle{
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* End scrollbar style */
+
+/* Animation on cards and icons */
+
+
+.cardStyle {
     position: relative;
     border-radius: 20px;
+    width: 550px;
     box-shadow: 0px 0px 15px 2px #dadada;
     -moz-transition: all 0.3s ease;
-	transition: all 0.3s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
 }
 
-.cardStyle .icon{
+.cardStyle .icon {
     margin: 1rem 0rem 0rem 0rem;
+    color: rgb(143, 138, 138);
+  -webkit-text-stroke: 2px rgb(0, 0, 0);
 }
 
 .cardStyle:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     box-shadow: 20px 15px rgba(0, 0, 0, 0.15);
-  }
+}
 
-.cardSelStyle{
+.cardSelStyle {
     position: relative;
     border-radius: 20px;
     box-shadow: 0px 0px 15px 2px #dadada;
     -moz-transition: all 0.3s ease;
-	transition: all 0.3s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
     z-index: 1;
     box-sizing: border-box;
@@ -163,52 +228,69 @@
     margin: 0 5rem 2.5rem 1.2rem;
     width: 1.25rem;
     height: 2.6rem;
-  }
-  .cardSelStyle .icons i {
+}
+
+.cardSelStyle .icons i {
     position: absolute;
     top: 0;
     left: 0;
     display: block;
-  }
-  .cardSelStyle .icons .icon-default {
+}
+
+.cardSelStyle .icons .icon-default {
     transition: opacity 0.3s, transform 0.3s;
-  }
-  .cardSelStyle .icons .icon-hover {
+}
+
+.cardSelStyle .icons .icon-hover {
     transition: opacity 0.3s, transform 0.3s;
     transform: rotate(-180deg) scale(0.5);
     opacity: 0;
-  }
-  .cardSelStyle:hover {
+}
+
+.cardSelStyle:hover {
     transform: scale(1.2);
     box-shadow: 20px 15px rgba(0, 0, 0, 0.15);
-  }
-  .cardSelStyle:hover .icon-hover {
+}
+
+.cardSelStyle:hover .icon-hover {
     transform: rotate(0deg) scale(1);
     opacity: 1;
-  }
-  .cardSelStyle:hover .icon-default {
+}
+
+.cardSelStyle:hover .icon-default {
     transform: rotate(180deg) scale(0.5);
     opacity: 0;
-  }
+}
 
-  /* Popover */
 
- /* popover */
+/* Popover container */
+
+.box-shadow {
+    box-shadow: 0px 0px 15px 2px #dadada;
+}
+
+
+/* Popover */
+
 details[data-popover] {
     position: relative;
     display: flex;
     justify-content: end;
-  }
-  details[data-popover] > summary:focus {
+}
+
+details[data-popover]>summary:focus {
     outline: none;
-  }
-  details[data-popover] > summary::-webkit-details-marker {
+}
+
+details[data-popover]>summary::-webkit-details-marker {
     display: none;
-  }
-  details[data-popover] > summary {
+}
+
+details[data-popover]>summary {
     list-style: none;
-  }
-  details[data-popover] > summary + * {
+}
+
+details[data-popover]>summary+* {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -216,52 +298,107 @@ details[data-popover] {
     border: solid 1px teal;
     border-radius: 5%;
     margin-top: 10px;
-    padding-left: 65px;
+    padding-left: 0px;
     padding-top: 20px;
     left: -575px;
     background: rgb(255, 255, 255);
     border: none;
-  }
+}
 
-  details[data-popover] .column{
-      display: flex;
-      align-items: flex-start;
-  }
+details[data-popover] .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-  details[data-popover] .column p{
+details[data-popover] .column {
+    display: flex;
+    align-items: flex-start;
+    width: 40%;
+}
+
+details[data-popover] .column p {
     color: rgb(179, 179, 179);
-    font-weight:500;
-  }
+    font-weight: 500;
+    padding-left: 40px;
+}
 
-  details[data-popover] .column h5{
+details[data-popover] .column h5 {
     color: rgb(153, 153, 153);
-    font-weight:700;
+    font-weight: 700;
     margin-bottom: 0px;
     margin-top: 10px;
-  }
+    padding-left: 40px;
+}
 
-  details[data-popover] > * + * {
+details[data-popover] .column2 {
+    display: flex;
+    justify-content: space-evenly;
+    width: 70%;
+}
+
+details[data-popover] .column2 a {
+    margin-bottom: 10px;
+    width: 90px;
+    padding: 0%;
+}
+
+details[data-popover]>*+* {
     /* hide detail elements that would ruin the popover */
     display: none;
-  }
-  details[data-popover="up"] > summary + * {
+}
+
+details[data-popover="up"]>summary+* {
     bottom: calc(0.5rem + 100%);
     right: 50%;
     transform: translateX(50%);
-  }
-  details[data-popover="down"] > summary + * {
+}
+
+details[data-popover="down"]>summary+* {
     top: calc(0.5rem + 100%);
     right: 50%;
     transform: translateX(50%);
-  }
-  details[data-popover="left"] > summary + * {
+}
+
+details[data-popover="left"]>summary+* {
     right: calc(1rem + 100%);
     bottom: 50%;
     transform: translateY(50%);
-  }
-  details[data-popover="right"] > summary + * {
+}
+
+details[data-popover="right"]>summary+* {
     left: calc(1rem + 100%);
     bottom: 50%;
     transform: translateY(50%);
-  }
-  
+}
+
+
+/* Buttons inside popover */
+
+.detailDelete {
+    border-width: 5px;
+    border-color: rgb(192, 53, 53);
+    color: rgb(192, 53, 53);
+    font-weight: bold;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.detailDelete:hover {
+    color: rgb(255, 0, 0);
+    border-color: red;
+}
+
+.detailBan {
+    border-width: 5px;
+    border-color: rgb(216, 152, 56);
+    color: rgb(216, 152, 56);
+    font-weight: bold;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.detailBan:hover {
+    color: rgb(255, 196, 0);
+    border-color: rgb(255, 196, 0);
+}

@@ -57,15 +57,15 @@ public class ClientProvider {
     public void edit(Client client) throws ClassNotFoundException, SQLException {
         MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
-        String sql = "UPDATE clientsBuddy SET name='$name', lastName='$lastName', age=$age,weight=$weight,height=$height, clientStatusBuddyID= $clientStatusBuddyID, memberShipBuddyID=$memberShipBuddyID WHERE natID='$natId'";
+        String sql = "UPDATE clientsBuddy SET name = '$name', lastName = '$lastName', age = $age, weight = $weight, height = $height, clientStatusBuddyID = $clientStatusBuddyID, memberShipBuddyID = $memberShipBuddyID WHERE natID = '$natId'";
         sql = sql.replace("$natId", client.getNatId());
         sql = sql.replace("$name", client.getName());
         sql = sql.replace("$lastName", client.getLastname());
-        sql = sql.replace("$age", ""+client.getAge());
-        sql = sql.replace("$weight", ""+client.getWeight());
-        sql = sql.replace("$height", ""+client.getHeight());
-        sql = sql.replace("$clientStatusBuddyID", client.getStatusID() + "");
-        sql = sql.replace("$memberShipBuddyID", client.getMembershipID() + "");
+        sql = sql.replace("$age", ""+client.getAge()+"");
+        sql = sql.replace("$weight", ""+client.getWeight()+"");
+        sql = sql.replace("$height", ""+client.getHeight()+"");
+        sql = sql.replace("$clientStatusBuddyID", client.getStatusID()+"");
+        sql = sql.replace("$memberShipBuddyID", client.getMembershipID()+"");
         db.comandSQL(sql);
         db.close();
     }
@@ -145,24 +145,25 @@ public class ClientProvider {
         ArrayList<Card> cards = new ArrayList<>();
         db.connection();
         String sql = "SELECT c.*, p.name, m.endDate, cs.status FROM plansBuddy p, clientsBuddy c, memberShipBuddy m, clientStatusBuddy cs WHERE c.memberShipBuddyID=m.id AND m.plansBuddyID=p.id AND c.clientStatusBuddyID=cs.id";
-        if(!natID.isEmpty()){
-            sql += "AND c.natID = '"+natID+"'";
+        if(!(natID.equalsIgnoreCase("null"))){
+            sql += " AND c.natID = '"+natID+"'";
         }
-        if(!name.isEmpty()){
-            sql += "AND c.name = '"+name+"'";
+        if(!(name.equalsIgnoreCase("null"))){
+            sql += " AND c.name = '"+name+"'";
         }
-        if(!lastName.isEmpty()){
-            sql += "AND c.lastName = '"+lastName+"'";
+        if(!(lastName.equalsIgnoreCase("null"))){
+            sql += " AND c.lastName = '"+lastName+"'";
+            System.out.println(sql);
         }
-        if(!age.isEmpty()){
+        if(!(age.equalsIgnoreCase("null"))){
             int ageint = Integer.parseInt(age);
-            sql += "AND c.age = "+ageint+"";
+            sql += " AND c.age = "+ageint+"";
         }
-        if(!plan.isEmpty()){
-            sql += "AND p.name = '"+plan+"'";
+        if(!(plan.equalsIgnoreCase("null"))){
+            sql += " AND p.name = '"+plan+"'";
         }
-        if(!status.isEmpty()){
-            sql += "AND cs.status = '"+status+"'";
+        if(!(status.equalsIgnoreCase("null"))){
+            sql += " AND cs.status = '"+status+"'";
         }
 
         ResultSet results = db.getDataMySQL(sql);
