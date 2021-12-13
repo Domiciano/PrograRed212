@@ -62,6 +62,7 @@ main {
   border-radius: 8px;
   text-align: center;
   padding-left: 10px;
+  padding-right: 10px;
   cursor: pointer;
   margin-left: 20px;
   opacity: 80%;
@@ -78,13 +79,13 @@ main {
 
 #ClientLogin button:hover {
   /* Cuando me paro en el botón hace esto*/
-  border: none;
   margin: 20px 0;
   height: 40px;
   width: 85px;
   border-radius: 8px;
   text-align: center;
-  padding-left: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
   margin-left: 20px;
   border: 2px;
   border-style: groove;

@@ -9,13 +9,31 @@ const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
 var venuesD;
 
+const getAllUsers = async ()=>{
+    let response = await fetch("http://localhost:8080/backend/api/users/");
+    let data = await response.json();
+    cardsC.innerHTML = "";
+    
 
+    
+    for(let i in data){
+        let user = data[i];     
+        let sfView = new staffView(user);
+        let view = sfView.render();
 
+        
+         //let view = taskView.render();
+        
+       cardsC.appendChild(view);
+        
 
-
-
-
-
+        
+        
+        
+       
+        //usersContainer.innerHTML += `<li>${user.name}</li>`;
+    }
+}
 
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
@@ -29,8 +47,7 @@ const getVenues = async ()=>{
     select.innerHTML = html;
     
 }
-
-
+getVenues();
 
 const getVenueId = (vname)=>{  
   
@@ -43,92 +60,17 @@ const getVenueId = (vname)=>{
 
 }
 
-const deleteStaff = async (id)=>{
-    
-    //let obj = JSON.parse(json);
-
-    let response = await fetch("http://localhost:8080/backend/api/users/"+id)
-    let data = await response.json();
-        
-}
-
-const getAllUsers = async ()=>{
-
-  
-    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null");
-    let data = await response.json();
-    cardsC.innerHTML = "";
-    
- 
-    for(let i in data){
-        
-        let user = data[i];  
-        let sfView = new staffView(user);
-        let view = sfView.render();  
-       cardsC.appendChild(view);
-       $('[data-bs-toggle="popover"]').popover({
-        content:
-        `<div id="detailContainer">
-        
-        <div class="row">
-           <div class="col col1">
-                <h5>Id:</h5>
-                <p>`+user.user.id+`</p>
-           </div>
-           <div class="col col2">
-                <h5>Nombre:</h5>
-                <p>`+user.user.name+`</p>
-           
-            </div>
-        </div>
-       <div class="row">
-           <div class="col col3">
-                <h5>Apellido:</h5>
-                 <p>`+user.user.lastName+`</p>
-           </div>
-           <div class="col col4">
-                <h5>Sede:</h5>
-                <p>`+user.venueName+`</p>
-                       
-           </div> 
-           
-        <div class="row">
-            <div class="col">
-               <a class="btn delete" id="btnDelete">Delete</a>
-           </div>
-       </div>
-        `,
-        html:true
-       }).parent().delegate("click",'a#btnDelete',function() {
-
-        console.log("llegue XD");
-        deleteStaff(user.user.id);
-        getAllUsers();
-    });
-
-        /*list[0].addEventListener("click",(event)=>{
-            
-            console.log("llegue XD");
-            event.preventDefault();
-            deleteStaff(user.user.id);
-            getAllUsers();
-        });
-
-        */
-    
-    }
-}
-
-
-
-
 const getUserByParam = async()=>{
 
-    let filterdata = checkFilter();
-    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO);
-    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO);
+    let parameters = checkFilterP();
+    let values = checkFilterV();
+
+    console.log("http://localhost:8080/backend/api/users/"+parameters+"-"+values);
+    let response = await fetch("http://localhost:8080/backend/api/users/"+parameters+"-"+values);
     let data = await response.json();
     cardsC.innerHTML = "";
+    
+
     
     for(let i in data){
         let user = data[i];     
@@ -139,113 +81,64 @@ const getUserByParam = async()=>{
          //let view = taskView.render();
         
        cardsC.appendChild(view);
-
-       $('[data-bs-toggle="popover"]').popover({
-        content:
-        `<div id="detailContainer">
         
-        <div class="row">
-           <div class="col col1">
-                <h5>Id:</h5>
-                <p>`+user.user.id+`</p>
-           </div>
-           <div class="col col2">
-                <h5>Nombre:</h5>
-                <p>`+user.user.name+`</p>
-            </div>
-        </div>
-       <div id="row" class="row">
-           <div class="col col3">
-                <h5>Apellido:</h5>
-                <p>`+user.user.lastName+`</p>
-           </div>
-           <div class="col col4">
-                <h5>Sede:</h5>
-                 <p>`+user.venueName+`</p>
-               
-           </div>    
-           
-        <div class="row">
-            <div class="col">
-              <a name ="btndelete" class="btn delete" id="btnDelete">Delete</a>
-             </div>
-      </div>
-        `,
-        html:true
-       }).parent().delegate('a#btnDelete',"click",(event)=> {
-
-        event.preventDefault();
-        console.log("llegue XD");
-        deleteStaff(user.user.id);
-        getAllUsers();
-    });  
-       
-
-    
-    /*
-        list[0].addEventListener("click",(event)=>{
-            
-            console.log("llegue XD");
-            event.preventDefault();
-            deleteStaff(user.user.id);
-            getAllUsers();
-        });
-        */
-     
     }
 
 }
-const checkFilter = ()=>{
 
-    let ln ="";
-    let n = ""
-    let vid = "";
-    let nid = "";
 
-      if(userN.value == ""){
+const checkFilterV = ()=>{
 
-         n = "null";
+    let values = "";
 
-      }else{
-        n = userN.value;
-      }
+    if(!userN.value==""){
 
-      if(lastname.value ==""){
+       values += userN.value+","
+    }
+
+    if(!lastname.value==""){
+       values += lastname.value+","
+    }
+    if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
+        let str =select.options[select.selectedIndex].text;
+        let id = getVenueId(str);
+       values += id+","
+    }
+    if(!id.value==""){
+       values += id.value+",";
+    }
+     return values;
+}
+
+const checkFilterP = ()=>{
+    let properties = "";
     
-         ln = "null"; 
-      }else{
-         ln= lastname.value;
-      }
-      if(id.value == ""){
-
-           nid = "null";
-      }else{
-          nid = id.value;
-      }
+    if(!userN.value==""){
+       properties+="name,"
+    }
+    if(!lastname.value==""){
+       properties+="lastName,"
+    }
+    if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
+       properties+="venuesBuddyID,"
+    }
+    if(!id.value==""){
  
-    if(select.options[select.selectedIndex].text=="Seleccionar Sede"){
-          vid = "null";
-    }else{
-
-        vid = getVenueId(select.options[select.selectedIndex].text);
+       properties+="id,"
     }
 
-    let obj = {
-           
-           idO: nid,
-           nameO : n,
-           lastnameO: ln,
-           venueO: vid
-    };
+    return properties;
 
-    return obj
 }
+
+
 const clearFields = async()=>{
     userN.value = "";
     lastname.value = "";
     id.value = "";
     select.value = "Seleccionar Sede";
    
+
 }
 
 filterbtn.addEventListener("click", (event)=>{
@@ -261,7 +154,7 @@ cancelbtn.addEventListener("click",(event)=>{
     event.preventDefault();
     clearFields();
 })
+
+clearFields();
+
 getAllUsers();
-getVenues();
-
-

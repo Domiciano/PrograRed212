@@ -49,7 +49,7 @@ public class PlanServices {
     @Path("getAll")
     @GET
     @Produces("application/json")
-    public Response getAllRoles(){
+    public Response getAllPlans(){
         try {
             PlanProvider provider = new PlanProvider();
             ArrayList<Plan> list = provider.getAllPlans();
@@ -86,7 +86,7 @@ public class PlanServices {
     @Path("insert")
     @POST
     @Consumes("application/json")
-    public Response insertRole(Plan plan){
+    public Response insertPlan(Plan plan){
         try {
             PlanProvider provider = new PlanProvider();
             provider.insert(plan);
