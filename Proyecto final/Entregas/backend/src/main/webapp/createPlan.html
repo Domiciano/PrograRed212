@@ -7,7 +7,7 @@
     <title>crear Plan</title>
      <!-- Related to sidebar style and page style-->
      <link href="css/sb-admin-2.css" rel="stylesheet"> 
-    <link rel="stylesheet" href="css/plans/createPlan.css">
+     <link href="css/plans/createPlan.css" rel="stylesheet"> 
      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -85,7 +85,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-3">
-                        <h1 class="h3 mb-0 black font-weight-bold">Crear Plan<i class="fas fa-user-circle createi"></i></h1>
+                        <h1 class="h3 mb-0 black font-weight-bold">Crear Plan<i class="fab fa-wpforms ml-2"></i></h1>
                     </div>
 
                      <!-- Divider -->
@@ -100,32 +100,57 @@
             </div>
             <!-- End of Main Content -->
          <!-- input content -->
-            <div class = "inputContainer">
-                <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-3">
-                    <h1  class="h3 mb-0 black font-weight-bold">Crear Plan</h1>
-                    
-                </div>
-                <div id ="inp"class="col-1">
-                    <hr class="sidebar-divider d-none d-md-block">
-                    <label for="">Nombre</label>
-                    <input id="sName" type= "text" class= "inp" placeholder="Nombre">
-                    <label for="">Tiempo</label>
-                    <input id="sTime" type= "text" class= "inp" placeholder="Teimpo">
-                    <label for="">Estado</label>
-                    <input id="sStatus" type= "text" class= "inp" placeholder="Estado">
-                    <label for="">Precio</label>
-                    <input id="sAmount" type= "text" class= "inp" placeholder="Precio">
-                    <button id = "cBtn" class ="cancelBtn">Cancelar</button>
-                    <button id = "creBtn" class ="createBtn">Crear</button>
-                </div>  
-
-            </div>  
+         <div class = "inputContainer">
+            <h3 class="createPlanTittle">
+                Nuevo plan 
+                <hr class="sidebar-divider d-none d-md-block">            
+            </h3>  
+        
+        <div class="columnscontainer">
+            <div class="row row-1">
+              <div class="col order-last">
+                <input id="amountTF" type= "number" class= "inp" placeholder="Valor del plan">
+              </div>
+              <div class="col order-first">
+                <input id="nameTF" type= "text" class= "inp" placeholder="Nombre">
+              </div>
+            </div>
+            <div class="row row-2">
+                <div class="col order-last">
+                    <select id="planActive" class="inp form-select" aria-label=".form-select-lg example">
+                        <option selected disabled selected hidden>Activo / Inactivo</option>
+                        <option value="active">Activo</option>
+                        <option value="inactive">Inactivo</option>   
+                      </select>
+                  </div>
+                  <div class="col order-first">
+                    <input id="timeTF" type= "number" class= "inp" placeholder="Tiempo de duración en días">
+                  </div>
+              </div>
+          </div>
+          <div id="createbtns" class="colbtns">
+            <button id="cancelBtn" class ="cancelBtn">Cancelar</button>
+            <button id="createBtn" class ="createBtn">Crear</button>
+          </div>
+    </div>   
 
         </div>
         <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
+
+  <!-- Modal -->
+  <div class="modal fade " id="plansCreatePlanModal" tabindex="-1" aria-labelledby="plansCreatePlanModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content radiousxd border border-3">
+        <div class="modal-body" id="plansCtePlanModalBody">
+
+        </div>
+      </div>
+    </div>
+  </div>
 
       <!-- Bootstrap core JavaScript-->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -137,16 +162,10 @@
   
       <!-- Custom scripts for all pages-->
       <script src="js/sb-admin-2.min.js"></script> 
-      <!-- Custom script this page-->
-      <script src="js/plans/createPlan.js"></script> 
+      <!-- Custom script this page--> 
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
-
-
-
-
-
 
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="js/plans/createPlan.js"></script>
