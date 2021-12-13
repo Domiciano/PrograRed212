@@ -19,6 +19,7 @@ public class MySQL {
 
         //connection = DriverManager.getConnection("jdbc:mysql://200.3.193.22:3306/P09728_1_11","P09728_1_11","ZCSaQGZU");
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/prograred","root","");
+        //connection = DriverManager.getConnection("http://8a08-186-112-77-7.ngrok.io/","root","");
         //connection = DriverManager.getConnection("jdbc:mysql://200.3.193.22:3306/P09728_1_2","P09728_1_2","ajvRnEIa");
         //connection = DriverManager.getConnection("jdbc:mysql://200.3.193.22:3306/P09728_1_11","P09728_1_11","ZCSaQGZU");
         //connection = DriverManager.getConnection("jdbc:mysql://200.3.193.22:3306/P09728_1_6","P09728_1_6","p1OnJm69");
