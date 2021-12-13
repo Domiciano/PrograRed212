@@ -1,15 +1,13 @@
 package provider;
 
-import model.Card;
-import model.Client;
+
 import model.Plan;
 import sql.MySQL;
 import sql.SQLAdmin;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class PlanProvider {
 

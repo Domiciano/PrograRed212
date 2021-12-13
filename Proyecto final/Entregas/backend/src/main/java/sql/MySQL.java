@@ -27,7 +27,6 @@ public class MySQL {
 
     public void close() throws SQLException {
         connection.close();
-        System.out.println("Conexión cerrada desde back");
     }
     // select
     public ResultSet getDataMySQL(String sql) throws SQLException {
