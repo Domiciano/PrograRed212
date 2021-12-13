@@ -5,7 +5,13 @@ const password = document.getElementById("sPass");
 const addBtn = document.getElementById("addBtn");
 const cBtn = document.getElementById("cBtn");
 const select = document.getElementById("select");
-var venuesD;
+let userLoged = JSON.parse(window.localStorage.getItem('user'));
+console.log("Usuario que llega con nombre: "+userLoged.name);
+console.log("Usuario que llega con ciudad: "+userLoged.city);
+var ncities;
+
+
+
 const postStaff = async ()=>{
 
       var str = select.options[select.selectedIndex].text;
@@ -41,10 +47,39 @@ const postStaff = async ()=>{
         swal("Datos Actualizados", "Creaste un nuevo miembro del staff", "success");
      }     
 }
-const getVenues = async ()=>{
-    let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
+
+/*
+const getVenueId = (vname)=>{  
+  
+    for(let i in venuesD){
+        if(venuesD[i].name == vname){
+            
+            return venuesD[i].id;
+        }       
+    }
+
+}
+
+
+const getAllVenues = async ()=>{
+    let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues/");
     let venues = await venuesNames.json();
     venuesD = venues;
+      
+}
+
+*/
+
+
+const getVenuesByCity = async ()=>{
+    
+
+    console.log(userLoged.city);
+    let cityId = getCityId(userLoged.city);
+    console.log("ID Ciudad: "+cityId);
+
+    let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues/"+cityId);
+    let venues = await venuesNames.json();
     let html = `<option selected disabled selected hidden>Seleccionar Sede</option>`;
     for(let i in venues){
         let incomingName = venues[i].name;
@@ -52,8 +87,27 @@ const getVenues = async ()=>{
     }
     select.innerHTML = html;
     
+
 }
-getVenues();
+const getAllCities = async ()=>{
+    let citiesNames = await fetch("http://localhost:8080/backend/api/cty/cities");
+    let cities = await citiesNames.json();
+    ncities = cities;
+
+      
+}
+const getCityId = (vname)=>{  
+  
+    for(let i in ncities){
+        if(ncities[i].name == vname){
+            
+            return ncities[i].id;
+        }       
+    }
+
+}
+
+
 const clearFields = async()=>{
     id.value = "";
     nameTF.value = "";
@@ -77,17 +131,9 @@ cBtn.addEventListener("click", (event)=>{
     
 });
 
+getVenuesByCity();
+getAllCities();
 
-const getVenueId = (vname)=>{  
-  
-    for(let i in venuesD){
-        if(venuesD[i].name == vname){
-            
-            return venuesD[i].id;
-        }       
-    }
-
-}
 
 
 

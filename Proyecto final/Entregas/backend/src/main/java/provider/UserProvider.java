@@ -158,7 +158,7 @@ public class UserProvider {
                 int venuesBuddyID = Integer.parseInt(results.getString(results.findColumn("venuesBuddyID")));
                 int roleBuddyID = Integer.parseInt(results.getString(results.findColumn("roleBuddyID")));
 
-                temp = new LogUser(id, lastName, name, venuesBuddyID, roleBuddyID);
+                temp = new LogUser(id, name, lastName, venuesBuddyID, roleBuddyID);
             }
 
             db.close();

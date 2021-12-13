@@ -45,7 +45,7 @@ class staffView{
        detaildiv.innerHTML= `<button class="seeDet">
         <details class="mb-1" data-popover="left">
             <summary>
-                See detail
+                Ver detalle
                 <i class="fas fa-chevron-right pl-3"></i>
             </summary>
 

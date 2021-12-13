@@ -7,9 +7,56 @@ const id = document.getElementById("id");
 const select = document.getElementById("select");
 const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
-var venuesD;
+let userLoged = JSON.parse(window.localStorage.getItem('user'));
+var ncities;
 
 
+
+
+
+const getVenuesByCity = async ()=>{
+    
+
+    console.log(userLoged.city);
+    let cityId = getCityId(userLoged.city);
+    console.log("ID Ciudad: "+cityId);
+
+    let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues/"+cityId);
+    let venues = await venuesNames.json();
+    let html = `<option selected disabled selected hidden>Seleccionar Sede</option>`;
+    for(let i in venues){
+        let incomingName = venues[i].name;
+            html += `<option value="${i}">${incomingName}</option>`;        
+    }
+    select.innerHTML = html;
+    
+}
+
+
+const getAllCities = async ()=>{
+    let citiesNames = await fetch("http://localhost:8080/backend/api/cty/cities");
+    let cities = await citiesNames.json();
+    ncities = cities;
+    console.log(ncities)
+    getVenuesByCity();
+   
+      
+}
+const getCityId = (vname)=>{  
+  
+    for(let i in ncities){
+        console.log("ciudad 1: "+ncities[i].name);
+        if(ncities[i].name == vname){
+            
+            return ncities[i].id;
+        }       
+    }
+
+}
+
+
+
+/*
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
     let venues = await venuesNames.json();
@@ -36,6 +83,8 @@ const getVenueId = (vname)=>{
 
 }
 
+*/
+
 const deleteStaff = async (id)=>{
     
     //let obj = JSON.parse(json);
@@ -54,6 +103,8 @@ if(response.ok){
         
 }
 
+
+
 const getAllUsers = async ()=>{
 
     let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null-3");
@@ -70,6 +121,7 @@ const getAllUsers = async ()=>{
     }
 
 }
+
 
 
 const getUserByParam = async()=>{
@@ -153,9 +205,12 @@ cancelbtn.addEventListener("click",(event)=>{
     event.preventDefault();
     clearFields();
 })
-
-
 getAllUsers();
-getVenues();
+getAllCities();
+
+
+
+
+
 
 

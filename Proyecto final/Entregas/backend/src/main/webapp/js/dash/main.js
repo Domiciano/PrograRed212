@@ -35,15 +35,17 @@ let mainChard = document.getElementById("myAreaChart");
 const userName = document.getElementById("userName");
 let userLoged = JSON.parse(window.localStorage.getItem('user'));
 
+
 // URL
 //const url = "http://192.168.1.54:8080/buddyTech_war/api/dash/";
-const url = "http://localhost:8080/buddyTech_war/api/dash/";
+const url = "http://localhost:8080/backend/api/dash/";
 
 //logout
 const logoutBtn = document.getElementById("logoutBtn");
 
 const loadName = () => {
   userName.innerHTML = userLoged.name;
+ console.log(userLoged);
 }
 
 const loadMainGraph = async () => {
@@ -211,6 +213,7 @@ const loadData = () => {
 };
 
 const loadSelectMenu = async () => {
+  console.log(userLoged.city);
   let response = await fetch(url + "cities");
   if (response.ok) {
     let cities = await response.json();
@@ -221,6 +224,7 @@ const loadSelectMenu = async () => {
       option.render(selectCity);
     });
 
+    //Cambie dos iguales por 1
     if (userLoged.city !== "all") {
       selectCity.disabled = true;
     }
