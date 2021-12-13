@@ -6,9 +6,9 @@ const addBtn = document.getElementById("addBtn");
 const cBtn = document.getElementById("cBtn");
 const select = document.getElementById("select");
 let userLoged = JSON.parse(window.localStorage.getItem('user'));
-console.log("Usuario que llega con nombre: "+userLoged.name);
-console.log("Usuario que llega con ciudad: "+userLoged.city);
 var ncities;
+//logout
+const logoutBtn = document.getElementById("logoutBtn");
 
 
 
@@ -131,6 +131,10 @@ cBtn.addEventListener("click", (event)=>{
     clearFields();
     
 });
+logoutBtn.addEventListener('click', ()=>{
+    window.location.href = "index.html";
+    userLoged = undefined;
+  })
 
 getAllCities();
 getAllVenues();
