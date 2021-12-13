@@ -22,7 +22,7 @@ const fillCards = async (managerCards) => {
         let managerCard = managerCards[i];
 
         let cardView = new UserCard(managerCard);
-        cardView.render(subgerentesContainer);
+        cardView.filterCard(subgerentesContainer);
     }
 }
 
@@ -52,16 +52,16 @@ const getVenueId = (vname)=>{
 }
 const getUserByParam = async()=>{
 
-    let filterdata = checkFilter();
+    let filterdata = await checkFilter();
 
     console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-2");
     let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-2");
     let data = await response.json();
-    await fillCards(data);
+    fillCards(data);
 }
 
 
-const checkFilter = ()=>{
+const checkFilter = async ()  =>{
 
     let ln ="";
     let n = ""
