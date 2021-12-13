@@ -12,29 +12,6 @@ import java.util.ArrayList;
 @Path("ps")
 public class PlanServices {
 
-    @GET
-    @Path("close")
-    public Response closeConnections(){
-        SQLAdmin.getInstance().closeAllConnections();
-        return Response.status(200)
-                .header("access-control-allow-origin", "*")
-                .header("access-control-allow-methods", "*")
-                .header("access-control-allow-headers", "*")
-                .header("Connection", "close")
-                .entity(new Message("Conexiones cerradas desde plan")).build();
-    }
-
-    @OPTIONS
-    @Path("close")
-    public Response optionsClose(){
-        return Response.status(200)
-                .header("access-control-allow-origin", "*")
-                .header("access-control-allow-methods", "*")
-                .header("access-control-allow-headers", "*")
-                .header("Connection", "close")
-                .build();
-    }
-
     @OPTIONS
     @Path("getactive")
     public Response optionsgetActivePlans() {
@@ -46,10 +23,68 @@ public class PlanServices {
                 .build();
     }
 
+
+    @OPTIONS
+    @Path("insert")
+    public Response optionsAddPlan() {
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Content-Type", "application/json")
+                .build();
+    }
+    @OPTIONS
+    @Path("filter/{name}/{amountFrom}/{amountTo}/{status}")
+    public Response optionsGetPlanFiltered(@PathParam("name") String name, @PathParam("amountFrom") String amountFrom, @PathParam("amountTo") String amountTo, @PathParam("status") String status){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Content-Type", "application/json")
+                .build();
+    }
+
+    @OPTIONS
+    @Path("update")
+    public Response optionsEditPlan() {
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .header("Content-Type", "application/json")
+                .build();
+    }
+
+    @GET
+    @Path("getData")
+    @Produces("application/json")
+    public Response getList(){
+        try{
+            PlanProvider provider = new PlanProvider();
+            ArrayList<Plan> res = provider.getData();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
+        }catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
+            e.printStackTrace();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
+        }
+    }
+
+    @OPTIONS
+    @Path("getAll")
+    public Response optionsGetAll(Plan plan){
+        return Response.status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
+    }
+
     @Path("getAll")
     @GET
     @Produces("application/json")
-    public Response getAllPlans(){
+    public Response getAll(){
         try {
             PlanProvider provider = new PlanProvider();
             ArrayList<Plan> list = provider.getAllPlans();
@@ -83,18 +118,19 @@ public class PlanServices {
         }
     }
 
-    @Path("insert")
+
     @POST
+    @Path("insert")
     @Consumes("application/json")
-    public Response insertPlan(Plan plan){
+    public Response addPlan(Plan plan){
         try {
             PlanProvider provider = new PlanProvider();
             provider.insert(plan);
-            return Response.status(200).entity(new Message("Plan inserted")).build();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(new Message("Plan inserted")).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
 
@@ -105,11 +141,11 @@ public class PlanServices {
         try {
             PlanProvider provider = new PlanProvider();
             provider.update(plan);
-            return Response.status(200).entity(new Message("Plan updated")).build();
+            return Response.status(200).header("access-control-allow-origin", "*").entity(new Message("Plan updated")).build();
         } catch (SQLException e) {
             SQLAdmin.getInstance().closeAllConnections();
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
         }
     }
 
@@ -150,6 +186,21 @@ public class PlanServices {
             SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
         }
+    }
+
+    @GET
+    @Path("filter/{name}/{amountFrom}/{amountTo}/{status}")
+    @Produces("application/json")
+    public Response getPlanFiltered(@PathParam("name") String name, @PathParam("amountFrom") String amountFrom, @PathParam("amountTo") String amountTo, @PathParam("status") String status){
+        try {
+            PlanProvider provider = new PlanProvider();
+            ArrayList<Plan> plans = provider.filter(name,amountFrom,amountTo,status);
+            return Response.status(200).header("access-control-allow-origin", "*").entity(plans).build();
+        } catch (SQLException ex) {
+            SQLAdmin.getInstance().closeAllConnections();
+            return Response.status(500).header("access-control-allow-origin", "*").entity(new Message(ex.getMessage())).build();
+        }
+
     }
 
 }

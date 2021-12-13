@@ -22,6 +22,7 @@ public class MySQL {
         //connection = DriverManager.getConnection("jdbc:mysql://200.3.193.22:3306/P09728_1_6","P09728_1_6","p1OnJm69");
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gym","root","");
         //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gym","root","");
+
     }
 
     public void close() throws SQLException {
