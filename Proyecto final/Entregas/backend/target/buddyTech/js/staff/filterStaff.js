@@ -125,6 +125,8 @@ const clearFields = async () => {
 filterbtn.addEventListener("click", (event) => {
   event.preventDefault();
   filtering();
+  getPlans();
+  getStatus();
   clearFields();
 });
 

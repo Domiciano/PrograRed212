@@ -67,19 +67,35 @@
           >
         </li>
 
-        <!-- Nav Item - Crear staff -->
+        <!-- Nav Item - Registro -->
         <li class="nav-item">
-          <a class="nav-link" href="createStaff.html">
+          <a class="nav-link" href="staffCreateClient.html">
             <i class="fas fa-user-circle"></i>
-            <span>Registrar staff</span></a
+            <span>Registrar clientes</span></a
           >
         </li>
 
-        <!-- Nav Item - Ver Staff -->
+        <!-- Nav Item - Ingreso -->
         <li class="nav-item">
-          <a class="nav-link" href="showStaff.html">
+          <a class="nav-link" href="staffClientAccess.html">
+            <i class="fas fa-user-check"></i>
+            <span>Ingreso clientes</span></a
+          >
+        </li>
+
+        <!-- Nav Item - Ingreso -->
+        <li class="nav-item">
+          <a class="nav-link" href="staffClientsFilter.html">
             <i class="fas fa-search"></i>
-            <span>Ver Staff</span></a
+            <span>Buscar clientes</span></a
+          >
+        </li>
+
+        <!-- Nav Item - Ingreso -->
+        <li class="nav-item">
+          <a class="nav-link" href="staffRenovateClientMembership.html">
+            <i class="fas fa-search"></i>
+            <span>Renovar membresía</span></a
           >
         </li>
 
@@ -100,11 +116,19 @@
           <!-- Begin Page Content -->
           <div class="container-fluid">
             <!-- Page Heading -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-3">
-                <h1 class="h3 mb-0 black font-weight-bold">
-               Buscar Staff<i class="fas fa-search sicon"></i>
-             </h1>
-           </div>
+            <div
+              class="
+                d-sm-flex
+                align-items-center
+                justify-content-between
+                mb-4
+                mt-3
+              "
+            >
+              <h1 class="h3 mb-0 black font-weight-bold">
+                Buscar Staff<i class="fas fa-search sicon"></i>
+              </h1>
+            </div>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block" />
@@ -113,46 +137,46 @@
             <div class="row">
               <div class="col-lg-7">
                 <div class="filtersC">
-                    <div class="filtersT">
-                      <h1>Filtros</h1>
-                      <i class="fas fa-filter"></i>
-                    </div>
-    
-                    <div class="settings">
-                      <label>Cedula</label>
-                      <input id="id" type="text" class="input" />
-    
-                      <label>Nombre</label>
-                      <input id="nameC" type="text" class="input" />
-    
-                      <label>Apellido</label>
-                      <input id="lastname" type="text" class="input" />
-    
-                      <label>Edad</label>
-                      <input id="age" type="number" class="input" />
+                  <div class="filtersT">
+                    <h1>Filtros</h1>
+                    <i class="fas fa-filter"></i>
+                  </div>
 
-                      <label>Plan</label>
-                      <select class="selectC" id="selectPlan"></select>
-                      
-                      <label>Status</label>
-                      <select class="selectC" id="selectStatus"></select>
+                  <div class="settings">
+                    <label>Cedula</label>
+                    <input id="id" type="text" class="input" />
 
-                    </div>
-                    <div class="buttons">
-                      <button id="cButton" class="cancel">Cancelar</button>
-                      <button id="filter" class="filter">Filtrar</button>
-                    </div>
+                    <label>Nombre</label>
+                    <input id="nameC" type="text" class="input" />
+
+                    <label>Apellido</label>
+                    <input id="lastname" type="text" class="input" />
+
+                    <label>Edad</label>
+                    <input id="age" type="number" class="input" />
+
+                    <label>Plan</label>
+                    <select class="selectC" id="selectPlan"></select>
+
+                    <label>Status</label>
+                    <select class="selectC" id="selectStatus"></select>
+                  </div>
+                  <div class="buttons">
+                    <button id="cButton" class="cancel">Cancelar</button>
+                    <button id="filter" class="filter">Filtrar</button>
+                  </div>
                 </div>
               </div>
 
               <div class="col-lg-4">
                 <!-- Heading -->
-                <div class="sidebar-heading mb-3 font-weight-bold">Filtrado</div>
+                <div class="sidebar-heading mb-3 font-weight-bold">
+                  Filtrado
+                </div>
                 <div id="cardsContainer"></div>
               </div>
 
               <div class="col-lg-1"></div>
-
             </div>
             <!-- /.container-fluid -->
           </div>

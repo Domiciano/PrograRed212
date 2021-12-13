@@ -65,7 +65,7 @@ const validateSelectors = () => {
 }
 
 const createClient = async () => {
-
+    modalBody.innerHTML = "";
     if ((validateSelectors()) && (nameTF.value.lenght !== 0) && (lastNameTF.value.lenght !== 0) && (clientidTF.value.lenght !== 0) &&
         (ageTF.value.lenght !== 0) && (heightTF.value.lenght !== 0) && (weightTF.value.lenght !== 0) && (discountTF.value.lenght !== 0)) {
 
