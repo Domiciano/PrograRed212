@@ -26,7 +26,7 @@ public class UserProvider {
 
         return respuesta;
     }
-    public ArrayList<UserCard> getUserCard(String natId, String name, String lastName, String venuesBuddyID, String role) throws SQLException {
+    public ArrayList<UserCard> getUserCard(String natId, String name, String lastName, String venuesBuddyID, String role, String cityName) throws SQLException {
         ArrayList<UserCard> usercards = new ArrayList<>();
 
         String sql = "SELECT u.*, v.name,c.name FROM roleBuddy r, usersBuddy u, venuesBuddy v, cityBuddy c WHERE u.roleBuddyID = r.id AND v.cityBuddyID = c.id AND u.venuesBuddyID=v.id ";
@@ -46,6 +46,10 @@ public class UserProvider {
         }
         if (!venuesBuddyID.equalsIgnoreCase("null")) {
             sql += " AND u.venuesBuddyID =" + Integer.parseInt(venuesBuddyID);
+        }
+
+        if(!cityName.equalsIgnoreCase("null")){
+            sql += " AND c.name = '"+cityName+"'";
         }
 
         MySQL db = SQLAdmin.getInstance().addConnection();
@@ -69,6 +73,8 @@ public class UserProvider {
 
         return usercards;
     }
+
+
 
 
 
