@@ -90,7 +90,9 @@ public class PlanProvider {
         sql = sql.replace("$name", plan.getName());
         sql = sql.replace("$amount", plan.getAmount()+"");
         sql = sql.replace("$time", plan.getTime()+"");
-        sql = sql.replace("$active", plan.isActive()+"");
+        int active = 0;
+        if (plan.isActive()) active = 1;
+        sql = sql.replace("$active", active +"");
 
         MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();

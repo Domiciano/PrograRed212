@@ -44,6 +44,11 @@ const getPlansByFilter = async () => {
     }
   }
 
+  console.log(name);
+  console.log(fAmount);
+  console.log(toAmount);
+  console.log(status);
+
   let response = await fetch(
     "http://localhost:8080/backend/api/ps/filter/" +
       name +

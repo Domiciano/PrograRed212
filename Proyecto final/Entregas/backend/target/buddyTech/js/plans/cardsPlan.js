@@ -5,12 +5,10 @@ class cardsPlan {
   }
 
   render = (container) => {
-    console.log(this.plan.active);
-
     let div = document.createElement("div");
     let html = "";
 
-    html = `<div id="${this.plan.name}" class="card mb-4 py-3 cardSelStyle border-left-success">
+    html = `<div id="${this.plan.name}" class="card cardSelStyle border-left-success">
                           <div class="card-body">
                               <div class="row">
                                   <div class="column-1 centIcon">
@@ -42,17 +40,17 @@ class cardsPlan {
                                                 <div class="row">
                                                     <div class="column">
                                                     <h5>Estado</h5>
-                                                    <select class="selectC" id="selectStatus">
+                                                    <select class="selectC" id="selectStatusEdit">
                                                     <option selected disabled selected hidden>Seleccionar estado</option>
                                                     <option>Activo</option>
                                                     <option>Inactivo</option>
                                                     </select>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row mb-4">
                                                     <div class="column2">
-                                                        <a class="btn deleteBtn">Delete</a>
-                                                        <a class="btn editBtn">Edit</a>
+                                                        <a class="btn deleteBtn mx-3">Delete</a>
+                                                        <a class="btn editBtn mx-3">Edit</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -64,19 +62,34 @@ class cardsPlan {
     let cardComplete = div.firstChild;
     container.appendChild(cardComplete);
 
-    div.innerHTML = html;
-    let cardComplete = div.firstChild;
-    container.appendChild(cardComplete);
-    var editBtn = div.querySelector(".edit");
+    var editBtn = cardComplete.querySelector(".editBtn");
+    var editName = document.getElementById("id");
+    var statusEdit = document.getElementById("selectStatusEdit");
 
     editBtn.addEventListener("click", async () => {
+      let status = statusEdit.options[statusEdit.selectedIndex].text;
+      if (status != "Seleccionar estado") {
+        if (status == "Activo") {
+          status = 1
+        } else{
+          status = 0;
+        }
+      } else{
+        status = this.plan.active;
+        if (status == true) {
+          status = 1
+        } else{
+          status = 0;
+        }
+      }
       let planToUpdate = {
         id: this.plan.id,
-        name: this.plan.name,
+        name: editName.value,
         amount: this.plan.amount,
         time: this.plan.time,
-        active: this.plan.active,
+        active: status,
       };
+      
       console.log(planToUpdate);
 
       let json = JSON.stringify(planToUpdate);
@@ -89,12 +102,13 @@ class cardsPlan {
           body: json,
         }
       );
-      if (memresponse.ok) {
+      if (response.ok) {
         let data = await response.json();
         console.log(data);
         div.innerHTML = "";
         getCardInfo();
       }
+      
     });
   };
 }

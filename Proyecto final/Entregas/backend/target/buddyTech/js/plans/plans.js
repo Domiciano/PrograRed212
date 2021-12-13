@@ -8,7 +8,6 @@ const cancelBtn = document.getElementById("cButton");
 const searchBtn = document.getElementById("filter");
 
 const getCardInfo = async () => {
-<<<<<<< HEAD
   cardsC.innerHTML = "";
   let response1 = await fetch("http://localhost:8080/backend/api/ps/getAll");
   let data = await response1.json();
@@ -45,6 +44,11 @@ const getPlansByFilter = async () => {
     }
   }
 
+  console.log(name);
+  console.log(fAmount);
+  console.log(toAmount);
+  console.log(status);
+
   let response = await fetch(
     "http://localhost:8080/backend/api/ps/filter/" +
       name +
@@ -64,66 +68,6 @@ const getPlansByFilter = async () => {
     cardView.render(cardsC);
   }
 };
-=======
-    cardsC.innerHTML = "";
-    let response1 = await fetch("http://localhost:8080/backend/api/ps/getAll")
-    let data = await response1.json();
-    console.log(data);
-    for(let i in data){
-        let plan = data[i];
-        let cardView = new cardsPlan(plan);
-        let view = cardView.render(cardsC);
-        //cardsC.appendChild(view);
-        $('[data-bs-toggle="popover"]').popover({
-
-        });
-    }
-}
-
-const getPlanssByFilter = async ()=>{
-    cardsC.innerHTML = "";
-    let name = null;
-    let fAmount = null;
-    let toAmount = null;
-    let status = null;
-
-      if(nameTF.value.length != 0){
-         name = nameTF.value;
-      }
-      if(amountF.value.length != 0){
-         fAmount = amountF.value;
-      }
-      if(amountT.value.length != 0){
-           toAmount = amountT.value;
-      }
-      if(statusTF.value.length != 0){
-          status = statusTF.value;
-      }
-
-      let response = await fetch(
-        "http://localhost:8080/backend/api/ps/filter/" +
-          name +
-          "/" +
-          fAmount +
-          "/" +
-          toAmount +
-          "/" +
-          status
-      );
-
-      let data = await response.json();
-      console.log(data);
-      for(let i in data){
-          let plan = data[i];
-          let cardView = new cardsPlan(plan);
-          let view = cardView.render(cardsC);
-          //cardsC.appendChild(view);
-          $('[data-bs-toggle="popover"]').popover({
-  
-          });
-      }
-}
->>>>>>> 79a35ac182a47fdcb275677e305b28515148e6e1
 
 const clearFields = async () => {
   nameTF.value = "";
@@ -143,15 +87,9 @@ const validate = () => {
     return validate;
   };
 
-<<<<<<< HEAD
 searchBtn.addEventListener("click", (event) => {
   event.preventDefault();
   getPlansByFilter();
-=======
-searchBtn.addEventListener("click", (event)=>{
-    event.preventDefault();
-    getPlanssByFilter();
->>>>>>> 79a35ac182a47fdcb275677e305b28515148e6e1
 });
 
 cancelBtn.addEventListener("click", (event) => {
