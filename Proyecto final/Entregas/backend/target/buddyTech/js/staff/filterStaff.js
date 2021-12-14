@@ -135,6 +135,11 @@ cancelbtn.addEventListener("click", (event) => {
   clearFields();
 });
 
+logoutBtn.addEventListener('click', ()=>{
+  window.location.href = "index.html";
+  userLoged = undefined;
+});
+
 getPlans();
 getStatus();
 clearFields();

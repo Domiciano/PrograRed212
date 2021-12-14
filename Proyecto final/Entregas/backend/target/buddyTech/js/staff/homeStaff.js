@@ -14,3 +14,8 @@ const getCardInfo = async() => {
 }
 
 getCardInfo();
+
+logoutBtn.addEventListener('click', ()=>{
+    window.location.href = "index.html";
+    userLoged = undefined;
+  });

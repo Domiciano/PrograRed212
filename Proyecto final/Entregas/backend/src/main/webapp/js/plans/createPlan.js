@@ -6,7 +6,8 @@ const cancelBtn = document.getElementById("cancelBtn");
 const createBtn = document.getElementById("createBtn");
 const myModal = new bootstrap.Modal(document.getElementById('plansCreatePlanModal'));
 const modalBody = document.getElementById("plansCtePlanModalBody");
-
+//logout
+const logoutBtn = document.getElementById("logoutBtn");
 
 const validateSelector = () => {
     let validate = true;
@@ -83,6 +84,11 @@ const createPlan = async () => {
        myModal.show();
     }
 }
+
+logoutBtn.addEventListener('click', ()=>{
+  window.location.href = "index.html";
+  userLoged = undefined;
+});
 
 const clearFields = async () => {
     nameTF.value = "";

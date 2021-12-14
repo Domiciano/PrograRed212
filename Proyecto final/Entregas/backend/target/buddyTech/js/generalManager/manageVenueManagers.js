@@ -7,6 +7,8 @@ const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
 var cardSelected = document.getElementById("cardSelected");
 var venuesD;
+//logout
+const logoutBtn = document.getElementById("logoutBtn");
 
 const getCardInfo = async () => {
 
@@ -114,6 +116,11 @@ const clearFields = async()=>{
 
 
 }
+
+logoutBtn.addEventListener('click', ()=>{
+    window.location.href = "index.html";
+    userLoged = undefined;
+  });
 
 filterbtn.addEventListener("click", (event)=>{
 

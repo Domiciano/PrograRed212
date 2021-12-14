@@ -6,6 +6,7 @@ const amountT = document.getElementById("amountT");
 const statusTF = document.getElementById("selectStatus");
 const cancelBtn = document.getElementById("cButton");
 const searchBtn = document.getElementById("filter");
+const logoutBtn = document.getElementById("logoutBtn");
 
 const getCardInfo = async () => {
   cardsC.innerHTML = "";
@@ -38,9 +39,9 @@ const getPlansByFilter = async () => {
   if (validate()) {
     status = statusTF.value;
     if (status == "Activo") {
-        status = 1;
+      status = 1;
     } else {
-        status = 0;
+      status = 0;
     }
   }
 
@@ -51,13 +52,13 @@ const getPlansByFilter = async () => {
 
   let response = await fetch(
     "http://localhost:8080/backend/api/ps/filter/" +
-      name +
-      "/" +
-      fAmount +
-      "/" +
-      toAmount +
-      "/" +
-      status
+    name +
+    "/" +
+    fAmount +
+    "/" +
+    toAmount +
+    "/" +
+    status
   );
 
   let data = await response.json();
@@ -77,15 +78,20 @@ const clearFields = async () => {
 };
 
 const validate = () => {
-    let validate = true;
-    let selectedValue = statusTF.options[statusTF.selectedIndex].text;
-  
-    if (selectedValue == "Seleccionar estado") {
-      validate = false;
-    }
-  
-    return validate;
-  };
+  let validate = true;
+  let selectedValue = statusTF.options[statusTF.selectedIndex].text;
+
+  if (selectedValue == "Seleccionar estado") {
+    validate = false;
+  }
+
+  return validate;
+};
+
+logoutBtn.addEventListener('click', ()=>{
+  window.location.href = "index.html";
+  userLoged = undefined;
+});
 
 searchBtn.addEventListener("click", (event) => {
   event.preventDefault();

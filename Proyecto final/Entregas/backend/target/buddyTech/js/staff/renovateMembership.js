@@ -222,11 +222,7 @@ cancelBtn.addEventListener("click", (event) => {
     clearAll();
 });
 
-
-
-
-
-
-
-
-
+logoutBtn.addEventListener('click', ()=>{
+    window.location.href = "index.html";
+    userLoged = undefined;
+  });

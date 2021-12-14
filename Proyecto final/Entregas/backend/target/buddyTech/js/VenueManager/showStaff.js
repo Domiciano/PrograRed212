@@ -204,11 +204,11 @@ cancelbtn.addEventListener("click",(event)=>{
 
     event.preventDefault();
     clearFields();
-})
+});
 logoutBtn.addEventListener('click', ()=>{
     window.location.href = "index.html";
     userLoged = undefined;
-  })
+  });
 getAllUsers();
 getAllCities();
 getVenues();
