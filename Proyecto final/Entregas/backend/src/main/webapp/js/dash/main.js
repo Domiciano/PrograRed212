@@ -125,7 +125,7 @@ const loadAgeSementation = async () => {
     }
 
     per = data.map(function (num) {
-      let value = (num * 100) / sum;
+      let value = Math.floor((num * 100) / sum);
       return value + "%";
     })
 
