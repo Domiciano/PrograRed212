@@ -71,5 +71,79 @@ class UserCard {
             })
         });
     }
-    // }
+    filterCard = (container) =>{
+        let div = document.createElement("div");
+
+            let day = daysLeft(this.card.memEndDate);
+            let html = "";
+
+            html = `<div id="${this.card.user.id}" class="card mb-4 py-3 cardSelStyle border-left-success">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="column-1 centIcon">
+                                    <div class="icons">
+                                        <i class="fas fa-user-circle fa-3x"></i>
+                                    </div>
+                                </div>
+                                <div class="column-2">
+                                    <h5 class="mb-0 black font-weight-bold">${this.card.user.name}</h5>
+                                    <p class="mb-0">Sede: ${this.card.venueName}</p>
+                                    <p class="mb-0">Ciudad: ${this.card.cityName}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="seeDet">
+                                        <details class="mb-1" data-popover="right">
+                                            <summary>
+                                                See detail
+                                                <i class="fas fa-chevron-right pl-3"></i>
+                                            </summary>
+
+                                            <div class="box-shadow">
+                                                <div class="row">
+                                                    <div class="column">
+                                                    <h5>Nombre</h5>
+                                                    <p>${this.card.user.name}</p>
+                                                    </div>
+                                                    <div class="column">
+                                                    <h5>Apellido</h5>
+                                                    <p>${this.card.user.lastName}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="column">
+                                                    <h5>Cédula</h5>
+                                                    <p>${this.card.user.id}</p>
+                                                    </div>
+                                                    <div class="column">
+                                                    <h5>Sede</h5>
+                                                    <p>${this.card.venueName}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="column2">
+                                                        <a class="btn detailDelete">Borrar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </details>
+                                    </button>
+                    </div>`
+            div.innerHTML = html;
+
+            var deleteBtn = div.querySelector(".detailDelete");
+
+            deleteBtn.addEventListener("click", async() => {
+                let response = await fetch("http://localhost:8080/backend/api/users/"+this.card.user.id, {
+                    method: "DELETE"
+                });
+                //let data = await response.json();
+                //console.log(data);
+                //filtering();
+                getCardInfo();
+            });
+
+            let cardComplete = div.firstChild;
+            container.appendChild(cardComplete);
+    }
 }

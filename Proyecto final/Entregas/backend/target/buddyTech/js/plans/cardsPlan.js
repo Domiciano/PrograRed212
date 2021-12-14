@@ -49,7 +49,6 @@ class cardsPlan {
                                                 </div>
                                                 <div class="row mb-4">
                                                     <div class="column2">
-                                                        <a class="btn deleteBtn mx-3">Delete</a>
                                                         <a class="btn editBtn mx-3">Edit</a>
                                                     </div>
                                                 </div>
@@ -70,21 +69,22 @@ class cardsPlan {
       let status = statusEdit.options[statusEdit.selectedIndex].text;
       if (status != "Seleccionar estado") {
         if (status == "Activo") {
-          status = 1
+          status = true
         } else{
-          status = 0;
+          status = false;
         }
       } else{
         status = this.plan.active;
-        if (status == true) {
-          status = 1
-        } else{
-          status = 0;
-        }
       }
+
+      let name = this.plan.name;
+      if (editName.value != "") {
+        name = editName.value;
+      }
+
       let planToUpdate = {
         id: this.plan.id,
-        name: editName.value,
+        name: name,
         amount: this.plan.amount,
         time: this.plan.time,
         active: status,

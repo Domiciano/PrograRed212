@@ -37,75 +37,74 @@
   </head>
   <body>
     <div id="wrapper">
-      <!-- Sidebar -->
-      <ul
-        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-        id="accordionSidebar"
-      >
-        <!-- Sidebar - Brand -->
-        <a
-          class="sidebar-brand d-flex align-items-center justify-content-center"
-          href="index.html"
-        >
-          <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+          <!-- Sidebar - Brand -->
+          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+
+              <img src="img/Group75.png" alt="Buddy Tech.">
+
+          </a>
+
+          <!-- Divider -->
+          <hr class="sidebar-divider my-0">
+
+          <!-- Nav Item - Dashboard -->
+          <li class="nav-item active">
+              <a class="nav-link" href="dashboardCEO.html">
+                  <!-- Ejecutar función hacia el dashboard de nuevo -->
+                  <i class="fas fa-fw fa-tachometer-alt"></i>
+                  <span>Tablero</span>
+              </a>
+          </li>
+
+          <!-- Divider -->
+          <hr class="sidebar-divider">
+
+          <!-- Heading -->
+          <div class="sidebar-heading">
+              Gestión
           </div>
-          <div class="sidebar-brand-text mx-3">Buddy Tech</div>
-        </a>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider" />
+          <li class="nav-item ">
+              <a class="nav-link" href="plans.html">
+                  <!-- Ejecutar función hacia el dashboard de nuevo -->
+                  <i class="fas fa-fw fa-columns"></i>
+                  <span>Planes</span>
+              </a>
+          </li>
 
-        <!-- Heading -->
-        <div class="sidebar-heading">Menú principal</div>
+          <li class="nav-item ">
+              <a class="nav-link" href="createPlan.html">
+                  <!-- Ejecutar función hacia el dashboard de nuevo -->
+                  <i class="fas fa-fw fa-columns"></i>
+                  <span>Crear Planes</span>
+              </a>
+          </li>
 
-        <!-- Nav Item - Inicio -->
-        <li class="nav-item active">
-          <a class="nav-link" href="index.html">
-            <i class="fas fa-home"></i>
-            <span>Inicio</span></a
-          >
-        </li>
+          <li class="nav-item ">
+              <a class="nav-link" href="manageVenueManagers.html">
+                  <!-- Ejecutar función hacia el dashboard de nuevo -->
+                  <i class="fas fa-fw fa-user"></i>
+                  <span>Gerentes</span>
+              </a>
+          </li>
 
-        <!-- Nav Item - Registro -->
-        <li class="nav-item">
-          <a class="nav-link" href="staffCreateClient.html">
-            <i class="fas fa-user-circle"></i>
-            <span>Registrar clientes</span></a
-          >
-        </li>
+          <!-- Divider -->
+          <hr class="sidebar-divider d-none d-md-block">
 
-        <!-- Nav Item - Ingreso -->
-        <li class="nav-item">
-          <a class="nav-link" href="staffClientAccess.html">
-            <i class="fas fa-user-check"></i>
-            <span>Ingreso clientes</span></a
-          >
-        </li>
+          <!-- Sidebar Toggler (Sidebar) -->
+          <div class="text-center d-none d-md-inline">
+              <button class="rounded-circle border-0" id="sidebarToggle"></button>
+          </div>
 
-        <!-- Nav Item - Ingreso -->
-        <li class="nav-item">
-          <a class="nav-link" href="staffClientsFilter.html">
-            <i class="fas fa-search"></i>
-            <span>Buscar clientes</span></a
-          >
-        </li>
+          <!-- Sidebar Message -->
+          <div class="d-none d-lg-flex cardBtn" id="cardBtn">
+              <button id="logoutBtn" class="border-gradient-blue">Salir</button>
 
-        <!-- Nav Item - Ingreso -->
-        <li class="nav-item">
-          <a class="nav-link" href="staffRenovateClientMembership.html">
-            <i class="fas fa-search"></i>
-            <span>Renovar membresía</span></a
-          >
-        </li>
+          </div>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block" />
-
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-          <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
       </ul>
       <!-- End of Sidebar -->
 
@@ -126,7 +125,7 @@
               "
             >
               <h1 class="h3 mb-0 black font-weight-bold">
-                Buscar Staff<i class="fas fa-search sicon ml-3"></i>
+               Filtrar Planes<i class="fas fa-search sicon ml-3"></i>
               </h1>
             </div>
 
