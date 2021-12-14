@@ -37,7 +37,7 @@ let userLoged = JSON.parse(window.localStorage.getItem('user'));
 
 // URL
 //const url = "http://192.168.1.54:8080/buddyTech_war/api/dash/";
-const url = "http://localhost:8080/buddyTech_war/api/dash/";
+const url = "http://localhost:8080/backend/api/dash/";
 
 //logout
 const logoutBtn = document.getElementById("logoutBtn");

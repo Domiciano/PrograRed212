@@ -3,7 +3,7 @@ const userIdTF = document.getElementById("userIdTF");
 const passTF = document.getElementById("passTF");
 
 //const url = "http://192.168.1.54:8080/buddyTech_war/api/";
-const url = "http://localhost:8080/buddyTech_war/api/";
+const url = "http://localhost:8080/backend/api/";
 
 //let city = "";
 
