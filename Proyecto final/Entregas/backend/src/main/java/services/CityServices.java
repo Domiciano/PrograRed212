@@ -1,6 +1,7 @@
 package services;
 
 import model.City;
+import model.UserCard;
 import provider.CityProvider;
 import sql.SQLAdmin;
 
@@ -12,6 +13,9 @@ import java.util.ArrayList;
 @Path("cty")
 public class CityServices {
 
+
+
+
     @GET
     @Path("echo")
     public String echo(){return "echo city";}
@@ -22,14 +26,23 @@ public class CityServices {
     @Produces("application/json")
     public Response getList(){
         CityProvider provider = new CityProvider();
-        try {
-            ArrayList<City> res = provider.getData();
-            return Response.status(200).entity(res).build();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            SQLAdmin.getInstance().closeAllConnections();
-            return Response.status(500).entity(e).build();
-        }
+            try {
+                ArrayList<City> res = provider.getData();
+                return Response.status(200).header("access-control-allow-origin", "*").entity(res).build();
+            } catch (SQLException e) {
+                SQLAdmin.getInstance().closeAllConnections();
+                e.printStackTrace();
+                return Response.status(500).header("access-control-allow-origin", "*").entity(e).build();
+            }
+    }
+    @OPTIONS
+    @Path("cities")
+    public Response OptionsGetList(){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
     }
 
     @POST
@@ -59,6 +72,27 @@ public class CityServices {
             e.printStackTrace();
             SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).entity(e).build();
+        }
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces("text/plain")
+    public Response getName(@PathParam("id") int id ){
+        CityProvider provider = new CityProvider();
+        try {
+            String res = provider.getCity(id);
+            return Response.status(200)
+                    .header("access-control-allow-origin", "*").
+                    entity(res)
+                    .build();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //SQLAdmin.getInstance().closeAllConnections();
+            return Response.status(500)
+                    .header("access-control-allow-origin", "*")
+                    .entity(e)
+                    .build();
         }
     }
 

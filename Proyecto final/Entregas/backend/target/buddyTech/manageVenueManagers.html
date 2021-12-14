@@ -32,47 +32,46 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">Buddy Tech</div>
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+
+            <img src="img/Group75.png" alt="Buddy Tech.">
+
         </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="dashboardCEO.html">
+                <!-- Ejecutar función hacia el dashboard de nuevo -->
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Tablero</span>
+            </a>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Menú principal
+            Gestión
         </div>
 
-        <!-- Nav Item - Inicio -->
-        <li class="nav-item">
-            <a class="nav-link" href="dashboardCEO.html">
-                <i class="fas fa-home"></i>
-                <span>Inicio</span></a>
-        </li>
-        <!-- Nav Item - resumen por ciudad -->
-        <li class="nav-item">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-city"></i>
-                <span>Resumen por ciudad</span>
+        <li class="nav-item ">
+            <a class="nav-link" href="#">
+                <!-- Ejecutar función hacia el dashboard de nuevo -->
+                <i class="fas fa-fw fa-columns"></i>
+                <span>Planes</span>
             </a>
         </li>
-        <!-- Nav Item - planes -->
-        <li class="nav-item">
-            <a class="nav-link" href="">
-                <i class="fas fa-address-card"></i>
-                <span>Administrar planes</span></a>
-        </li>
 
-
-        <!-- Nav Item - Ingreso -->
         <li class="nav-item active">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-users"></i>
-                <span>Subgerentes</span></a>
+            <a class="nav-link" href="manageVenueManagers.html">
+                <!-- Ejecutar función hacia el dashboard de nuevo -->
+                <i class="fas fa-fw fa-user"></i>
+                <span>Gerentes</span>
+            </a>
         </li>
 
         <!-- Divider -->
@@ -81,6 +80,12 @@
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+        <!-- Sidebar Message -->
+        <div class="d-none d-lg-flex cardBtn" id="cardBtn">
+            <button id="logoutBtn" class="border-gradient-blue"> Salir</button>
+
         </div>
 
     </ul>

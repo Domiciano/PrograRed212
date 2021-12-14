@@ -7,12 +7,52 @@ const id = document.getElementById("id");
 const select = document.getElementById("select");
 const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
-var venuesD;
+let userLoged = JSON.parse(window.localStorage.getItem('user'));
+var ncities;
 
 
 
 
 
+const getVenuesByCity = async ()=>{
+    
+
+    console.log(userLoged.city);
+    let cityId = getCityId(userLoged.city);
+    console.log("ID Ciudad: "+cityId);
+
+    let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues/"+cityId);
+    let venues = await venuesNames.json();
+    let html = `<option selected disabled selected hidden>Seleccionar Sede</option>`;
+    for(let i in venues){
+        let incomingName = venues[i].name;
+            html += `<option value="${i}">${incomingName}</option>`;        
+    }
+    select.innerHTML = html;
+    
+}
+
+
+const getAllCities = async ()=>{
+    let citiesNames = await fetch("http://localhost:8080/backend/api/cty/cities");
+    let cities = await citiesNames.json();
+    ncities = cities;
+    console.log(ncities)
+    getVenuesByCity();
+   
+      
+}
+const getCityId = (vname)=>{  
+  
+    for(let i in ncities){
+        console.log("ciudad 1: "+ncities[i].name);
+        if(ncities[i].name == vname){
+            
+            return ncities[i].id;
+        }       
+    }
+
+}
 
 
 
@@ -43,19 +83,31 @@ const getVenueId = (vname)=>{
 
 }
 
+
+
 const deleteStaff = async (id)=>{
     
     //let obj = JSON.parse(json);
 
-    let response = await fetch("http://localhost:8080/backend/api/users/"+id)
-    let data = await response.json();
+    let response = await fetch("http://localhost:8080/backend/api/users/"+id,
+    {
+        method: "DELETE",      
+    }
+);
+
+if(response.ok){
+    getAllUsers();
+} 
+
+
         
 }
 
+
+
 const getAllUsers = async ()=>{
 
-  
-    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null-3");
+    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null-3-"+userLoged.city);
     let data = await response.json();
     cardsC.innerHTML = "";
     
@@ -64,136 +116,28 @@ const getAllUsers = async ()=>{
         
         let user = data[i];  
         let sfView = new staffView(user);
-        let view = sfView.render();  
-       cardsC.appendChild(view);
-       $('[data-bs-toggle="popover"]').popover({
-        content:
-        `<div id="detailContainer">
+        sfView.render(cardsC);  
         
-        <div class="row">
-           <div class="col col1">
-                <h5>Id:</h5>
-                <p>`+user.user.id+`</p>
-           </div>
-           <div class="col col2">
-                <h5>Nombre:</h5>
-                <p>`+user.user.name+`</p>
-           
-            </div>
-        </div>
-       <div class="row">
-           <div class="col col3">
-                <h5>Apellido:</h5>
-                 <p>`+user.user.lastName+`</p>
-           </div>
-           <div class="col col4">
-                <h5>Sede:</h5>
-                <p>`+user.venueName+`</p>
-                       
-           </div> 
-           
-        <div class="row">
-            <div class="col">
-               <a class="btn delete" id="btnDelete">Delete</a>
-           </div>
-       </div>
-        `,
-        html:true
-       }).parent().delegate("click",'a#btnDelete',function() {
-
-        console.log("llegue XD");
-        deleteStaff(user.user.id);
-        getAllUsers();
-    });
-
-        /*list[0].addEventListener("click",(event)=>{
-            
-            console.log("llegue XD");
-            event.preventDefault();
-            deleteStaff(user.user.id);
-            getAllUsers();
-        });
-
-        */
-    
     }
-}
 
+}
 
 
 
 const getUserByParam = async()=>{
 
     let filterdata = checkFilter();
-    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-3");
-    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-3");
+    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-3-"+userLoged.city);
+    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-3-"+userLoged.city);
     let data = await response.json();
     cardsC.innerHTML = "";
     
     for(let i in data){
         let user = data[i];     
         let sfView = new staffView(user);
-        let view = sfView.render();
-
-        
-         //let view = taskView.render();
-        
-       cardsC.appendChild(view);
-
-       $('[data-bs-toggle="popover"]').popover({
-        content:
-        `<div id="detailContainer">
-        
-        <div class="row">
-           <div class="col col1">
-                <h5>Id:</h5>
-                <p>`+user.user.id+`</p>
-           </div>
-           <div class="col col2">
-                <h5>Nombre:</h5>
-                <p>`+user.user.name+`</p>
-            </div>
-        </div>
-       <div id="row" class="row">
-           <div class="col col3">
-                <h5>Apellido:</h5>
-                <p>`+user.user.lastName+`</p>
-           </div>
-           <div class="col col4">
-                <h5>Sede:</h5>
-                 <p>`+user.venueName+`</p>
-               
-           </div>    
-           
-        <div class="row">
-            <div class="col">
-              <a name ="btndelete" class="btn delete" id="btnDelete">Delete</a>
-             </div>
-      </div>
-        `,
-        html:true
-       }).parent().delegate('a#btnDelete',"click",(event)=> {
-
-        event.preventDefault();
-        console.log("llegue XD");
-        deleteStaff(user.user.id);
-        getAllUsers();
-    });  
-       
-
-    
-    /*
-        list[0].addEventListener("click",(event)=>{
-            
-            console.log("llegue XD");
-            event.preventDefault();
-            deleteStaff(user.user.id);
-            getAllUsers();
-        });
-        */
+        sfView.render(cardsC);     
      
     }
-
 }
 const checkFilter = ()=>{
 
@@ -261,7 +205,17 @@ cancelbtn.addEventListener("click",(event)=>{
     event.preventDefault();
     clearFields();
 })
+logoutBtn.addEventListener('click', ()=>{
+    window.location.href = "index.html";
+    userLoged = undefined;
+  })
 getAllUsers();
+getAllCities();
 getVenues();
+
+
+
+
+
 
 

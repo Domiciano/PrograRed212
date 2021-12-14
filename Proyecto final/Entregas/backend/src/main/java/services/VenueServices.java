@@ -16,7 +16,7 @@ public class VenueServices {
 
     @OPTIONS
     @Path("getvenues")
-    public Response optionsGetVenues(){
+    public Response optionsGetVenues() {
         return Response.status(200)
                 .header("access-control-allow-origin", "*")
                 .header("access-control-allow-methods", "*")
@@ -28,7 +28,7 @@ public class VenueServices {
     @POST
     @Path("addVenue")
     @Consumes("application/json")
-    public Response addVenue(Venue venue){
+    public Response addVenue(Venue venue) {
 
         try {
             VenueProvider provider = new VenueProvider();
@@ -38,7 +38,7 @@ public class VenueServices {
                     .header("access-control-allow-methods", "*")
                     .header("access-control-allow-headers", "*")
                     .entity(new Message("Sede creada correctamente")).build();
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500)
                     .header("access-control-allow-origin", "*")
@@ -52,7 +52,7 @@ public class VenueServices {
     @GET
     @Path("getvenues")
     @Produces("application/json")
-    public Response getVenues(){
+    public Response getVenues() {
         try {
             VenueProvider provider = new VenueProvider();
             ArrayList<Venue> response = provider.getData();
@@ -61,6 +61,37 @@ public class VenueServices {
             SQLAdmin.getInstance().closeAllConnections();
             return Response.status(500).header("access-control-allow-origin", "*").header("Connection", "close").entity(new Message(ex.getMessage())).build();
         }
+    }
+
+    @GET
+    @Path("getvenues/{cityId}")
+    @Produces("application/json")
+    public Response getVenuesByCity(@PathParam("cityId") int cityId) {
+
+        try {
+            VenueProvider provider = new VenueProvider();
+            ArrayList<Venue> venues = provider.getData(cityId);
+            return Response.status(200).header("access-control-allow-origin", "*").entity(venues)
+                    .build();
+        } catch (SQLException e) {
+            SQLAdmin.getInstance().closeAllConnections();
+            e.printStackTrace();
+            return Response.status(500)
+                    .entity(new Message("Operacion fallida"))
+                    .header("access-control-allow-origin", "*")
+                    .build();
+        }
+    }
+
+
+    @OPTIONS
+    @Path("getvenues/{cityId}")
+    public Response OptionsGetVenuesByCity(@PathParam("cityId")int cityId){
+        return Response.status(200)
+                .header("access-control-allow-origin", "*")
+                .header("access-control-allow-methods", "*")
+                .header("access-control-allow-headers", "*")
+                .build();
     }
 
     @DELETE

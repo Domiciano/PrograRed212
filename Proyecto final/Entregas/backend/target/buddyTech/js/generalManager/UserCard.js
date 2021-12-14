@@ -51,10 +51,24 @@ class UserCard {
                                     <i class="fas fa-check fa-3x check"></i>
                                 </h2>
                             </div>  
+                            <a id="delete${this.card.user.id}btn" class="btn btn-danger btn-circle btn-lg mt-4 ml-3">
+                                <i class="fas fa-trash"></i>
+                            </a>                                    
                         </div>
-                    </div>
-                    
+                    </div>   
                 </div>`;
+            let deleteBtn = document.getElementById("delete"+this.card.user.id+"btn");
+            deleteBtn.addEventListener("click", async (e) => {
+                e.preventDefault();
+                let response = await fetch("http://localhost:8080/backend/api/users/"+this.card.user.id,
+                    {
+                        method: "DELETE",
+                    }
+                );
+                if (response.ok) {
+                    await getCardInfo();
+                }
+            })
         });
     }
     // }

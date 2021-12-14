@@ -5,17 +5,19 @@ const id = document.getElementById("id");
 const select = document.getElementById("select");
 const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
+var cardSelected = document.getElementById("cardSelected");
 var venuesD;
 
 const getCardInfo = async () => {
 
-    let response1 = await fetch("http://localhost:8080/backend/api/users/cardInfo")
-    let managerCards = await response1.json();
-    await fillCards(managerCards);
+    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null-2");
+    let data = await response.json();
+    await fillCards(data);
     console.log("Rendering done")
 }
 const fillCards = async (managerCards) => {
     subgerentesContainer.innerHTML = "";
+    cardSelected.innerHTML = "";
     for(let i in managerCards) {
         let managerCard = managerCards[i];
 
@@ -50,61 +52,60 @@ const getVenueId = (vname)=>{
 }
 const getUserByParam = async()=>{
 
-    let parameters = checkFilterP();
-    let values = checkFilterV();
+    let filterdata = checkFilter();
 
-    console.log("http://localhost:8080/backend/api/users/managers"+parameters+"-"+values);
-    let response = await fetch("http://localhost:8080/backend/api/users/managers"+parameters+"-"+values);
+    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-2");
+    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-2");
     let data = await response.json();
     await fillCards(data);
 }
 
 
-const checkFilterV = ()=>{
+const checkFilter = ()=>{
 
-    let values = "";
+    let ln ="";
+    let n = ""
+    let vid = "";
+    let nid = "";
 
-    if(!userN.value==""){
+    if(userN.value == ""){
 
-        values += userN.value+","
+        n = "null";
+
+    }else{
+        n = userN.value;
     }
 
-    if(!lastname.value==""){
-        values += lastname.value+","
+    if(lastname.value ==""){
+
+        ln = "null";
+    }else{
+        ln= lastname.value;
     }
-    if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
-        let str =select.options[select.selectedIndex].text;
-        let id = getVenueId(str);
-        values += id+","
+    if(id.value == ""){
+
+        nid = "null";
+    }else{
+        nid = id.value;
     }
-    if(!id.value==""){
-        values += id.value+",";
+
+    if(select.options[select.selectedIndex].text=="Seleccionar Sede"){
+        vid = "null";
+    }else{
+
+        vid = getVenueId(select.options[select.selectedIndex].text);
     }
-    return values;
+
+    let obj = {
+
+        idO: nid,
+        nameO : n,
+        lastnameO: ln,
+        venueO: vid
+    };
+
+    return obj
 }
-
-const checkFilterP = ()=>{
-    let properties = "";
-
-    if(!userN.value==""){
-        properties+="name,"
-    }
-    if(!lastname.value==""){
-        properties+="lastName,"
-    }
-    if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
-        properties+="venuesBuddyID,"
-    }
-    if(!id.value==""){
-
-        properties+="id,"
-    }
-
-    return properties;
-
-}
-
-
 const clearFields = async()=>{
     userN.value = "";
     lastname.value = "";
@@ -128,6 +129,5 @@ cancelbtn.addEventListener("click",(event)=>{
     clearFields();
 })
 
-clearFields();
 getVenues();
 getCardInfo();

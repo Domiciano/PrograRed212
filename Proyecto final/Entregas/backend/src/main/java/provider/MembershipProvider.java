@@ -41,10 +41,17 @@ public class MembershipProvider {
 
     public ArrayList<Membership> getData(String city, boolean isYear) throws SQLException, ParseException {
         String sql;
-        City cityObj = new CityProvider().getData(city);
-        ArrayList<Venue> vList = new VenueProvider().getDatabyCityID(cityObj.getId());
-        StringBuilder venuesIds = new StringBuilder();
 
+        ArrayList<Venue> vList = new ArrayList<>();
+
+        if (city.equals("all")) {
+            vList = new VenueProvider().getData();
+        } else {
+            City cityObj = new CityProvider().getData(city);
+            vList = new VenueProvider().getData(cityObj.getId());
+        }
+
+        StringBuilder venuesIds = new StringBuilder();
         String pattern = "yyyy-MM-dd";
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -64,7 +71,7 @@ public class MembershipProvider {
             }
         }
 
-        if(city.equals("")){
+        if(city.equals("all")){
             sql = "SELECT * FROM memberShipBuddy WHERE startDate > "+ date[0]+date[1]+date[2];
         } else {
             sql = "SELECT * FROM memberShipBuddy WHERE venuesBuddyID = " + venuesIds;
@@ -73,6 +80,7 @@ public class MembershipProvider {
 
 
         MySQL db = SQLAdmin.getInstance().addConnection();
+
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {

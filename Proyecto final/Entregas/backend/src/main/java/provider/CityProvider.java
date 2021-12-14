@@ -9,6 +9,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CityProvider {
+
+    public String getCity(int id) throws SQLException {
+        String sql = "SELECT cb.name FROM cityBuddy cb JOIN venuesBuddy vb WHERE vb.id = " +id+" AND vb.cityBuddyID = cb.id";
+        String name ="";
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
+        while (results.next()) {
+            name = results.getString(results.findColumn("name"));
+        }
+        db.close();
+
+        return name;
+
+    }
     public ArrayList<City> getData() throws SQLException {
         ArrayList<City> respuesta = new ArrayList<>();
 

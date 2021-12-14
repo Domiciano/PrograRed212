@@ -7,33 +7,55 @@ const id = document.getElementById("id");
 const select = document.getElementById("select");
 const filterbtn = document.getElementById("filter");
 const cancelbtn = document.getElementById("cButton");
-var venuesD;
+let userLoged = JSON.parse(window.localStorage.getItem('user'));
+var ncities;
 
-const getAllUsers = async ()=>{
-    let response = await fetch("http://localhost:8080/backend/api/users/");
-    let data = await response.json();
-    cardsC.innerHTML = "";
+
+
+
+
+const getVenuesByCity = async ()=>{
     
 
-    
-    for(let i in data){
-        let user = data[i];     
-        let sfView = new staffView(user);
-        let view = sfView.render();
+    console.log(userLoged.city);
+    let cityId = getCityId(userLoged.city);
+    console.log("ID Ciudad: "+cityId);
 
-        
-         //let view = taskView.render();
-        
-       cardsC.appendChild(view);
-        
-
-        
-        
-        
-       
-        //usersContainer.innerHTML += `<li>${user.name}</li>`;
+    let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues/"+cityId);
+    let venues = await venuesNames.json();
+    let html = `<option selected disabled selected hidden>Seleccionar Sede</option>`;
+    for(let i in venues){
+        let incomingName = venues[i].name;
+            html += `<option value="${i}">${incomingName}</option>`;        
     }
+    select.innerHTML = html;
+    
 }
+
+
+const getAllCities = async ()=>{
+    let citiesNames = await fetch("http://localhost:8080/backend/api/cty/cities");
+    let cities = await citiesNames.json();
+    ncities = cities;
+    console.log(ncities)
+    getVenuesByCity();
+   
+      
+}
+const getCityId = (vname)=>{  
+  
+    for(let i in ncities){
+        console.log("ciudad 1: "+ncities[i].name);
+        if(ncities[i].name == vname){
+            
+            return ncities[i].id;
+        }       
+    }
+
+}
+
+
+
 
 const getVenues = async ()=>{
     let venuesNames = await fetch("http://localhost:8080/backend/api/venues/getvenues");
@@ -47,7 +69,8 @@ const getVenues = async ()=>{
     select.innerHTML = html;
     
 }
-getVenues();
+
+
 
 const getVenueId = (vname)=>{  
   
@@ -60,85 +83,113 @@ const getVenueId = (vname)=>{
 
 }
 
-const getUserByParam = async()=>{
 
-    let parameters = checkFilterP();
-    let values = checkFilterV();
 
-    console.log("http://localhost:8080/backend/api/users/"+parameters+"-"+values);
-    let response = await fetch("http://localhost:8080/backend/api/users/"+parameters+"-"+values);
+const deleteStaff = async (id)=>{
+    
+    //let obj = JSON.parse(json);
+
+    let response = await fetch("http://localhost:8080/backend/api/users/"+id,
+    {
+        method: "DELETE",      
+    }
+);
+
+if(response.ok){
+    getAllUsers();
+} 
+
+
+        
+}
+
+
+
+const getAllUsers = async ()=>{
+
+    let response = await fetch("http://localhost:8080/backend/api/users/null-null-null-null-3-"+userLoged.city);
     let data = await response.json();
     cardsC.innerHTML = "";
     
+ 
+    for(let i in data){
+        
+        let user = data[i];  
+        let sfView = new staffView(user);
+        sfView.render(cardsC);  
+        
+    }
 
+}
+
+
+
+const getUserByParam = async()=>{
+
+    let filterdata = checkFilter();
+    console.log("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-3-"+userLoged.city);
+    let response = await fetch("http://localhost:8080/backend/api/users/"+filterdata.idO+"-"+filterdata.nameO+"-"+filterdata.lastnameO+"-"+filterdata.venueO+"-3-"+userLoged.city);
+    let data = await response.json();
+    cardsC.innerHTML = "";
     
     for(let i in data){
         let user = data[i];     
         let sfView = new staffView(user);
-        let view = sfView.render();
-
-        
-         //let view = taskView.render();
-        
-       cardsC.appendChild(view);
-        
+        sfView.render(cardsC);     
+     
     }
-
 }
+const checkFilter = ()=>{
 
+    let ln ="";
+    let n = ""
+    let vid = "";
+    let nid = "";
 
-const checkFilterV = ()=>{
+      if(userN.value == ""){
 
-    let values = "";
+         n = "null";
 
-    if(!userN.value==""){
+      }else{
+        n = userN.value;
+      }
 
-       values += userN.value+","
-    }
-
-    if(!lastname.value==""){
-       values += lastname.value+","
-    }
-    if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
-        let str =select.options[select.selectedIndex].text;
-        let id = getVenueId(str);
-       values += id+","
-    }
-    if(!id.value==""){
-       values += id.value+",";
-    }
-     return values;
-}
-
-const checkFilterP = ()=>{
-    let properties = "";
+      if(lastname.value ==""){
     
-    if(!userN.value==""){
-       properties+="name,"
-    }
-    if(!lastname.value==""){
-       properties+="lastName,"
-    }
-    if(select.options[select.selectedIndex].text!="Seleccionar Sede"){
-       properties+="venuesBuddyID,"
-    }
-    if(!id.value==""){
+         ln = "null"; 
+      }else{
+         ln= lastname.value;
+      }
+      if(id.value == ""){
+
+           nid = "null";
+      }else{
+          nid = id.value;
+      }
  
-       properties+="id,"
+    if(select.options[select.selectedIndex].text=="Seleccionar Sede"){
+          vid = "null";
+    }else{
+
+        vid = getVenueId(select.options[select.selectedIndex].text);
     }
 
-    return properties;
+    let obj = {
+           
+           idO: nid,
+           nameO : n,
+           lastnameO: ln,
+           venueO: vid
+    };
 
+    return obj
 }
-
-
 const clearFields = async()=>{
     userN.value = "";
     lastname.value = "";
     id.value = "";
     select.value = "Seleccionar Sede";
    
-
 }
 
 filterbtn.addEventListener("click", (event)=>{
@@ -154,7 +205,17 @@ cancelbtn.addEventListener("click",(event)=>{
     event.preventDefault();
     clearFields();
 })
-
-clearFields();
-
+logoutBtn.addEventListener('click', ()=>{
+    window.location.href = "index.html";
+    userLoged = undefined;
+  })
 getAllUsers();
+getAllCities();
+getVenues();
+
+
+
+
+
+
+

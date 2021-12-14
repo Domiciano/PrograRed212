@@ -10,16 +10,15 @@ import java.util.Date;
 
 public class UserProvider {
 
-    private final MySQL db;
-
     public UserProvider() {
-        db = SQLAdmin.getInstance().addConnection();
+
     }
 
     public ArrayList<User> getData() throws SQLException {
         ArrayList<User> respuesta = new ArrayList<>();
 
         String sql = "SELECT * FROM usersBuddy";
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         getResponseList(results, respuesta);
@@ -27,7 +26,7 @@ public class UserProvider {
 
         return respuesta;
     }
-    public ArrayList<UserCard> getUserCard(String natId, String name, String lastName, String venuesBuddyID, String role) throws SQLException {
+    public ArrayList<UserCard> getUserCard(String natId, String name, String lastName, String venuesBuddyID, String role, String cityName) throws SQLException {
         ArrayList<UserCard> usercards = new ArrayList<>();
 
         String sql = "SELECT u.*, v.name,c.name FROM roleBuddy r, usersBuddy u, venuesBuddy v, cityBuddy c WHERE u.roleBuddyID = r.id AND v.cityBuddyID = c.id AND u.venuesBuddyID=v.id ";
@@ -43,10 +42,17 @@ public class UserProvider {
         if (!lastName.equalsIgnoreCase("null")) {
             sql += " AND u.lastName = '" + lastName + "'";
 
+
         }
         if (!venuesBuddyID.equalsIgnoreCase("null")) {
             sql += " AND u.venuesBuddyID =" + Integer.parseInt(venuesBuddyID);
         }
+
+        if(!cityName.equalsIgnoreCase("null")){
+            sql += " AND c.name = '"+cityName+"'";
+        }
+
+        MySQL db = SQLAdmin.getInstance().addConnection();
         db.connection();
         ResultSet results = db.getDataMySQL(sql);
         while (results.next()) {
@@ -67,6 +73,8 @@ public class UserProvider {
 
         return usercards;
     }
+
+
 
 
 
@@ -91,11 +99,13 @@ public class UserProvider {
 
             sql = replace(sql, user);
 
-            db.connection();
-            db.comandSQL(sql);
-            db.close();
-            return "ok";
-        }
+
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        db.connection();
+        db.comandSQL(sql);
+        db.close();
+        return "ok";
+    }
 
         public String update(User user) throws SQLException {
             String sql = "UPDATE usersBuddy " +
@@ -105,11 +115,14 @@ public class UserProvider {
 
             sql = replace(sql, user);
 
-            db.connection();
-            db.comandSQL(sql);
-            db.close();
-            return "ok";
-        }
+
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        db.connection();
+        db.comandSQL(sql);
+        db.close();
+        return "ok";
+    }
+
 
         private String replace(String sql, User user){
             sql = sql.replace("$name", user.getName());
@@ -126,9 +139,10 @@ public class UserProvider {
                     " WHERE id=$id";
             sql = sql.replace("$id", id+"");
 
-            db.connection();
-            db.comandSQL(sql);
-            db.close();
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        db.connection();
+        db.comandSQL(sql);
+        db.close();
 
             return "ok";
         }
@@ -139,8 +153,9 @@ public class UserProvider {
             sql = sql.replace("$name", auth.getId()+"");
             sql = sql.replace("$password", auth.getPassword());
 
-            db.connection();
-            ResultSet results = db.getDataMySQL(sql);
+        MySQL db = SQLAdmin.getInstance().addConnection();
+        db.connection();
+        ResultSet results = db.getDataMySQL(sql);
 
             while (results.next()) {
                 int id = Integer.parseInt(results.getString(results.findColumn("id")));
@@ -149,7 +164,7 @@ public class UserProvider {
                 int venuesBuddyID = Integer.parseInt(results.getString(results.findColumn("venuesBuddyID")));
                 int roleBuddyID = Integer.parseInt(results.getString(results.findColumn("roleBuddyID")));
 
-                temp = new LogUser(id, lastName, name, venuesBuddyID, roleBuddyID);
+                temp = new LogUser(id, name, lastName, venuesBuddyID, roleBuddyID);
             }
 
             db.close();
